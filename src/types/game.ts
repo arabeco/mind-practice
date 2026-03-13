@@ -1,14 +1,27 @@
+// ============================================================
+// Core types
+// ============================================================
+
 export type StatKey = 'vigor' | 'harmonia' | 'filtro' | 'presenca' | 'desapego';
 export type QuestionType = 'NORMAL' | 'RANDOM' | 'SOCIAL' | 'TENSION';
 export type Ambiente = 'Publico' | 'Privado' | 'Profissional' | 'Digital';
 export type Relacao = 'Autoridade' | 'Par' | 'Desconhecido';
 export type Aposta = 'Status' | 'Paz Emocional' | 'Dinheiro' | 'Tempo';
+export type Pilar = 'ego' | 'propriedade' | 'seguranca';
+export type Tone = 'pragmatico' | 'provocativo' | 'protetor' | 'evasivo' | 'neutro';
+export type DeckCategory = 'essencial' | 'arquetipo' | 'cenario';
+export type ArchetypeCategory = 'puro' | 'cruzado' | 'especial';
+
+// ============================================================
+// Scene / Question
+// ============================================================
 
 export interface SceneMetadata {
   tensao: 1 | 2 | 3 | 4 | 5;
   ambiente: Ambiente;
   relacao: Relacao;
   aposta: Aposta;
+  pilar: Pilar;
 }
 
 export interface Slide {
@@ -18,7 +31,8 @@ export interface Slide {
 
 export interface Option {
   text: string;
-  meta: string;
+  subtext: string;
+  tone: Tone;
   weights: Partial<Record<StatKey, number>>;
   feedback: string;
 }
@@ -31,25 +45,56 @@ export interface Question {
   options: Option[];
 }
 
+// ============================================================
+// Deck
+// ============================================================
+
 export interface Deck {
   deckId: string;
   name: string;
   description: string;
   tema: string;
+  category: DeckCategory;
+  focusAxis?: StatKey;
   level: 'leve' | 'medio' | 'extremo';
+  difficulty: 1 | 2 | 3 | 4 | 5;
   questions: Question[];
 }
 
-export interface UserStats {
-  vigor: number;
-  harmonia: number;
-  filtro: number;
-  presenca: number;
-  desapego: number;
+// ============================================================
+// Archetype
+// ============================================================
+
+export interface Archetype {
+  id: string;
+  name: string;
+  category: ArchetypeCategory;
+  axes: StatKey[] | 'equilibrio';
+  description: string;
+  tagline: string;
+}
+
+// ============================================================
+// Calibration State (replaces old UserStats/GameState)
+// ============================================================
+
+export interface CalibrationState {
+  axes: Record<StatKey, number>;
+  totalResponses: number;
+  recentWeights: Record<StatKey, number[]>;
+  toneHistory: Tone[];
+  snapshots: DeckSnapshot[];
+}
+
+export interface DeckSnapshot {
+  deckId: string;
+  completedAt: string;
+  archetypeAtCompletion: string;
+  statsAtCompletion: Record<StatKey, number>;
 }
 
 export interface GameState {
-  userStats: UserStats;
+  calibration: CalibrationState;
   activeDeck: Deck | null;
   currentQuestion: number;
   unlockedDecks: string[];
@@ -57,24 +102,27 @@ export interface GameState {
   lastTrainingDate: string | null;
 }
 
-export interface Archetype {
-  name: string;
-  axes: [StatKey, StatKey];
-  description: string;
-}
+// ============================================================
+// Constants
+// ============================================================
 
-export const ARCHETYPES: Archetype[] = [
-  { name: 'Inabalavel', axes: ['desapego', 'filtro'], description: 'Voce desvia a energia do conflito para o nada. Nada te atinge.' },
-  { name: 'Lider Natural', axes: ['presenca', 'filtro'], description: 'Voce domina o espaco com calculo. As pessoas seguem sua direcao.' },
-  { name: 'Protetor', axes: ['harmonia', 'vigor'], description: 'Voce age com forca para manter os lacos. Defende os seus.' },
-  { name: 'Racional', axes: ['filtro', 'vigor'], description: 'Logica pura move suas decisoes. Voce age com precisao cirurgica.' },
-  { name: 'Conciliador', axes: ['harmonia', 'desapego'], description: 'Voce mantem a paz sem se apegar ao resultado. Equilibrio natural.' },
-  { name: 'Pragmatico', axes: ['vigor', 'filtro'], description: 'Resultado acima de tudo. Voce faz o que precisa ser feito.' },
-  { name: 'Espontaneo', axes: ['vigor', 'desapego'], description: 'Instinto puro. Voce age sem pensar duas vezes.' },
-  { name: 'Reservado', axes: ['desapego', 'presenca'], description: 'Voce observa tudo de longe. Seu silencio e sua forca.' },
-  { name: 'Diplomata', axes: ['harmonia', 'filtro'], description: 'Voce calcula cada palavra para manter a harmonia. Ninguem percebe sua estrategia.' },
-  { name: 'Entusiasta', axes: ['presenca', 'vigor'], description: 'Energia pura. Voce entra e toma conta do espaco.' },
-];
+export const STAT_KEYS: StatKey[] = ['vigor', 'harmonia', 'filtro', 'presenca', 'desapego'];
+
+export const STAT_COLORS: Record<StatKey, string> = {
+  vigor: '#ef4444',
+  harmonia: '#10b981',
+  filtro: '#8b5cf6',
+  presenca: '#d4af37',
+  desapego: '#60a5fa',
+};
+
+export const STAT_LABELS: Record<StatKey, string> = {
+  vigor: 'Vigor',
+  harmonia: 'Harmonia',
+  filtro: 'Filtro',
+  presenca: 'Presenca',
+  desapego: 'Desapego',
+};
 
 export const TIMER_DURATION = 6;
 
@@ -83,10 +131,21 @@ export const INERTIA_PENALTY: Partial<Record<StatKey, number>> = {
   presenca: -15,
 };
 
-export const INITIAL_STATS: UserStats = {
-  vigor: 0,
-  harmonia: 0,
-  filtro: 0,
-  presenca: 0,
-  desapego: 0,
+export const CALIBRATION_WINDOW = 200;
+export const CONSISTENCY_WINDOW = 20;
+export const HOLD_DURATION_MS = 1000;
+
+export const INITIAL_CALIBRATION: CalibrationState = {
+  axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
+  totalResponses: 0,
+  recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
+  toneHistory: [],
+  snapshots: [],
 };
+
+/** Delay in ms before options appear, based on scene tension */
+export function getSceneDelay(tensao: number): number {
+  if (tensao <= 2) return 500;
+  if (tensao === 3) return 1000;
+  return 1500;
+}
