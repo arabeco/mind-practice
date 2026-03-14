@@ -215,7 +215,7 @@ export function getPrecision(totalResponses: number): number {
 export function getPrecisionLabel(pct: number): { label: string; color: string } {
   if (pct >= 100) return { label: 'Blindado', color: 'text-accent-gold' };
   if (pct > 70) return { label: 'Perfil Solido', color: 'text-accent-gold' };
-  if (pct > 30) return { label: 'Calibrando...', color: 'text-accent-purple' };
+  if (pct > 30) return { label: 'Calibrando', color: 'text-accent-purple' };
   return { label: 'Fase de Descoberta', color: 'text-orange-400' };
 }
 
@@ -287,7 +287,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const { activeDeck: _, ...persistable } = state;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...persistable, activeDeck: null }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
     } catch {}
   }, [state]);
 
