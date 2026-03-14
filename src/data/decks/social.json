@@ -3,7 +3,9 @@
   "name": "Circulos Sociais",
   "description": "Intrigas, traicoes e dramas sociais. Nivel extremo para os corajosos.",
   "tema": "Intrigas Sociais",
+  "category": "cenario",
   "level": "extremo",
+  "difficulty": 5,
   "questions": [
     {
       "id": "s1",
@@ -12,7 +14,8 @@
         "tensao": 3,
         "ambiente": "Publico",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Churrasco na casa de um amigo. Clima descontraido, musica boa, todo mundo se divertindo." },
@@ -21,19 +24,22 @@
       "options": [
         {
           "text": "Falo pro anfitriao: 'Ou ele sai, ou eu saio. Simples.'",
-          "meta": "Vigor/Ultimato",
+          "subtext": "Vigor/Ultimato",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -15 },
           "feedback": "Voce forcou a escolha. O churrasco ficou tenso, mas voce nao finge que ta tudo bem."
         },
         {
           "text": "Ignoro a presenca dele e sigo curtindo. Nao vou deixar estragar meu dia.",
-          "meta": "Nonchalant/Desapego",
+          "subtext": "Nonchalant/Desapego",
+          "tone": "evasivo",
           "weights": { "desapego": 15, "filtro": 5, "vigor": -5, "presenca": -5 },
           "feedback": "Voce nao deu poder ao passado. Mas a tensao silenciosa ficou no ar."
         },
         {
           "text": "Cumprimento de longe com um aceno e mantenho distancia. Se cruzar, sou educado mas frio.",
-          "meta": "Harmonia/Diplomacia Fria",
+          "subtext": "Harmonia/Diplomacia Fria",
+          "tone": "neutro",
           "weights": { "harmonia": 10, "filtro": 10, "vigor": -5, "desapego": -5 },
           "feedback": "Voce manteve a civilidade sem ser falso. O churrasco continuou em paz."
         }
@@ -46,7 +52,8 @@
         "tensao": 4,
         "ambiente": "Privado",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Seu melhor amigo comeca a namorar alguem novo. Voce percebe que algo esta errado." },
@@ -55,19 +62,22 @@
       "options": [
         {
           "text": "Sento com ele e digo: 'Preciso ser honesto. Essa pessoa esta te destruindo.'",
-          "meta": "Vigor/Verdade Crua",
+          "subtext": "Vigor/Verdade Crua",
+          "tone": "pragmatico",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -10, "filtro": -5 },
           "feedback": "A verdade doeu. Ele pode se afastar de voce, mas voce disse o que precisava ser dito."
         },
         {
           "text": "Me afasto. Ele vai ter que aprender sozinho. Nao posso salvar quem nao quer ser salvo.",
-          "meta": "Nonchalant/Desapego Protetor",
+          "subtext": "Nonchalant/Desapego Protetor",
+          "tone": "evasivo",
           "weights": { "desapego": 15, "filtro": 5, "harmonia": -5, "presenca": -5 },
           "feedback": "Voce se protegeu emocionalmente. Mas seu amigo perdeu uma voz de alerta."
         },
         {
           "text": "Continuo presente, faco perguntas que o facam refletir e espero ele perceber sozinho.",
-          "meta": "Harmonia/Paciencia Estrategica",
+          "subtext": "Harmonia/Paciencia Estrategica",
+          "tone": "protetor",
           "weights": { "harmonia": 10, "filtro": 10, "presenca": 5, "vigor": -5 },
           "feedback": "Voce plantou sementes sem forcar. A mudanca vem de dentro — se vier."
         }
@@ -80,7 +90,8 @@
         "tensao": 4,
         "ambiente": "Digital",
         "relacao": "Desconhecido",
-        "aposta": "Status"
+        "aposta": "Status",
+        "pilar": "ego"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Voce posta uma foto normal nas redes sociais. Nada de mais, so seu dia a dia." },
@@ -89,19 +100,22 @@
       "options": [
         {
           "text": "Respondo publicamente desmontando o anonimo e exponho a covardia dele.",
-          "meta": "Vigor/Contra-ataque Publico",
+          "subtext": "Vigor/Contra-ataque Publico",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -5, "filtro": -10 },
           "feedback": "Voce entrou na guerra digital. Pode virar heroi ou virar mais meme."
         },
         {
           "text": "Deleto o post, bloqueio a conta e sigo minha vida. Internet nao e real.",
-          "meta": "Nonchalant/Reset",
+          "subtext": "Nonchalant/Reset",
+          "tone": "evasivo",
           "weights": { "desapego": 15, "filtro": 10, "presenca": -10 },
           "feedback": "Voce apagou o fogo cortando o oxigenio. Inteligente, mas custou sua presenca online."
         },
         {
           "text": "Faco um story abordando o assunto com humor e leveza, desarmando a narrativa.",
-          "meta": "Harmonia/Jiu-Jitsu Social",
+          "subtext": "Harmonia/Jiu-Jitsu Social",
+          "tone": "neutro",
           "weights": { "harmonia": 5, "presenca": 15, "filtro": 5, "vigor": -5 },
           "feedback": "Voce transformou o ataque em conteudo. O anonimo perdeu o poder."
         }
@@ -114,7 +128,8 @@
         "tensao": 3,
         "ambiente": "Privado",
         "relacao": "Par",
-        "aposta": "Dinheiro"
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Voce emprestou um valor significativo pra um amigo ha 3 meses. Ele prometeu devolver em duas semanas." },
@@ -123,19 +138,22 @@
       "options": [
         {
           "text": "Mando mensagem: 'Vi que ta bem de grana. Quando devolve o que me deve?'",
-          "meta": "Vigor/Cobranca Direta",
+          "subtext": "Vigor/Cobranca Direta",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -10, "filtro": -5 },
           "feedback": "Voce cobrou sem rodeio. A amizade vai tremer, mas seu dinheiro importa."
         },
         {
           "text": "Considero o dinheiro perdido e a amizade tambem. Nao empresto mais.",
-          "meta": "Nonchalant/Corte Limpo",
+          "subtext": "Nonchalant/Corte Limpo",
+          "tone": "evasivo",
           "weights": { "desapego": 15, "filtro": 10, "vigor": -5, "harmonia": -10 },
           "feedback": "Voce perdeu o dinheiro mas ganhou uma licao. Licoes caras sao as que mais ensinam."
         },
         {
           "text": "Chamo pra um cafe e digo: 'Ei, sobre aquele valor... Podemos combinar um jeito de resolver?'",
-          "meta": "Harmonia/Negociacao Pessoal",
+          "subtext": "Harmonia/Negociacao Pessoal",
+          "tone": "neutro",
           "weights": { "harmonia": 10, "filtro": 5, "presenca": 5, "vigor": -5 },
           "feedback": "Voce preservou a relacao e abriu espaco pra resolver. Diplomatico."
         }
@@ -148,7 +166,8 @@
         "tensao": 5,
         "ambiente": "Publico",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Voce esta numa festa e encontra um amigo que confia em voce. Ele esta feliz." },
@@ -157,19 +176,22 @@
       "options": [
         {
           "text": "Vou direto no amigo e conto tudo ali mesmo. Ele merece saber.",
-          "meta": "Vigor/Verdade Imediata",
+          "subtext": "Vigor/Verdade Imediata",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -15, "filtro": -5 },
           "feedback": "A bomba estourou na festa. Caos total, mas voce nao conseguia carregar essa verdade."
         },
         {
           "text": "Finjo que nao vi. Nao e meu relacionamento, nao e meu problema.",
-          "meta": "Nonchalant/Nao Interferencia",
+          "subtext": "Nonchalant/Nao Interferencia",
+          "tone": "evasivo",
           "weights": { "desapego": 10, "filtro": 10, "harmonia": -5, "presenca": -10 },
           "feedback": "Voce se protegeu, mas o peso de saber e nao falar vai ficar."
         },
         {
           "text": "No dia seguinte, chamo meu amigo em particular e conto com cuidado.",
-          "meta": "Harmonia/Timing",
+          "subtext": "Harmonia/Timing",
+          "tone": "protetor",
           "weights": { "harmonia": 10, "filtro": 10, "presenca": 5, "vigor": -5 },
           "feedback": "Voce escolheu o momento certo. A verdade veio com respeito."
         }
@@ -182,7 +204,8 @@
         "tensao": 4,
         "ambiente": "Publico",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Casamento de um amigo proximo. Cerimonia linda, todo mundo emocionado." },
@@ -191,19 +214,22 @@
       "options": [
         {
           "text": "Respondo seco: 'Nao e o lugar nem a hora pra isso. Com licenca.'",
-          "meta": "Vigor/Corte",
+          "subtext": "Vigor/Corte",
+          "tone": "pragmatico",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -5, "filtro": -5 },
           "feedback": "Voce fechou a porta com firmeza. Constrangeu quem perguntou."
         },
         {
           "text": "Dou um sorriso e mudo de assunto: 'Que cerimonia linda, ne?' e saio de perto.",
-          "meta": "Nonchalant/Desvio",
+          "subtext": "Nonchalant/Desvio",
+          "tone": "evasivo",
           "weights": { "filtro": 10, "desapego": 10, "vigor": -5, "presenca": -5 },
           "feedback": "Voce esquivou com elegancia. A pergunta morreu sem resposta."
         },
         {
           "text": "Digo com leveza: 'Cada um seguiu seu caminho. Hoje o foco e nos noivos!' e brindo.",
-          "meta": "Harmonia/Redirecionamento",
+          "subtext": "Harmonia/Redirecionamento",
+          "tone": "neutro",
           "weights": { "harmonia": 10, "presenca": 10, "filtro": 5, "vigor": -5 },
           "feedback": "Voce respondeu sem revelar e trouxe o foco de volta pro momento. Maestria social."
         }
@@ -216,7 +242,8 @@
         "tensao": 3,
         "ambiente": "Digital",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Grupo da familia no WhatsApp. Normalmente e so bom dia e foto de comida." },
@@ -225,19 +252,22 @@
       "options": [
         {
           "text": "Mando o link desmentindo e digo: 'Tio, isso e falso. Para de espalhar desinformacao.'",
-          "meta": "Vigor/Correcao Publica",
+          "subtext": "Vigor/Correcao Publica",
+          "tone": "pragmatico",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -10, "filtro": -5 },
           "feedback": "Voce corrigiu a mentira. O tio ficou bravo, mas a informacao certa esta la agora."
         },
         {
           "text": "Silencio o grupo. Nao adianta discutir com quem nao quer aprender.",
-          "meta": "Nonchalant/Silencio",
+          "subtext": "Nonchalant/Silencio",
+          "tone": "evasivo",
           "weights": { "desapego": 10, "filtro": 10, "vigor": -5, "harmonia": -5 },
           "feedback": "Voce preservou sua sanidade. Mas a fake news continua rodando."
         },
         {
           "text": "Mando no privado pra sua mae o link correto e explico com paciencia por que aquilo e falso.",
-          "meta": "Harmonia/Protecao Seletiva",
+          "subtext": "Harmonia/Protecao Seletiva",
+          "tone": "protetor",
           "weights": { "harmonia": 10, "filtro": 10, "presenca": 5, "vigor": -5 },
           "feedback": "Voce protegeu quem importa sem criar guerra familiar. Cirurgico."
         }
@@ -250,7 +280,8 @@
         "tensao": 3,
         "ambiente": "Privado",
         "relacao": "Desconhecido",
-        "aposta": "Dinheiro"
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Voce recebe uma ligacao de um numero desconhecido. A voz do outro lado parece desesperada." },
@@ -259,19 +290,22 @@
       "options": [
         {
           "text": "Grito: 'Eu sei que e golpe! Vou ligar pra policia!' e desligo.",
-          "meta": "Vigor/Reacao Explosiva",
+          "subtext": "Vigor/Reacao Explosiva",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 5, "filtro": -5, "harmonia": -5 },
           "feedback": "Voce reagiu com raiva ao golpe. Nao caiu, mas a adrenalina te pegou."
         },
         {
           "text": "Desligo sem falar nada e bloqueio o numero.",
-          "meta": "Nonchalant/Corte Frio",
+          "subtext": "Nonchalant/Corte Frio",
+          "tone": "pragmatico",
           "weights": { "filtro": 15, "desapego": 10, "vigor": -5 },
           "feedback": "Zero emocao desperdicada. Voce identificou o golpe e eliminou."
         },
         {
           "text": "Digo calmamente: 'Qual e seu nome?' pra confirmar que e golpe, depois desligo e aviso a familia real.",
-          "meta": "Harmonia/Verificacao",
+          "subtext": "Harmonia/Verificacao",
+          "tone": "protetor",
           "weights": { "harmonia": 10, "filtro": 10, "presenca": 5, "vigor": -5 },
           "feedback": "Voce verificou sem se expor e ainda protegeu os seus. Completo."
         }
@@ -284,7 +318,8 @@
         "tensao": 4,
         "ambiente": "Publico",
         "relacao": "Par",
-        "aposta": "Status"
+        "aposta": "Status",
+        "pilar": "ego"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Formatura de um amigo proximo. Voce esta orgulhoso e feliz por ele." },
@@ -293,19 +328,22 @@
       "options": [
         {
           "text": "Levanto e saio visivelmente irritado. Depois confronto quem vazou.",
-          "meta": "Vigor/Saida Dramatica",
+          "subtext": "Vigor/Saida Dramatica",
+          "tone": "provocativo",
           "weights": { "vigor": 10, "presenca": 10, "harmonia": -15, "filtro": -5 },
           "feedback": "Sua saida foi notada. O constrangimento mudou de alvo — agora e de quem falou."
         },
         {
           "text": "Rio junto, como se nao me afetasse. Depois processo em casa.",
-          "meta": "Nonchalant/Mascara Social",
+          "subtext": "Nonchalant/Mascara Social",
+          "tone": "evasivo",
           "weights": { "filtro": 10, "desapego": 10, "vigor": -5, "presenca": -5 },
           "feedback": "Voce absorveu o golpe em publico. Ninguem percebeu a ferida."
         },
         {
           "text": "Rio e digo: 'Essa historia ficou melhor na versao dele!' e tomo o controle da narrativa.",
-          "meta": "Harmonia/Controle Narrativo",
+          "subtext": "Harmonia/Controle Narrativo",
+          "tone": "neutro",
           "weights": { "harmonia": 5, "presenca": 15, "filtro": 5, "vigor": -5 },
           "feedback": "Voce virou o jogo. A piada agora e sua e voce controla o desfecho."
         }
@@ -318,7 +356,8 @@
         "tensao": 5,
         "ambiente": "Privado",
         "relacao": "Par",
-        "aposta": "Paz Emocional"
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
       },
       "slides": [
         { "tipo": "contexto", "texto": "Voce descobre algo que muda tudo sobre alguem que voce considerava seu melhor amigo." },
@@ -327,19 +366,22 @@
       "options": [
         {
           "text": "Confronto cara a cara: 'Eu sei de tudo. Cada palavra, cada sabotagem. Acabou.'",
-          "meta": "Vigor/Ruptura Total",
+          "subtext": "Vigor/Ruptura Total",
+          "tone": "provocativo",
           "weights": { "vigor": 15, "presenca": 10, "harmonia": -15, "filtro": -5 },
           "feedback": "A mascara caiu. A amizade acabou com um estrondo. Doloroso, mas libertador."
         },
         {
           "text": "Me afasto sem explicacao. Ele nao merece nem o confronto.",
-          "meta": "Nonchalant/Desaparecimento",
+          "subtext": "Nonchalant/Desaparecimento",
+          "tone": "evasivo",
           "weights": { "desapego": 15, "filtro": 10, "vigor": -5, "presenca": -10 },
           "feedback": "Voce sumiu da vida dele sem uma palavra. O silencio e a pior resposta pra quem quer atencao."
         },
         {
           "text": "Afasto devagar, sem drama. Paro de compartilhar, paro de confiar, mas nao explodo.",
-          "meta": "Harmonia/Afastamento Gradual",
+          "subtext": "Harmonia/Afastamento Gradual",
+          "tone": "protetor",
           "weights": { "harmonia": 5, "filtro": 15, "desapego": 10, "vigor": -10 },
           "feedback": "Voce saiu pela porta dos fundos. Sem escandalo, sem guerra. Ele so vai perceber quando ja for tarde."
         }
