@@ -56,7 +56,7 @@ export interface Deck {
   tema: string;
   category: DeckCategory;
   focusAxis?: StatKey;
-  level: 'leve' | 'medio' | 'extremo';
+  tier: 1 | 2 | 3 | 4 | 5;
   difficulty: 1 | 2 | 3 | 4 | 5;
   questions: Question[];
 }
@@ -122,6 +122,71 @@ export const STAT_LABELS: Record<StatKey, string> = {
   filtro: 'Filtro',
   presenca: 'Presenca',
   desapego: 'Desapego',
+};
+
+// ============================================================
+// Tier System
+// ============================================================
+
+export type TierLevel = 1 | 2 | 3 | 4 | 5;
+
+export interface TierConfig {
+  label: string;
+  subtitle: string;
+  badgeClass: string;
+  cardBorderClass: string;
+  cardBgClass: string;
+  cardShadow: string;
+  /** Tier 5 only — animated gradient border */
+  animated: boolean;
+}
+
+export const TIER_CONFIG: Record<TierLevel, TierConfig> = {
+  1: {
+    label: 'Zinco',
+    subtitle: 'Calibragem basica',
+    badgeClass: 'bg-white/10 text-white/60',
+    cardBorderClass: 'border-white/10',
+    cardBgClass: 'bg-white/5',
+    cardShadow: 'none',
+    animated: false,
+  },
+  2: {
+    label: 'Cromo',
+    subtitle: 'Alta tensao',
+    badgeClass: 'bg-purple-500/20 text-purple-400',
+    cardBorderClass: 'border-purple-500/30',
+    cardBgClass: 'bg-purple-900/10',
+    cardShadow: '0 0 15px rgba(139,92,246,0.1)',
+    animated: false,
+  },
+  3: {
+    label: 'Dominio',
+    subtitle: 'Treino de eixo',
+    badgeClass: 'bg-cyan-400/20 text-cyan-400',
+    cardBorderClass: 'border-cyan-400/40',
+    cardBgClass: 'bg-cyan-900/10',
+    cardShadow: 'none',
+    animated: false,
+  },
+  4: {
+    label: 'Gold',
+    subtitle: 'Desafio',
+    badgeClass: 'bg-yellow-500/20 text-yellow-500',
+    cardBorderClass: 'border-yellow-500/50',
+    cardBgClass: 'bg-yellow-600/5',
+    cardShadow: '0 0 20px rgba(212,175,55,0.2)',
+    animated: false,
+  },
+  5: {
+    label: 'Lendario',
+    subtitle: 'Season',
+    badgeClass: 'bg-gradient-to-r from-purple-500/30 to-amber-500/30 text-white',
+    cardBorderClass: 'border-transparent',
+    cardBgClass: 'bg-white/8',
+    cardShadow: 'none',
+    animated: true,
+  },
 };
 
 export const TIMER_DURATION = 6;
