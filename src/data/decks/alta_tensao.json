@@ -4,7 +4,7 @@
   "description": "Situacoes de pressao emocional intensa. Prepare-se para decisoes dificeis.",
   "tema": "Pressao Emocional",
   "category": "cenario",
-  "level": "medio",
+  "tier": 2,
   "difficulty": 4,
   "questions": [
     {

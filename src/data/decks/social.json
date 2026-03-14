@@ -4,7 +4,7 @@
   "description": "Intrigas, traicoes e dramas sociais. Nivel extremo para os corajosos.",
   "tema": "Intrigas Sociais",
   "category": "cenario",
-  "level": "extremo",
+  "tier": 4,
   "difficulty": 5,
   "questions": [
     {

@@ -4,7 +4,7 @@
   "description": "Situacoes do dia a dia que testam seus reflexos sociais. Comece aqui.",
   "tema": "Misto",
   "category": "essencial",
-  "level": "leve",
+  "tier": 1,
   "difficulty": 2,
   "questions": [
     {

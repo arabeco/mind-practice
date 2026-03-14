@@ -4,7 +4,7 @@
   "description": "O mundo corporativo e um campo minado. Navegue com estrategia.",
   "tema": "Carreira",
   "category": "cenario",
-  "level": "medio",
+  "tier": 2,
   "difficulty": 3,
   "questions": [
     {
