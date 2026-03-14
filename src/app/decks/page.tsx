@@ -1,134 +1,151 @@
 'use client';
 
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
-import { ALL_DECKS, DECK_UNLOCK_ORDER } from '@/data/decks/index';
-import type { Deck } from '@/types/game';
+import { ALL_DECKS, getDecksByCategory, getWeeklyFreeDeckIds } from '@/data/decks/index';
+import type { Deck, DeckCategory, StatKey } from '@/types/game';
+import { STAT_COLORS } from '@/types/game';
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+const TABS: { id: DeckCategory; label: string }[] = [
+  { id: 'essencial', label: 'Essenciais' },
+  { id: 'arquetipo', label: 'Arquetipos' },
+  { id: 'cenario', label: 'Cenarios' },
+];
+
+const levelColors: Record<Deck['level'], string> = {
+  leve: 'bg-green-500/20 text-green-400',
+  medio: 'bg-yellow-500/20 text-yellow-400',
+  extremo: 'bg-red-500/20 text-red-400',
+};
 
 function formatTimeLeft(ms: number): string {
   if (ms === Infinity) return 'Complete o deck anterior';
-  const totalMinutes = Math.ceil(ms / 60_000);
-  const h = Math.floor(totalMinutes / 60);
-  const m = totalMinutes % 60;
+  const h = Math.floor(ms / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
   if (h > 0) return `${h}h ${m}m`;
   return `${m}m`;
 }
 
-const levelColors: Record<Deck['level'], string> = {
-  leve: 'bg-green-500/80 text-green-100',
-  medio: 'bg-yellow-500/80 text-yellow-100',
-  extremo: 'bg-red-500/80 text-red-100',
-};
-
-// ---------------------------------------------------------------------------
-// Page
-// ---------------------------------------------------------------------------
-
 export default function DecksPage() {
+  const [activeTab, setActiveTab] = useState<DeckCategory>('essencial');
   const router = useRouter();
   const { state, dispatch, isDeckLocked, getTimeUntilUnlock } = useGame();
+  const weeklyFree = getWeeklyFreeDeckIds();
+
+  const decks = getDecksByCategory(activeTab);
 
   const handleSelect = (deck: Deck) => {
-    if (isDeckLocked(deck.deckId)) return;
+    const locked = isDeckLocked(deck.deckId) && !weeklyFree.includes(deck.deckId);
+    if (locked) return;
     dispatch({ type: 'START_DECK', deck });
     router.push(`/play/${deck.deckId}`);
   };
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col gap-6 px-4 py-10">
+    <main className="mx-auto flex min-h-screen max-w-md flex-col px-4 py-8">
       {/* Header */}
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-white">Decks</h2>
-        <p className="mt-1 text-sm text-white/60">Escolha seu desafio</p>
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold">Decks</h2>
+        <p className="mt-1 text-sm text-white/40">Escolha seu desafio</p>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-2 mb-6">
+        {TABS.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all ${
+              activeTab === tab.id
+                ? 'bg-accent-purple text-white'
+                : 'bg-white/5 text-white/40 hover:bg-white/10'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {/* Deck list */}
-      <div className="flex flex-col gap-4">
-        {DECK_UNLOCK_ORDER.map((deckId, index) => {
-          const deck = ALL_DECKS.find((d) => d.deckId === deckId);
-          if (!deck) return null;
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+          className="flex flex-col gap-4"
+        >
+          {decks.map((deck, i) => {
+            const isWeeklyFree = weeklyFree.includes(deck.deckId);
+            const locked = isDeckLocked(deck.deckId) && !isWeeklyFree;
+            const completed = deck.deckId in state.completedDecks;
+            const timeLeft = getTimeUntilUnlock(deck.deckId);
+            const focusColor = deck.focusAxis ? STAT_COLORS[deck.focusAxis] : undefined;
 
-          const locked = isDeckLocked(deckId);
-          const completed = deckId in state.completedDecks;
-          const timeLeft = getTimeUntilUnlock(deckId);
-
-          return (
-            <motion.button
-              key={deckId}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.4 }}
-              disabled={locked}
-              onClick={() => handleSelect(deck)}
-              className={`glass-card-hover relative overflow-hidden rounded-2xl p-5 text-left ${
-                locked ? 'cursor-not-allowed opacity-40 grayscale' : ''
-              }`}
-            >
-              {/* Badges row */}
-              <div className="mb-2 flex items-center gap-2">
-                <span
-                  className={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${levelColors[deck.level]}`}
-                >
-                  {deck.level}
-                </span>
-
-                {completed && (
-                  <span className="flex items-center gap-1 rounded-full bg-accent-gold/20 px-2.5 py-0.5 text-xs font-semibold text-accent-gold">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-3.5 w-3.5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Completo
+            return (
+              <motion.button
+                key={deck.deckId}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 }}
+                disabled={locked}
+                onClick={() => handleSelect(deck)}
+                className={`glass-card-hover relative overflow-hidden p-5 text-left ${
+                  locked ? 'cursor-not-allowed opacity-40 grayscale' : ''
+                }`}
+                style={focusColor && !locked ? { borderColor: `${focusColor}30` } : undefined}
+              >
+                {/* Badges */}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${levelColors[deck.level]}`}>
+                    {deck.level}
                   </span>
-                )}
-              </div>
-
-              {/* Name & description */}
-              <h3 className="text-lg font-bold text-white">{deck.name}</h3>
-              <p className="mt-1 text-sm text-white/60">{deck.description}</p>
-
-              {/* Question count */}
-              <p className="mt-3 text-xs text-white/40">
-                {deck.questions.length} cenas
-              </p>
-
-              {/* Lock overlay */}
-              {locked && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black/40">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white/70"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  <span className="text-sm font-medium text-white/70">
-                    {formatTimeLeft(timeLeft)}
-                  </span>
+                  {completed && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-gold/20 text-accent-gold">
+                      Completo
+                    </span>
+                  )}
+                  {isWeeklyFree && !completed && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-500/20 text-green-400">
+                      Gratis esta semana
+                    </span>
+                  )}
                 </div>
-              )}
-            </motion.button>
-          );
-        })}
-      </div>
+
+                <h3 className="text-lg font-bold">{deck.name}</h3>
+                <p className="text-sm text-white/50 mt-1">{deck.description}</p>
+
+                {/* Focus axis tag */}
+                {deck.focusAxis && (
+                  <div className="mt-2 flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: focusColor }} />
+                    <span className="text-[10px] text-white/30 uppercase">{deck.focusAxis}</span>
+                  </div>
+                )}
+
+                <p className="text-[10px] text-white/20 mt-2">{deck.questions.length} cenas</p>
+
+                {/* Lock overlay */}
+                {locked && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-2xl bg-black/50 backdrop-blur-sm">
+                    <svg className="w-7 h-7 text-accent-gold/60" fill="currentColor" viewBox="0 0 24 24">
+                      <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-xs text-white/50">{formatTimeLeft(timeLeft)}</span>
+                  </div>
+                )}
+              </motion.button>
+            );
+          })}
+
+          {decks.length === 0 && (
+            <p className="text-center text-white/30 text-sm py-8">Nenhum deck nesta categoria ainda.</p>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </main>
   );
 }
