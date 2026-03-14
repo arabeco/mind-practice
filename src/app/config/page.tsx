@@ -2,30 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
-import type { StatKey } from '@/types/game';
+import { getPrecisionLabel, getConsistencyLabel } from '@/context/GameContext';
+import BipolarSliders from '@/components/BipolarSliders';
 
-const STAT_KEYS: StatKey[] = ['vigor', 'harmonia', 'filtro', 'presenca', 'desapego'];
-
-const container = {
-  hidden: {},
-  show: {
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
-};
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
 
 export default function ConfigPage() {
-  const { state, dispatch, getArchetype } = useGame();
-
+  const { state, dispatch, getArchetype, precision, consistency, isIdentityValidated } = useGame();
   const archetype = getArchetype();
   const deckCount = Object.keys(state.completedDecks).length;
+  const precLabel = getPrecisionLabel(precision);
+  const consLabel = getConsistencyLabel(consistency);
 
   function handleReset() {
-    if (confirm('Tem certeza?')) {
+    if (confirm('Tem certeza? Todo progresso sera apagado.')) {
       dispatch({ type: 'RESET_ALL' });
       localStorage.removeItem('mindpractice_state');
     }
@@ -33,74 +24,82 @@ export default function ConfigPage() {
 
   return (
     <motion.div
-      className="flex flex-col gap-6 px-4 py-8 max-w-md mx-auto"
+      className="flex flex-col gap-5 px-4 py-8 max-w-md mx-auto"
       variants={container}
       initial="hidden"
       animate="show"
     >
-      {/* Header */}
       <motion.header variants={fadeUp}>
-        <h2 className="text-2xl font-bold tracking-tight">Configuracoes</h2>
-        <p className="text-sm text-white/50 mt-1">Seu perfil e preferencias</p>
+        <h2 className="text-2xl font-bold">Configuracoes</h2>
+        <p className="text-sm text-white/40 mt-1">Seu perfil e preferencias</p>
       </motion.header>
 
       {/* Profile Card */}
-      <motion.section className="glass-card p-5 flex flex-col gap-2" variants={fadeUp}>
-        <span className="text-[11px] font-semibold tracking-widest text-white/40 uppercase">
-          Perfil Atual
-        </span>
-        <h3 className={`text-lg font-bold ${archetype ? 'text-accent-gold' : 'text-white/40'}`}>
-          {archetype ? archetype.name : 'Nenhum'}
-        </h3>
-        <p className="text-sm text-white/60">
-          {archetype ? archetype.description : 'Complete um deck para descobrir.'}
-        </p>
-        <p className="text-xs text-white/30 mt-1">
-          {deckCount} deck{deckCount !== 1 ? 's' : ''} completo{deckCount !== 1 ? 's' : ''}
-        </p>
+      <motion.section className="glass-card p-5" variants={fadeUp}>
+        <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase">Perfil</span>
+        <div className="flex items-center gap-3 mt-2">
+          <h3 className="text-xl font-bold text-accent-gold">{archetype.name}</h3>
+          {isIdentityValidated && (
+            <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-accent-gold/20 text-accent-gold">
+              Identidade Confirmada
+            </span>
+          )}
+        </div>
+        <p className="text-xs text-white/40 italic">{archetype.tagline}</p>
+        <p className="text-sm text-white/50 mt-2">{archetype.description}</p>
+        <p className="text-[10px] text-white/20 mt-2">{deckCount} deck(s) completo(s)</p>
       </motion.section>
 
-      {/* Stats Card */}
-      <motion.section className="glass-card p-5 flex flex-col gap-3" variants={fadeUp}>
-        <span className="text-[11px] font-semibold tracking-widest text-white/40 uppercase">
-          Eixos Acumulados
-        </span>
-        <div className="grid grid-cols-5 gap-2 text-center">
-          {STAT_KEYS.map((key) => {
-            const value = state.userStats[key];
-            const colorClass =
-              value > 0 ? 'text-accent-gold' : value < 0 ? 'text-red-400' : 'text-white/20';
-
-            return (
-              <div key={key} className="flex flex-col items-center gap-1">
-                <span className={`text-lg font-bold tabular-nums ${colorClass}`}>{value}</span>
-                <span className="text-[10px] text-white/40 uppercase">
-                  {key.slice(0, 4)}
-                </span>
-              </div>
-            );
-          })}
+      {/* Metrics */}
+      <motion.section className="glass-card p-5" variants={fadeUp}>
+        <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase mb-3 block">Metricas</span>
+        <div className="grid grid-cols-2 gap-4">
+          {/* Precision */}
+          <div>
+            <p className="text-[10px] text-white/30 uppercase mb-1">Calibragem</p>
+            <p className={`text-lg font-bold ${precLabel.color}`}>{Math.round(precision)}%</p>
+            <p className={`text-[10px] ${precLabel.color}`}>{precLabel.label}</p>
+          </div>
+          {/* Consistency */}
+          <div>
+            <p className="text-[10px] text-white/30 uppercase mb-1">Consistencia</p>
+            <p className={`text-lg font-bold ${
+              consLabel.icon === 'full' ? 'text-accent-gold' :
+              consLabel.icon === 'half' ? 'text-accent-purple' : 'text-red-400'
+            }`}>
+              {(consistency * 100).toFixed(0)}%
+            </p>
+            <p className={`text-[10px] ${
+              consLabel.icon === 'full' ? 'text-accent-gold' :
+              consLabel.icon === 'half' ? 'text-accent-purple' : 'text-red-400'
+            }`}>
+              {consLabel.label}
+            </p>
+          </div>
         </div>
       </motion.section>
 
-      {/* About Card */}
-      <motion.section className="glass-card p-5 flex flex-col gap-2" variants={fadeUp}>
-        <span className="text-[11px] font-semibold tracking-widest text-white/40 uppercase">
-          Sobre
-        </span>
-        <p className="text-sm text-white/60">
-          MindPractice e um treino mental baseado em cenarios sociais. Tome decisoes sob pressao e
-          descubra seu perfil comportamental.
-        </p>
-        <p className="text-xs text-white/30 mt-1">v0.1.0</p>
+      {/* Axes */}
+      <motion.section className="glass-card p-5" variants={fadeUp}>
+        <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase mb-4 block">Eixos</span>
+        <BipolarSliders axes={state.calibration.axes} animate={false} />
       </motion.section>
 
-      {/* Reset Button */}
+      {/* About */}
+      <motion.section className="glass-card p-5" variants={fadeUp}>
+        <span className="text-[10px] font-semibold tracking-widest text-white/30 uppercase">Sobre</span>
+        <p className="text-sm text-white/50 mt-2">
+          MindPractice e um simulador de reatividade social. Treine seu comportamento
+          atraves de micro-conflitos sob pressao e descubra seu arquetipo.
+        </p>
+        <p className="text-[10px] text-white/20 mt-2">v0.2.0</p>
+      </motion.section>
+
+      {/* Reset */}
       <motion.button
         variants={fadeUp}
         onClick={handleReset}
-        className="w-full py-3 rounded-xl border border-red-500/20 text-red-400 text-sm font-medium
-                   transition-colors hover:bg-red-500/10 active:bg-red-500/20"
+        className="w-full py-3 rounded-xl border border-red-500/20 text-red-400 text-sm font-medium hover:bg-red-500/10 transition-colors"
       >
         Resetar Progresso
       </motion.button>
