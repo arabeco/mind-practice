@@ -1,14 +1,18 @@
 import basic01 from './basic_01.json';
 import altaTensao from './alta_tensao.json';
+import holofote from './holofote.json';
+import livroAmaldicoado from './livro_amaldicoado.json';
 import profissional from './profissional.json';
 import social from './social.json';
 import type { Deck, DeckCategory } from '@/types/game';
 
 export const ALL_DECKS: Deck[] = [
   basic01 as unknown as Deck,
+  holofote as unknown as Deck,
   altaTensao as unknown as Deck,
   profissional as unknown as Deck,
   social as unknown as Deck,
+  livroAmaldicoado as unknown as Deck,
 ];
 
 export const getDeckById = (id: string): Deck | undefined =>
@@ -17,7 +21,14 @@ export const getDeckById = (id: string): Deck | undefined =>
 export const getDecksByCategory = (cat: DeckCategory): Deck[] =>
   ALL_DECKS.filter(d => d.category === cat);
 
-export const DECK_UNLOCK_ORDER = ['basic_01', 'alta_tensao', 'profissional', 'social'];
+export const DECK_UNLOCK_ORDER = [
+  'basic_01',
+  'holofote',
+  'alta_tensao',
+  'profissional',
+  'social',
+  'livro_amaldicoado',
+];
 
 /**
  * Weekly free rotation: returns 2 deck IDs (1 arquetipo + 1 cenario)
@@ -31,7 +42,9 @@ export function getWeeklyFreeDeckIds(): string[] {
   );
 
   const arquetipoDecks = ALL_DECKS.filter(d => d.category === 'arquetipo');
-  const cenarioDecks = ALL_DECKS.filter(d => d.category === 'cenario' && d.deckId !== 'basic_01');
+  const cenarioDecks = ALL_DECKS.filter(
+    d => d.category === 'cenario' && d.deckId !== 'basic_01' && d.tier < 5,
+  );
 
   const freeDeckIds: string[] = [];
   if (arquetipoDecks.length > 0) {

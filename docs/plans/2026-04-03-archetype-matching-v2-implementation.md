@@ -1,6 +1,46 @@
-import type { Archetype, StatKey } from '@/types/game';
-import { STAT_KEYS } from '@/types/game';
+# Archetype Matching v2 Implementation Plan
 
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Replace lookup-table archetype matching with distance-based matching using ideal profiles, axis confidence, and change inertia.
+
+**Architecture:** Add `idealProfile` field to each archetype definition. Rewrite `matchArchetype` to compute weighted distance to each profile, using per-axis confidence from recentWeights stddev. Apply 15% inertia bonus to current archetype (skipped in discovery phase <20 responses).
+
+**Tech Stack:** TypeScript, React Context
+
+---
+
+### Task 1: Add idealProfile to Archetype type
+
+**Files:**
+- Modify: `src/types/game.ts:81-88`
+
+**Step 1: Add idealProfile to Archetype interface**
+
+```typescript
+export interface Archetype {
+  id: string;
+  name: string;
+  category: ArchetypeCategory;
+  axes: StatKey[] | 'equilibrio';
+  idealProfile: Record<StatKey, number>;
+  description: string;
+  tagline: string;
+}
+```
+
+**Step 2: Verify no build errors from missing field (expected — fixed in Task 2)**
+
+---
+
+### Task 2: Add idealProfile to all 15 archetypes
+
+**Files:**
+- Modify: `src/data/archetypes.ts:3-124`
+
+**Step 1: Add idealProfile to every archetype entry**
+
+```typescript
 export const ARCHETYPES: Archetype[] = [
   {
     id: 'soberano',
@@ -138,13 +178,27 @@ export const ARCHETYPES: Archetype[] = [
     tagline: 'Xadrez humano',
   },
 ];
+```
 
+---
+
+### Task 3: Rewrite matchArchetype function
+
+**Files:**
+- Modify: `src/data/archetypes.ts:126-192`
+
+**Step 1: Replace the entire matchArchetype function**
+
+New signature: `matchArchetype(axes, recentWeights, totalResponses, currentArchetypeId?)`
+
+```typescript
 /**
  * Match archetype using distance-based scoring with confidence weighting.
  *
+ * Algorithm:
  * 1. Normalize player axes to 0-1
  * 2. Calculate per-axis confidence from recentWeights stddev
- * 3. Score each archetype: weighted (1 - |player - ideal|)
+ * 3. Score each archetype: weighted sum of (1 - |player - ideal|)
  * 4. Apply 15% inertia bonus to current archetype (if >= 20 responses)
  * 5. Return highest scoring archetype
  */
@@ -171,8 +225,10 @@ export function matchArchetype(
       totalWeight += w;
     }
 
+    // Normalize score to 0-1
     score = totalWeight > 0 ? score / totalWeight : 0;
 
+    // Apply inertia: current archetype gets 15% bonus after discovery phase
     if (
       currentArchetypeId &&
       totalResponses >= 20 &&
@@ -190,6 +246,7 @@ export function matchArchetype(
   return bestArchetype;
 }
 
+/** Normalize axes values to 0-1 range */
 function normalizeAxes(axes: Record<string, number>): Record<StatKey, number> {
   const values = STAT_KEYS.map(k => axes[k] ?? 0);
   const min = Math.min(...values);
@@ -203,18 +260,109 @@ function normalizeAxes(axes: Record<string, number>): Record<StatKey, number> {
   return result;
 }
 
+/** Calculate per-axis confidence: consistent data = high confidence, contradictory = low */
 function getAxisConfidence(recentWeights: Record<StatKey, number[]>): Record<StatKey, number> {
   const result = {} as Record<StatKey, number>;
   for (const key of STAT_KEYS) {
     const vals = recentWeights[key];
     if (!vals || vals.length < 3) {
-      result[key] = 0.5;
+      result[key] = 0.5; // not enough data — neutral confidence
       continue;
     }
     const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
     const variance = vals.reduce((sum, v) => sum + (v - mean) ** 2, 0) / vals.length;
     const stddev = Math.sqrt(variance);
+    // stddev 0 = perfect consistency (confidence 1.0)
+    // stddev 30 = max contradiction (confidence 0.1)
     result[key] = Math.max(0.1, Math.min(1.0, 1 - stddev / 30));
   }
   return result;
 }
+```
+
+---
+
+### Task 4: Update all matchArchetype call sites in GameContext
+
+**Files:**
+- Modify: `src/context/GameContext.tsx`
+
+There are 3 call sites to update:
+
+**Call site 1 — START_DECK (line ~154):**
+```typescript
+const startArchetype = matchArchetype(
+  state.calibration.axes,
+  state.calibration.recentWeights,
+  state.calibration.totalResponses,
+  // no currentArchetypeId on start — let it pick freely
+);
+```
+
+**Call site 2 — FINISH_DECK (line ~192):**
+```typescript
+// Need to know current archetype for inertia
+const currentArch = matchArchetype(
+  state.calibration.axes,
+  state.calibration.recentWeights,
+  state.calibration.totalResponses,
+);
+const archetype = matchArchetype(
+  state.calibration.axes,
+  state.calibration.recentWeights,
+  state.calibration.totalResponses,
+  currentArch.id,
+);
+```
+
+Wait — this is circular. The simpler approach: pass the `startArchetype` from the run session as the current:
+
+```typescript
+const archetype = matchArchetype(
+  state.calibration.axes,
+  state.calibration.recentWeights,
+  state.calibration.totalResponses,
+  state.activeRun?.startArchetype ? ARCHETYPES.find(a => a.name === state.activeRun!.startArchetype)?.id : undefined,
+);
+```
+
+Actually simplest: store archetype ID not name in startArchetype. But that's a bigger change. For now, find by name:
+
+```typescript
+const prevArchId = ARCHETYPES.find(a => a.name === state.activeRun?.startArchetype)?.id;
+const archetype = matchArchetype(
+  state.calibration.axes,
+  state.calibration.recentWeights,
+  state.calibration.totalResponses,
+  prevArchId,
+);
+```
+
+**Call site 3 — getArchetype callback (line ~337-338):**
+```typescript
+const getArchetype = useCallback(
+  () => matchArchetype(
+    state.calibration.axes,
+    state.calibration.recentWeights,
+    state.calibration.totalResponses,
+  ),
+  [state.calibration.axes, state.calibration.recentWeights, state.calibration.totalResponses],
+);
+```
+
+---
+
+### Task 5: Remove old toneHistory param and verify build
+
+**Files:**
+- Modify: `src/data/archetypes.ts` — old matchArchetype already replaced in Task 3
+- Modify: `src/context/GameContext.tsx` — remove toneHistory from matchArchetype calls
+
+**Step 1: Verify build**
+
+Run: `npx next build`
+Expected: Build succeeds
+
+**Step 2: Smoke test**
+
+Run dev server, play a deck, verify archetype is assigned correctly.

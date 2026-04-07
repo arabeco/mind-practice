@@ -2,6 +2,7 @@ import type { Deck } from '@/types/game';
 
 export function validateDeck(deck: Deck): string[] {
   const errors: string[] = [];
+  const validScale = new Set(['baixa', 'media', 'alta']);
 
   // Check required root fields
   if (!deck.category) errors.push('Missing category');
@@ -21,12 +22,40 @@ export function validateDeck(deck: Deck): string[] {
   if (tensionCount !== 1) errors.push(`Expected 1 TENSION, got ${tensionCount}`);
 
   for (const q of deck.questions) {
+    if (q.sceneHook !== undefined && !q.sceneHook.trim()) {
+      errors.push(`${q.id}: sceneHook is empty`);
+    }
+
     if (q.options.length !== 3) {
       errors.push(`${q.id}: Expected 3 options, got ${q.options.length}`);
     }
 
     if (!q.metadata.pilar) {
       errors.push(`${q.id}: Missing pilar`);
+    }
+
+    if (q.metadata.proximidade && !validScale.has(q.metadata.proximidade)) {
+      errors.push(`${q.id}: Invalid proximidade`);
+    }
+
+    if (q.metadata.urgencia && !validScale.has(q.metadata.urgencia)) {
+      errors.push(`${q.id}: Invalid urgencia`);
+    }
+
+    for (const field of [
+      'papel',
+      'historico',
+      'canal',
+      'plateia',
+      'momento',
+      'intencaoDoOutro',
+      'assimetria',
+      'riscoPrincipal',
+    ] as const) {
+      const value = q.metadata[field];
+      if (value !== undefined && !value.trim()) {
+        errors.push(`${q.id}: ${field} is empty`);
+      }
     }
 
     for (const opt of q.options) {

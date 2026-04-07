@@ -77,7 +77,7 @@ export default function Home() {
         <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5">
           <span className="text-[11px] text-accent-gold">&#9670;</span>
           <span className="text-sm font-bold text-white/80">{state.wallet.fichas}</span>
-          <span className="text-[10px] uppercase tracking-[0.12em] text-white/34">fichas</span>
+          <span className="text-[10px] uppercase tracking-[0.12em] text-white/50">fichas</span>
         </div>
       </motion.div>
 
@@ -90,7 +90,7 @@ export default function Home() {
               <span className="text-sm font-bold text-white/90">
                 {streak > 0 ? `${streak} dia${streak !== 1 ? 's' : ''}` : 'Sem streak'}
               </span>
-              <span className="text-[10px] uppercase tracking-[0.12em] text-white/34">
+              <span className="text-[10px] uppercase tracking-[0.12em] text-white/50">
                 {streak > 0 ? 'streak ativo' : 'jogue hoje'}
               </span>
             </div>
@@ -120,7 +120,7 @@ export default function Home() {
                 <span className="text-sm font-bold text-white/90">
                   Voce agora e {archetype.name}
                 </span>
-                <span className="text-[11px] text-white/40">{archetype.tagline}</span>
+                <span className="text-[11px] text-white/55">{archetype.tagline}</span>
               </div>
               <button
                 onClick={dismissArchetypeBanner}
@@ -152,7 +152,7 @@ export default function Home() {
       {/* Suggested decks — tarot cards */}
       {suggestions.length > 0 && (
         <motion.div variants={fadeUp}>
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/34">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/48">
             {hasPlayed ? 'Continue treinando' : 'Comece por aqui'}
           </p>
           <div className="grid grid-cols-3 gap-2">
@@ -174,7 +174,7 @@ export default function Home() {
       {premiumDecks.length > 0 && (
         <motion.div variants={fadeUp}>
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/34">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/48">
               Decks premium
             </p>
             <Link href="/decks" className="text-[10px] font-semibold uppercase tracking-[0.16em] text-accent-gold/60 transition-colors hover:text-accent-gold">

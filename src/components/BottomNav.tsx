@@ -11,14 +11,15 @@ const tabs = [
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1',
   },
   {
-    label: 'Desafio',
+    label: 'Decks',
     href: '/decks',
-    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+    isCenter: true,
   },
   {
-    label: 'Config',
-    href: '/config',
-    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+    label: 'Perfil',
+    href: '/perfil',
+    icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
   },
 ];
 
@@ -30,42 +31,116 @@ export default function BottomNav() {
   }
 
   return (
-    <nav className="glass-nav fixed bottom-0 left-0 right-0 z-50 h-16">
-      <div className="flex h-full items-center justify-around">
-        {tabs.map((tab) => {
-          const isActive = pathname === tab.href;
+    <nav className="fixed inset-x-3 bottom-3 z-50 sm:left-1/2 sm:right-auto sm:w-[32rem] sm:-translate-x-1/2">
+      <div className="glass-nav px-1 py-2">
+        <div className="flex items-end justify-around gap-0.5">
+          {tabs.map((tab) => {
+            const isActive =
+              tab.href === '/'
+                ? pathname === '/'
+                : pathname.startsWith(tab.href);
 
-          return (
-            <Link
-              key={tab.href}
-              href={tab.href}
-              className="relative flex flex-1 flex-col items-center justify-center gap-1"
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="nav-indicator"
-                  className="absolute top-0 h-0.5 w-10 rounded-full bg-accent-purple"
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                />
-              )}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 ${isActive ? 'text-accent-purple' : 'text-white/40'}`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+            if (tab.isCenter) {
+              return (
+                <Link
+                  key={tab.href}
+                  href={tab.href}
+                  className="relative -mt-4 flex flex-col items-center gap-1"
+                >
+                  <div
+                    className={`flex h-14 w-14 items-center justify-center rounded-2xl border shadow-lg transition-colors ${
+                      isActive
+                        ? 'border-cyan-400/60 bg-cyan-500/20 shadow-cyan-500/25'
+                        : 'border-white/16 bg-white/[0.08] shadow-black/20'
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className={`h-6 w-6 ${
+                        isActive
+                          ? 'text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
+                          : 'text-white/55'
+                      }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d={tab.icon}
+                      />
+                    </svg>
+                  </div>
+                  <span
+                    className={`text-[11px] font-medium tracking-[0.08em] ${
+                      isActive ? 'text-white' : 'text-white/48'
+                    }`}
+                  >
+                    {tab.label}
+                  </span>
+                </Link>
+              );
+            }
+
+            return (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className="relative flex min-h-12 flex-1 flex-col items-center justify-center gap-1 rounded-[1.2rem] px-1 py-2"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
-              </svg>
-              <span
-                className={`text-xs ${isActive ? 'text-accent-purple' : 'text-white/40'}`}
-              >
-                {tab.label}
-              </span>
-            </Link>
-          );
-        })}
+                {isActive && (
+                  <>
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 rounded-[1.12rem] border border-white/16 bg-white/[0.08]"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 420,
+                        damping: 32,
+                      }}
+                    />
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute left-1/2 top-1 h-1 w-7 -translate-x-1/2 rounded-full bg-cyan-300/90 shadow-[0_0_18px_rgba(103,232,249,0.85)]"
+                      transition={{
+                        type: 'spring',
+                        stiffness: 500,
+                        damping: 30,
+                      }}
+                    />
+                  </>
+                )}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`relative z-10 h-5 w-5 ${
+                    isActive
+                      ? 'text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
+                      : 'text-white/55'
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={tab.icon}
+                  />
+                </svg>
+                <span
+                  className={`relative z-10 text-[11px] font-medium tracking-[0.08em] ${
+                    isActive ? 'text-white' : 'text-white/48'
+                  }`}
+                >
+                  {tab.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </nav>
   );

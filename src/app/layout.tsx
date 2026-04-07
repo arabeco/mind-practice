@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { GameProvider } from '@/context/GameContext';
 import BottomNav from '@/components/BottomNav';
+import OnboardingGate from '@/components/OnboardingGate';
 
 export const metadata: Metadata = {
   title: 'MindPractice - Simulador de Reatividade Social',
@@ -20,8 +21,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR">
       <body className="antialiased">
         <GameProvider>
-          <main className="min-h-screen pb-20">{children}</main>
-          <BottomNav />
+          <OnboardingGate>
+            <main className="min-h-screen pb-20">{children}</main>
+            <BottomNav />
+          </OnboardingGate>
         </GameProvider>
       </body>
     </html>

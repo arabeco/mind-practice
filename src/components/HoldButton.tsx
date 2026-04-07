@@ -7,7 +7,9 @@ import { HOLD_DURATION_MS } from '@/types/game';
 interface HoldButtonProps {
   onConfirm: () => void;
   holdColor: string;
+  durationMs?: number;
   disabled?: boolean;
+  enableHaptics?: boolean;
   children: ReactNode;
   className?: string;
 }
@@ -15,10 +17,13 @@ interface HoldButtonProps {
 export default function HoldButton({
   onConfirm,
   holdColor,
+  durationMs,
   disabled = false,
+  enableHaptics = true,
   children,
   className = '',
 }: HoldButtonProps) {
+  const holdDuration = durationMs ?? HOLD_DURATION_MS;
   const [progress, setProgress] = useState(0);
   const [holding, setHolding] = useState(false);
   const startRef = useRef<number>(0);
@@ -27,14 +32,14 @@ export default function HoldButton({
 
   const animate = useCallback(() => {
     const elapsed = Date.now() - startRef.current;
-    const pct = Math.min(elapsed / HOLD_DURATION_MS, 1);
+    const pct = Math.min(elapsed / holdDuration, 1);
     setProgress(pct);
 
     if (pct >= 1 && !confirmedRef.current) {
       confirmedRef.current = true;
       setHolding(false);
       // Haptic feedback if available
-      if (navigator.vibrate) navigator.vibrate(30);
+      if (enableHaptics && navigator.vibrate) navigator.vibrate(30);
       onConfirm();
       return;
     }
@@ -42,7 +47,7 @@ export default function HoldButton({
     if (pct < 1) {
       rafRef.current = requestAnimationFrame(animate);
     }
-  }, [onConfirm]);
+  }, [enableHaptics, onConfirm]);
 
   const handleStart = useCallback(() => {
     if (disabled) return;

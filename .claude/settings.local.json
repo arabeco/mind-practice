@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Read(//c/tmp/**)",
+      "Bash(rm -rf nextjs_scaffold)",
+      "Bash(npx create-next-app@latest nextjs_scaffold --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm install:*)",
+      "Bash(timeout 20 npx next dev)",
+      "Bash(node validate.js)",
+      "Bash(rm validate.js)",
+      "Bash(npx tsc:*)",
+      "Bash(node -e \"console.log\\(require\\(''./package.json''\\).dependencies.next\\)\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where npx:*)",
+      "Bash(where node:*)",
+      "Bash(where npm:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(npm run:*)",
+      "Bash(find /c/Users/Afonso/Desktop/mindpractice/src -name tailwind.config.* -o -name postcss.config.*)",
+      "Bash(xargs ls:*)",
+      "Bash(npx next:*)",
+      "Bash(xargs grep:*)",
+      "Bash(git reset:*)"
+    ]
+  }
+}

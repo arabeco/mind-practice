@@ -11,6 +11,8 @@ export type Pilar = 'ego' | 'propriedade' | 'seguranca';
 export type Tone = 'pragmatico' | 'provocativo' | 'protetor' | 'evasivo' | 'neutro';
 export type DeckCategory = 'essencial' | 'arquetipo' | 'cenario';
 export type ArchetypeCategory = 'puro' | 'cruzado' | 'especial';
+export type SceneProximidade = 'baixa' | 'media' | 'alta';
+export type SceneUrgencia = 'baixa' | 'media' | 'alta';
 
 // ============================================================
 // Scene / Question
@@ -22,6 +24,16 @@ export interface SceneMetadata {
   relacao: Relacao;
   aposta: Aposta;
   pilar: Pilar;
+  papel?: string;
+  proximidade?: SceneProximidade;
+  historico?: string;
+  canal?: string;
+  plateia?: string;
+  momento?: string;
+  intencaoDoOutro?: string;
+  assimetria?: string;
+  riscoPrincipal?: string;
+  urgencia?: SceneUrgencia;
 }
 
 export interface Slide {
@@ -40,6 +52,7 @@ export interface Option {
 export interface Question {
   id: string;
   type: QuestionType;
+  sceneHook?: string;
   metadata: SceneMetadata;
   slides: Slide[];
   options: Option[];
@@ -70,6 +83,7 @@ export interface Archetype {
   name: string;
   category: ArchetypeCategory;
   axes: StatKey[] | 'equilibrio';
+  idealProfile: Record<StatKey, number>;
   description: string;
   tagline: string;
 }
@@ -86,20 +100,77 @@ export interface CalibrationState {
   snapshots: DeckSnapshot[];
 }
 
+export interface RunAnswerEvent {
+  questionId: string;
+  tone: Tone | null;
+  weights: Partial<Record<StatKey, number>>;
+  dominantAxis: StatKey | null;
+  responseTimeMs?: number;
+  timedOut: boolean;
+}
+
+export interface RunScoreBreakdown {
+  completion: number;
+  decisiveness: number;
+  coherence: number;
+}
+
+export interface RunSession {
+  deckId: string;
+  startedAt: string;
+  totalQuestions: number;
+  startStats: Record<StatKey, number>;
+  startArchetype: string;
+  answeredCount: number;
+  timeoutCount: number;
+  answers: RunAnswerEvent[];
+}
+
 export interface DeckSnapshot {
   deckId: string;
   completedAt: string;
+  archetypeBeforeRun: string | null;
   archetypeAtCompletion: string;
+  archetypeChanged: boolean;
   statsAtCompletion: Record<StatKey, number>;
+  runScore: number | null;
+  scoreBreakdown: RunScoreBreakdown | null;
+  answeredCount: number;
+  timeoutCount: number;
+  dominantAxis: StatKey | null;
+  axisDelta: Record<StatKey, number>;
+  profileShift: number;
+  focusAlignment: number | null;
+  legacy: boolean;
 }
+
+export interface Wallet {
+  fichas: number;
+  lastDailyClaim: string | null; // ISO date string e.g. '2026-04-05'
+  totalEarned: number;
+  totalSpent: number;
+}
+
+export const INITIAL_WALLET: Wallet = {
+  fichas: 20,
+  lastDailyClaim: null,
+  totalEarned: 20,
+  totalSpent: 0,
+};
+
+export const DAILY_FICHAS = 10;
 
 export interface GameState {
   calibration: CalibrationState;
+  wallet: Wallet;
   activeDeck: Deck | null;
+  activeRun: RunSession | null;
   currentQuestion: number;
   unlockedDecks: string[];
   completedDecks: Record<string, string>;
   lastTrainingDate: string | null;
+  streak: number;
+  lastPlayDate: string | null;
 }
 
 // ============================================================
@@ -128,77 +199,85 @@ export const STAT_LABELS: Record<StatKey, string> = {
 // Tier System
 // ============================================================
 
-export type TierLevel = 1 | 2 | 3 | 4 | 5;
+export type TierLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface TierConfig {
   label: string;
   subtitle: string;
+  color: string;
   badgeClass: string;
   cardBorderClass: string;
   cardBgClass: string;
   cardShadow: string;
-  /** Tier 5 only — animated gradient border */
   animated: boolean;
 }
 
 export const TIER_CONFIG: Record<TierLevel, TierConfig> = {
   1: {
-    label: 'Zinco',
+    label: 'Comum',
     subtitle: 'Calibragem basica',
-    badgeClass: 'bg-white/10 text-white/60',
-    cardBorderClass: 'border-white/10',
-    cardBgClass: 'bg-white/5',
+    color: '#cd7f32',
+    badgeClass: 'border border-[#cd7f32]/30 bg-[#cd7f32]/12 text-[#cd7f32]',
+    cardBorderClass: 'border-[#cd7f32]/20',
+    cardBgClass: 'bg-white/[0.06]',
     cardShadow: 'none',
     animated: false,
   },
   2: {
-    label: 'Cromo',
+    label: 'Incomum',
     subtitle: 'Alta tensao',
-    badgeClass: 'bg-purple-500/20 text-purple-400',
-    cardBorderClass: 'border-purple-500/30',
-    cardBgClass: 'bg-purple-900/10',
-    cardShadow: '0 0 15px rgba(139,92,246,0.1)',
+    color: '#c0c0c0',
+    badgeClass: 'border border-[#c0c0c0]/30 bg-[#c0c0c0]/12 text-[#c0c0c0]',
+    cardBorderClass: 'border-[#c0c0c0]/25',
+    cardBgClass: 'bg-white/[0.065]',
+    cardShadow: '0 0 16px rgba(192,192,192,0.1)',
     animated: false,
   },
   3: {
-    label: 'Dominio',
+    label: 'Raro',
     subtitle: 'Treino de eixo',
-    badgeClass: 'bg-cyan-400/20 text-cyan-400',
-    cardBorderClass: 'border-cyan-400/40',
-    cardBgClass: 'bg-cyan-900/10',
-    cardShadow: 'none',
+    color: '#d4af37',
+    badgeClass: 'border border-[#d4af37]/30 bg-[#d4af37]/12 text-[#d4af37]',
+    cardBorderClass: 'border-[#d4af37]/28',
+    cardBgClass: 'bg-white/[0.065]',
+    cardShadow: '0 0 18px rgba(212,175,55,0.14)',
     animated: false,
   },
   4: {
-    label: 'Gold',
+    label: 'Epico',
     subtitle: 'Desafio',
-    badgeClass: 'bg-yellow-500/20 text-yellow-500',
-    cardBorderClass: 'border-yellow-500/50',
-    cardBgClass: 'bg-yellow-600/5',
-    cardShadow: '0 0 20px rgba(212,175,55,0.2)',
+    color: '#3b82f6',
+    badgeClass: 'border border-[#3b82f6]/30 bg-[#3b82f6]/12 text-[#3b82f6]',
+    cardBorderClass: 'border-[#3b82f6]/28',
+    cardBgClass: 'bg-white/[0.07]',
+    cardShadow: '0 0 22px rgba(59,130,246,0.16)',
     animated: false,
   },
   5: {
     label: 'Lendario',
-    subtitle: 'Season',
-    badgeClass: 'bg-gradient-to-r from-purple-500/30 to-amber-500/30 text-white',
+    subtitle: 'Lenda',
+    color: '#f97316',
+    badgeClass: 'border border-[#f97316]/30 bg-[#f97316]/12 text-[#f97316]',
     cardBorderClass: 'border-transparent',
-    cardBgClass: 'bg-white/8',
-    cardShadow: 'none',
+    cardBgClass: 'bg-white/[0.09]',
+    cardShadow: '0 0 28px rgba(249,115,22,0.18)',
+    animated: true,
+  },
+  6: {
+    label: 'Temporada',
+    subtitle: 'Season',
+    color: '#8b5cf6',
+    badgeClass: 'border border-[#8b5cf6]/30 bg-[#8b5cf6]/12 text-[#8b5cf6]',
+    cardBorderClass: 'border-transparent',
+    cardBgClass: 'bg-white/[0.09]',
+    cardShadow: '0 0 28px rgba(139,92,246,0.18)',
     animated: true,
   },
 };
 
-export const TIMER_DURATION = 6;
-
-export const INERTIA_PENALTY: Partial<Record<StatKey, number>> = {
-  vigor: -15,
-  presenca: -15,
-};
-
 export const CALIBRATION_WINDOW = 200;
 export const CONSISTENCY_WINDOW = 20;
-export const HOLD_DURATION_MS = 1000;
+export const HOLD_DURATION_MS = 500;
 
 export const INITIAL_CALIBRATION: CalibrationState = {
   axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
@@ -206,6 +285,14 @@ export const INITIAL_CALIBRATION: CalibrationState = {
   recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
   toneHistory: [],
   snapshots: [],
+};
+
+export const EMPTY_STAT_RECORD: Record<StatKey, number> = {
+  vigor: 0,
+  harmonia: 0,
+  filtro: 0,
+  presenca: 0,
+  desapego: 0,
 };
 
 /** Delay in ms before options appear, based on scene tension */

@@ -15,15 +15,22 @@ import {
   type Tone,
   type Deck,
   type Archetype,
-  type DeckSnapshot,
+  type Wallet,
   STAT_KEYS,
   INITIAL_CALIBRATION,
-  INERTIA_PENALTY,
+  INITIAL_WALLET,
+  DAILY_FICHAS,
   CALIBRATION_WINDOW,
   CONSISTENCY_WINDOW,
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
+import {
+  appendRunAnswer,
+  createDeckSnapshot,
+  createRunSession,
+  normalizeGameState,
+} from '@/lib/runScoring';
 
 // ---------------------------------------------------------------------------
 // Actions
@@ -31,10 +38,12 @@ import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
 
 type GameAction =
   | { type: 'START_DECK'; deck: Deck }
-  | { type: 'ANSWER'; weights: Partial<Record<StatKey, number>>; tone: Tone }
-  | { type: 'TIMEOUT' }
+  | { type: 'ANSWER'; weights: Partial<Record<StatKey, number>>; tone: Tone; responseTimeMs?: number }
   | { type: 'NEXT_QUESTION' }
   | { type: 'FINISH_DECK' }
+  | { type: 'CLAIM_DAILY' }
+  | { type: 'SPEND_FICHAS'; amount: number; itemId: string }
+  | { type: 'EARN_FICHAS'; amount: number; reason: string }
   | { type: 'RESET_ALL' }
   | { type: 'HYDRATE'; state: GameState };
 
@@ -82,10 +91,6 @@ function applyDampenedWeights(
   };
 }
 
-function applyInertia(cal: CalibrationState): CalibrationState {
-  return applyDampenedWeights(cal, INERTIA_PENALTY, 'neutro');
-}
-
 export function getUnlockedDecks(completedDecks: Record<string, string>): string[] {
   const unlocked: string[] = [];
   for (let i = 0; i < DECK_UNLOCK_ORDER.length; i++) {
@@ -107,11 +112,15 @@ export function getUnlockedDecks(completedDecks: Record<string, string>): string
 
 const initialState: GameState = {
   calibration: { ...INITIAL_CALIBRATION },
+  wallet: { ...INITIAL_WALLET },
   activeDeck: null,
+  activeRun: null,
   currentQuestion: 0,
   unlockedDecks: getUnlockedDecks({}),
   completedDecks: {},
   lastTrainingDate: null,
+  streak: 0,
+  lastPlayDate: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -133,11 +142,15 @@ function migrateV1(raw: Record<string, unknown>): GameState | null {
         toneHistory: [],
         snapshots: [],
       },
+      wallet: { ...INITIAL_WALLET },
       activeDeck: null,
+      activeRun: null,
       currentQuestion: 0,
       unlockedDecks: getUnlockedDecks(completedDecks),
       completedDecks,
       lastTrainingDate: (raw.lastTrainingDate as string) ?? null,
+      streak: 0,
+      lastPlayDate: null,
     };
   }
   return null;
@@ -150,16 +163,34 @@ function migrateV1(raw: Record<string, unknown>): GameState | null {
 function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'START_DECK':
-      return { ...state, activeDeck: action.deck, currentQuestion: 0 };
+      const startArchetype = matchArchetype(
+        state.calibration.axes,
+        state.calibration.recentWeights,
+        state.calibration.totalResponses,
+      );
+      return {
+        ...state,
+        activeDeck: action.deck,
+        activeRun: createRunSession(
+          action.deck,
+          state.calibration.axes,
+          startArchetype.name,
+        ),
+        currentQuestion: 0,
+      };
 
-    case 'ANSWER':
+    case 'ANSWER': {
+      const question = state.activeDeck?.questions[state.currentQuestion];
+
       return {
         ...state,
         calibration: applyDampenedWeights(state.calibration, action.weights, action.tone),
+        activeRun:
+          state.activeRun && question
+            ? appendRunAnswer(state.activeRun, question.id, action.tone, action.weights, action.responseTimeMs)
+            : state.activeRun,
       };
-
-    case 'TIMEOUT':
-      return { ...state, calibration: applyInertia(state.calibration) };
+    }
 
     case 'NEXT_QUESTION':
       return { ...state, currentQuestion: state.currentQuestion + 1 };
@@ -171,24 +202,96 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         ? { ...state.completedDecks, [deckId]: now }
         : state.completedDecks;
 
-      const archetype = matchArchetype(state.calibration.axes, state.calibration.toneHistory);
-      const snapshot: DeckSnapshot = {
-        deckId: deckId ?? 'unknown',
-        completedAt: now,
-        archetypeAtCompletion: archetype.name,
-        statsAtCompletion: { ...state.calibration.axes },
-      };
+      const todayStr = now.split('T')[0];
+      const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+      let newStreak = state.streak;
+      if (state.lastPlayDate === todayStr) {
+        // Already played today, no streak change
+      } else if (state.lastPlayDate === yesterday) {
+        newStreak = state.streak + 1;
+      } else {
+        newStreak = 1;
+      }
+
+      // Bonus fichas from gameplay
+      let bonusFichas = 3; // first deck of day
+      if (state.lastPlayDate === todayStr) bonusFichas = 0; // already played today
+      if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += 20; // weekly streak bonus
+      const noTimeouts = state.activeRun ? state.activeRun.timeoutCount === 0 : false;
+      if (noTimeouts) bonusFichas += 5;
+
+      const prevArchId = ARCHETYPES.find(a => a.name === state.activeRun?.startArchetype)?.id;
+      const archetype = matchArchetype(
+        state.calibration.axes,
+        state.calibration.recentWeights,
+        state.calibration.totalResponses,
+        prevArchId,
+      );
+      const snapshot = state.activeRun
+        ? createDeckSnapshot({
+            session: state.activeRun,
+            archetypeName: archetype.name,
+            finalStats: state.calibration.axes,
+          })
+        : null;
 
       return {
         ...state,
         activeDeck: null,
+        activeRun: null,
         currentQuestion: 0,
         completedDecks,
         unlockedDecks: getUnlockedDecks(completedDecks),
         lastTrainingDate: now,
+        streak: newStreak,
+        lastPlayDate: todayStr,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas + bonusFichas,
+          totalEarned: state.wallet.totalEarned + bonusFichas,
+        },
         calibration: {
           ...state.calibration,
-          snapshots: [...state.calibration.snapshots, snapshot],
+          snapshots: snapshot
+            ? [...state.calibration.snapshots, snapshot]
+            : state.calibration.snapshots,
+        },
+      };
+    }
+
+    case 'CLAIM_DAILY': {
+      const today = new Date().toISOString().split('T')[0];
+      if (state.wallet.lastDailyClaim === today) return state;
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas + DAILY_FICHAS,
+          lastDailyClaim: today,
+          totalEarned: state.wallet.totalEarned + DAILY_FICHAS,
+        },
+      };
+    }
+
+    case 'SPEND_FICHAS': {
+      if (state.wallet.fichas < action.amount) return state;
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas - action.amount,
+          totalSpent: state.wallet.totalSpent + action.amount,
+        },
+      };
+    }
+
+    case 'EARN_FICHAS': {
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas + action.amount,
+          totalEarned: state.wallet.totalEarned + action.amount,
         },
       };
     }
@@ -197,7 +300,10 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...initialState, unlockedDecks: getUnlockedDecks({}) };
 
     case 'HYDRATE':
-      return { ...action.state, unlockedDecks: getUnlockedDecks(action.state.completedDecks) };
+      return {
+        ...normalizeGameState(action.state),
+        unlockedDecks: getUnlockedDecks(action.state.completedDecks),
+      };
 
     default:
       return state;
@@ -255,6 +361,10 @@ interface GameContextValue {
   precision: number;
   consistency: number;
   isIdentityValidated: boolean;
+  canClaimDaily: boolean;
+  claimDaily: () => void;
+  spendFichas: (amount: number, itemId: string) => boolean;
+  streak: number;
 }
 
 const GameContext = createContext<GameContextValue | null>(null);
@@ -277,16 +387,16 @@ export function GameProvider({ children }: { children: ReactNode }) {
       }
 
       // v2 format
-      dispatch({ type: 'HYDRATE', state: parsed as GameState });
+      dispatch({ type: 'HYDRATE', state: normalizeGameState(parsed as GameState) });
     } catch {
       // corrupted — start fresh
     }
   }, []);
 
-  // Persist (exclude activeDeck)
+  // Persist (exclude activeDeck and activeRun)
   useEffect(() => {
     try {
-      const { activeDeck: _, ...persistable } = state;
+      const { activeDeck: _, activeRun: __, ...persistable } = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
     } catch {}
   }, [state]);
@@ -310,13 +420,32 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 
   const getArchetype = useCallback(
-    () => matchArchetype(state.calibration.axes, state.calibration.toneHistory),
-    [state.calibration.axes, state.calibration.toneHistory],
+    () => matchArchetype(
+      state.calibration.axes,
+      state.calibration.recentWeights,
+      state.calibration.totalResponses,
+    ),
+    [state.calibration.axes, state.calibration.recentWeights, state.calibration.totalResponses],
   );
 
   const precision = getPrecision(state.calibration.totalResponses);
   const consistency = getConsistency(state.calibration.recentWeights);
   const isIdentityValidated = precision >= 80 && consistency >= 0.6;
+
+  const canClaimDaily = state.wallet.lastDailyClaim !== new Date().toISOString().split('T')[0];
+
+  const claimDaily = useCallback(() => {
+    dispatch({ type: 'CLAIM_DAILY' });
+  }, []);
+
+  const spendFichas = useCallback(
+    (amount: number, itemId: string) => {
+      if (state.wallet.fichas < amount) return false;
+      dispatch({ type: 'SPEND_FICHAS', amount, itemId });
+      return true;
+    },
+    [state.wallet.fichas],
+  );
 
   return (
     <GameContext.Provider
@@ -329,6 +458,10 @@ export function GameProvider({ children }: { children: ReactNode }) {
         precision,
         consistency,
         isIdentityValidated,
+        canClaimDaily,
+        claimDaily,
+        spendFichas,
+        streak: state.streak,
       }}
     >
       {children}
