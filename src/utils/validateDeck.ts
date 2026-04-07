@@ -1,5 +1,9 @@
 import type { Deck } from '@/types/game';
 
+function wordCount(text: string): number {
+  return text.trim().split(/\s+/).filter(Boolean).length;
+}
+
 export function validateDeck(deck: Deck): string[] {
   const errors: string[] = [];
   const validScale = new Set(['baixa', 'media', 'alta']);
@@ -26,8 +30,8 @@ export function validateDeck(deck: Deck): string[] {
       errors.push(`${q.id}: sceneHook is empty`);
     }
 
-    if (q.options.length !== 3) {
-      errors.push(`${q.id}: Expected 3 options, got ${q.options.length}`);
+    if (q.options.length < 3 || q.options.length > 5) {
+      errors.push(`${q.id}: Expected 3-5 options, got ${q.options.length}`);
     }
 
     if (!q.metadata.pilar) {
@@ -55,6 +59,29 @@ export function validateDeck(deck: Deck): string[] {
       const value = q.metadata[field];
       if (value !== undefined && !value.trim()) {
         errors.push(`${q.id}: ${field} is empty`);
+      }
+    }
+
+    // Slide text length checks
+    for (const slide of q.slides) {
+      const wc = wordCount(slide.texto);
+      if (slide.tipo === 'contexto' && wc > 25) {
+        errors.push(`${q.id}: Context slide has ${wc} words (max 25)`);
+      }
+      if (slide.tipo === 'evento' && wc > 20) {
+        errors.push(`${q.id}: Event slide has ${wc} words (max 20)`);
+      }
+    }
+
+    // Option/feedback text length checks
+    for (const opt of q.options) {
+      const textWc = wordCount(opt.text);
+      if (textWc > 15) {
+        errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." has ${textWc} words (max 15)`);
+      }
+      const fbWc = wordCount(opt.feedback);
+      if (fbWc > 15) {
+        errors.push(`${q.id}: Feedback "${opt.feedback.slice(0, 25)}..." has ${fbWc} words (max 15)`);
       }
     }
 
