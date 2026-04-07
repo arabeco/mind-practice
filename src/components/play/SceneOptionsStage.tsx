@@ -68,7 +68,7 @@ export default function SceneOptionsStage({
           Escolha sua reacao
         </p>
 
-        <div className="grid gap-1.5">
+        <div className={`grid gap-1.5 ${shuffledOptions.length >= 4 ? 'sm:grid-cols-2' : ''}`}>
           {shuffledOptions.map((option, index) => {
             const dominantAxis = getDominantAxis(option.weights);
             const holdColor = STAT_COLORS[dominantAxis];
@@ -84,11 +84,15 @@ export default function SceneOptionsStage({
                   onConfirm={() => onAnswer(option)}
                   holdColor={holdColor}
                   enableHaptics={enableHaptics}
-                  className="w-full rounded-xl border border-white/10 bg-white/6 px-3 py-2 text-left backdrop-blur-xl transition-colors hover:bg-white/8"
+                  className={`w-full rounded-xl border border-white/10 bg-white/6 text-left backdrop-blur-xl transition-colors hover:bg-white/8 ${
+                    shuffledOptions.length >= 4 ? 'px-2.5 py-1.5' : 'px-3 py-2'
+                  }`}
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[10px] font-bold"
+                      className={`flex items-center justify-center rounded-full border font-bold flex-shrink-0 ${
+                        shuffledOptions.length >= 4 ? 'h-5 w-5 text-[9px]' : 'h-6 w-6 text-[10px]'
+                      }`}
                       style={{
                         borderColor: `${holdColor}40`,
                         color: holdColor,
@@ -97,7 +101,9 @@ export default function SceneOptionsStage({
                     >
                       {OPTION_LETTERS[index]}
                     </div>
-                    <p className="text-[13px] leading-snug text-white/90">
+                    <p className={`leading-snug text-white/90 ${
+                      shuffledOptions.length >= 4 ? 'text-[12px]' : 'text-[13px]'
+                    }`}>
                       {option.text}
                     </p>
                   </div>
