@@ -28,7 +28,7 @@ export default function SceneFeedbackStage({
         <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/35">
           Leitura da cena
         </p>
-        <p className="mt-4 text-lg leading-relaxed text-white/88 sm:text-2xl">
+        <p className="mt-3 text-base leading-relaxed text-white/88 sm:text-xl">
           {feedback}
         </p>
 

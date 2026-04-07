@@ -18,30 +18,44 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Num sebo quase vazio, voce encontra um livro sem titulo. Ao abrir, a pagina descreve com precisao a conversa que tera em uma hora." },
-        { "tipo": "evento", "texto": "A ultima linha diz que um amigo vai usar sua historia para ganhar atencao em publico. Minutos depois, ele pega o celular e prepara um post sobre voce." }
+        { "tipo": "contexto", "texto": "Num sebo vazio, voce acha um livro sem titulo. A pagina descreve a conversa que tera em breve." },
+        { "tipo": "evento", "texto": "O livro previu: seu amigo vai expor sua historia pra ganhar atencao. Ele ja pega o celular." }
       ],
       "options": [
         {
-          "text": "Tiro o celular da mao dele e corto: 'Nao usa meu nome pra alimentar tua plateia.'",
+          "text": "Tomo o celular: 'Nao usa meu nome pra tua plateia.'",
           "subtext": "Vigor/Ruptura",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce quebrou o feitico pela forca. O livro ficou quieto, mas o clima morreu na hora."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Quebrou o feitico na forca. O clima morreu ali."
         },
         {
-          "text": "Deixo postar. Se o livro quer show, eu nao vou entrar.",
+          "text": "Seguro o celular com calma: 'Isso nao e teu pra contar.'",
+          "subtext": "Vigor/Limite firme",
+          "tone": "protetor",
+          "weights": { "vigor": 2, "filtro": 2, "harmonia": -1, "desapego": -2 },
+          "feedback": "Acao firme sem explosao. Ele parou, mas ficou ressentido."
+        },
+        {
+          "text": "Deixo postar. Nao vou entrar no show do livro.",
           "subtext": "Desapego/Nao alimenta",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 10, "presenca": -5 },
-          "feedback": "Voce recusou o palco, mas entregou a narrativa ao outro."
+          "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
+          "feedback": "Recusou o palco, mas entregou a narrativa ao outro."
         },
         {
-          "text": "Seguro o olhar dele e digo: 'Se for contar, conta comigo junto agora.'",
+          "text": "Encaro ele: 'Se for contar, conta comigo junto.'",
           "subtext": "Presenca/Reescrita",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce entrou na historia antes de ser usado por ela. O foco mudou de dono."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Entrou na historia antes de virar objeto dela."
+        },
+        {
+          "text": "Deixo postar e comento algo que muda todo o tom.",
+          "subtext": "Filtro/Contrajogo",
+          "tone": "pragmatico",
+          "weights": { "filtro": 3, "presenca": 1, "harmonia": -1, "desapego": -2 },
+          "feedback": "Jogou por cima sem confronto. Estrategia fria e eficaz."
         }
       ]
     },
@@ -56,30 +70,44 @@
         "pilar": "seguranca"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Mais tarde, em casa, o livro se abre sozinho sobre a mesa. A pagina descreve uma visita inesperada e uma frase que vai te acertar em cheio." },
-        { "tipo": "evento", "texto": "Pouco depois, alguem proximo bate a porta e repete exatamente a frase: 'Voce sempre foge quando precisa se comprometer.'" }
+        { "tipo": "contexto", "texto": "Em casa, o livro abre sozinho. A pagina descreve uma visita e uma frase que vai te acertar." },
+        { "tipo": "evento", "texto": "Batem na porta. A pessoa repete a frase: 'Voce sempre foge quando precisa se comprometer.'" }
       ],
       "options": [
         {
-          "text": "Respondo na hora: 'Se veio me atacar, pode ir embora agora.'",
+          "text": "Respondo na lata: 'Veio me atacar? Pode ir embora.'",
           "subtext": "Vigor/Porta fechada",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 5, "harmonia": -10 },
-          "feedback": "Voce blindou o territorio. Seguro, mas a conversa morreu antes de nascer."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
+          "feedback": "Blindou o espaco. Seguro, mas a conversa morreu."
         },
         {
-          "text": "Ignoro a provocacao e volto o olhar para o livro, como se nada tivesse me tocado.",
+          "text": "Ignoro e volto o olhar pro livro, indiferente.",
           "subtext": "Filtro/Entorpecimento",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "desapego": 10, "presenca": -5 },
-          "feedback": "Voce congelou a entrada. O golpe nao virou briga, mas ficou dentro."
+          "weights": { "filtro": 2, "desapego": 2, "presenca": -2, "harmonia": -1 },
+          "feedback": "Congelou a entrada. Nao virou briga, mas ficou dentro."
         },
         {
-          "text": "Digo baixo: 'Se quer conversar serio, entra. Se quer ferir, nao fica.'",
+          "text": "Ignoro, mas sinto o corpo todo reagindo por dentro.",
+          "subtext": "Filtro/Mascara",
+          "tone": "evasivo",
+          "weights": { "filtro": 1, "vigor": 2, "desapego": -2, "presenca": -1 },
+          "feedback": "Pareceu calmo, mas o veneno ficou circulando sem saida."
+        },
+        {
+          "text": "Digo baixo: 'Quer conversar, entra. Quer ferir, nao fica.'",
           "subtext": "Harmonia/Limite",
           "tone": "protetor",
-          "weights": { "harmonia": 10, "presenca": 5, "vigor": -5 },
-          "feedback": "Voce abriu a porta sem abrir mao do limite. O livro perdeu um pouco da forca."
+          "weights": { "harmonia": 3, "presenca": 2, "vigor": -2, "filtro": -1 },
+          "feedback": "Abriu a porta sem abrir mao do limite."
+        },
+        {
+          "text": "Puxo pra dentro e fecho a porta: 'Fala tudo agora.'",
+          "subtext": "Presenca/Confronto intimo",
+          "tone": "neutro",
+          "weights": { "presenca": 3, "vigor": 2, "desapego": -2, "filtro": -1 },
+          "feedback": "Trouxe a verdade pra dentro. Corajoso e arriscado."
         }
       ]
     },
@@ -94,30 +122,44 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "No trabalho, uma pagina nova aparece no livro com o titulo da reuniao do dia. O texto descreve seu chefe tentando jogar em voce o erro de outra area." },
-        { "tipo": "evento", "texto": "Horas depois, na frente de todos, ele diz: 'Isso aconteceu porque voce nao antecipou o risco.' O silencio cai sobre a sala." }
+        { "tipo": "contexto", "texto": "No trabalho, o livro previu a reuniao de hoje. O texto mostra seu chefe jogando um erro em voce." },
+        { "tipo": "evento", "texto": "Na frente de todos, ele diz: 'Aconteceu porque voce nao antecipou.' Silencio total." }
       ],
       "options": [
         {
-          "text": "Corto a fala: 'Nao. Eu antecipei e tenho o registro aqui.'",
+          "text": "Corto: 'Nao. Eu antecipei e tenho registro.'",
           "subtext": "Vigor/Defesa frontal",
           "tone": "pragmatico",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce rasgou a narrativa dele em publico. Nao sobrou duvida sobre sua posicao."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
+          "feedback": "Rasgou a narrativa dele em publico. Sem volta."
         },
         {
-          "text": "Anoto tudo e deixo a resposta para depois, por escrito.",
+          "text": "Jogo de volta: 'Quem assinou a decisao foi voce.'",
+          "subtext": "Vigor/Contra-ataque",
+          "tone": "provocativo",
+          "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -1 },
+          "feedback": "Virou o jogo, mas declarou guerra aberta."
+        },
+        {
+          "text": "Anoto tudo e deixo a resposta pra depois, por escrito.",
           "subtext": "Filtro/Xadrez",
           "tone": "pragmatico",
-          "weights": { "filtro": 15, "desapego": 5, "presenca": -5 },
-          "feedback": "Voce nao comprou a guerra na frente da corte. O livro perdeu barulho, mas nao saiu de cena."
+          "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "vigor": -1 },
+          "feedback": "Nao comprou a guerra na hora. Silencio calculado."
         },
         {
-          "text": "Respondo calmo: 'Posso contextualizar agora para a sala nao sair com a impressao errada.'",
+          "text": "Calmo: 'Posso contextualizar pra sala nao sair confusa.'",
           "subtext": "Presenca/Reposicionamento",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce corrigiu a historia sem incendiar o teto. Presenca com sangue frio."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Corrigiu a historia sem incendiar a sala."
+        },
+        {
+          "text": "Fico quieto, olhando firme ate o silencio pesar.",
+          "subtext": "Presenca/Pressao muda",
+          "tone": "neutro",
+          "weights": { "presenca": 2, "filtro": 2, "harmonia": -1, "vigor": -2 },
+          "feedback": "O silencio disse tudo. Ele sentiu o peso."
         }
       ]
     },
@@ -132,30 +174,44 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Jantar em familia. O livro esta fechado na mochila, mas voce sente o peso dele como se estivesse vivo." },
-        { "tipo": "evento", "texto": "Uma parente olha para voce e diz exatamente a frase escrita na pagina anterior: 'Todo mundo aqui amadureceu menos voce.'" }
+        { "tipo": "contexto", "texto": "Jantar em familia. O livro ta na mochila, mas voce sente o peso dele como se estivesse vivo." },
+        { "tipo": "evento", "texto": "Uma parente solta a frase do livro: 'Todo mundo amadureceu menos voce.'" }
       ],
       "options": [
         {
-          "text": "Respondo seco: 'Entao para de medir minha vida com a tua regua.'",
+          "text": "Seco: 'Para de medir minha vida com tua regua.'",
           "subtext": "Vigor/Quebra de mesa",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 5, "harmonia": -10 },
-          "feedback": "Voce bateu de volta e o jantar rachou junto. Verdade e estilhaco vieram no mesmo pacote."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Bateu de volta e o jantar rachou junto."
         },
         {
-          "text": "Finjo que nao ouvi e concentro no prato. O livro nao vai me puxar.",
+          "text": "Finjo que nao ouvi e foco no prato. Nao me puxa.",
           "subtext": "Desapego/Blindagem",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 5, "presenca": -5 },
-          "feedback": "Voce nao entregou reacao. O veneno perdeu palco, mas nao necessariamente perdeu efeito."
+          "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
+          "feedback": "O veneno perdeu palco, mas nao perdeu efeito."
         },
         {
-          "text": "Olho firme e digo: 'Se quiser falar de mim, fala comigo. Nao sobre mim.'",
+          "text": "Finjo nao ouvir, mas por dentro to engolindo raiva.",
+          "subtext": "Desapego/Falso",
+          "tone": "evasivo",
+          "weights": { "filtro": 1, "vigor": 2, "desapego": -2, "presenca": -1 },
+          "feedback": "Segurou por fora. A conta vai chegar depois."
+        },
+        {
+          "text": "Olho firme: 'Quer falar de mim, fala comigo. Nao sobre.'",
           "subtext": "Presenca/Fronteira",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce reposicionou a mesa sem virar o tabuleiro. O livro recuou um passo."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Reposicionou a mesa sem virar o tabuleiro."
+        },
+        {
+          "text": "Sorrio e mudo de assunto com leveza. Sem palco.",
+          "subtext": "Harmonia/Desvio elegante",
+          "tone": "pragmatico",
+          "weights": { "harmonia": 2, "filtro": 2, "vigor": -2, "presenca": -1 },
+          "feedback": "Desarmou sem confronto. A frase ficou no ar."
         }
       ]
     },
@@ -170,30 +226,37 @@
         "pilar": "propriedade"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "No metro, um desconhecido nota o livro embrulhado na sua bolsa e muda de lugar para sentar ao seu lado." },
-        { "tipo": "evento", "texto": "Sem rodeio, ele sussurra: 'Eu pago qualquer valor por isso. Se voce nao vender agora, alguem vai tomar de voce.'" }
+        { "tipo": "contexto", "texto": "No metro, um desconhecido nota o livro na sua bolsa e senta do seu lado de proposito." },
+        { "tipo": "evento", "texto": "Ele sussurra: 'Pago qualquer valor. Se nao vender, alguem toma de voce.'" }
       ],
       "options": [
         {
-          "text": "Levanto e corto: 'Chega perto de novo e a conversa muda de nivel.'",
+          "text": "Levanto e encaro: 'Chega perto de novo e a conversa muda.'",
           "subtext": "Vigor/Defesa de posse",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce marcou territorio com violencia controlada. O homem recuou, mas te gravou na memoria."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Marcou territorio na forca. Ele recuou, mas te marcou."
         },
         {
-          "text": "Saio no proximo vagao sem responder. Nao negocio com sombra.",
-          "subtext": "Filtro/Saida",
+          "text": "Saio no proximo vagao sem responder. Sem negocio.",
+          "subtext": "Filtro/Saida limpa",
           "tone": "pragmatico",
-          "weights": { "filtro": 10, "desapego": 10, "presenca": -5 },
-          "feedback": "Voce escolheu continuar inteiro em vez de provar qualquer coisa. Sobrevivencia tambem e maestria."
+          "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "vigor": -1 },
+          "feedback": "Saiu inteiro. Sobrevivencia tambem e maestria."
         },
         {
-          "text": "Seguro o pacote e digo: 'Se sabe o que e isso, sabe que me ameacar e um erro.'",
+          "text": "Seguro o livro: 'Se sabe o que e, sabe que me ameacar e erro.'",
           "subtext": "Presenca/Aviso",
           "tone": "neutro",
-          "weights": { "presenca": 10, "filtro": 5, "vigor": -5 },
-          "feedback": "Voce nao saiu nem explodiu. Ficou ali, inteiro, e isso bastou para quebrar o apetite dele."
+          "weights": { "presenca": 3, "filtro": 1, "vigor": -1, "desapego": -2 },
+          "feedback": "Ficou ali, inteiro. Bastou pra quebrar o apetite dele."
+        },
+        {
+          "text": "Ignoro e continuo lendo como se ele nao existisse.",
+          "subtext": "Desapego/Apagamento",
+          "tone": "evasivo",
+          "weights": { "desapego": 3, "filtro": 1, "vigor": -2, "presenca": -1 },
+          "feedback": "Virou invisivel. Ele ficou confuso, mas nao desistiu."
         }
       ]
     },
@@ -208,30 +271,44 @@
         "pilar": "seguranca"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Ao abrir o grupo de amigos, voce encontra uma foto de uma pagina do livro. Voce nunca tirou aquela foto." },
-        { "tipo": "evento", "texto": "A legenda expoe um segredo seu que so tres pessoas sabiam. O grupo inteiro comeca a reagir." }
+        { "tipo": "contexto", "texto": "No grupo de amigos, aparece foto de uma pagina do livro. Voce nunca tirou aquela foto." },
+        { "tipo": "evento", "texto": "A legenda expoe um segredo que so tres pessoas sabiam. O grupo reage em massa." }
       ],
       "options": [
         {
-          "text": "Escrevo no grupo: 'Quem vazou isso vai falar comigo agora.'",
+          "text": "Escrevo: 'Quem vazou isso vai falar comigo agora.'",
           "subtext": "Vigor/Exposicao do traidor",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce puxou o traidor para a luz. O grupo congelou esperando sangue."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Puxou o traidor pra luz. O grupo congelou."
         },
         {
-          "text": "Apago o app por um tempo. Nao vou alimentar o ritual.",
+          "text": "Apago o app. Nao vou alimentar o ritual.",
           "subtext": "Desapego/Corte de energia",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 10, "presenca": -5 },
-          "feedback": "Voce saiu do circulo antes da combustao. O livro perdeu acesso a sua reacao."
+          "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
+          "feedback": "Saiu antes da combustao. O livro perdeu acesso."
         },
         {
-          "text": "Mando uma linha no grupo e puxo os tres para uma conversa privada na sequencia.",
+          "text": "Apago o app mas fico remoendo quem foi.",
+          "subtext": "Desapego/Falso corte",
+          "tone": "evasivo",
+          "weights": { "vigor": 2, "filtro": 1, "desapego": -2, "presenca": -1 },
+          "feedback": "Saiu do grupo, mas a paranoia ficou de companhia."
+        },
+        {
+          "text": "Mando uma linha no grupo e puxo os tres pro privado.",
           "subtext": "Filtro/Controle de dano",
           "tone": "pragmatico",
-          "weights": { "filtro": 10, "presenca": 5, "vigor": -5 },
-          "feedback": "Voce segurou o palco publico e abriu cirurgia no privado. Estrategia acima do impulso."
+          "weights": { "filtro": 3, "presenca": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Segurou o publico e abriu cirurgia no privado."
+        },
+        {
+          "text": "Conto minha versao no grupo antes que a historia cresça.",
+          "subtext": "Presenca/Narrativa propria",
+          "tone": "neutro",
+          "weights": { "presenca": 3, "harmonia": 2, "filtro": -2, "desapego": -1 },
+          "feedback": "Tomou o controle da historia. Corajoso, mas se expos."
         }
       ]
     },
@@ -246,30 +323,37 @@
         "pilar": "seguranca"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Ja de madrugada, batem na sua porta tres vezes. O livro se abre na mesa com uma pagina nova escrita a mao: 'Nao deixe entrar quem conhece o seu nome antigo.'" },
-        { "tipo": "evento", "texto": "Do outro lado, uma voz desconhecida chama por um apelido que so pessoas do seu passado usavam." }
+        { "tipo": "contexto", "texto": "De madrugada, batem na porta. O livro abre: 'Nao deixe entrar quem conhece seu nome antigo.'" },
+        { "tipo": "evento", "texto": "Uma voz desconhecida chama por um apelido que so gente do seu passado usava." }
       ],
       "options": [
         {
-          "text": "Pergunto pela porta, em voz alta, quem a pessoa pensa que e para aparecer assim.",
+          "text": "Grito: 'Quem voce pensa que e pra aparecer assim?'",
           "subtext": "Vigor/Intimidacao",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 5, "harmonia": -10 },
-          "feedback": "Voce ergueu a parede pelo som. A casa toda ouviu que ali havia resistencia."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Ergueu parede pelo som. A casa ouviu resistencia."
         },
         {
-          "text": "Apago as luzes e fico em silencio total ate a presenca sumir.",
+          "text": "Apago as luzes e fico em silencio total.",
           "subtext": "Filtro/Invisibilidade",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "desapego": 10, "presenca": -5 },
-          "feedback": "Voce virou ausencia e deixou a noite engolir o visitante. Seguro, mas encolhido."
+          "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "vigor": -1 },
+          "feedback": "Virou ausencia. Seguro, mas encolhido no escuro."
         },
         {
-          "text": "Sem abrir, digo calmo: 'Se quiser falar comigo, diz seu nome primeiro.'",
+          "text": "Apago as luzes mas fico colado na porta, coracao disparado.",
+          "subtext": "Filtro/Medo disfarçado",
+          "tone": "evasivo",
+          "weights": { "filtro": 1, "vigor": 2, "desapego": -2, "presenca": -1 },
+          "feedback": "Pareceu calmo, mas o medo comandou cada gesto."
+        },
+        {
+          "text": "Sem abrir, digo: 'Quer falar comigo, diz teu nome primeiro.'",
           "subtext": "Presenca/Controle de porta",
           "tone": "neutro",
-          "weights": { "presenca": 10, "filtro": 5, "vigor": -5 },
-          "feedback": "Voce nao cedeu o limite nem o centro. A porta continuou fechada, mas voce ficou inteiro diante dela."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "filtro": -1 },
+          "feedback": "Nao cedeu limite nem centro. Ficou inteiro ali."
         }
       ]
     },
@@ -284,30 +368,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Ao virar a pagina, voce encontra uma carta escrita com a sua letra. Ela acusa alguem muito proximo de ter sabotado uma fase inteira da sua vida." },
-        { "tipo": "evento", "texto": "A pessoa chega poucos minutos depois para te ver, sem saber o que voce acabou de ler." }
+        { "tipo": "contexto", "texto": "Uma pagina traz uma carta na sua letra acusando alguem proximo de ter sabotado sua vida." },
+        { "tipo": "evento", "texto": "A pessoa chega pra te ver sem saber o que voce acabou de ler." }
       ],
       "options": [
         {
-          "text": "Mostro a carta na cara dela e exijo uma resposta imediata.",
+          "text": "Mostro a carta na cara dela e exijo resposta.",
           "subtext": "Vigor/Interrogatorio",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce forcou a verdade a se defender agora. O quarto ficou pequeno para os dois."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Forcou a verdade a se defender. Quarto ficou pequeno."
         },
         {
-          "text": "Guardo a carta e observo cada gesto antes de decidir no que acredito.",
+          "text": "Guardo a carta e observo cada gesto antes de agir.",
           "subtext": "Filtro/Observacao fria",
           "tone": "pragmatico",
-          "weights": { "filtro": 10, "desapego": 5, "presenca": -5 },
-          "feedback": "Voce escolheu nao entregar seu jogo. O livro ficou sem saber se tinha vencido."
+          "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "harmonia": -1 },
+          "feedback": "Nao entregou o jogo. O livro nao soube se venceu."
         },
         {
-          "text": "Pergunto sobre o periodo descrito na carta sem mostrar tudo de uma vez.",
+          "text": "Pergunto sobre aquele periodo sem revelar a carta.",
           "subtext": "Harmonia/Teste de verdade",
           "tone": "neutro",
-          "weights": { "harmonia": 10, "filtro": 5, "vigor": -5 },
-          "feedback": "Voce abriu uma fresta em vez de explodir a casa. Inteligente o bastante para ver quem se contradiz."
+          "weights": { "harmonia": 3, "presenca": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Abriu fresta em vez de explodir. Paciente e inteligente."
+        },
+        {
+          "text": "Queimo a carta ali mesmo. O livro nao vai vencer.",
+          "subtext": "Desapego/Recusa do jogo",
+          "tone": "protetor",
+          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
+          "feedback": "Destruiu a isca. Livre do veneno, sem a resposta."
         }
       ]
     },
@@ -322,30 +413,44 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Num jantar pequeno, alguem encontra o livro e o grupo entra em excitacao. Todos querem brincar de abrir uma pagina e ouvir uma verdade." },
-        { "tipo": "evento", "texto": "Pedem para voce ler em voz alta o trecho que apareceu com o seu nome no topo." }
+        { "tipo": "contexto", "texto": "Num jantar, alguem acha o livro e o grupo quer abrir uma pagina e ouvir uma verdade." },
+        { "tipo": "evento", "texto": "Pedem pra voce ler em voz alta o trecho com seu nome no topo." }
       ],
       "options": [
         {
-          "text": "Leio tudo em voz alta e encaro quem nao suportar ouvir.",
+          "text": "Leio tudo em voz alta e encaro quem nao aguentar.",
           "subtext": "Vigor/Teatro de verdade",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -10 },
-          "feedback": "Voce transformou o jantar em tribunal. Ninguem saiu ileso."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Transformou o jantar em tribunal. Ninguem saiu ileso."
         },
         {
-          "text": "Fecho o livro e digo que ninguem vai brincar com isso comigo.",
+          "text": "Leio tudo com humor, como se fosse piada do livro.",
+          "subtext": "Vigor/Mascara de leveza",
+          "tone": "provocativo",
+          "weights": { "vigor": 2, "harmonia": 2, "presenca": -1, "desapego": -2 },
+          "feedback": "Suavizou o golpe com riso. Ninguem notou o peso real."
+        },
+        {
+          "text": "Fecho o livro: 'Ninguem vai brincar com isso.'",
           "subtext": "Filtro/Corte ritual",
           "tone": "pragmatico",
-          "weights": { "filtro": 10, "presenca": 5, "harmonia": -5 },
-          "feedback": "Voce matou a festa antes que ela te consumisse. Foi seco, mas necessario."
+          "weights": { "filtro": 3, "presenca": 1, "harmonia": -1, "desapego": -2 },
+          "feedback": "Matou o ritual antes que te consumisse."
         },
         {
-          "text": "Leio so a parte que me pertence e recuso expor o resto da mesa.",
+          "text": "Leio so a parte que me pertence. O resto nao abro.",
           "subtext": "Presenca/Curadoria",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce segurou o palco sem virar carrasco. Forca com medida."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
+          "feedback": "Segurou o palco sem virar carrasco. Forca com medida."
+        },
+        {
+          "text": "Passo o livro: 'Abre a tua pagina primeiro.'",
+          "subtext": "Desapego/Espelho",
+          "tone": "evasivo",
+          "weights": { "desapego": 2, "filtro": 2, "presenca": -1, "vigor": -2 },
+          "feedback": "Devolveu a pressao. Esperto, mas fugiu do proprio."
         }
       ]
     },
@@ -360,30 +465,44 @@
         "pilar": "propriedade"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Na ultima pagina, o livro revela o nome de quem o procurava o tempo todo: uma figura de autoridade da sua vida atual." },
-        { "tipo": "evento", "texto": "Essa pessoa surge e oferece um acordo: poder imediato em troca do livro e do silencio sobre tudo o que voce viu." }
+        { "tipo": "contexto", "texto": "Ultima pagina. O livro revela quem o procurava: uma figura de autoridade da sua vida atual." },
+        { "tipo": "evento", "texto": "Ela surge e oferece poder em troca do livro e do silencio sobre tudo." }
       ],
       "options": [
         {
-          "text": "Recuso e exponho o jogo ali mesmo: 'Voce nao compra meu silencio.'",
+          "text": "Recuso e exponho tudo: 'Nao compra meu silencio.'",
           "subtext": "Vigor/Ruptura final",
           "tone": "provocativo",
-          "weights": { "vigor": 10, "presenca": 10, "harmonia": -15 },
-          "feedback": "Voce escolheu guerra aberta. O livro vibrou como se aprovasse a coragem."
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
+          "feedback": "Escolheu guerra aberta. O livro vibrou aprovando."
         },
         {
-          "text": "Aceito por enquanto e escondo a verdadeira jogada para depois.",
+          "text": "Recuso e jogo o livro no chao na frente dela.",
+          "subtext": "Vigor/Desprezo total",
+          "tone": "provocativo",
+          "weights": { "vigor": 2, "desapego": 2, "filtro": -2, "harmonia": -1 },
+          "feedback": "Destruiu o pacto e a ponte. Livre, mas so."
+        },
+        {
+          "text": "Aceito por agora e escondo a jogada real pra depois.",
           "subtext": "Filtro/Pacto frio",
           "tone": "pragmatico",
-          "weights": { "filtro": 15, "desapego": 5, "presenca": -5 },
-          "feedback": "Voce entrou no pacto sem entregar a alma inteira. Frio, perigoso e util."
+          "weights": { "filtro": 3, "desapego": 1, "presenca": -2, "harmonia": -1 },
+          "feedback": "Entrou no pacto sem entregar a alma. Perigoso."
         },
         {
-          "text": "Digo que negocio em termos claros ou nao negocio nada.",
+          "text": "Digo: 'Negocio em termos claros ou nao negocio nada.'",
           "subtext": "Presenca/Ultima mesa",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce recusou ser engolido pela cena. Se vai haver acordo, sera no seu eixo."
+          "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "filtro": -1 },
+          "feedback": "Recusou ser engolido. Se houver acordo, sera seu."
+        },
+        {
+          "text": "Devolvo: 'Nao preciso disso pra saber quem voce e.'",
+          "subtext": "Desapego/Libertacao",
+          "tone": "protetor",
+          "weights": { "desapego": 3, "presenca": 2, "vigor": -2, "filtro": -1 },
+          "feedback": "Largou a arma e saiu inteiro. Sem poder, sem corrente."
         }
       ]
     }

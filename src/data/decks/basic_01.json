@@ -20,11 +20,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce esta na fila do supermercado com apenas dois itens. A fila esta enorme e voce tem pressa."
+          "texto": "Fila do supermercado. Dois itens, fila enorme, pressa."
         },
         {
           "tipo": "evento",
-          "texto": "Uma pessoa com o carrinho cheio fura a fila na sua frente e finge que nao te viu."
+          "texto": "Alguem com carrinho cheio fura na sua frente fingindo que nao te viu."
         }
       ],
       "options": [
@@ -33,33 +33,36 @@
           "subtext": "Vigor/Confronto",
           "tone": "pragmatico",
           "weights": {
-            "vigor": 10,
-            "presenca": 5,
-            "harmonia": -5
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
           },
-          "feedback": "Voce marcou seu espaco. Direto e sem rodeios."
+          "feedback": "Marcou espaco. Direto e sem rodeios."
         },
         {
-          "text": "Ignoro. Coloco os fones e finjo que nao vi.",
+          "text": "Coloco os fones e finjo que nao vi.",
           "subtext": "Nonchalant/Desapego",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 5,
-            "vigor": -5
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
           },
-          "feedback": "Nao vale a energia. Voce deixou passar sem se afetar."
+          "feedback": "Nao vale a energia. Deixou passar."
         },
         {
-          "text": "Toco no ombro da pessoa e digo com calma: 'Acho que voce nao percebeu, mas eu estava aqui.'",
+          "text": "Toco no ombro e digo calmo: 'Eu estava aqui.'",
           "subtext": "Harmonia/Diplomacia",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "presenca": 5,
-            "desapego": -5
+            "harmonia": 2,
+            "presenca": 1,
+            "desapego": -2,
+            "vigor": -1
           },
-          "feedback": "Voce resolveu sem criar conflito. Suave e eficaz."
+          "feedback": "Resolveu sem criar conflito. Suave."
         }
       ]
     },
@@ -87,46 +90,49 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Almoco de equipe no restaurante em frente ao escritorio. Bruno, um colega senior que vive disputando espaco com voce nas reunioes, esta especialmente solto porque o gerente resolveu sentar na mesma mesa e o clima parece leve."
+          "texto": "Almoco de equipe. Bruno, colega que disputa espaco, ta solto porque o gerente ta na mesa."
         },
         {
           "tipo": "evento",
-          "texto": "Quando uma historia sua aparece pela metade, Bruno encaixa uma piada te diminuindo. Metade da mesa ri por reflexo; duas pessoas abaixam o olhar esperando ver se voce vai aceitar o papel de alvo."
+          "texto": "Bruno manda uma piada te diminuindo. Metade ri, dois esperam sua reacao."
         }
       ],
       "options": [
         {
-          "text": "Olho pra ele e devolvo com um sorriso seco: 'Boa. Agora conta a parte em que voce travou na apresentacao passada.'",
+          "text": "Devolvo com sorriso: 'Conta a parte que voce travou na apresentacao.'",
           "subtext": "Vigor/Contra-ataque social",
           "tone": "provocativo",
           "weights": {
-            "vigor": 10,
-            "presenca": 5,
-            "harmonia": -10
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
           },
-          "feedback": "Voce tirou o controle da piada da mao dele e devolveu o constrangimento. A mesa ficou mais fria, mas ninguem saiu dali te vendo como alvo facil."
+          "feedback": "Devolveu o constrangimento. A mesa esfriou."
         },
         {
-          "text": "Dou um sorriso curto, nao alimento a piada e puxo o assunto de volta para o projeto que o time acabou de fechar.",
+          "text": "Sorriso curto, nao alimento e puxo outro assunto.",
           "subtext": "Nonchalant/Redirecionamento frio",
           "tone": "evasivo",
           "weights": {
-            "filtro": 10,
-            "desapego": 5,
-            "vigor": -5
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
           },
-          "feedback": "Voce nao comprou a arena que ele tentou abrir. A piada morreu sem aplauso, embora uma parte sua fique com a vontade de ter marcado o limite ali."
+          "feedback": "A piada morreu sem aplauso. Ficou a vontade."
         },
         {
-          "text": "Rio de leve e digo: 'Valeu, Bruno. Quando quiser me usar de personagem principal, me avisa antes.'",
+          "text": "Rio e digo: 'Quer me usar de personagem, avisa antes.'",
           "subtext": "Harmonia/Limite com humor",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "presenca": 5,
-            "filtro": -5
+            "harmonia": 2,
+            "presenca": 1,
+            "filtro": -1,
+            "desapego": -2
           },
-          "feedback": "Voce marcou o limite sem quebrar o almoco. A mesa entendeu que voce percebeu o golpe, e Bruno perdeu parte da vantagem sem poder te chamar de dramatico."
+          "feedback": "Marcou limite sem quebrar o clima."
         }
       ]
     },
@@ -143,11 +149,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce esta dirigindo no transito de fim de tarde. Ja esta atrasado para um compromisso."
+          "texto": "Transito de fim de tarde. Voce ja esta atrasado."
         },
         {
           "tipo": "evento",
-          "texto": "Um motorista te fecha de forma agressiva e ainda buzina como se voce estivesse errado."
+          "texto": "Um motorista te fecha e buzina como se voce estivesse errado."
         }
       ],
       "options": [
@@ -156,34 +162,48 @@
           "subtext": "Vigor/Explosao",
           "tone": "provocativo",
           "weights": {
-            "vigor": 10,
-            "presenca": 5,
-            "filtro": -10,
-            "harmonia": -5
+            "vigor": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "harmonia": -2
           },
-          "feedback": "Voce explodiu. A raiva tomou o volante por um momento."
+          "feedback": "A raiva tomou o volante. Explodiu sem pensar."
         },
         {
           "text": "Respiro fundo, ligo o som e sigo em frente.",
           "subtext": "Nonchalant/Desapego",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 10,
-            "vigor": -5
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
           },
-          "feedback": "Transito nao vale seu sangue. Voce escolheu a paz."
+          "feedback": "Transito nao vale seu sangue. Escolheu a paz."
         },
         {
-          "text": "Diminuo a velocidade e dou passagem, evitando qualquer conflito.",
+          "text": "Diminuo e dou passagem, evitando conflito.",
           "subtext": "Harmonia/Cautela",
           "tone": "protetor",
           "weights": {
-            "harmonia": 10,
-            "desapego": 5,
-            "vigor": -10
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
           },
-          "feedback": "Voce priorizou a seguranca. Maduro, mas talvez passivo demais."
+          "feedback": "Priorizou seguranca. Maduro, mas talvez passivo."
+        },
+        {
+          "text": "Noto a placa, fico atento, mas sigo no meu ritmo.",
+          "subtext": "Presenca/Observacao calma",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "filtro": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Registrou tudo sem reagir. Controle frio."
         }
       ]
     },
@@ -200,47 +220,49 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Reuniao de equipe na segunda-feira. Seu chefe esta apresentando resultados do trimestre."
+          "texto": "Reuniao de segunda. Chefe apresenta resultados do trimestre pra equipe."
         },
         {
           "tipo": "evento",
-          "texto": "Seu chefe apresenta sua ideia como se fosse dele, na frente de toda a equipe."
+          "texto": "Seu chefe apresenta sua ideia como se fosse dele, na frente de todos."
         }
       ],
       "options": [
         {
-          "text": "Interrompo: 'So pra lembrar, essa ideia partiu do meu projeto da semana passada.'",
+          "text": "Interrompo: 'So lembrando, essa ideia saiu do meu projeto.'",
           "subtext": "Vigor/Confronto",
           "tone": "pragmatico",
           "weights": {
-            "vigor": 10,
-            "presenca": 10,
-            "harmonia": -10,
-            "filtro": -5
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
           },
-          "feedback": "Voce reivindicou o que e seu. Corajoso, mas arriscado com seu chefe."
+          "feedback": "Reivindicou o que e seu. Corajoso, mas arriscado."
         },
         {
-          "text": "Fico quieto. Quem importa ja sabe que a ideia foi minha.",
+          "text": "Fico quieto. Quem importa ja sabe que foi minha.",
           "subtext": "Nonchalant/Filtro",
           "tone": "pragmatico",
           "weights": {
-            "desapego": 10,
-            "filtro": 5,
-            "presenca": -10
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
           },
-          "feedback": "Voce jogou o jogo longo. Mas sera que todos sabem mesmo?"
+          "feedback": "Jogou o jogo longo. Mas todos sabem?"
         },
         {
-          "text": "Depois da reuniao, falo com ele em particular sobre o credito.",
+          "text": "Depois da reuniao, falo com ele em particular.",
           "subtext": "Harmonia/Estrategia",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "filtro": 10,
-            "vigor": -5
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
           },
-          "feedback": "Voce escolheu o momento certo. Politicamente inteligente."
+          "feedback": "Escolheu o momento certo. Politicamente esperto."
         }
       ]
     },
@@ -257,46 +279,49 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Festa de aniversario de um amigo. Muita gente que voce nao conhece."
+          "texto": "Festa de aniversario de amigo. Muita gente que voce nao conhece."
         },
         {
           "tipo": "evento",
-          "texto": "Alguem que voce acabou de conhecer comeca a te interrogar sobre salario, relacionamento e planos de vida."
+          "texto": "Alguem que voce acabou de conhecer te interroga sobre salario e vida pessoal."
         }
       ],
       "options": [
         {
-          "text": "Respondo: 'Voce sempre entrevista as pessoas nas festas?'",
+          "text": "'Voce sempre entrevista as pessoas nas festas?'",
           "subtext": "Vigor/Sarcasmo",
           "tone": "pragmatico",
           "weights": {
-            "vigor": 5,
-            "presenca": 10,
-            "harmonia": -5
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
           },
-          "feedback": "Voce cortou a curiosidade com humor afiado."
+          "feedback": "Cortou a curiosidade com humor afiado."
         },
         {
-          "text": "Dou respostas vagas e mudo de assunto rapidamente.",
+          "text": "Dou respostas vagas e mudo de assunto.",
           "subtext": "Nonchalant/Filtro",
           "tone": "pragmatico",
           "weights": {
-            "filtro": 10,
-            "desapego": 5,
-            "presenca": -5
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -2,
+            "vigor": -1
           },
-          "feedback": "Voce protegeu suas informacoes sem criar desconforto."
+          "feedback": "Protegeu suas infos sem criar desconforto."
         },
         {
-          "text": "Respondo de forma leve e devolvo as perguntas: 'E voce, o que faz?'",
+          "text": "Respondo leve e devolvo: 'E voce, o que faz?'",
           "subtext": "Harmonia/Reciprocidade",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "presenca": 5,
-            "filtro": -5
+            "harmonia": 2,
+            "presenca": 1,
+            "filtro": -2,
+            "desapego": -1
           },
-          "feedback": "Voce equilibrou a conversa. Social e fluido."
+          "feedback": "Equilibrou a conversa. Social e fluido."
         }
       ]
     },
@@ -324,47 +349,49 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Grupo do WhatsApp dos amigos da faculdade, aquele que costuma virar segundo bar quando todo mundo esta acordado demais. Diego, um amigo antigo que sempre te cutuca quando quer incendiar a conversa, joga uma noticia polemica no grupo e o clima esquenta rapido."
+          "texto": "Grupo de WhatsApp da faculdade. Diego joga noticia polemica e o clima esquenta."
         },
         {
           "tipo": "evento",
-          "texto": "Sem te chamar no privado, ele te marca no meio da discussao: 'Fala serio, voce nao vai defender isso tambem, ne?' Tres pessoas visualizam na hora. Voce sabe que, se responder mal, a conversa vira tribunal."
+          "texto": "Ele te marca: 'Fala serio, voce nao vai defender isso ne?' Tres visualizam."
         }
       ],
       "options": [
         {
-          "text": "Gravo um audio curto e firme: 'Nao fala comigo como se eu te devesse satisfacao. Se quiser discutir, discute direito.'",
+          "text": "Audio firme: 'Nao me cobra satisfacao por mensagem.'",
           "subtext": "Vigor/Enquadramento",
           "tone": "provocativo",
           "weights": {
-            "vigor": 10,
-            "presenca": 5,
-            "harmonia": -10,
-            "desapego": -5
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
           },
-          "feedback": "Voce travou a forma como ele tentou te enquadrar, e o grupo sentiu o peso disso. A conversa provavelmente esquenta mais, mas voce nao aceitou ser puxado pela coleira."
+          "feedback": "Travou o enquadramento. Mas a conversa esquenta."
         },
         {
-          "text": "Visualizo, silencio o grupo por algumas horas e deixo a poeira baixar antes de decidir se vale voltar.",
+          "text": "Visualizo, silencio o grupo e deixo a poeira baixar.",
           "subtext": "Nonchalant/Retirada calculada",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 10,
-            "presenca": -5
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
           },
-          "feedback": "Voce se recusou a performar para a plateia. O grupo segue sem sua resposta, o que preserva sua energia, mas tambem deixa outros definirem o clima enquanto voce some do palco."
+          "feedback": "Saiu do palco. Preservou energia."
         },
         {
-          "text": "Respondo: 'Tenho uma visao diferente, mas nao vou transformar grupo em arena. Se quiser, a gente fala depois.'",
+          "text": "'Penso diferente, mas nao vou transformar grupo em arena.'",
           "subtext": "Harmonia/Ponte com limite",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "filtro": 5,
-            "vigor": -5
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
           },
-          "feedback": "Voce tirou a discussao do espetaculo sem fugir dela. Quem estava vendo entende que voce nao correu; so recusou o formato armado para te expor."
+          "feedback": "Recusou o formato sem fugir."
         }
       ]
     },
@@ -381,53 +408,68 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce esta caminhando pela rua num bairro movimentado. Esta voltando do trabalho cansado."
+          "texto": "Rua movimentada, voltando do trabalho cansado."
         },
         {
           "tipo": "evento",
-          "texto": "Um desconhecido esbarra em voce com forca e diz: 'Olha por onde anda!' com agressividade."
+          "texto": "Desconhecido esbarra em voce e manda: 'Olha por onde anda!' agressivo."
         }
       ],
       "options": [
         {
-          "text": "Paro, olho nos olhos e digo: 'Quem esbarrou foi voce. Quer resolver?'",
+          "text": "Paro e olho nos olhos: 'Quem esbarrou foi voce.'",
           "subtext": "Vigor/Confronto",
           "tone": "provocativo",
           "weights": {
-            "vigor": 10,
-            "presenca": 10,
-            "harmonia": -10,
-            "filtro": -5
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -2
           },
-          "feedback": "Voce nao recuou. Mas na rua, escalar conflito tem consequencias reais."
+          "feedback": "Nao recuou. Mas escalar na rua tem preco."
         },
         {
-          "text": "Continuo andando sem olhar pra tras. Nao vale meu tempo.",
+          "text": "Sigo andando sem olhar pra tras.",
           "subtext": "Nonchalant/Desapego",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 5,
-            "presenca": -5
+            "desapego": 3,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
           },
-          "feedback": "Voce seguiu sua vida. Na rua, ignorar pode ser a jogada mais forte."
+          "feedback": "Seguiu sua vida. Ignorar pode ser a jogada."
         },
         {
-          "text": "Levanto as maos e digo: 'Foi mal, sem querer.' e sigo andando.",
+          "text": "Levanto as maos: 'Foi mal' e sigo andando.",
           "subtext": "Harmonia/Desescalada",
           "tone": "protetor",
           "weights": {
-            "harmonia": 10,
-            "desapego": 5,
-            "vigor": -10
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
           },
-          "feedback": "Voce desescalou. Seguro, mas sera que era voce quem devia pedir desculpa?"
+          "feedback": "Desescalou. Mas voce devia pedir desculpa?"
+        },
+        {
+          "text": "Solto um 'ta bom, campeao' e sigo sem parar.",
+          "subtext": "Filtro/Sarcasmo controlado",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Marcou sem escalar. Deboche medido."
         }
       ]
     },
     {
       "id": "b8",
       "type": "RANDOM",
+      "sceneHook": "Nao e so o segredo: e o fato de ter vindo dele.",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -448,51 +490,63 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce esta em casa no fim da noite quando Caio, seu melhor amigo desde a adolescencia, te liga fora do horario de costume. Ele foi uma das poucas pessoas que conheceu essa historia inteira quando ela ainda doia. A voz dele chega baixa, travada."
+          "texto": "Fim de noite. Caio, melhor amigo desde a adolescencia, te liga com a voz travada."
         },
         {
           "tipo": "evento",
-          "texto": "Sem rodeio, ele admite que contou seu segredo num encontro com outras pessoas e que a historia ja correu por fora. Ele repete que 'escapou sem querer', mas voce sente que ele ligou mais com medo da sua reacao do que do que fez."
+          "texto": "Ele admite que contou seu segredo pra outras pessoas. Diz que escapou."
         }
       ],
       "options": [
         {
-          "text": "Corto na hora: 'Nao tenho nada pra falar com voce agora.' e encerro a ligacao.",
+          "text": "'Nao tenho nada pra falar agora.' Desligo na hora.",
           "subtext": "Vigor/Corte imediato",
           "tone": "provocativo",
           "weights": {
-            "vigor": 5,
-            "desapego": 10,
-            "harmonia": -10
+            "vigor": 2,
+            "desapego": 1,
+            "harmonia": -2,
+            "presenca": -1
           },
-          "feedback": "Voce impediu que ele aliviasse a propria culpa usando seu ouvido como abrigo. O corte protege voce no instante, mas deixa a ferida aberta e a amizade suspensa no pior ponto."
+          "feedback": "Cortou antes dele aliviar a culpa."
         },
         {
-          "text": "Digo so 'entendi' e seguro tudo para pensar sozinho antes de decidir o que essa traicao muda.",
+          "text": "Digo 'entendi' e seguro tudo pra pensar sozinho depois.",
           "subtext": "Nonchalant/Contencao",
           "tone": "evasivo",
           "weights": {
-            "filtro": 10,
-            "desapego": 5,
-            "harmonia": -5,
-            "presenca": -5
+            "filtro": 3,
+            "desapego": 1,
+            "harmonia": -1,
+            "presenca": -2
           },
-          "feedback": "Voce nao entregou a ele acesso imediato ao seu caos. Isso te da margem para pensar com lucidez, mas o silencio pesa porque a dor continua inteira do lado de dentro."
+          "feedback": "Nao entregou seu caos. Mas a dor continua."
         },
         {
-          "text": "Respiro e digo: 'Voce vai me ouvir agora. Isso me feriu de verdade e eu preciso entender como voce pretende reparar.'",
+          "text": "'Me feriu de verdade. Como voce pretende reparar?'",
           "subtext": "Harmonia/Vulnerabilidade firme",
           "tone": "protetor",
           "weights": {
-            "harmonia": 10,
-            "presenca": 10,
-            "vigor": -5,
-            "filtro": -5
+            "harmonia": 2,
+            "presenca": 2,
+            "vigor": -1,
+            "filtro": -2
           },
-          "feedback": "Voce nao fingiu frieza nem terceirizou o impacto. A conversa fica mais pesada, mas tambem mais honesta, porque agora ele e obrigado a encarar o tamanho real do dano."
+          "feedback": "Nao fingiu frieza. Pesado, mas honesto."
+        },
+        {
+          "text": "Escuto tudo calado. Por dentro destruido, mas nao deixo transparecer.",
+          "subtext": "Filtro/Dor contida",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Aguentou firme por fora. Peso ficou dentro."
         }
-      ],
-      "sceneHook": "Nao e so o segredo: e o fato de ter vindo dele."
+      ]
     },
     {
       "id": "b9",
@@ -507,49 +561,62 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Seu mentor no trabalho te chamou pra conversar no final do dia. Ele parece serio."
+          "texto": "Seu mentor te chamou pra conversar no fim do dia. Parece serio."
         },
         {
           "tipo": "evento",
-          "texto": "Ele diz que voce esta 'acomodado' e que esperava mais de voce. O tom e duro mas parece genuino."
+          "texto": "Diz que voce esta acomodado e esperava mais. Tom duro mas genuino."
         }
       ],
       "options": [
         {
-          "text": "Respondo: 'Entao me da oportunidades reais, nao so criticas.'",
+          "text": "'Entao me da oportunidades reais, nao so criticas.'",
           "subtext": "Vigor/Contra-ataque",
           "tone": "pragmatico",
           "weights": {
-            "vigor": 10,
-            "presenca": 10,
-            "harmonia": -5,
-            "filtro": -5
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
           },
-          "feedback": "Voce cobrou de volta. Arriscado com um mentor, mas voce mostrou que tem voz."
+          "feedback": "Cobrou de volta. Arriscado, mas tem voz."
         },
         {
-          "text": "Agradeco pelo feedback e nao dou muita importancia.",
+          "text": "Agradeco e nao dou muita importancia por dentro.",
           "subtext": "Nonchalant/Distanciamento",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 5,
-            "presenca": -5,
-            "vigor": -5
+            "desapego": 3,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
           },
-          "feedback": "Voce ouviu sem absorver. Mas sera que perdeu uma chance de crescer?"
+          "feedback": "Ouviu sem absorver. Perdeu chance de crescer?"
         },
         {
-          "text": "Ouco com atencao, anoto os pontos e peco exemplos concretos.",
+          "text": "Ouco com atencao, anoto e peco exemplos concretos.",
           "subtext": "Harmonia/Aprendizado",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "filtro": 10,
-            "presenca": 5,
-            "vigor": -5
+            "harmonia": 2,
+            "filtro": 1,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -2
           },
-          "feedback": "Voce transformou critica em ferramenta. Maturidade pura."
+          "feedback": "Transformou critica em ferramenta."
+        },
+        {
+          "text": "'Acomodado? To tocando tres projetos ao mesmo tempo.'",
+          "subtext": "Vigor/Deflexao defensiva",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1,
+            "desapego": -2
+          },
+          "feedback": "Defendeu seu lado. Fechou a porta pro feedback."
         }
       ]
     },
@@ -566,49 +633,73 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Jantar em familia. Todos parecem de bom humor ate o assunto de politica surgir."
+          "texto": "Jantar em familia. Bom humor ate politica surgir."
         },
         {
           "tipo": "evento",
-          "texto": "Seu tio faz um comentario ofensivo sobre algo que voce acredita profundamente. Todos olham pra voce."
+          "texto": "Seu tio faz comentario ofensivo sobre algo que voce acredita. Todos olham pra voce."
         }
       ],
       "options": [
         {
-          "text": "Bato na mesa: 'Isso e inaceitavel e eu nao vou fingir que ta tudo bem.'",
+          "text": "Bato na mesa: 'Isso e inaceitavel e nao vou fingir.'",
           "subtext": "Vigor/Explosao",
           "tone": "provocativo",
           "weights": {
-            "vigor": 10,
-            "presenca": 10,
-            "harmonia": -15,
-            "filtro": -5
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -3,
+            "filtro": -1
           },
-          "feedback": "Voce explodiu o jantar. Seus valores ficaram claros, mas o preco foi alto."
+          "feedback": "Explodiu o jantar. Valores claros, preco alto."
         },
         {
           "text": "Levanto da mesa em silencio e vou pegar ar.",
-          "subtext": "Nonchalant/Saida Estrategica",
+          "subtext": "Nonchalant/Saida estrategica",
           "tone": "evasivo",
           "weights": {
-            "desapego": 10,
-            "filtro": 10,
-            "vigor": -5,
-            "harmonia": -5
+            "desapego": 2,
+            "filtro": 2,
+            "vigor": -1,
+            "harmonia": -2
           },
-          "feedback": "Voce saiu antes de explodir. O silencio diz mais que qualquer grito."
+          "feedback": "Saiu antes de explodir. Silencio diz muito."
         },
         {
-          "text": "Respiro fundo e digo: 'Tio, respeito o senhor, mas penso muito diferente sobre isso.'",
-          "subtext": "Harmonia/Firmeza Suave",
+          "text": "'Tio, respeito o senhor, mas penso muito diferente.'",
+          "subtext": "Harmonia/Firmeza suave",
           "tone": "neutro",
           "weights": {
-            "harmonia": 10,
-            "presenca": 10,
-            "filtro": 5,
-            "vigor": -5
+            "harmonia": 2,
+            "presenca": 2,
+            "vigor": -2,
+            "desapego": -2
           },
-          "feedback": "Voce manteve a posicao sem destruir o jantar. Equilibrio raro."
+          "feedback": "Manteve posicao sem destruir o jantar."
+        },
+        {
+          "text": "Saio calado da mesa, irritado por dentro. Nao volto pro assunto.",
+          "subtext": "Filtro/Raiva contida",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -2
+          },
+          "feedback": "Engoliu a raiva. Protegeu o jantar, nao a si."
+        },
+        {
+          "text": "Saio calado da mesa, genuinamente indiferente. Nem me afetou.",
+          "subtext": "Desapego/Indiferenca real",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -2
+          },
+          "feedback": "Soltou de verdade. Mas quem cala consente?"
         }
       ]
     }

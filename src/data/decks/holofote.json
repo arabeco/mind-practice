@@ -19,30 +19,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Reuniao com cliente. Voce acabou de abrir sua explicacao e a sala finalmente te escuta." },
-        { "tipo": "evento", "texto": "Um colega te corta no meio da frase e comeca a repetir sua ideia como se ela tivesse partido dele." }
+        { "tipo": "contexto", "texto": "Reuniao com cliente. Voce apresenta sua proposta e a sala escuta." },
+        { "tipo": "evento", "texto": "Colega te corta e repete sua ideia como se fosse dele." }
       ],
       "options": [
         {
-          "text": "Retomo na hora: 'Como eu estava dizendo, esse ponto muda a decisao.'",
+          "text": "Retomo firme: 'Como eu dizia, esse ponto muda tudo.'",
           "subtext": "Presenca/Controle",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "harmonia": -5 },
-          "feedback": "Voce puxou o foco de volta sem pedir permissao. A sala entendeu quem conduzia a linha."
+          "weights": { "presenca": 3, "vigor": 2, "harmonia": -2 },
+          "feedback": "Puxou o foco de volta. A sala entendeu quem conduzia."
         },
         {
           "text": "Deixo passar. Se a ideia entrar, tanto faz quem falou.",
           "subtext": "Filtro/Apagamento",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "desapego": 5, "presenca": -10 },
-          "feedback": "Voce preservou o clima, mas sua assinatura sumiu da conversa."
+          "weights": { "filtro": 2, "desapego": 1, "presenca": -2 },
+          "feedback": "Clima preservado, mas sua autoria sumiu da conversa."
         },
         {
-          "text": "Espero a pausa e sorrio: 'Boa, e eu quero fechar com a parte do impacto real.'",
+          "text": "Espero a pausa e sorrio: 'Boa, fecho com o impacto.'",
           "subtext": "Presenca/Reconquista",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce retomou o protagonismo sem virar duelo. Presenca limpa."
+          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1 },
+          "feedback": "Retomou protagonismo sem virar duelo. Presenca limpa."
+        },
+        {
+          "text": "Falo alto: 'Amigo, essa ideia e minha, ne?'",
+          "subtext": "Vigor/Disputa",
+          "tone": "provocativo",
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -3 },
+          "feedback": "Marcou territorio, mas criou atrito na sala."
         }
       ]
     },
@@ -57,30 +64,30 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Aniversario de um amigo. O clima esta alto, todo mundo de copo na mao e rindo." },
-        { "tipo": "evento", "texto": "Do nada, pedem que voce diga algumas palavras para a roda inteira. Todos viram o rosto na sua direcao." }
+        { "tipo": "contexto", "texto": "Aniversario de amigo. Clima alto, galera de copo na mao." },
+        { "tipo": "evento", "texto": "Pedem que voce fale pra roda. Todos olham pra voce." }
       ],
       "options": [
         {
           "text": "Ergo o copo e puxo um mini discurso sem hesitar.",
           "subtext": "Presenca/Palco",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "filtro": -5 },
-          "feedback": "Voce entrou no centro da roda como se ja fosse seu. A energia subiu."
+          "weights": { "presenca": 3, "vigor": 1, "filtro": -1 },
+          "feedback": "Entrou no centro como se fosse seu. Energia subiu."
         },
         {
-          "text": "Dou risada e passo a vez. Melhor deixar quem gosta disso brilhar.",
+          "text": "Dou risada e passo a vez pra outro falar.",
           "subtext": "Desapego/Recuo",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 5, "presenca": -10 },
-          "feedback": "Voce saiu do foco com leveza. Ninguem te cobrou, mas a oportunidade foi embora."
+          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
+          "feedback": "Saiu do foco com leveza, mas a chance passou."
         },
         {
-          "text": "Falo pouco, olho para o aniversariante e entrego uma frase simples e forte.",
+          "text": "Olho pro aniversariante e mando uma frase curta e forte.",
           "subtext": "Presenca/Precisao",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce ocupou o momento sem exagerar. Calmo, visivel e certeiro."
+          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
+          "feedback": "Ocupou o momento sem exagerar. Calmo e certeiro."
         }
       ]
     },
@@ -95,30 +102,30 @@
         "pilar": "propriedade"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Cafe lotado na hora do almoco. O atendente esta apressado e passando pedido atras de pedido." },
-        { "tipo": "evento", "texto": "Ele entrega seu pedido para outra pessoa e segue como se voce nem estivesse ali." }
+        { "tipo": "contexto", "texto": "Cafe lotado na hora do almoco. Atendente apressado, fila grande." },
+        { "tipo": "evento", "texto": "Ele entrega seu pedido pra outra pessoa e segue." }
       ],
       "options": [
         {
-          "text": "Chamo firme: 'Esse pedido e meu. Pode corrigir agora, por favor.'",
+          "text": "Chamo firme: 'Esse pedido e meu. Corrige, por favor.'",
           "subtext": "Presenca/Reivindicacao",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "harmonia": -5 },
-          "feedback": "Voce apareceu no caos e foi reconhecido. Nao precisou repetir duas vezes."
+          "weights": { "presenca": 2, "vigor": 1, "harmonia": -1 },
+          "feedback": "Apareceu no caos e foi reconhecido. Sem repetir."
         },
         {
-          "text": "Espero o erro se resolver sozinho. Nao quero criar cena.",
+          "text": "Espero o erro se resolver sozinho. Sem criar cena.",
           "subtext": "Filtro/Invisibilidade",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "harmonia": 5, "presenca": -10 },
-          "feedback": "Voce evitou atrito, mas ficou dependente da atencao alheia."
+          "weights": { "filtro": 2, "harmonia": 1, "presenca": -2 },
+          "feedback": "Evitou atrito, mas ficou refem da atencao alheia."
         },
         {
-          "text": "Faco contato visual e digo baixo: 'Oi, faltou o meu. E aquele ali.'",
+          "text": "Contato visual e tom baixo: 'Faltou o meu, e aquele.'",
           "subtext": "Presenca/Calma",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce foi visto sem levantar o volume. Presenca nao e barulho."
+          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
+          "feedback": "Foi visto sem levantar o tom. Presenca nao e barulho."
         }
       ]
     },
@@ -133,30 +140,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Revisao mensal com seu gestor. Ele percorre os resultados da equipe numa tela compartilhada." },
-        { "tipo": "evento", "texto": "Ao chegar no maior resultado do mes, ele elogia o time sem citar que foi voce quem liderou a entrega." }
+        { "tipo": "contexto", "texto": "Revisao mensal com seu gestor. Ele mostra resultados da equipe." },
+        { "tipo": "evento", "texto": "No maior resultado do mes, ele elogia o time sem te citar." }
       ],
       "options": [
         {
-          "text": "Interrompo: 'So para contextualizar, essa frente ficou sob minha lideranca direta.'",
+          "text": "Interrompo: 'Essa frente ficou sob minha lideranca direta.'",
           "subtext": "Presenca/Assinatura",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 10, "harmonia": -10 },
-          "feedback": "Voce carimbou seu nome no resultado. A sala registrou, mesmo com atrito."
+          "weights": { "presenca": 3, "vigor": 2, "harmonia": -2 },
+          "feedback": "Carimbou seu nome no resultado. A sala registrou."
         },
         {
-          "text": "Anoto mentalmente e deixo quieto. Nao preciso me vender toda hora.",
+          "text": "Anoto e fico quieto. Nao preciso me vender toda hora.",
           "subtext": "Desapego/Recuo",
-          "tone": "pragmatico",
-          "weights": { "desapego": 10, "filtro": 5, "presenca": -10 },
-          "feedback": "Voce segurou a vontade de entrar na disputa, mas tambem abriu mao de aparecer."
+          "tone": "evasivo",
+          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
+          "feedback": "Segurou a disputa, mas abriu mao de aparecer."
         },
         {
-          "text": "Espero o fim e complemento: 'Posso compartilhar o raciocinio que levou a esse numero?'",
+          "text": "No fim, pergunto: 'Posso detalhar o raciocinio desse numero?'",
           "subtext": "Presenca/Autoridade serena",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "filtro": -5 },
-          "feedback": "Voce assumiu a autoria sem soar carente por credito. Classe com coluna."
+          "weights": { "presenca": 3, "harmonia": 1, "filtro": -1 },
+          "feedback": "Assumiu autoria sem soar carente. Classe com coluna."
+        },
+        {
+          "text": "Mando mensagem pro gestor depois pedindo credito.",
+          "subtext": "Filtro/Bastidor",
+          "tone": "calculado",
+          "weights": { "filtro": 2, "presenca": 1, "vigor": -2 },
+          "feedback": "Jogou nos bastidores. Funcional, mas sem brilho publico."
         }
       ]
     },
@@ -171,30 +185,30 @@
         "pilar": "seguranca"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Jantar com pessoas novas. A conversa esta boa, mas voce ainda esta medindo o terreno." },
-        { "tipo": "evento", "texto": "Depois que alguem te pergunta algo, o grupo cai num silencio comprido esperando sua resposta." }
+        { "tipo": "contexto", "texto": "Jantar com gente nova. Conversa boa, voce ainda medindo o terreno." },
+        { "tipo": "evento", "texto": "Te fazem uma pergunta e o grupo para esperando." }
       ],
       "options": [
         {
-          "text": "Sustento o silencio por um segundo e respondo olhando para todos, sem correr.",
+          "text": "Sustento o silencio e respondo olhando pra todos, sem pressa.",
           "subtext": "Presenca/Tempo proprio",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "filtro": 5, "harmonia": -5 },
-          "feedback": "Voce nao correu para tapar o vazio. O grupo passou a te escutar de verdade."
+          "weights": { "presenca": 2, "filtro": 1, "harmonia": -1 },
+          "feedback": "Nao correu pro vazio. O grupo passou a te ouvir."
         },
         {
-          "text": "Rio, olho o celular e desvio com uma resposta curta.",
+          "text": "Rio, pego o celular e desvio com resposta curta.",
           "subtext": "Desapego/Fuga",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 5, "presenca": -10 },
-          "feedback": "Voce escapou do foco, mas tambem perdeu espaco dentro da roda."
+          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
+          "feedback": "Escapou do foco, mas perdeu espaco na roda."
         },
         {
-          "text": "Respondo de forma leve e devolvo a pergunta para incluir o grupo.",
+          "text": "Respondo leve e devolvo a pergunta pro grupo.",
           "subtext": "Presenca/Conducao",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 10, "vigor": -5 },
-          "feedback": "Voce usou o foco para puxar a mesa junto. Visivel sem virar monologo."
+          "weights": { "harmonia": 3, "presenca": 1, "vigor": -1 },
+          "feedback": "Usou o foco pra puxar a mesa junto. Generoso."
         }
       ]
     },
@@ -209,30 +223,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Call com lideranca. Quase todo mundo esta de camera desligada, inclusive voce." },
-        { "tipo": "evento", "texto": "Seu diretor pede: 'Liga a camera e explica esse ponto pra todo mundo agora.' Sem aviso." }
+        { "tipo": "contexto", "texto": "Call com lideranca. Quase todo mundo de camera desligada." },
+        { "tipo": "evento", "texto": "Diretor pede sem aviso: 'Liga a camera e explica agora.'" }
       ],
       "options": [
         {
-          "text": "Ligo a camera na hora e assumo a fala sem pedir desculpa.",
+          "text": "Ligo a camera e assumo a fala sem pedir desculpa.",
           "subtext": "Presenca/Exposicao",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "filtro": -5 },
-          "feedback": "Voce entrou em quadro sem dramatizar. A reuniao ganhou um centro."
+          "weights": { "presenca": 3, "vigor": 1, "filtro": -1 },
+          "feedback": "Entrou em quadro sem drama. Reuniao ganhou centro."
         },
         {
-          "text": "Digo que estou com problema tecnico e prefiro responder no chat.",
+          "text": "Digo que to com problema tecnico. Respondo no chat.",
           "subtext": "Filtro/Cobertura",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "desapego": 5, "presenca": -10 },
-          "feedback": "Voce se protegeu do desconforto, mas tambem recuou da vitrine."
+          "weights": { "filtro": 2, "desapego": 1, "presenca": -2 },
+          "feedback": "Se protegeu, mas recuou da vitrine."
         },
         {
-          "text": "Ligo a camera, respiro e abro com uma frase clara antes de explicar.",
+          "text": "Ligo a camera, respiro e abro com frase clara.",
           "subtext": "Presenca/Ancoragem",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce criou presenca antes do conteudo. A sala entrou no seu ritmo."
+          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1 },
+          "feedback": "Criou presenca antes do conteudo. Sala no seu ritmo."
+        },
+        {
+          "text": "Ligo a camera mas atropelo a fala, visivelmente nervoso.",
+          "subtext": "Presenca/Impulso",
+          "tone": "reativo",
+          "weights": { "presenca": 1, "vigor": 2, "filtro": -2 },
+          "feedback": "Apareceu, mas a ansiedade roubou sua clareza."
         }
       ]
     },
@@ -247,30 +268,30 @@
         "pilar": "propriedade"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Portao de embarque confuso. A fila se mistura, a atendente fala rapido e quase ninguem entende." },
-        { "tipo": "evento", "texto": "Ela chama seu grupo, mas continua atendendo outros e te ignora quando voce tenta passar." }
+        { "tipo": "contexto", "texto": "Portao de embarque confuso. Fila misturada, atendente apressada." },
+        { "tipo": "evento", "texto": "Ela chama seu grupo mas te ignora quando voce tenta passar." }
       ],
       "options": [
         {
-          "text": "Dou um passo a frente: 'Meu grupo foi chamado. Pode confirmar aqui, por favor?'",
+          "text": "'Meu grupo foi chamado. Pode confirmar, por favor?'",
           "subtext": "Presenca/Passagem",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "harmonia": -5 },
-          "feedback": "Voce ocupou o espaco certo no momento certo. O fluxo abriu para voce."
+          "weights": { "presenca": 2, "vigor": 1, "harmonia": -1 },
+          "feedback": "Ocupou o espaco certo na hora certa. Fluxo abriu."
         },
         {
-          "text": "Volto para o fim da fila e espero outra chamada.",
+          "text": "Volto pro fim da fila e espero outra chamada.",
           "subtext": "Harmonia/Recuo",
           "tone": "evasivo",
-          "weights": { "harmonia": 5, "filtro": 10, "presenca": -10 },
-          "feedback": "Voce escolheu nao tensionar, mas pagou com atraso e apagamento."
+          "weights": { "harmonia": 1, "filtro": 2, "presenca": -2 },
+          "feedback": "Evitou tensao, mas pagou com atraso e apagamento."
         },
         {
-          "text": "Levanto o bilhete na linha do olhar dela e sorrio: 'Acho que sou o proximo.'",
+          "text": "Levanto o bilhete na linha do olhar dela e sorrio.",
           "subtext": "Presenca/Leveza",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce foi visto sem brigar pelo foco. Elegante e funcional."
+          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
+          "feedback": "Foi visto sem brigar pelo foco. Elegante e funcional."
         }
       ]
     },
@@ -285,30 +306,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Elevador cheio de executivos de outras areas. Voce esta quieto, esperando chegar no seu andar." },
-        { "tipo": "evento", "texto": "A CEO olha para o cracha no seu peito e pergunta: 'Em uma frase, quem e voce aqui dentro?'" }
+        { "tipo": "contexto", "texto": "Elevador cheio de executivos. Voce quieto esperando seu andar." },
+        { "tipo": "evento", "texto": "A CEO olha seu cracha e pergunta: 'Em uma frase, quem e voce?'" }
       ],
       "options": [
         {
-          "text": "Respondo na hora com uma frase forte sobre o valor que eu gero.",
+          "text": "Respondo na hora com frase forte sobre o valor que gero.",
           "subtext": "Presenca/Identidade",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 10, "filtro": -5 },
-          "feedback": "Voce se apresentou como quem ja sabe seu peso. O elevador ficou pequeno."
+          "weights": { "presenca": 3, "vigor": 2, "filtro": -2 },
+          "feedback": "Se apresentou como quem sabe seu peso. Direto."
         },
         {
-          "text": "Brinco que so estou tentando sobreviver a segunda-feira.",
+          "text": "Brinco que so to tentando sobreviver a segunda.",
           "subtext": "Desapego/Desvio",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "harmonia": 5, "presenca": -10 },
-          "feedback": "Voce tirou a pressao com humor, mas deixou sua marca indefinida."
+          "weights": { "desapego": 2, "harmonia": 1, "presenca": -2 },
+          "feedback": "Tirou pressao com humor, mas ficou indefinido."
         },
         {
-          "text": "Sorrio e digo com calma qual problema eu resolvo e para quem.",
+          "text": "Sorrio e digo com calma qual problema resolvo.",
           "subtext": "Presenca/Clareza",
           "tone": "neutro",
-          "weights": { "presenca": 10, "filtro": 5, "vigor": -5 },
-          "feedback": "Voce se nomeou sem inflar nem encolher. Presenca com nitidez."
+          "weights": { "presenca": 3, "filtro": 1, "vigor": -1 },
+          "feedback": "Se nomeou sem inflar nem encolher. Presenca nitida."
+        },
+        {
+          "text": "Gaguejo, falo demais e tento impressionar com curriculo.",
+          "subtext": "Presenca/Ansiedade",
+          "tone": "reativo",
+          "weights": { "vigor": 2, "presenca": -1, "filtro": -2 },
+          "feedback": "Quis brilhar demais e a imagem saiu borrada."
         }
       ]
     },
@@ -323,30 +351,37 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Evento de networking. Seu amigo esta te apresentando a um grupo interessante." },
-        { "tipo": "evento", "texto": "Ele resume todo mundo com brilho e, ao chegar em voce, solta apenas: 'E esse aqui ta sempre por perto.' O grupo ri." }
+        { "tipo": "contexto", "texto": "Evento de networking. Seu amigo te apresenta a um grupo." },
+        { "tipo": "evento", "texto": "Ele apresenta todos com brilho, mas de voce solta: 'Esse ta por perto.'" }
       ],
       "options": [
         {
-          "text": "Entro por cima: 'Por perto, sim. E conduzindo a operacao X hoje.'",
+          "text": "Entro por cima: 'Por perto, sim. Conduzindo a operacao X.'",
           "subtext": "Presenca/Autointroducao",
           "tone": "pragmatico",
-          "weights": { "presenca": 10, "vigor": 5, "harmonia": -5 },
-          "feedback": "Voce se reposicionou em um segundo. O grupo recebeu um nome, nao uma sombra."
+          "weights": { "presenca": 3, "vigor": 2, "harmonia": -2 },
+          "feedback": "Se reposicionou rapido. Virou nome, nao sombra."
         },
         {
-          "text": "Dou risada junto e deixo quieto. Quem quiser saber, pergunta depois.",
+          "text": "Rio junto e fico quieto. Quem quiser saber, pergunta.",
           "subtext": "Desapego/Apagamento social",
           "tone": "evasivo",
-          "weights": { "desapego": 10, "filtro": 5, "presenca": -10 },
-          "feedback": "Voce nao travou a energia, mas aceitou uma apresentacao pequena demais para quem voce e."
+          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
+          "feedback": "Nao travou a energia, mas aceitou apresentacao pequena."
         },
         {
-          "text": "Completo com leveza: 'E ultimamente eu tenho vivido no projeto X. Prazer.'",
+          "text": "Completo leve: 'Tenho vivido no projeto X. Prazer.'",
           "subtext": "Presenca/Entrada limpa",
           "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "vigor": -5 },
-          "feedback": "Voce entrou na conversa sem precisar humilhar ninguem. Presenca adulta."
+          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1 },
+          "feedback": "Entrou na conversa sem humilhar ninguem. Presenca adulta."
+        },
+        {
+          "text": "Encaro o amigo com ironia: 'Fala serio, conta direito.'",
+          "subtext": "Vigor/Cobranca publica",
+          "tone": "provocativo",
+          "weights": { "vigor": 3, "presenca": 1, "harmonia": -3 },
+          "feedback": "Cobrou o amigo na frente de todos. Tenso, mas notado."
         }
       ]
     },
@@ -361,30 +396,44 @@
         "pilar": "ego"
       },
       "slides": [
-        { "tipo": "contexto", "texto": "Painel aberto com plateia. Voce esta na primeira fila quando o mediador abre para perguntas." },
-        { "tipo": "evento", "texto": "Um participante critica em voz alta uma decisao sua do passado e o mediador te oferece o microfone na frente de todos." }
+        { "tipo": "contexto", "texto": "Painel aberto com plateia. Voce na primeira fila, mediador abre perguntas." },
+        { "tipo": "evento", "texto": "Alguem critica sua decisao. O mediador te oferece o microfone." }
       ],
       "options": [
         {
-          "text": "Pego o microfone e rebato ponto por ponto sem baixar o olhar.",
-          "subtext": "Presenca/Confronto",
+          "text": "Pego o mic e rebato ponto por ponto, sem baixar o olhar.",
+          "subtext": "Presenca/Confronto direto",
           "tone": "provocativo",
-          "weights": { "presenca": 10, "vigor": 10, "harmonia": -10 },
-          "feedback": "Voce ocupou o palco inteiro. A resposta veio afiada e impossivel de ignorar."
+          "weights": { "presenca": 3, "vigor": 2, "harmonia": -2 },
+          "feedback": "Ocupou o palco inteiro. Resposta afiada e impossivel de ignorar."
         },
         {
-          "text": "Recuso o microfone. Nao vou transformar isso em espetaculo.",
+          "text": "Pego o mic e respondo com uma unica linha precisa.",
+          "subtext": "Presenca/Confronto cirurgico",
+          "tone": "neutro",
+          "weights": { "presenca": 3, "filtro": 1, "vigor": -1 },
+          "feedback": "Poucas palavras, muito peso. Presenca sem guerra."
+        },
+        {
+          "text": "Recuso o microfone. Nao vou transformar isso em show.",
           "subtext": "Filtro/Retirada",
           "tone": "evasivo",
-          "weights": { "filtro": 10, "desapego": 5, "presenca": -10 },
-          "feedback": "Voce protegeu sua paz, mas deixou sua versao fora do palco."
+          "weights": { "filtro": 2, "desapego": 1, "presenca": -2 },
+          "feedback": "Protegeu sua paz, mas sua versao ficou fora do palco."
         },
         {
-          "text": "Pego o microfone e respondo em uma linha clara antes de encerrar no alto.",
-          "subtext": "Presenca/Autoridade",
-          "tone": "neutro",
-          "weights": { "presenca": 10, "harmonia": 5, "filtro": -5 },
-          "feedback": "Voce marcou sua presenca sem se perder na guerra. Poucas palavras, muito peso."
+          "text": "Pego o mic, agradeco a critica e amplio o debate.",
+          "subtext": "Presenca/Autoridade generosa",
+          "tone": "diplomatico",
+          "weights": { "presenca": 2, "harmonia": 2, "vigor": -1 },
+          "feedback": "Virou o jogo sem combate. Plateia ficou do seu lado."
+        },
+        {
+          "text": "Pego o mic mas me perco, fico defensivo e longo demais.",
+          "subtext": "Presenca/Reacao impulsiva",
+          "tone": "reativo",
+          "weights": { "vigor": 2, "presenca": -1, "filtro": -2 },
+          "feedback": "Quis se defender mas o nervoso tomou conta."
         }
       ]
     }
