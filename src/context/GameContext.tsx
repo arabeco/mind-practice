@@ -62,15 +62,19 @@ function applyDampenedWeights(
   cal: CalibrationState,
   weights: Partial<Record<StatKey, number>>,
   tone: Tone,
+  tensao: number = 2,
 ): CalibrationState {
   const divisor = Math.min(cal.totalResponses + 1, CALIBRATION_WINDOW);
+  const tensionMultiplier = 0.5 + (tensao * 0.5);
+  // tensao 1 → 1.0x, tensao 2 → 1.5x, tensao 3 → 2.0x, tensao 4 → 2.5x, tensao 5 → 3.0x
   const newAxes = { ...cal.axes };
   const newRecent = { ...cal.recentWeights };
 
   for (const key of STAT_KEYS) {
     const w = weights[key];
     if (w !== undefined) {
-      newAxes[key] = newAxes[key] + w / divisor;
+      const adjustedW = w * tensionMultiplier;
+      newAxes[key] = newAxes[key] + adjustedW / divisor;
 
       // Update recent weights window for consistency tracking
       const arr = [...(newRecent[key] || []), w];
@@ -181,10 +185,11 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'ANSWER': {
       const question = state.activeDeck?.questions[state.currentQuestion];
+      const tensao = question?.metadata?.tensao ?? 2;
 
       return {
         ...state,
-        calibration: applyDampenedWeights(state.calibration, action.weights, action.tone),
+        calibration: applyDampenedWeights(state.calibration, action.weights, action.tone, tensao),
         activeRun:
           state.activeRun && question
             ? appendRunAnswer(state.activeRun, question.id, action.tone, action.weights, action.responseTimeMs)
