@@ -3,7 +3,7 @@
   "name": "Holofote",
   "description": "Treino de Presenca. Cenas para ocupar espaco, sustentar olhar e nao sumir de si mesmo.",
   "tema": "Presenca",
-  "category": "arquetipo",
+  "category": "eixo",
   "focusAxis": "presenca",
   "tier": 3,
   "difficulty": 3,
@@ -54,82 +54,6 @@
       ]
     },
     {
-      "id": "h2",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 2,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Status",
-        "pilar": "ego"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Aniversario de amigo. Clima alto, galera de copo na mao." },
-        { "tipo": "evento", "texto": "Pedem que voce fale pra roda. Todos olham pra voce." }
-      ],
-      "options": [
-        {
-          "text": "Ergo o copo e puxo um mini discurso sem hesitar.",
-          "subtext": "Presenca/Palco",
-          "tone": "pragmatico",
-          "weights": { "presenca": 3, "vigor": 1, "filtro": -1 },
-          "feedback": "Entrou no centro como se fosse seu. Energia subiu."
-        },
-        {
-          "text": "Dou risada e passo a vez pra outro falar.",
-          "subtext": "Desapego/Recuo",
-          "tone": "evasivo",
-          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
-          "feedback": "Saiu do foco com leveza, mas a chance passou."
-        },
-        {
-          "text": "Olho pro aniversariante e mando uma frase curta e forte.",
-          "subtext": "Presenca/Precisao",
-          "tone": "neutro",
-          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
-          "feedback": "Ocupou o momento sem exagerar. Calmo e certeiro."
-        }
-      ]
-    },
-    {
-      "id": "h3",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 2,
-        "ambiente": "Publico",
-        "relacao": "Desconhecido",
-        "aposta": "Tempo",
-        "pilar": "propriedade"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Cafe lotado na hora do almoco. Atendente apressado, fila grande." },
-        { "tipo": "evento", "texto": "Ele entrega seu pedido pra outra pessoa e segue." }
-      ],
-      "options": [
-        {
-          "text": "Chamo firme: 'Esse pedido e meu. Corrige, por favor.'",
-          "subtext": "Presenca/Reivindicacao",
-          "tone": "pragmatico",
-          "weights": { "presenca": 2, "vigor": 1, "harmonia": -1 },
-          "feedback": "Apareceu no caos e foi reconhecido. Sem repetir."
-        },
-        {
-          "text": "Espero o erro se resolver sozinho. Sem criar cena.",
-          "subtext": "Filtro/Invisibilidade",
-          "tone": "evasivo",
-          "weights": { "filtro": 2, "harmonia": 1, "presenca": -2 },
-          "feedback": "Evitou atrito, mas ficou refem da atencao alheia."
-        },
-        {
-          "text": "Contato visual e tom baixo: 'Faltou o meu, e aquele.'",
-          "subtext": "Presenca/Calma",
-          "tone": "neutro",
-          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
-          "feedback": "Foi visto sem levantar o tom. Presenca nao e barulho."
-        }
-      ]
-    },
-    {
       "id": "h4",
       "type": "NORMAL",
       "metadata": {
@@ -171,44 +95,6 @@
           "tone": "calculado",
           "weights": { "filtro": 2, "presenca": 1, "vigor": -2 },
           "feedback": "Jogou nos bastidores. Funcional, mas sem brilho publico."
-        }
-      ]
-    },
-    {
-      "id": "h5",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 2,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Jantar com gente nova. Conversa boa, voce ainda medindo o terreno." },
-        { "tipo": "evento", "texto": "Te fazem uma pergunta e o grupo para esperando." }
-      ],
-      "options": [
-        {
-          "text": "Sustento o silencio e respondo olhando pra todos, sem pressa.",
-          "subtext": "Presenca/Tempo proprio",
-          "tone": "pragmatico",
-          "weights": { "presenca": 2, "filtro": 1, "harmonia": -1 },
-          "feedback": "Nao correu pro vazio. O grupo passou a te ouvir."
-        },
-        {
-          "text": "Rio, pego o celular e desvio com resposta curta.",
-          "subtext": "Desapego/Fuga",
-          "tone": "evasivo",
-          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
-          "feedback": "Escapou do foco, mas perdeu espaco na roda."
-        },
-        {
-          "text": "Respondo leve e devolvo a pergunta pro grupo.",
-          "subtext": "Presenca/Conducao",
-          "tone": "neutro",
-          "weights": { "harmonia": 3, "presenca": 1, "vigor": -1 },
-          "feedback": "Usou o foco pra puxar a mesa junto. Generoso."
         }
       ]
     },
@@ -258,46 +144,8 @@
       ]
     },
     {
-      "id": "h7",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 2,
-        "ambiente": "Publico",
-        "relacao": "Desconhecido",
-        "aposta": "Tempo",
-        "pilar": "propriedade"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Portao de embarque confuso. Fila misturada, atendente apressada." },
-        { "tipo": "evento", "texto": "Ela chama seu grupo mas te ignora quando voce tenta passar." }
-      ],
-      "options": [
-        {
-          "text": "'Meu grupo foi chamado. Pode confirmar, por favor?'",
-          "subtext": "Presenca/Passagem",
-          "tone": "pragmatico",
-          "weights": { "presenca": 2, "vigor": 1, "harmonia": -1 },
-          "feedback": "Ocupou o espaco certo na hora certa. Fluxo abriu."
-        },
-        {
-          "text": "Volto pro fim da fila e espero outra chamada.",
-          "subtext": "Harmonia/Recuo",
-          "tone": "evasivo",
-          "weights": { "harmonia": 1, "filtro": 2, "presenca": -2 },
-          "feedback": "Evitou tensao, mas pagou com atraso e apagamento."
-        },
-        {
-          "text": "Levanto o bilhete na linha do olhar dela e sorrio.",
-          "subtext": "Presenca/Leveza",
-          "tone": "neutro",
-          "weights": { "presenca": 2, "harmonia": 1, "vigor": -1 },
-          "feedback": "Foi visto sem brigar pelo foco. Elegante e funcional."
-        }
-      ]
-    },
-    {
       "id": "h8",
-      "type": "RANDOM",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -341,53 +189,8 @@
       ]
     },
     {
-      "id": "h9",
-      "type": "SOCIAL",
-      "metadata": {
-        "tensao": 3,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Status",
-        "pilar": "ego"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Evento de networking. Seu amigo te apresenta a um grupo." },
-        { "tipo": "evento", "texto": "Ele apresenta todos com brilho, mas de voce solta: 'Esse ta por perto.'" }
-      ],
-      "options": [
-        {
-          "text": "Entro por cima: 'Por perto, sim. Conduzindo a operacao X.'",
-          "subtext": "Presenca/Autointroducao",
-          "tone": "pragmatico",
-          "weights": { "presenca": 3, "vigor": 2, "harmonia": -2 },
-          "feedback": "Se reposicionou rapido. Virou nome, nao sombra."
-        },
-        {
-          "text": "Rio junto e fico quieto. Quem quiser saber, pergunta.",
-          "subtext": "Desapego/Apagamento social",
-          "tone": "evasivo",
-          "weights": { "desapego": 2, "filtro": 1, "presenca": -2 },
-          "feedback": "Nao travou a energia, mas aceitou apresentacao pequena."
-        },
-        {
-          "text": "Completo leve: 'Tenho vivido no projeto X. Prazer.'",
-          "subtext": "Presenca/Entrada limpa",
-          "tone": "neutro",
-          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1 },
-          "feedback": "Entrou na conversa sem humilhar ninguem. Presenca adulta."
-        },
-        {
-          "text": "Encaro o amigo com ironia: 'Fala serio, conta direito.'",
-          "subtext": "Vigor/Cobranca publica",
-          "tone": "provocativo",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -3 },
-          "feedback": "Cobrou o amigo na frente de todos. Tenso, mas notado."
-        }
-      ]
-    },
-    {
       "id": "h10",
-      "type": "TENSION",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",

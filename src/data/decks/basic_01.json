@@ -3,7 +3,7 @@
   "name": "O Despertar",
   "description": "Situacoes do dia a dia que testam seus reflexos sociais. Comece aqui.",
   "tema": "Misto",
-  "category": "essencial",
+  "category": "calibragem",
   "tier": 1,
   "difficulty": 2,
   "questions": [
@@ -468,7 +468,7 @@
     },
     {
       "id": "b8",
-      "type": "RANDOM",
+      "type": "NORMAL",
       "sceneHook": "Nao e so o segredo: e o fato de ter vindo dele.",
       "metadata": {
         "tensao": 3,
@@ -550,7 +550,7 @@
     },
     {
       "id": "b9",
-      "type": "SOCIAL",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -622,7 +622,7 @@
     },
     {
       "id": "b10",
-      "type": "TENSION",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",

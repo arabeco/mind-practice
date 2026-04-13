@@ -8,44 +8,6 @@
   "difficulty": 5,
   "questions": [
     {
-      "id": "s1",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 3,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Churrasco de amigo. Clima leve, musica boa, galera curtindo." },
-        { "tipo": "evento", "texto": "Aparece alguem que ja te causou problema. O anfitriao trava." }
-      ],
-      "options": [
-        {
-          "text": "Falo pro anfitriao: 'Ou ele sai, ou eu saio.'",
-          "subtext": "Vigor/Ultimato",
-          "tone": "provocativo",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Forcou a escolha. O clima pesou, mas nao fingiu."
-        },
-        {
-          "text": "Ignoro e sigo curtindo. Nao deixo estragar meu dia.",
-          "subtext": "Nonchalant/Desapego",
-          "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
-          "feedback": "Nao deu poder ao passado. A tensao ficou no ar."
-        },
-        {
-          "text": "Cumprimento de longe e mantenho distancia. Educado, porem frio.",
-          "subtext": "Harmonia/Diplomacia Fria",
-          "tone": "neutro",
-          "weights": { "harmonia": 2, "filtro": 2, "vigor": -1, "desapego": -1 },
-          "feedback": "Civilidade sem falsidade. O churrasco seguiu em paz."
-        }
-      ]
-    },
-    {
       "id": "s2",
       "type": "NORMAL",
       "metadata": {
@@ -136,44 +98,6 @@
       ]
     },
     {
-      "id": "s4",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 3,
-        "ambiente": "Privado",
-        "relacao": "Par",
-        "aposta": "Dinheiro",
-        "pilar": "propriedade"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Emprestou grana pra um amigo ha 3 meses. Prometeu devolver rapido." },
-        { "tipo": "evento", "texto": "Voce ve ele postando restaurante caro e roupa nova. Sua grana nada." }
-      ],
-      "options": [
-        {
-          "text": "'Vi que ta bem de grana. Quando devolve o meu?'",
-          "subtext": "Vigor/Cobranca Direta",
-          "tone": "provocativo",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Cobrou sem rodeio. Amizade treme, mas seu dinheiro importa."
-        },
-        {
-          "text": "Considero o dinheiro perdido e a amizade tambem.",
-          "subtext": "Nonchalant/Corte Limpo",
-          "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "harmonia": -2 },
-          "feedback": "Perdeu a grana mas ganhou uma licao cara."
-        },
-        {
-          "text": "Chamo pra um cafe: 'Sobre aquele valor, como resolve?'",
-          "subtext": "Harmonia/Negociacao Pessoal",
-          "tone": "neutro",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -1, "desapego": -2 },
-          "feedback": "Preservou a relacao e abriu espaco pra resolver."
-        }
-      ]
-    },
-    {
       "id": "s5",
       "type": "NORMAL",
       "metadata": {
@@ -226,129 +150,8 @@
       ]
     },
     {
-      "id": "s6",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "ego"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Casamento de amigo proximo. Cerimonia linda, todos emocionados." },
-        { "tipo": "evento", "texto": "Alguem pergunta alto: 'E verdade que voce terminou com fulano? O que rolou?'" }
-      ],
-      "options": [
-        {
-          "text": "'Nao e o lugar nem a hora pra isso. Com licenca.'",
-          "subtext": "Vigor/Corte",
-          "tone": "pragmatico",
-          "weights": { "vigor": 2, "filtro": 2, "harmonia": -1, "presenca": -1 },
-          "feedback": "Fechou a porta com firmeza. Constrangeu quem perguntou."
-        },
-        {
-          "text": "Sorrio e mudo de assunto: 'Que cerimonia linda, ne?'",
-          "subtext": "Nonchalant/Desvio",
-          "tone": "evasivo",
-          "weights": { "filtro": 2, "desapego": 2, "vigor": -1, "presenca": -1 },
-          "feedback": "Esquivou com elegancia. A pergunta morreu ali."
-        },
-        {
-          "text": "'Cada um seguiu seu caminho. Hoje o foco e nos noivos!'",
-          "subtext": "Harmonia/Redirecionamento",
-          "tone": "neutro",
-          "weights": { "harmonia": 2, "presenca": 2, "vigor": -1, "desapego": -2 },
-          "feedback": "Respondeu sem revelar e trouxe o foco de volta."
-        },
-        {
-          "text": "Encaro a pessoa e conto tudo sem filtro, em voz alta.",
-          "subtext": "Vigor/Exposicao Total",
-          "tone": "provocativo",
-          "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -1 },
-          "feedback": "Roubou a cena do casamento. Sincero, mas fora de hora."
-        }
-      ]
-    },
-    {
-      "id": "s7",
-      "type": "NORMAL",
-      "metadata": {
-        "tensao": 3,
-        "ambiente": "Digital",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Grupo da familia no WhatsApp. So bom dia e foto de comida normalmente." },
-        { "tipo": "evento", "texto": "Tio manda fake news sobre saude. Sua mae parece acreditar." }
-      ],
-      "options": [
-        {
-          "text": "Mando o link desmentindo: 'Tio, isso e falso. Para.'",
-          "subtext": "Vigor/Correcao Publica",
-          "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Corrigiu a mentira. Tio bravo, mas verdade la."
-        },
-        {
-          "text": "Silencio o grupo. Nao adianta discutir com tio.",
-          "subtext": "Nonchalant/Silencio",
-          "tone": "evasivo",
-          "weights": { "desapego": 2, "filtro": 2, "vigor": -1, "harmonia": -1 },
-          "feedback": "Preservou sanidade. Mas a fake news continua rodando."
-        },
-        {
-          "text": "Mando no privado pra mae o link correto, com calma.",
-          "subtext": "Harmonia/Protecao Seletiva",
-          "tone": "protetor",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -1, "desapego": -2 },
-          "feedback": "Protegeu quem importa sem guerra familiar."
-        }
-      ]
-    },
-    {
-      "id": "s8",
-      "type": "RANDOM",
-      "metadata": {
-        "tensao": 3,
-        "ambiente": "Privado",
-        "relacao": "Desconhecido",
-        "aposta": "Dinheiro",
-        "pilar": "propriedade"
-      },
-      "slides": [
-        { "tipo": "contexto", "texto": "Ligacao de numero desconhecido. A voz do outro lado parece desesperada." },
-        { "tipo": "evento", "texto": "Finge ser familiar chorando e pede pix: 'Fui assaltado, agora!'" }
-      ],
-      "options": [
-        {
-          "text": "'Sei que e golpe! Vou ligar pra policia!' Desligo.",
-          "subtext": "Vigor/Reacao Explosiva",
-          "tone": "provocativo",
-          "weights": { "vigor": 2, "presenca": 1, "filtro": -1, "harmonia": -1 },
-          "feedback": "Reagiu com raiva ao golpe. Nao caiu, mas gastou energia."
-        },
-        {
-          "text": "Desligo sem falar nada e bloqueio o numero.",
-          "subtext": "Nonchalant/Corte Frio",
-          "tone": "pragmatico",
-          "weights": { "filtro": 3, "desapego": 1, "vigor": -1, "presenca": -2 },
-          "feedback": "Zero emocao desperdicada. Identificou e eliminou."
-        },
-        {
-          "text": "'Qual seu nome?' pra confirmar golpe, depois aviso familia.",
-          "subtext": "Harmonia/Verificacao",
-          "tone": "protetor",
-          "weights": { "presenca": 2, "harmonia": 2, "vigor": -1, "desapego": -2 },
-          "feedback": "Verificou sem se expor e protegeu os seus."
-        }
-      ]
-    },
-    {
       "id": "s9",
-      "type": "SOCIAL",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -393,7 +196,7 @@
     },
     {
       "id": "s10",
-      "type": "TENSION",
+      "type": "NORMAL",
       "metadata": {
         "tensao": 5,
         "ambiente": "Privado",
