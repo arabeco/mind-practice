@@ -13,9 +13,10 @@ import { getWeeklyDiscountDeckId, getDiscountTimeRemaining } from '@/lib/weeklyD
 type TabId = DeckCategory | 'loja';
 
 const TABS: { id: TabId; label: string }[] = [
-  { id: 'essencial', label: 'Essenciais' },
-  { id: 'arquetipo', label: 'Arquetipos' },
+  { id: 'calibragem', label: 'Calibragem' },
+  { id: 'eixo', label: 'Eixos' },
   { id: 'cenario', label: 'Cenarios' },
+  { id: 'campanha', label: 'Campanhas' },
   { id: 'loja', label: 'Loja' },
 ];
 
@@ -29,7 +30,7 @@ const DECK_PRICES: Record<string, number> = {
 };
 
 export default function DecksPage() {
-  const [activeTab, setActiveTab] = useState<TabId>('essencial');
+  const [activeTab, setActiveTab] = useState<TabId>('calibragem');
   const [selectedDeck, setSelectedDeck] = useState<Deck | null>(null);
   const router = useRouter();
   const { state, dispatch, isDeckLocked, spendFichas } = useGame();

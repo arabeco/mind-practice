@@ -31,7 +31,7 @@ export const DECK_UNLOCK_ORDER = [
 ];
 
 /**
- * Weekly free rotation: returns 2 deck IDs (1 arquetipo + 1 cenario)
+ * Weekly free rotation: returns 2 deck IDs (1 eixo + 1 cenario)
  * that are free this week. Deterministic based on week number.
  */
 export function getWeeklyFreeDeckIds(): string[] {
@@ -41,14 +41,14 @@ export function getWeeklyFreeDeckIds(): string[] {
     (now.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000),
   );
 
-  const arquetipoDecks = ALL_DECKS.filter(d => d.category === 'arquetipo');
+  const eixoDecks = ALL_DECKS.filter(d => d.category === 'eixo');
   const cenarioDecks = ALL_DECKS.filter(
     d => d.category === 'cenario' && d.deckId !== 'basic_01' && d.tier < 5,
   );
 
   const freeDeckIds: string[] = [];
-  if (arquetipoDecks.length > 0) {
-    freeDeckIds.push(arquetipoDecks[weekNumber % arquetipoDecks.length].deckId);
+  if (eixoDecks.length > 0) {
+    freeDeckIds.push(eixoDecks[weekNumber % eixoDecks.length].deckId);
   }
   if (cenarioDecks.length > 0) {
     freeDeckIds.push(cenarioDecks[weekNumber % cenarioDecks.length].deckId);

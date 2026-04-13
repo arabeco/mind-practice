@@ -121,9 +121,9 @@ function buildFallbackArt(deck: Deck): DeckArtSpec {
     };
   }
 
-  if (deck.category === 'arquetipo') {
+  if (deck.category === 'eixo') {
     return {
-      kicker: 'Arquetipo',
+      kicker: 'Eixo',
       caption: deck.tema,
       align: 'center',
       pattern: 'reticle',
