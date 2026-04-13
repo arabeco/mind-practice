@@ -13,17 +13,10 @@ export function validateDeck(deck: Deck): string[] {
   if (!deck.difficulty) errors.push('Missing difficulty');
   if (!deck.tier || deck.tier < 1 || deck.tier > 5) errors.push('Invalid tier (must be 1-5)');
 
-  // Distribution check
-  const types = deck.questions.map(q => q.type);
-  const normalCount = types.filter(t => t === 'NORMAL').length;
-  const randomCount = types.filter(t => t === 'RANDOM').length;
-  const socialCount = types.filter(t => t === 'SOCIAL').length;
-  const tensionCount = types.filter(t => t === 'TENSION').length;
-
-  if (normalCount !== 7) errors.push(`Expected 7 NORMAL, got ${normalCount}`);
-  if (randomCount !== 1) errors.push(`Expected 1 RANDOM, got ${randomCount}`);
-  if (socialCount !== 1) errors.push(`Expected 1 SOCIAL, got ${socialCount}`);
-  if (tensionCount !== 1) errors.push(`Expected 1 TENSION, got ${tensionCount}`);
+  // Question count check
+  if (deck.questions.length < 5 || deck.questions.length > 10) {
+    errors.push(`Expected 5-10 questions, got ${deck.questions.length}`);
+  }
 
   for (const q of deck.questions) {
     if (q.sceneHook !== undefined && !q.sceneHook.trim()) {

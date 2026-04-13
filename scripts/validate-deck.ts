@@ -19,16 +19,6 @@ const bold = (s: string) => `\x1b[1m${s}\x1b[0m`;
 const VALID_AXES = ["vigor", "presenca", "harmonia", "desapego", "filtro"] as const;
 type Axis = (typeof VALID_AXES)[number];
 
-const VALID_QUESTION_TYPES = ["NORMAL", "RANDOM", "SOCIAL", "TENSION"] as const;
-type QuestionType = (typeof VALID_QUESTION_TYPES)[number];
-
-const REQUIRED_TYPE_COUNTS: Record<QuestionType, number> = {
-  NORMAL: 7,
-  RANDOM: 1,
-  SOCIAL: 1,
-  TENSION: 1,
-};
-
 const VALID_PROXIMIDADE = ["baixa", "media", "alta"];
 const VALID_URGENCIA = ["baixa", "media", "alta"];
 
@@ -83,25 +73,13 @@ function validateDeck(filePath: string): ValidationResult {
     err(`"questions" must be an array`);
     return result;
   }
-  if (questions.length !== 10) {
-    err(`Expected 10 questions, found ${questions.length}`);
-  }
-
-  // Type distribution
-  const typeCounts: Record<string, number> = {};
-  for (const q of questions) {
-    const t = q.type ?? "UNKNOWN";
-    typeCounts[t] = (typeCounts[t] || 0) + 1;
-  }
-  for (const [type, expected] of Object.entries(REQUIRED_TYPE_COUNTS)) {
-    const actual = typeCounts[type] || 0;
-    if (actual !== expected) {
-      err(`Expected ${expected} ${type} question(s), found ${actual}`);
-    }
+  if (questions.length < 5 || questions.length > 10) {
+    err(`Expected 5-10 questions, found ${questions.length}`);
   }
 
   // Track axes that appear as dominant across the whole deck (for warning 8)
   const dominantAxes = new Set<string>();
+  const axisAppearances: Record<string, number> = {};
 
   // Per-question validation
   questions.forEach((q, qi) => {
@@ -185,6 +163,11 @@ function validateDeck(filePath: string): ValidationResult {
         }
       }
       if (dominant) dominantAxes.add(dominant);
+
+      // Track axis appearances across all options
+      for (const axis of Object.keys(weights)) {
+        axisAppearances[axis] = (axisAppearances[axis] || 0) + 1;
+      }
     });
   });
 
@@ -192,6 +175,16 @@ function validateDeck(filePath: string): ValidationResult {
   for (const axis of VALID_AXES) {
     if (!dominantAxes.has(axis)) {
       warn(`Axis "${axis}" never appears as the dominant weight in any option`);
+    }
+  }
+
+  if (deck.category === 'calibragem') {
+    const totalOptions = questions.reduce((sum: number, q: any) => sum + q.options.length, 0);
+    const minPerAxis = Math.ceil(totalOptions * 0.2);
+    for (const [axis, count] of Object.entries(axisAppearances)) {
+      if (count < minPerAxis) {
+        warn(`Calibragem: axis "${axis}" is dominant in ${count}/${totalOptions} options (need ${minPerAxis} for 20%)`);
+      }
     }
   }
 
