@@ -228,7 +228,7 @@
           "text": "Pego o mic, agradeco a critica e amplio o debate.",
           "subtext": "Presenca/Autoridade generosa",
           "tone": "diplomatico",
-          "weights": { "presenca": 2, "harmonia": 2, "vigor": -1 },
+          "weights": { "presenca": 1, "harmonia": 3, "vigor": -1 },
           "feedback": "Virou o jogo sem combate. Plateia ficou do seu lado."
         },
         {
