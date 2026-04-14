@@ -94,6 +94,18 @@ export default function DeckTarotCard({
         {/* Background */}
         <div className="absolute inset-0" style={{ background: art.palette.background }} />
 
+        {/* Cover image */}
+        {art.imageSrc && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${art.imageSrc})`,
+              opacity: locked ? 0.3 : 0.45,
+              mixBlendMode: 'luminosity',
+            }}
+          />
+        )}
+
         {/* SVG ornament layer — tier-based */}
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 180 240" fill="none" xmlns="http://www.w3.org/2000/svg">
           {/* Corner ornaments — all tiers */}
@@ -193,14 +205,16 @@ export default function DeckTarotCard({
           </div>
         )}
 
-        {/* Center: deck icon area */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <p className="text-4xl font-black tracking-tight text-white/10">
-              {deck.name.charAt(0)}
-            </p>
+        {/* Center: deck icon area (fallback when no cover image) */}
+        {!art.imageSrc && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <p className="text-4xl font-black tracking-tight text-white/10">
+                {deck.name.charAt(0)}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Bottom: name + info */}
         <div className="absolute inset-x-0 bottom-0 z-10 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.7)_40%)] px-3.5 pb-3.5 pt-12">

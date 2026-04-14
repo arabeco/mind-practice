@@ -71,6 +71,7 @@ export interface Deck {
   focusAxis?: StatKey;
   tier: 1 | 2 | 3 | 4 | 5;
   difficulty: 1 | 2 | 3 | 4 | 5;
+  coverImage?: string;
   questions: Question[];
 }
 
