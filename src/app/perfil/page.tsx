@@ -112,91 +112,93 @@ export default function PerfilPage() {
       <div className="screen-lights" />
 
       {/* ================================================================ */}
-      {/* Top: Big centered avatar card + identity                         */}
+      {/* Top: Centered avatar + corner action icons                       */}
       {/* ================================================================ */}
-      <motion.section variants={fadeUp} className="flex flex-col items-center">
-        {/* Avatar card — 9:16, centered, tappable */}
-        <button
-          type="button"
-          onClick={() => setAvatarModalOpen(true)}
-          className="group relative overflow-hidden rounded-2xl border-2 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all hover:border-white/35 hover:shadow-[0_8px_40px_rgba(192,192,192,0.12)]"
-          style={{ background: visual.background, width: '100px', aspectRatio: '9 / 16' }}
-        >
-          {!imageFailed && (
-            <img
-              src={imageSrc}
-              alt={`${archetype.name} ${variant}`}
-              className="h-full w-full object-cover transition-transform group-hover:scale-[1.03]"
-              onError={() => {
-                if (imageIndex < imageCandidates.length - 1) {
-                  setImageIndex((prev) => prev + 1);
-                  return;
-                }
-                setImageFailed(true);
-              }}
-            />
-          )}
-          {imageFailed && (
-            <div className="flex h-full w-full items-center justify-center">
-              <span className="text-3xl font-black text-white/15">{archetype.name.charAt(0)}</span>
-            </div>
-          )}
-          {/* Bottom gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.7))]" />
-          {/* Tap hint */}
-          <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-opacity group-hover:bg-black/20 group-hover:opacity-100">
-            <svg className="h-5 w-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-            </svg>
-          </div>
-        </button>
-
-        {/* Identity below card */}
-        <div className="mt-2 text-center">
-          <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
-          <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
-          <div className="mt-0.5 flex items-center justify-center gap-1.5">
-            {!editingNickname ? (
-              <>
-                <p className="text-xs text-white/50">{nickname}</p>
-                {isIdentityValidated && (
-                  <span className="rounded-full border border-accent-gold/25 bg-accent-gold/12 px-1.5 py-px text-[7px] font-semibold uppercase tracking-[0.16em] text-accent-gold">
-                    Confirmado
-                  </span>
-                )}
-              </>
-            ) : (
-              <div className="flex items-center gap-1.5">
-                <input
-                  type="text"
-                  value={nicknameInput}
-                  onChange={(e) => setNicknameInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSaveNickname()}
-                  maxLength={24}
-                  autoFocus
-                  className="w-28 rounded-md bg-white/10 px-2 py-1 text-xs text-white/90 outline-none ring-1 ring-white/15 placeholder:text-white/28 focus:ring-white/30"
-                  placeholder="Nickname"
-                />
-                <button type="button" onClick={handleSaveNickname} className="text-[10px] font-bold text-accent-purple">OK</button>
-                <button type="button" onClick={() => setEditingNickname(false)} className="text-[10px] text-white/40">X</button>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Action buttons row */}
-        <div className="mt-1.5 flex items-center gap-2">
+      <motion.section variants={fadeUp} className="relative">
+        {/* Action icons — top right corner */}
+        <div className="absolute right-0 top-0 z-10 flex flex-col gap-1.5">
           <ShareButton archetype={archetype} axes={calibration.axes} nickname={nickname} compact />
-          <button type="button" onClick={handleStartEdit} className="flex h-7 w-7 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Editar nickname">
-            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <button type="button" onClick={handleStartEdit} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Editar nickname">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           </button>
-          <button type="button" onClick={toggleVariant} className="flex h-7 w-7 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Trocar variante">
-            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <button type="button" onClick={toggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Trocar variante">
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
           </button>
+        </div>
+
+        {/* Centered avatar card */}
+        <div className="flex flex-col items-center">
+          <button
+            type="button"
+            onClick={() => setAvatarModalOpen(true)}
+            className="group relative overflow-hidden rounded-2xl border-2 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all hover:border-white/35 hover:shadow-[0_8px_40px_rgba(192,192,192,0.12)]"
+            style={{ background: visual.background, width: '130px', aspectRatio: '9 / 16' }}
+          >
+            {!imageFailed && (
+              <img
+                src={imageSrc}
+                alt={`${archetype.name} ${variant}`}
+                className="h-full w-full object-cover transition-transform group-hover:scale-[1.03]"
+                onError={() => {
+                  if (imageIndex < imageCandidates.length - 1) {
+                    setImageIndex((prev) => prev + 1);
+                    return;
+                  }
+                  setImageFailed(true);
+                }}
+              />
+            )}
+            {imageFailed && (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-3xl font-black text-white/15">{archetype.name.charAt(0)}</span>
+              </div>
+            )}
+            {/* Bottom gradient */}
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.7))]" />
+            {/* Tap hint */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-opacity group-hover:bg-black/20 group-hover:opacity-100">
+              <svg className="h-5 w-5 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+              </svg>
+            </div>
+          </button>
+
+          {/* Identity below card */}
+          <div className="mt-2 text-center">
+            <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
+            <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
+            <div className="mt-0.5 flex items-center justify-center gap-1.5">
+              {!editingNickname ? (
+                <>
+                  <p className="text-xs text-white/50">{nickname}</p>
+                  {isIdentityValidated && (
+                    <span className="rounded-full border border-accent-gold/25 bg-accent-gold/12 px-1.5 py-px text-[7px] font-semibold uppercase tracking-[0.16em] text-accent-gold">
+                      Confirmado
+                    </span>
+                  )}
+                </>
+              ) : (
+                <div className="flex items-center gap-1.5">
+                  <input
+                    type="text"
+                    value={nicknameInput}
+                    onChange={(e) => setNicknameInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSaveNickname()}
+                    maxLength={24}
+                    autoFocus
+                    className="w-28 rounded-md bg-white/10 px-2 py-1 text-xs text-white/90 outline-none ring-1 ring-white/15 placeholder:text-white/28 focus:ring-white/30"
+                    placeholder="Nickname"
+                  />
+                  <button type="button" onClick={handleSaveNickname} className="text-[10px] font-bold text-accent-purple">OK</button>
+                  <button type="button" onClick={() => setEditingNickname(false)} className="text-[10px] text-white/40">X</button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </motion.section>
 
