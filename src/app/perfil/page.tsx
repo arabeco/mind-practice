@@ -192,8 +192,8 @@ export default function PerfilPage() {
                     className="w-28 rounded-md bg-white/10 px-2 py-1 text-xs text-white/90 outline-none ring-1 ring-white/15 placeholder:text-white/28 focus:ring-white/30"
                     placeholder="Nickname"
                   />
-                  <button type="button" onClick={handleSaveNickname} className="text-[10px] font-bold text-accent-purple">OK</button>
-                  <button type="button" onClick={() => setEditingNickname(false)} className="text-[10px] text-white/40">X</button>
+                  <button type="button" onClick={handleSaveNickname} className="rounded-full border border-accent-purple/40 bg-accent-purple/15 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-accent-purple hover:bg-accent-purple/25">OK</button>
+                  <button type="button" onClick={() => setEditingNickname(false)} className="rounded-full border border-white/20 bg-white/8 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/70 hover:bg-white/15 hover:text-white/95">Sair</button>
                 </div>
               )}
             </div>
@@ -406,22 +406,24 @@ export default function PerfilPage() {
               <button
                 type="button"
                 onClick={toggleVariant}
-                className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white/60 backdrop-blur-sm transition-colors hover:text-white/90"
+                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/70 backdrop-blur-sm transition-colors hover:text-white/95"
+                title="Trocar variante"
               >
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </button>
 
-              {/* Close button */}
+              {/* Close / Sair button — prominent */}
               <button
                 type="button"
                 onClick={() => setAvatarModalOpen(false)}
-                className="absolute left-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white/60 backdrop-blur-sm transition-colors hover:text-white/90"
+                className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/60 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm transition-colors hover:border-white/40 hover:bg-black/75 hover:text-white"
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
+                Sair
               </button>
             </motion.div>
           </motion.div>
