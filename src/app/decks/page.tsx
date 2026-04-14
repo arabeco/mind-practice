@@ -22,6 +22,12 @@ const TABS: { id: TabId; label: string }[] = [
 
 const DECK_PRICES: Record<string, number> = {
   basic_01: 0,
+  espelho: 0,
+  mascara: 0,
+  roda: 0,
+  teste: 0,
+  limite: 0,
+  escolha: 0,
   holofote: 10,
   alta_tensao: 15,
   profissional: 25,

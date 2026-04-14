@@ -4,6 +4,12 @@ import holofote from './holofote.json';
 import livroAmaldicoado from './livro_amaldicoado.json';
 import profissional from './profissional.json';
 import social from './social.json';
+import espelho from './espelho.json';
+import mascara from './mascara.json';
+import roda from './roda.json';
+import teste from './teste.json';
+import limite from './limite.json';
+import escolha from './escolha.json';
 import type { Deck, DeckCategory } from '@/types/game';
 
 export const ALL_DECKS: Deck[] = [
@@ -13,6 +19,12 @@ export const ALL_DECKS: Deck[] = [
   profissional as unknown as Deck,
   social as unknown as Deck,
   livroAmaldicoado as unknown as Deck,
+  espelho as unknown as Deck,
+  mascara as unknown as Deck,
+  roda as unknown as Deck,
+  teste as unknown as Deck,
+  limite as unknown as Deck,
+  escolha as unknown as Deck,
 ];
 
 export const getDeckById = (id: string): Deck | undefined =>
@@ -23,6 +35,12 @@ export const getDecksByCategory = (cat: DeckCategory): Deck[] =>
 
 export const DECK_UNLOCK_ORDER = [
   'basic_01',
+  'espelho',
+  'mascara',
+  'roda',
+  'teste',
+  'limite',
+  'escolha',
   'holofote',
   'alta_tensao',
   'profissional',

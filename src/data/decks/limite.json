@@ -1,0 +1,781 @@
+{
+  "deckId": "limite",
+  "name": "O Limite",
+  "description": "Hora de descobrir ate onde voce vai antes de reagir.",
+  "tema": "Confrontos",
+  "category": "calibragem",
+  "tier": 1,
+  "difficulty": 3,
+  "questions": [
+    {
+      "id": "l1",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Meia-noite de quarta. Amanha tem reuniao cedo e voce precisa dormir."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Vizinho de cima liga som no maximo pela terceira vez na semana."
+        }
+      ],
+      "options": [
+        {
+          "text": "Subo e bato na porta com postura firme, sem gritar.",
+          "subtext": "Presenca/Imposicao fisica",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Apareceu de corpo presente. Impoe sem explodir."
+        },
+        {
+          "text": "Coloco tampao e lido amanha com calma.",
+          "subtext": "Desapego/Deixar passar",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Preservou o sono. Mas e da proxima vez?"
+        },
+        {
+          "text": "Mando mensagem educada pedindo pra baixar o volume.",
+          "subtext": "Harmonia/Diplomacia",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "desapego": -2,
+            "vigor": -1
+          },
+          "feedback": "Tentou resolver sem conflito. Civilizado."
+        },
+        {
+          "text": "Anoto tudo com hora e data pro sindico resolver.",
+          "subtext": "Filtro/Estrategia fria",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Jogou no sistema. Paciencia calculada."
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 5,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Almoco de domingo na casa da sua mae. Clima leve ate agora."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Convidado do seu tio faz comentario pesado desrespeitando sua mae."
+        }
+      ],
+      "options": [
+        {
+          "text": "Levanto e encaro: 'Repete isso na minha frente.'",
+          "subtext": "Vigor/Explosao protetora",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 2,
+            "harmonia": -3,
+            "filtro": -2
+          },
+          "feedback": "Protegeu quem ama. O almoco acabou ali."
+        },
+        {
+          "text": "Olho pro meu tio e digo: 'Controla teu convidado.'",
+          "subtext": "Presenca/Pressao indireta",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "filtro": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Cobrou de quem trouxe. Inteligente e firme."
+        },
+        {
+          "text": "Vou ate minha mae e digo baixo: 'Vamos sair daqui.'",
+          "subtext": "Harmonia/Protecao silenciosa",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Tirou ela da situacao. Cuidou sem explodir."
+        },
+        {
+          "text": "Falo firme: 'Na casa da minha mae ninguem fala assim.'",
+          "subtext": "Vigor/Limite territorial",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Marcou territorio. Tom pesado mas justo."
+        },
+        {
+          "text": "Ignoro o cara e mudo de assunto pra proteger o clima.",
+          "subtext": "Desapego/Evitar escalada",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Salvou o almoco. Mas sua mae viu voce calar."
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Apresentacao de resultados do trimestre. Equipe inteira assistindo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Colega apresenta seu trabalho como dele na frente do diretor."
+        }
+      ],
+      "options": [
+        {
+          "text": "Interrompo: 'Esse projeto e meu. Posso continuar?'",
+          "subtext": "Vigor/Reivindicacao publica",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -2
+          },
+          "feedback": "Tomou de volta na hora. Clima pesou."
+        },
+        {
+          "text": "Anoto tudo e marco reuniao com o diretor depois.",
+          "subtext": "Filtro/Jogo longo",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Guardou a carta. Estrategia antes de emocao."
+        },
+        {
+          "text": "Complemento a apresentacao mostrando que domino o assunto.",
+          "subtext": "Presenca/Autoridade sutil",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "vigor": -1
+          },
+          "feedback": "Mostrou competencia sem acusar. Elegante."
+        },
+        {
+          "text": "Deixo passar. O trabalho fala por si eventualmente.",
+          "subtext": "Desapego/Confianca no tempo",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Soltou o ego. Mas credito perdido volta?"
+        },
+        {
+          "text": "Mando mensagem pro colega: 'Precisamos conversar.'",
+          "subtext": "Harmonia/Confronto privado",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Resolveu nos bastidores. Maduro mas lento."
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Bar lotado num sabado. Voce ta com amigos relaxando."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Cara bebado esbarra em voce de proposito e te provoca."
+        }
+      ],
+      "options": [
+        {
+          "text": "Encaro de frente: 'Faz isso de novo pra ver.'",
+          "subtext": "Vigor/Escalada",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "harmonia": -2
+          },
+          "feedback": "Comprou a briga. Adrenalina no comando."
+        },
+        {
+          "text": "Falo calmo: 'Relaxa, brother, ta tudo bem' e oferto cerveja.",
+          "subtext": "Harmonia/Ponte inesperada",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 3,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Desarmou com gentileza. Ousado de outro jeito."
+        },
+        {
+          "text": "Olho firme sem falar nada. Espero ele recuar.",
+          "subtext": "Presenca/Pressao silenciosa",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "filtro": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Silencio que pesa. Deixou ele sem reacao."
+        },
+        {
+          "text": "Chamo o seguranca e aponto o cara.",
+          "subtext": "Filtro/Delegacao",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Usou o sistema. Nao precisou sujar as maos."
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Farmacia cheia, voce esperando ha vinte minutos com febre."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Senhor passa na sua frente como se a fila nao existisse."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Senhor, a fila ta aqui atras. Todos esperando.'",
+          "subtext": "Vigor/Confronto educado",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Falou por todos. Direto sem ser grosso."
+        },
+        {
+          "text": "Deixo passar. Nao vale a energia doente assim.",
+          "subtext": "Desapego/Economia de energia",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Priorizou a saude. Mas engoliu a injustica."
+        },
+        {
+          "text": "Falo pro atendente: 'Tem fila, ne? So confirmando.'",
+          "subtext": "Filtro/Pressao indireta",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Terceirizou o confronto. Esperto e limpo."
+        },
+        {
+          "text": "Toco no ombro dele e aponto a fila sem falar nada.",
+          "subtext": "Presenca/Gesto firme",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "filtro": -1,
+            "desapego": -2
+          },
+          "feedback": "Comunicou sem palavras. Presente e calmo."
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Autoridade",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Entrada de evento. Fila organizada, voce com ingresso na mao."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seguranca te barra sem motivo e fala grosso na frente de todos."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Me mostra a regra que me impede de entrar.'",
+          "subtext": "Vigor/Exigencia de razao",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 2,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Cobrou justificativa. Firme sem perder a linha."
+        },
+        {
+          "text": "Gravo tudo no celular e peco nome e identificacao.",
+          "subtext": "Filtro/Documentacao",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Virou o jogo com evidencia. Frio e eficaz."
+        },
+        {
+          "text": "Peco pra falar com o supervisor dele, sem levantar a voz.",
+          "subtext": "Harmonia/Canal adequado",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Subiu a cadeia sem criar cena. Estrategico."
+        },
+        {
+          "text": "Viro as costas e vou embora. Nao preciso disso.",
+          "subtext": "Desapego/Retirada digna",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -2
+          },
+          "feedback": "Saiu inteiro. Mas aceitou a injustica?"
+        }
+      ]
+    },
+    {
+      "id": "l7",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sala de aula cheia. Professor devolvendo trabalhos corrigidos."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Professor usa seu trabalho como exemplo ruim e ri na frente da turma."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Professor, pode apontar o erro sem me expor?'",
+          "subtext": "Harmonia/Limite respeitoso",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 2,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Pediu respeito sem desafiar. Corajoso e maduro."
+        },
+        {
+          "text": "Levanto e saio da sala sem dizer nada.",
+          "subtext": "Vigor/Protesto silencioso",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "desapego": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "A saida disse tudo. Mas queimou ponte."
+        },
+        {
+          "text": "Anoto o que ele disse e vou na coordenacao depois.",
+          "subtext": "Filtro/Resposta institucional",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Guardou pra jogar certo. Paciencia afiada."
+        },
+        {
+          "text": "Engulo e foco no conteudo. Nao vou dar moral.",
+          "subtext": "Desapego/Foco no objetivo",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Priorizou o diploma. Mas doeu calado."
+        },
+        {
+          "text": "'Se quiser debater o conteudo, debato agora.'",
+          "subtext": "Presenca/Desafio intelectual",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "harmonia": -2,
+            "filtro": -2
+          },
+          "feedback": "Jogou no campo dele. Ousado e arriscado."
+        }
+      ]
+    },
+    {
+      "id": "l8",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Shopping no fim de semana. Voce so quer comprar um tenis rapido."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Vendedor te agarra pelo braco e insiste que voce entre na loja."
+        }
+      ],
+      "options": [
+        {
+          "text": "Solto o braco, dou as costas e sigo sem uma palavra.",
+          "subtext": "Desapego/Desprezo total",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "harmonia": -1
+          },
+          "feedback": "Sumiu sem dar satisfacao. Indiferenca cortante."
+        },
+        {
+          "text": "Desvio rapido e calculo se vale voltar ou nao.",
+          "subtext": "Filtro/Calculo instantaneo",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -1,
+            "presenca": -2
+          },
+          "feedback": "Processou rapido e decidiu. Eficiencia pura."
+        },
+        {
+          "text": "'Nao obrigado, se eu quiser eu volto.' E sigo.",
+          "subtext": "Harmonia/Recusa educada",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Fechou a porta sem bater. Leve e firme."
+        },
+        {
+          "text": "Paro, olho serio e digo: 'Larga o meu braco.'",
+          "subtext": "Presenca/Comando calmo",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 2,
+            "vigor": 1,
+            "harmonia": -1,
+            "desapego": -2
+          },
+          "feedback": "Peso na voz sem gritar. Autoridade natural."
+        }
+      ]
+    },
+    {
+      "id": "l9",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 5,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Praca publica, domingo de tarde. Voce com sua crianca no parquinho."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Adulto empurra sua crianca pra tirar do brinquedo pro filho dele."
+        }
+      ],
+      "options": [
+        {
+          "text": "Vou em cima: 'Encosta no meu filho de novo.'",
+          "subtext": "Vigor/Protecao bruta",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 2,
+            "filtro": -3,
+            "harmonia": -2
+          },
+          "feedback": "Instinto de protecao puro. Pode virar briga."
+        },
+        {
+          "text": "Pego minha crianca, acalmo e confronto o adulto depois.",
+          "subtext": "Harmonia/Prioridade na crianca",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Cuidou primeiro, resolveu depois. Ordem certa."
+        },
+        {
+          "text": "Falo alto pra todos ouvirem: 'Adulto empurrando crianca?'",
+          "subtext": "Presenca/Pressao social",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "filtro": -2,
+            "desapego": -2
+          },
+          "feedback": "Usou a plateia como arma. Eficaz e publico."
+        },
+        {
+          "text": "Tiro minha crianca dali e ligo pra policia.",
+          "subtext": "Filtro/Canal oficial",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Protegeu e formalizou. Frio mas seguro."
+        },
+        {
+          "text": "Levo embora sem falar nada. Nao vale a cena.",
+          "subtext": "Desapego/Evitar conflito",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Saiu da zona de perigo. Mas o outro aprendeu?"
+        }
+      ]
+    },
+    {
+      "id": "l10",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Rua escura voltando pra casa. Pouca gente por perto."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Grupo de tres caras te cerca e comeca a provocar rindo."
+        }
+      ],
+      "options": [
+        {
+          "text": "Encaro o que parece lider: 'Qual e a graca?'",
+          "subtext": "Vigor/Confronto arriscado",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "harmonia": -2
+          },
+          "feedback": "Nao abaixou. Mas tres contra um e conta feia."
+        },
+        {
+          "text": "Mudo de calcada e acelero o passo sem correr.",
+          "subtext": "Filtro/Desescalada tatica",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -1,
+            "presenca": -2
+          },
+          "feedback": "Leu o perigo e saiu. Sobrevivencia inteligente."
+        },
+        {
+          "text": "Saco o celular e finjo ligacao alta: 'To chegando ja.'",
+          "subtext": "Harmonia/Blefe social",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Criou ilusao de companhia. Criativo e seguro."
+        },
+        {
+          "text": "Paro, olho cada um com calma e espero eles falarem.",
+          "subtext": "Presenca/Sangue frio",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "harmonia": -2,
+            "desapego": -2
+          },
+          "feedback": "Frieza intimidou. Mas era blefe ou coragem?"
+        },
+        {
+          "text": "Falo de boa: 'Tranquilo, rapazes? Boa noite.' E sigo.",
+          "subtext": "Desapego/Naturalidade",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "presenca": -1,
+            "vigor": -2
+          },
+          "feedback": "Tratou como nada. Desarmou com normalidade."
+        }
+      ]
+    }
+  ]
+}

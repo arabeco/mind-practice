@@ -1,0 +1,731 @@
+{
+  "deckId": "roda",
+  "name": "A Roda",
+  "description": "Amizades testam lealdade, ego e o que voce aceita engolir.",
+  "tema": "Amizades",
+  "category": "calibragem",
+  "tier": 1,
+  "difficulty": 2,
+  "questions": [
+    {
+      "id": "r1",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Seu amigo te pediu dinheiro emprestado dois meses atras. Nunca tocou no assunto."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele posta stories numa viagem cara. Voce ta apertado."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando mensagem: 'E aquele dinheiro, hein?'",
+          "subtext": "Vigor/Cobranca direta",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Cobrou sem rodeios. A amizade aguenta?"
+        },
+        {
+          "text": "Deixo quieto. Se precisar cobrar, nem era amigo.",
+          "subtext": "Desapego/Desistencia",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Largou mao do dinheiro. E do respeito?"
+        },
+        {
+          "text": "Puxo assunto de grana de forma indireta.",
+          "subtext": "Harmonia/Diplomacia",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "desapego": -2,
+            "vigor": -1
+          },
+          "feedback": "Tentou resolver sem clima. Sera que entendeu?"
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Grupo marca viagem no chat. Animacao total. Voce ta no grupo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Descobre por fora que ja compraram as passagens sem te chamar."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando no grupo: 'Valeu por avisar, hein.'",
+          "subtext": "Vigor/Exposicao publica",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Expos a exclusao. Coragem ou drama?"
+        },
+        {
+          "text": "Saio do grupo em silencio. Quem quis, quis.",
+          "subtext": "Desapego/Corte limpo",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Cortou sem cena. Mas ficou doendo?"
+        },
+        {
+          "text": "Chamo quem e mais proximo no privado pra entender.",
+          "subtext": "Presenca/Investigacao",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "vigor": -1
+          },
+          "feedback": "Buscou clareza antes de reagir. Maduro."
+        },
+        {
+          "text": "Finjo que nao vi e espero alguem vir falar.",
+          "subtext": "Filtro/Observacao passiva",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Segurou a reacao. Mas o silencio resolve?"
+        }
+      ]
+    },
+    {
+      "id": "r3",
+      "type": "NORMAL",
+      "sceneHook": "Nao e sobre o ex. E sobre o codigo que ele quebrou.",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego",
+        "papel": "melhor amigo",
+        "proximidade": "alta",
+        "historico": "Voces sao amigos desde crianca. Ele sabe suas feridas.",
+        "canal": "presencial",
+        "plateia": "nenhuma",
+        "momento": "tensao",
+        "intencaoDoOutro": "justificar",
+        "assimetria": "emocional",
+        "riscoPrincipal": "ruptura do vinculo",
+        "urgencia": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Seu melhor amigo comecou a ficar com seu ex. Voce descobriu por terceiros."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele te chama pra conversar e diz que nao queria te machucar."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Nao queria? Entao por que escondeu?'",
+          "subtext": "Vigor/Confronto emocional",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Jogou a verdade na cara. Doeu nos dois."
+        },
+        {
+          "text": "Ouco calado, levanto e saio sem responder.",
+          "subtext": "Filtro/Retirada fria",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Silencio pesado. Ele sentiu mais que um grito."
+        },
+        {
+          "text": "'Vou precisar de tempo pra processar isso.'",
+          "subtext": "Presenca/Honestidade contida",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Nao explodiu, nao fingiu. Respeitou a dor."
+        },
+        {
+          "text": "'Faz o que quiser. Nao sou dono de ninguem.'",
+          "subtext": "Desapego/Soltar radical",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Soltou rapido demais. Frieza ou defesa?"
+        },
+        {
+          "text": "'Me doi, mas quero ouvir tua versao inteira.'",
+          "subtext": "Harmonia/Vulnerabilidade aberta",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "vigor": -1
+          },
+          "feedback": "Abriu espaco pro dialogo. Forte de outro jeito."
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Rolezinho com a galera. Voce conta uma ideia de projeto que ta empolgado."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Semana depois, seu amigo lanca a mesma ideia como se fosse dele."
+        }
+      ],
+      "options": [
+        {
+          "text": "Chamo ele de lado: 'Isso saiu da minha boca.'",
+          "subtext": "Vigor/Reivindicacao",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Marcou territorio. Direto, sem plateia."
+        },
+        {
+          "text": "Penso: se a ideia era boa, eu faco melhor.",
+          "subtext": "Filtro/Competicao silenciosa",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "vigor": -1,
+            "harmonia": -2
+          },
+          "feedback": "Canalizou a raiva em acao. Estrategico."
+        },
+        {
+          "text": "Deixo pra la. Ideias vem e vao.",
+          "subtext": "Desapego/Indiferenca",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Soltou facil. Generoso ou ingenuidade?"
+        }
+      ]
+    },
+    {
+      "id": "r5",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Voce vai ao banheiro no bar. Ao voltar, ouve seu nome na conversa."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seus amigos tavam falando de voce. Param quando te veem."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Pode continuar. Quero ouvir o final.'",
+          "subtext": "Vigor/Enfrentamento",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 2,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Nao deixou passar. Clima pesou na hora."
+        },
+        {
+          "text": "Sento normal e finjo que nao ouvi nada.",
+          "subtext": "Filtro/Mascara social",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Engoliu seco. Mas vai remoer depois."
+        },
+        {
+          "text": "Depois, chamo o mais proximo: 'O que tava rolando?'",
+          "subtext": "Presenca/Apuracao privada",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Quis saber sem criar cena. Inteligente."
+        },
+        {
+          "text": "Pego minhas coisas e vou embora sem falar.",
+          "subtext": "Desapego/Saida muda",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "vigor": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "A ausencia falou. Mas ngm vai correr atras."
+        }
+      ]
+    },
+    {
+      "id": "r6",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Festa com todo mundo bebendo. A galera quer escalar a parada."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Te pressionam a fazer algo que voce nao curte. 'Para de ser careta.'"
+        }
+      ],
+      "options": [
+        {
+          "text": "'Careta e quem precisa de plateia pra se divertir.'",
+          "subtext": "Vigor/Contra-ataque verbal",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Devolveu o enquadramento. Galera ficou quieta."
+        },
+        {
+          "text": "Dou risada e mudo de assunto natural.",
+          "subtext": "Harmonia/Desvio suave",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Desviou sem criar atrito. Fluido."
+        },
+        {
+          "text": "Nao respondo, pego meu copo e vou pra outra roda.",
+          "subtext": "Desapego/Autonomia silenciosa",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "presenca": 1,
+            "harmonia": -1,
+            "vigor": -2
+          },
+          "feedback": "Saiu do raio. Nao precisou se justificar."
+        },
+        {
+          "text": "'To de boa assim. Quem quiser fica.'",
+          "subtext": "Presenca/Firmeza tranquila",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Segurou a posicao sem drama. Solido."
+        }
+      ]
+    },
+    {
+      "id": "r7",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Amigo te liga de madrugada pedindo pra mentir pra namorada dele."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Diz que ele tava contigo ontem. So isso, por favor.'"
+        }
+      ],
+      "options": [
+        {
+          "text": "'Nao minto por ngm. Resolve tua treta.'",
+          "subtext": "Vigor/Limite duro",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Nao se sujou. Amizade balancou."
+        },
+        {
+          "text": "'Cara, nao me coloca nessa posicao.'",
+          "subtext": "Harmonia/Recusa com empatia",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Disse nao sem destruir. Equilibrado."
+        },
+        {
+          "text": "Falo que vou pensar e nunca mais toco no assunto.",
+          "subtext": "Filtro/Esquiva elegante",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Fugiu sem confrontar. Ficou no limbo."
+        },
+        {
+          "text": "Cubro ele essa vez sem pensar muito.",
+          "subtext": "Harmonia/Lealdade cega",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 1,
+            "desapego": 1,
+            "filtro": -2,
+            "presenca": -1
+          },
+          "feedback": "Cobriu o amigo. Mas a que custo?"
+        }
+      ]
+    },
+    {
+      "id": "r8",
+      "type": "NORMAL",
+      "sceneHook": "O novo nao e o problema. O problema e ngm ter falado nada.",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego",
+        "papel": "grupo de amigos",
+        "proximidade": "alta",
+        "historico": "Voce era referencia do grupo. Agora parece que tem substituto.",
+        "canal": "presencial",
+        "plateia": "grupo com 5 amigos",
+        "momento": "deslocamento",
+        "intencaoDoOutro": "inconsciente",
+        "assimetria": "social",
+        "riscoPrincipal": "perda de lugar",
+        "urgencia": "media"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Churrasco da turma. Tem um cara novo que virou o centro das atencoes."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele ocupa seu lugar na roda. Todos riem das piadas dele, ngm te nota."
+        }
+      ],
+      "options": [
+        {
+          "text": "Entro na conversa e retomo meu espaco naturalmente.",
+          "subtext": "Presenca/Retomada",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 2,
+            "vigor": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Voltou pro jogo. Presenca se conquista."
+        },
+        {
+          "text": "Fico na minha, observando de longe.",
+          "subtext": "Filtro/Observacao fria",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Analisou sem reagir. Mas se isolou."
+        },
+        {
+          "text": "Vou embora cedo. Se sentirem falta, legal.",
+          "subtext": "Desapego/Teste silencioso",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "harmonia": -1,
+            "presenca": -2
+          },
+          "feedback": "Saiu pra ver quem nota. Arriscado."
+        },
+        {
+          "text": "Puxo papo com o cara novo, sem competir.",
+          "subtext": "Harmonia/Inclusao",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Acolheu ao inves de competir. Raro."
+        }
+      ]
+    },
+    {
+      "id": "r9",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Amigo antigo sumiu por meses. Do nada manda mensagem."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'E ai, tudo bem? Preciso de um favor...' La vem."
+        }
+      ],
+      "options": [
+        {
+          "text": "'So aparece quando precisa, ne?'",
+          "subtext": "Vigor/Exposicao",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Mandou a real. Queimou a ponte?"
+        },
+        {
+          "text": "Ajudo sem cobrar. Amizade nao tem placar.",
+          "subtext": "Harmonia/Generosidade",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -1,
+            "filtro": -2
+          },
+          "feedback": "Deu sem pedir nada. Nobre ou trouxa?"
+        },
+        {
+          "text": "Visualizo e nao respondo. Que se vire.",
+          "subtext": "Desapego/Indiferenca",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Sumiu de volta. Reciprocidade?"
+        }
+      ]
+    },
+    {
+      "id": "r10",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Aniversario seu. Voce organizou tudo. Galera confirmou presenca."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Quase ngm apareceu. Os que vieram ficam no celular. Bolo inteiro na mesa."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando mensagem no grupo: 'Valeu pela consideracao.'",
+          "subtext": "Vigor/Ironia cortante",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Mostrou a ferida. Mas virou cobranca."
+        },
+        {
+          "text": "Engulo a tristeza e brinco com quem ficou.",
+          "subtext": "Harmonia/Mascara feliz",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "presenca": -1,
+            "desapego": -2
+          },
+          "feedback": "Salvou a noite por fora. Por dentro, outra coisa."
+        },
+        {
+          "text": "Aceito que mostrou quem se importa de verdade.",
+          "subtext": "Presenca/Lucidez dolorosa",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "desapego": 1,
+            "harmonia": -2,
+            "vigor": -1
+          },
+          "feedback": "Enxergou a real. Doi, mas clareia."
+        },
+        {
+          "text": "Pego a chave do carro e vou embora da minha festa.",
+          "subtext": "Desapego/Abandono radical",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "vigor": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Largou tudo. Liberdade ou fuga?"
+        },
+        {
+          "text": "Choro no banheiro, lavo o rosto e volto sorrindo.",
+          "subtext": "Filtro/Dor escondida",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Guardou tudo. Ninguem viu, mas voce sentiu."
+        }
+      ]
+    }
+  ]
+}

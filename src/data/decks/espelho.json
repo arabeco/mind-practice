@@ -1,0 +1,685 @@
+{
+  "deckId": "espelho",
+  "name": "O Espelho",
+  "description": "Relacionamentos intimos que revelam quem voce e de verdade.",
+  "tema": "Relacionamentos",
+  "category": "calibragem",
+  "tier": 1,
+  "difficulty": 2,
+  "questions": [
+    {
+      "id": "e1",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Noite tranquila em casa. Voce deixa o celular na mesa."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seu parceiro pega seu celular e comeca a fucar sem pedir."
+        }
+      ],
+      "options": [
+        {
+          "text": "Tomo da mao: 'Meu celular, meu espaco.'",
+          "subtext": "Vigor/Limite fisico",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Recuperou o territorio. Clima pesou."
+        },
+        {
+          "text": "Deixo. Nao tenho nada a esconder mesmo.",
+          "subtext": "Desapego/Transparencia",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Sem drama. Mas e sobre confianca ou limite?"
+        },
+        {
+          "text": "'Ce ta procurando algo? Me pergunta direto.'",
+          "subtext": "Presenca/Leitura direta",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "filtro": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Nomeou o elefante. Agora ele precisa falar."
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Ex",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Meia-noite. Celular vibra. Nome que voce nao via ha meses."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seu ex manda: 'Precisava te dizer que sinto falta.'"
+        }
+      ],
+      "options": [
+        {
+          "text": "'Sentir falta nao apaga o que fez. Nao respondo mais.'",
+          "subtext": "Vigor/Corte definitivo",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "filtro": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Fechou a porta com cadeado. Sem volta."
+        },
+        {
+          "text": "Leio, respiro, apago a notificacao e durmo.",
+          "subtext": "Desapego/Soltar",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Nao alimentou o ciclo. Forca silenciosa."
+        },
+        {
+          "text": "'O que voce quer com isso?' Preciso entender.",
+          "subtext": "Presenca/Investigacao",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Abriu a porta pra entender. Risco calculado."
+        },
+        {
+          "text": "Respondo leve: 'Tmb penso em voce as vezes.'",
+          "subtext": "Harmonia/Vulnerabilidade",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "filtro": -2,
+            "vigor": -1
+          },
+          "feedback": "Abriu o peito. Honesto, mas vulneravel."
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Publico",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Jantar com amigos do casal. Clima leve, todo mundo rindo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seu parceiro te corrige na frente de todos com tom de deboche."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Se quiser me corrigir, faz em casa. Aqui nao.'",
+          "subtext": "Vigor/Limite publico",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Marcou territorio. A mesa congelou."
+        },
+        {
+          "text": "Rio junto e mudo de assunto. Resolvo depois.",
+          "subtext": "Filtro/Contencao tatica",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Engoliu em publico. Mas vai cobrar depois?"
+        },
+        {
+          "text": "Olho firme e fico em silencio. Ele entende o recado.",
+          "subtext": "Presenca/Comunicacao nao-verbal",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 3,
+            "filtro": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "O silencio falou mais alto que palavras."
+        },
+        {
+          "text": "Largo o garfo e vou ao banheiro esfriar a cabeca.",
+          "subtext": "Desapego/Retirada consciente",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Saiu antes de explodir. Inteligente ou fuga?"
+        }
+      ]
+    },
+    {
+      "id": "e4",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Conversa normal vira estranha. Algo nao bate no que ela disse."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce descobre que a pessoa que ama mentiu sobre algo importante."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Me conta a verdade agora ou a gente para por aqui.'",
+          "subtext": "Vigor/Ultimato",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Forcou a mao. Clareza ou destruicao?"
+        },
+        {
+          "text": "Guardo pra mim e observo se acontece de novo.",
+          "subtext": "Filtro/Observacao silenciosa",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "vigor": -2,
+            "harmonia": -1
+          },
+          "feedback": "Paciencia estrategica. Mas o peso fica."
+        },
+        {
+          "text": "'Me magoou. Quero entender por que voce mentiu.'",
+          "subtext": "Harmonia/Ponte com dor",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "filtro": -2,
+            "vigor": -1
+          },
+          "feedback": "Abriu dialogo sem atacar. Maduro."
+        }
+      ]
+    },
+    {
+      "id": "e5",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Crush",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Alguem que voce curte. Sinais confusos ha semanas."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Te chama pra sair, mas cancela na ultima hora. De novo."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Se nao quer, me fala. Paro de insistir.'",
+          "subtext": "Vigor/Confronto honesto",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1,
+            "desapego": -2
+          },
+          "feedback": "Pediu clareza. Corajoso, mas exposto."
+        },
+        {
+          "text": "Nem respondo. Ja entendi o recado.",
+          "subtext": "Desapego/Leitura fria",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Soltou sem drama. Orgulho intacto."
+        },
+        {
+          "text": "'Sem stress, marca quando puder.' E sigo minha vida.",
+          "subtext": "Harmonia/Leveza tatica",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Manteve a porta aberta sem se humilhar."
+        }
+      ]
+    },
+    {
+      "id": "e6",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Seu parceiro diz que precisa de espaco. Voce nao entende por que."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Preciso ficar sozinho um tempo.' Sem explicacao clara."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Nao. Voce me deve uma explicacao antes de sumir.'",
+          "subtext": "Vigor/Recusa",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "desapego": -2,
+            "harmonia": -2
+          },
+          "feedback": "Exigiu respostas. Mas forcou quem ta saindo."
+        },
+        {
+          "text": "'Tudo bem. Fico aqui quando voce voltar.'",
+          "subtext": "Harmonia/Acolhimento",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Respeitou o pedido. Amor ou dependencia?"
+        },
+        {
+          "text": "Aceito calado. Por dentro desmorono mas nao mostro.",
+          "subtext": "Filtro/Mascara",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Bancou forte por fora. Custo emocional alto."
+        },
+        {
+          "text": "'Entendo. Eu tambem vou usar esse tempo pra mim.'",
+          "subtext": "Desapego/Reciprocidade madura",
+          "tone": "pragmatico",
+          "weights": {
+            "desapego": 2,
+            "presenca": 2,
+            "vigor": -1,
+            "harmonia": -2
+          },
+          "feedback": "Virou a situacao a seu favor. Equilibrado."
+        },
+        {
+          "text": "'O que eu fiz? Me fala o que aconteceu.'",
+          "subtext": "Presenca/Busca por clareza",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 3,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -2
+          },
+          "feedback": "Quer entender de verdade. Mas o outro nao ta pronto."
+        }
+      ]
+    },
+    {
+      "id": "e7",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Manha seguinte a uma briga pesada. Ninguem dormiu direito."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voces se cruzam na cozinha. Silencio gelado. Alguem tem que falar."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Ontem voce passou do limite. Preciso ouvir um pedido de desculpa.'",
+          "subtext": "Vigor/Cobranca direta",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Cobrou reparacao. Justo, mas o timing pesa."
+        },
+        {
+          "text": "Faco cafe pros dois sem falar nada.",
+          "subtext": "Harmonia/Gesto silencioso",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "O cafe disse 'ainda to aqui'. Sem palavras."
+        },
+        {
+          "text": "Pego minhas coisas e saio. Preciso de ar.",
+          "subtext": "Desapego/Espaco proprio",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "vigor": -1
+          },
+          "feedback": "Priorizou clareza mental. Mas o outro espera."
+        },
+        {
+          "text": "'A gente precisa conversar sobre ontem. Sem gritar dessa vez.'",
+          "subtext": "Presenca/Abertura com regra",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Abriu o dialogo com estrutura. Maduro."
+        }
+      ]
+    },
+    {
+      "id": "e8",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Conversa intima de casal. Ela toca num assunto delicado."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Alguem que voce ama pergunta algo que voce nao quer responder."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Nao quero falar sobre isso. Ponto.'",
+          "subtext": "Vigor/Muro",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Fechou a porta. Protegeu, mas afastou."
+        },
+        {
+          "text": "Respondo pela metade. Dou algo sem entregar tudo.",
+          "subtext": "Filtro/Dose controlada",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -1,
+            "desapego": -2
+          },
+          "feedback": "Deu o minimo. Estrategico, mas superficial."
+        },
+        {
+          "text": "'Dificil responder, mas vou tentar ser honesto.'",
+          "subtext": "Presenca/Vulnerabilidade ativa",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Escolheu a verdade. Custa, mas conecta."
+        }
+      ]
+    },
+    {
+      "id": "e9",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Tres da manha. Voce flagra uma conversa suspeita no celular dele."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Mensagens carinhosas com alguem que voce nao conhece. Ele ta dormindo."
+        }
+      ],
+      "options": [
+        {
+          "text": "Acordo ele na hora: 'Me explica isso agora.'",
+          "subtext": "Vigor/Confronto imediato",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "harmonia": -2
+          },
+          "feedback": "Nao esperou amanhecer. Explosao as tres da manha."
+        },
+        {
+          "text": "Tiro print, guardo, e espero o momento certo.",
+          "subtext": "Filtro/Estrategia fria",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 3,
+            "presenca": 1,
+            "vigor": -1,
+            "harmonia": -2
+          },
+          "feedback": "Juntou provas no frio. Calculado."
+        },
+        {
+          "text": "Largo o celular e deito. Nao consigo lidar agora.",
+          "subtext": "Desapego/Autopreservacao",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Escolheu sobreviver a noite. Amanha e outro dia."
+        },
+        {
+          "text": "Sento na sala e choro baixinho. Preciso processar sozinho.",
+          "subtext": "Presenca/Dor consciente",
+          "tone": "protetor",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Sentiu tudo sem fugir. Corajoso de outro jeito."
+        }
+      ]
+    },
+    {
+      "id": "e10",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Ex",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Voces terminaram ha um mes. Dor ainda fresca."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Amigo em comum conta que seu ex ja ta com outra pessoa."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Foda-se. Que seja feliz.' E mudo de assunto.",
+          "subtext": "Vigor/Orgulho blindado",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 2,
+            "desapego": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Blindou o orgulho. Mas a dor ta ali."
+        },
+        {
+          "text": "Sinto o baque mas nao demonstro. Processo depois.",
+          "subtext": "Filtro/Contencao emocional",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Segurou firme. Mas ta guardando demais."
+        },
+        {
+          "text": "'Doi ouvir isso. Mas a vida dele nao e mais minha.'",
+          "subtext": "Desapego/Aceitacao dolorida",
+          "tone": "neutro",
+          "weights": {
+            "desapego": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Admitiu a dor e soltou. Maturidade real."
+        },
+        {
+          "text": "'Serio? Conta mais.' Preciso saber pra fechar o ciclo.",
+          "subtext": "Presenca/Necessidade de entender",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Quer detalhes pra processar. Risco de espiral."
+        }
+      ]
+    }
+  ]
+}

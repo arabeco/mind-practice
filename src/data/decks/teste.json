@@ -1,0 +1,721 @@
+{
+  "deckId": "teste",
+  "name": "O Teste",
+  "description": "Situacoes de pressao que mostram como voce lida com stress.",
+  "tema": "Pressao",
+  "category": "calibragem",
+  "tier": 1,
+  "difficulty": 3,
+  "questions": [
+    {
+      "id": "t1",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sexta a noite. Seu chefe manda mensagem dizendo que o prazo do projeto mudou."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Agora e pra segunda de manha. Impossivel sem virar a noite."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Faco o possivel, mas nao garanto milagre.'",
+          "subtext": "Filtro/Limite calculado",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "vigor": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Botou na mesa sem drama. Honesto e firme."
+        },
+        {
+          "text": "Aceito calado e comeco a trabalhar na hora.",
+          "subtext": "Harmonia/Obediencia",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Abraçou o peso sem questionar. Ate quando?"
+        },
+        {
+          "text": "Visualizo e deixo pra responder so de manha.",
+          "subtext": "Desapego/Adiamento",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Preservou a noite. Mas o problema continua la."
+        },
+        {
+          "text": "Ligo pro chefe e negocio entrega parcial.",
+          "subtext": "Presenca/Negociacao ativa",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Tomou a frente. Solucao no meio do caos."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Apresentacao pro cliente mais importante da empresa. Sala cheia, diretoria assistindo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Seu slide da erro e a tela fica preta na frente de todos."
+        }
+      ],
+      "options": [
+        {
+          "text": "Faco piada: 'Ate a tecnologia quis criar suspense.'",
+          "subtext": "Presenca/Improviso",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Ganhou a sala com carisma. Risco calculado."
+        },
+        {
+          "text": "Paro, respiro e sigo explicando sem o slide.",
+          "subtext": "Vigor/Controle sob pressao",
+          "tone": "neutro",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Dominou o momento. Nao precisa de tela."
+        },
+        {
+          "text": "Fico vermelho, gaguejo e peco desculpa repetidas vezes.",
+          "subtext": "Harmonia/Colapso",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -2
+          },
+          "feedback": "A vergonha tomou conta. Humano, mas custou caro."
+        },
+        {
+          "text": "Chamo o tecnico e espero em silencio olhando o celular.",
+          "subtext": "Desapego/Retirada",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Saiu do palco sem sair da sala. Estranho silencio."
+        },
+        {
+          "text": "Peço um minuto e resolvo o problema eu mesmo.",
+          "subtext": "Filtro/Foco tecnico",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "vigor": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Mao na massa. Resolveu, mas a sala esperou."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Reuniao de equipe. Seu gerente ta cobrando resultados de todo mundo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele para, olha pra voce e cobra seu atraso na frente de todos."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Tenho motivos. Posso explicar depois em particular?'",
+          "subtext": "Filtro/Redirecionamento",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Tirou do holofote. Esperto, mas pareceu fugir?"
+        },
+        {
+          "text": "'O atraso tem contexto. Quer ouvir ou so cobrar?'",
+          "subtext": "Vigor/Confronto publico",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -2
+          },
+          "feedback": "Peito aberto. A sala inteira sentiu o peso."
+        },
+        {
+          "text": "Abaixo a cabeca e anoto. Engulo o constrangimento.",
+          "subtext": "Harmonia/Submissao",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Absorveu o golpe. A equipe notou o silencio."
+        },
+        {
+          "text": "Encaro ele firme mas nao falo nada. So sustento o olhar.",
+          "subtext": "Presenca/Silencio forte",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "O silencio falou. Intimidou sem abrir a boca."
+        },
+        {
+          "text": "Solto um 'ok' seco e foco no notebook, indiferente.",
+          "subtext": "Desapego/Frieza",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Nem reagiu. Protegeu ou desistiu?"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Voce revisando codigo antes do deploy. Tudo pronto pra subir em uma hora."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Descobre um bug grave que pode derrubar o sistema em producao."
+        }
+      ],
+      "options": [
+        {
+          "text": "Aviso o time inteiro na hora e peço pra segurar o deploy.",
+          "subtext": "Vigor/Transparencia imediata",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "filtro": -2,
+            "desapego": -1
+          },
+          "feedback": "Tomou a frente. Melhor vergonha que desastre."
+        },
+        {
+          "text": "Tento corrigir sozinho antes que alguem perceba.",
+          "subtext": "Filtro/Risco solitario",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "vigor": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Heroi ou inconsequente? Depende se funcionar."
+        },
+        {
+          "text": "Mando mensagem pro lider com calma explicando a situacao.",
+          "subtext": "Harmonia/Comunicacao cuidadosa",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Alinhou sem panico. Processo limpo."
+        },
+        {
+          "text": "Penso: 'Talvez nao seja tao grave.' Deixo ir e vejo o que acontece.",
+          "subtext": "Desapego/Negacao",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Minimizou o risco. Se explodir, e sua conta."
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Dia de prova importante. Voce estudou semanas pra essa."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Abre a prova e nao reconhece metade das questoes. Branco total."
+        }
+      ],
+      "options": [
+        {
+          "text": "Fecho os olhos, respiro fundo e comeco pelo que sei.",
+          "subtext": "Presenca/Centragem",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Encontrou chao no caos. Um passo de cada vez."
+        },
+        {
+          "text": "Ataco as questoes que sei primeiro, rapido e agressivo.",
+          "subtext": "Vigor/Modo combate",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Canalizou o panico em acao. Adrenalina util."
+        },
+        {
+          "text": "Penso: 'Se reprovar, faco de novo.' Tiro a pressao.",
+          "subtext": "Desapego/Relativizacao",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Aliviou o peso. Mas faltou garra?"
+        },
+        {
+          "text": "Olho pro lado, vejo que outros tambem estao perdidos. Normalizo.",
+          "subtext": "Harmonia/Espelhamento social",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Achou conforto no coletivo. Mas sua prova e sua."
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Saindo de casa pro trabalho. Chaves, carteira, celular. Rotina normal."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Percebe que perdeu a carteira com todos os documentos e cartoes."
+        }
+      ],
+      "options": [
+        {
+          "text": "Ja pego o celular e bloqueio tudo na hora.",
+          "subtext": "Presenca/Reacao alerta",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 2,
+            "vigor": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Modo emergencia ativado. Rapido e eficiente."
+        },
+        {
+          "text": "Paro, refaco mentalmente meus passos do dia anterior.",
+          "subtext": "Presenca/Rastreamento calmo",
+          "tone": "neutro",
+          "weights": {
+            "presenca": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "harmonia": -1
+          },
+          "feedback": "Mente fria. Investigou antes de surtar."
+        },
+        {
+          "text": "'Dane-se, resolvo depois. Nao vou me atrasar por isso.'",
+          "subtext": "Desapego/Priorizacao",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Soltou o problema. Pratico ou negligente?"
+        }
+      ]
+    },
+    {
+      "id": "t7",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Reuniao importante em vinte minutos. Voce saiu no horario certo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Transito parado total. Waze mostra vermelho em tudo. Vai atrasar."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando mensagem avisando do atraso e fico tranquilo.",
+          "subtext": "Harmonia/Comunicacao preventiva",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Alinhou expectativas. Adulto e sem drama."
+        },
+        {
+          "text": "Procuro rota alternativa, atalho, qualquer coisa.",
+          "subtext": "Filtro/Busca estrategica",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Nao aceitou o destino. Lutou ate o fim."
+        },
+        {
+          "text": "Ligo o podcast e aceito. Chego quando chegar.",
+          "subtext": "Desapego/Aceitacao",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Soltou o controle. Zen ou irresponsavel?"
+        }
+      ]
+    },
+    {
+      "id": "t8",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sua irma te ligou pedindo ajuda com uma mudanca urgente pro sabado."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce ja ta esgotado e nao consegue, mas ela so tem voce."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Vou te ajudar, mas preciso sair cedo. Combina?'",
+          "subtext": "Harmonia/Limite com afeto",
+          "tone": "neutro",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "desapego": -2,
+            "vigor": -1
+          },
+          "feedback": "Ajudou com condicao. Cuidou dos dois."
+        },
+        {
+          "text": "'Nao consigo dessa vez. To no meu limite.'",
+          "subtext": "Vigor/Recusa honesta",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "desapego": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Disse nao pra quem ama. Doeu, mas era real."
+        },
+        {
+          "text": "Vou sem falar nada e me arrasto o dia inteiro.",
+          "subtext": "Presenca/Sacrificio mudo",
+          "tone": "protetor",
+          "weights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Apareceu. Mas a conta do corpo chega depois."
+        },
+        {
+          "text": "Digo que vou e cancelo no dia com uma desculpa.",
+          "subtext": "Filtro/Evitacao disfarçada",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Fugiu do confronto agora. Criou outro depois."
+        }
+      ]
+    },
+    {
+      "id": "t9",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sala de espera do hospital. Seu pai foi internado de emergencia."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Medico diz que precisa de exames e voce tem que decidir tudo sozinho."
+        }
+      ],
+      "options": [
+        {
+          "text": "Anoto tudo, pergunto cada detalhe e tomo a decisao na hora.",
+          "subtext": "Presenca/Lucidez sob pressao",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": 1,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Virou rocha quando precisou. Mas sentiu tudo."
+        },
+        {
+          "text": "Ligo pra alguem da familia dividir o peso da decisao.",
+          "subtext": "Harmonia/Rede de apoio",
+          "tone": "protetor",
+          "weights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Pediu ajuda. Nao e fraqueza, e inteligencia."
+        },
+        {
+          "text": "Autorizo tudo que o medico sugerir sem questionar.",
+          "subtext": "Desapego/Delegacao total",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "presenca": -2,
+            "filtro": -1
+          },
+          "feedback": "Confiou no especialista. Mas entendeu o que assinou?"
+        },
+        {
+          "text": "Peco um minuto sozinho no corredor pra processar.",
+          "subtext": "Filtro/Pausa necessaria",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "vigor": -2,
+            "harmonia": -1
+          },
+          "feedback": "Pausou antes de agir. Coragem silenciosa."
+        },
+        {
+          "text": "'Faz o que precisar, doutor.' Engulo o choro e resolvo a burocracia.",
+          "subtext": "Vigor/Forca bruta emocional",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "filtro": 1,
+            "harmonia": -1,
+            "desapego": -2
+          },
+          "feedback": "Segurou o mundo nas costas. Pesado demais sozinho."
+        }
+      ]
+    },
+    {
+      "id": "t10",
+      "type": "NORMAL",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Entrega final do projeto grande. Equipe exausta, todos contando com voce."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce percebe que sua parte tem um erro que ninguem viu ainda."
+        }
+      ],
+      "options": [
+        {
+          "text": "Corrijo discretamente antes de qualquer um notar.",
+          "subtext": "Filtro/Resolucao silenciosa",
+          "tone": "pragmatico",
+          "weights": {
+            "filtro": 2,
+            "presenca": 1,
+            "harmonia": -2,
+            "vigor": -1
+          },
+          "feedback": "Resolveu nos bastidores. Ninguem soube."
+        },
+        {
+          "text": "Aviso a equipe: 'Achei um erro, preciso de mais tempo.'",
+          "subtext": "Vigor/Transparencia",
+          "tone": "neutro",
+          "weights": {
+            "vigor": 2,
+            "harmonia": 1,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Peito aberto. A equipe confia mais agora."
+        },
+        {
+          "text": "Corrijo rapido e entrego sem avisar que teve problema.",
+          "subtext": "Vigor/Resolucao impulsiva",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 2,
+            "filtro": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Agiu antes de pensar. Resolveu, mas escondeu."
+        }
+      ]
+    }
+  ]
+}
