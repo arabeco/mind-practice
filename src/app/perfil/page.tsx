@@ -11,7 +11,7 @@ import {
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
-import type { DeckSnapshot } from '@/types/game';
+import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
@@ -236,23 +236,39 @@ export default function PerfilPage() {
       <motion.section variants={fadeUp} className="mt-2.5">
         <div className="rounded-xl bg-white/[0.04] px-3 py-2.5">
           <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/45">Eixos</p>
-          <div className="space-y-1">
+          <div className="space-y-2.5">
             {STAT_KEYS.map((key) => {
               const value = calibration.axes[key];
               const pct = hasData ? Math.min(Math.abs(value) / maxAbs, 1) * 50 : 0;
               const color = STAT_COLORS[key];
               const isNeg = value < 0;
-              // Negative: bar goes left from 50%, so left = 50% - pct%
-              // Positive: bar starts at 50%, width = pct%
               const barLeft = isNeg ? `${50 - pct}%` : '50%';
               const barWidth = `${pct}%`;
+              const poles = AXIS_POLES[key];
+              // Position of the number indicator: 50% + or - pct
+              const indicatorPos = isNeg ? `${50 - pct}%` : `${50 + pct}%`;
               return (
-                <div key={key} className="flex items-center gap-2">
-                  <span className="w-16 shrink-0 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/50">{STAT_LABELS[key]}</span>
-                  <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-white/8">
-                    {/* Center tick */}
+                <div key={key}>
+                  {/* Pole labels + floating number */}
+                  <div className="relative mb-1 flex items-center justify-between">
+                    <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[0]}</span>
+                    <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[1]}</span>
+                    {/* Floating value indicator */}
+                    {(hasData && value !== 0) && (
+                      <motion.span
+                        className="absolute -top-0.5 text-[9px] font-mono font-bold"
+                        style={{ color: isNeg ? '#ef4444' : color, left: indicatorPos, transform: 'translateX(-50%)' }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.3 }}
+                      >
+                        {value > 0 ? '+' : ''}{value.toFixed(1)}
+                      </motion.span>
+                    )}
+                  </div>
+                  {/* Bar */}
+                  <div className="relative h-2 overflow-hidden rounded-full bg-white/8">
                     <div className="absolute left-1/2 top-0 z-10 h-full w-px -translate-x-px bg-white/25" />
-                    {/* Bar */}
                     <motion.div
                       className="absolute top-0 h-full"
                       style={{ backgroundColor: isNeg ? '#ef4444' : color }}
@@ -261,9 +277,6 @@ export default function PerfilPage() {
                       transition={{ duration: 0.5, ease: 'easeOut' }}
                     />
                   </div>
-                  <span className="w-8 shrink-0 text-right text-[9px] font-mono font-bold" style={{ color: isNeg ? '#ef4444' : color }}>
-                    {value > 0 ? '+' : ''}{value.toFixed(1)}
-                  </span>
                 </div>
               );
             })}
@@ -480,6 +493,14 @@ function getRankFromScore(score: number | null): RankLetter {
   if (score >= 30) return 'D';
   return 'E';
 }
+
+const AXIS_POLES: Record<StatKey, [string, string]> = {
+  vigor: ['Passivo', 'Agressivo'],
+  harmonia: ['Conflito', 'Paz'],
+  filtro: ['Impulsivo', 'Calculista'],
+  presenca: ['Invisivel', 'Dominante'],
+  desapego: ['Apegado', 'Desapegado'],
+};
 
 const RANK_STYLES: Record<RankLetter, string> = {
   S: 'border-yellow-300/40 bg-yellow-300/14 text-yellow-200',
