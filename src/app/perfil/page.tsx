@@ -242,19 +242,23 @@ export default function PerfilPage() {
               const pct = hasData ? Math.min(Math.abs(value) / maxAbs, 1) * 50 : 0;
               const color = STAT_COLORS[key];
               const isNeg = value < 0;
+              // Negative: bar goes left from 50%, so left = 50% - pct%
+              // Positive: bar starts at 50%, width = pct%
+              const barLeft = isNeg ? `${50 - pct}%` : '50%';
+              const barWidth = `${pct}%`;
               return (
                 <div key={key} className="flex items-center gap-2">
                   <span className="w-16 shrink-0 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/50">{STAT_LABELS[key]}</span>
-                  <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-white/8">
+                  <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-white/8">
                     {/* Center tick */}
-                    <div className="absolute left-1/2 top-0 h-full w-px bg-white/20" />
-                    {/* Bar: grows left or right from center */}
+                    <div className="absolute left-1/2 top-0 z-10 h-full w-px -translate-x-px bg-white/25" />
+                    {/* Bar */}
                     <motion.div
-                      className="absolute top-0 h-full rounded-full"
-                      initial={isNeg ? { right: '50%', width: 0 } : { left: '50%', width: 0 }}
-                      animate={isNeg ? { right: '50%', width: `${pct}%` } : { left: '50%', width: `${pct}%` }}
-                      transition={{ duration: 0.4 }}
+                      className="absolute top-0 h-full"
                       style={{ backgroundColor: isNeg ? '#ef4444' : color }}
+                      initial={{ left: '50%', width: 0 }}
+                      animate={{ left: barLeft, width: barWidth }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
                     />
                   </div>
                   <span className="w-8 shrink-0 text-right text-[9px] font-mono font-bold" style={{ color: isNeg ? '#ef4444' : color }}>
@@ -310,18 +314,28 @@ export default function PerfilPage() {
       )}
 
       {/* ================================================================ */}
-      {/* Reset button                                                     */}
+      {/* Reset button — only visible in edit mode                         */}
       {/* ================================================================ */}
-      <motion.section variants={fadeUp} className="mt-3">
-        <button
-          type="button"
-          onClick={() => setResetModalOpen(true)}
-          className="w-full rounded-xl border border-red-500/15 bg-red-500/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-400/70 transition-colors hover:border-red-500/25 hover:bg-red-500/10 hover:text-red-400"
-        >
-          Resetar Stats
-        </button>
-        <p className="mt-1 text-center text-[8px] uppercase tracking-[0.2em] text-white/20">MindPractice v0.2</p>
-      </motion.section>
+      <AnimatePresence>
+        {editingNickname && (
+          <motion.section
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="mt-3 overflow-hidden"
+          >
+            <button
+              type="button"
+              onClick={() => setResetModalOpen(true)}
+              className="w-full rounded-xl border border-red-500/15 bg-red-500/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-red-400/70 transition-colors hover:border-red-500/25 hover:bg-red-500/10 hover:text-red-400"
+            >
+              Resetar Stats
+            </button>
+          </motion.section>
+        )}
+      </AnimatePresence>
+      <p className="mt-2 text-center text-[8px] uppercase tracking-[0.2em] text-white/20">MindPractice v0.2</p>
 
       {/* ================================================================ */}
       {/* Avatar Modal — 9:16 with silver border                           */}
