@@ -169,12 +169,11 @@ export default function PerfilPage() {
 
           {/* Identity below card */}
           <div className="mt-2 text-center">
-            <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
-            <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
-            <div className="mt-0.5 flex items-center justify-center gap-1.5">
+            {/* Nickname — prominent */}
+            <div className="flex items-center justify-center gap-1.5">
               {!editingNickname ? (
                 <>
-                  <p className="text-xs text-white/50">{nickname}</p>
+                  <p className="text-sm font-semibold text-white/80">{nickname}</p>
                   {isIdentityValidated && (
                     <span className="rounded-full border border-accent-gold/25 bg-accent-gold/12 px-1.5 py-px text-[7px] font-semibold uppercase tracking-[0.16em] text-accent-gold">
                       Confirmado
@@ -198,6 +197,9 @@ export default function PerfilPage() {
                 </div>
               )}
             </div>
+            {/* Archetype name + tagline */}
+            <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
+            <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
           </div>
         </div>
       </motion.section>
@@ -237,15 +239,25 @@ export default function PerfilPage() {
           <div className="space-y-1">
             {STAT_KEYS.map((key) => {
               const value = calibration.axes[key];
-              const width = hasData ? `${(Math.abs(value) / maxAbs) * 100}%` : '0%';
-              const color = value >= 0 ? STAT_COLORS[key] : '#ef4444';
+              const pct = hasData ? Math.min(Math.abs(value) / maxAbs, 1) * 50 : 0;
+              const color = STAT_COLORS[key];
+              const isNeg = value < 0;
               return (
                 <div key={key} className="flex items-center gap-2">
                   <span className="w-16 shrink-0 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/50">{STAT_LABELS[key]}</span>
-                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/8">
-                    <motion.div className="h-full rounded-full" initial={{ width: 0 }} animate={{ width }} transition={{ duration: 0.4 }} style={{ backgroundColor: color }} />
+                  <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-white/8">
+                    {/* Center tick */}
+                    <div className="absolute left-1/2 top-0 h-full w-px bg-white/20" />
+                    {/* Bar: grows left or right from center */}
+                    <motion.div
+                      className="absolute top-0 h-full rounded-full"
+                      initial={isNeg ? { right: '50%', width: 0 } : { left: '50%', width: 0 }}
+                      animate={isNeg ? { right: '50%', width: `${pct}%` } : { left: '50%', width: `${pct}%` }}
+                      transition={{ duration: 0.4 }}
+                      style={{ backgroundColor: isNeg ? '#ef4444' : color }}
+                    />
                   </div>
-                  <span className="w-8 shrink-0 text-right text-[9px] font-mono font-bold" style={{ color }}>
+                  <span className="w-8 shrink-0 text-right text-[9px] font-mono font-bold" style={{ color: isNeg ? '#ef4444' : color }}>
                     {value > 0 ? '+' : ''}{value.toFixed(1)}
                   </span>
                 </div>
