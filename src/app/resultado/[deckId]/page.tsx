@@ -9,6 +9,14 @@ import ShareButton from '@/components/ShareButton';
 import { useGame } from '@/context/GameContext';
 import { getDeckById } from '@/data/decks';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
+import {
+  getArchetypeAvatarPaths,
+  getArchetypeAvatarVisual,
+  type AvatarVariant,
+} from '@/lib/archetypeAvatar';
+
+const VARIANT_KEY = 'mindpractice_avatar_variant';
+const CALIBRATION_THRESHOLD = 1.2; // profileShift above this = "calibrou"
 
 export default function ResultadoPage({ params }: { params: Promise<{ deckId: string }> }) {
   const { deckId } = use(params);
@@ -26,7 +34,54 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
   }, []);
 
   const archetypeChanged = featuredSnapshot?.archetypeChanged ?? false;
+  const profileShift = featuredSnapshot?.profileShift ?? 0;
+  const calibrated = !archetypeChanged && profileShift >= CALIBRATION_THRESHOLD;
+  const maintained = !archetypeChanged && !calibrated;
   const maxAbs = Math.max(1, ...STAT_KEYS.map(k => Math.abs(state.calibration.axes[k])));
+
+  const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
+
+  // Avatar variant + image fallback chain (same pattern as /perfil)
+  const [variant, setVariant] = useState<AvatarVariant>('masculino');
+  const [imageIndex, setImageIndex] = useState(0);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    const storedVariant = localStorage.getItem(VARIANT_KEY);
+    if (storedVariant === 'masculino' || storedVariant === 'feminino') {
+      setVariant(storedVariant);
+    }
+  }, []);
+
+  useEffect(() => {
+    setImageIndex(0);
+    setImageFailed(false);
+  }, [archetype.id, variant]);
+
+  const imageCandidates = getArchetypeAvatarPaths(archetype.id, variant);
+  const imageSrc = imageCandidates[imageIndex];
+
+  // Status copy + color
+  const status = archetypeChanged
+    ? {
+        kicker: 'Mudou de arquetipo',
+        color: '#d4af37',
+        ring: 'border-accent-gold/45 bg-accent-gold/15',
+        shadow: '0 0 44px rgba(212,175,55,0.35)',
+      }
+    : calibrated
+    ? {
+        kicker: 'Calibrou o perfil',
+        color: '#c084fc',
+        ring: 'border-purple-300/45 bg-purple-500/18',
+        shadow: '0 0 36px rgba(139,92,246,0.32)',
+      }
+    : {
+        kicker: 'Manteve o perfil',
+        color: '#7dd3fc',
+        ring: 'border-cyan-300/35 bg-cyan-500/10',
+        shadow: '0 0 24px rgba(103,232,249,0.22)',
+      };
 
   const archetypeTimeline = useMemo(() => {
     const timeline: { date: string; archetype: string }[] = [];
@@ -75,69 +130,130 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
           </p>
         </motion.div>
 
-        {/* Archetype — big and prominent */}
+        {/* Archetype avatar + name */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25, duration: 0.5 }}
-          className="text-center"
+          className="flex flex-col items-center text-center"
         >
-          <motion.h1
-            initial={{ opacity: 0, filter: 'blur(12px)' }}
-            animate={{ opacity: 1, filter: 'blur(0px)' }}
-            transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-            className="text-3xl font-bold text-white/95"
+          {/* Avatar card */}
+          <motion.div
+            initial={{ scale: 0.88, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.35, type: 'spring', stiffness: 220, damping: 22 }}
+            className="relative overflow-hidden rounded-2xl border-2"
             style={{
-              textShadow: archetypeChanged
-                ? '0 0 40px rgba(212,175,55,0.4), 0 0 80px rgba(212,175,55,0.15)'
-                : '0 0 30px rgba(103,232,249,0.2)',
+              background: visual.background,
+              borderColor: `${status.color}60`,
+              width: '150px',
+              aspectRatio: '9 / 16',
+              boxShadow: status.shadow,
             }}
+          >
+            {!imageFailed && imageSrc ? (
+              <img
+                src={imageSrc}
+                alt={archetype.name}
+                className="h-full w-full object-cover"
+                onError={() => {
+                  if (imageIndex < imageCandidates.length - 1) {
+                    setImageIndex(prev => prev + 1);
+                  } else {
+                    setImageFailed(true);
+                  }
+                }}
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <span className="text-5xl font-black text-white/25">
+                  {archetype.name.charAt(0)}
+                </span>
+              </div>
+            )}
+            {/* Subtle top glow tinted to status */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-1/3"
+              style={{
+                background: `linear-gradient(180deg, ${status.color}28 0%, transparent 100%)`,
+              }}
+            />
+          </motion.div>
+
+          {/* Status pill */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.55 }}
+            className={`mt-4 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 ${status.ring}`}
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ backgroundColor: status.color, boxShadow: `0 0 8px ${status.color}` }}
+            />
+            <span
+              className="text-[10px] font-semibold uppercase tracking-[0.18em]"
+              style={{ color: status.color }}
+            >
+              {status.kicker}
+            </span>
+          </motion.div>
+
+          {/* Name + transition */}
+          <motion.h1
+            initial={{ opacity: 0, filter: 'blur(10px)' }}
+            animate={{ opacity: 1, filter: 'blur(0px)' }}
+            transition={{ delay: 0.6, duration: 0.7, ease: 'easeOut' }}
+            className="mt-3 text-3xl font-bold text-white/95"
+            style={{ textShadow: `0 0 32px ${status.color}3a` }}
           >
             {archetype.name}
           </motion.h1>
-          <p className="mt-1 text-sm italic text-white/40">{archetype.tagline}</p>
+          <p className="mt-1 text-sm italic text-white/45">{archetype.tagline}</p>
 
-          {/* Change indicator */}
-          {archetypeChanged ? (
+          {/* Before → After line (only when changed) */}
+          {archetypeChanged && featuredSnapshot?.archetypeBeforeRun && (
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-accent-gold/30 bg-accent-gold/12 px-3 py-1.5"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.75 }}
+              className="mt-3 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/55"
             >
-              <svg className="h-3.5 w-3.5 text-accent-gold" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" d="M14.615 1.595a.75.75 0 01.359.852L12.982 9.75h7.268a.75.75 0 01.548 1.262l-10.5 11.25a.75.75 0 01-1.272-.71l1.992-7.302H3.75a.75.75 0 01-.548-1.262l10.5-11.25a.75.75 0 01.913-.143z" clipRule="evenodd" />
+              <span className="text-white/40">{featuredSnapshot.archetypeBeforeRun}</span>
+              <svg className="h-3 w-3 text-accent-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-gold">
-                Arquetipo mudou!
-              </span>
+              <span className="font-semibold text-accent-gold">{archetype.name}</span>
             </motion.div>
-          ) : (
+          )}
+
+          {/* Calibration delta line */}
+          {calibrated && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-3 text-[11px] uppercase tracking-[0.16em] text-white/30"
+              transition={{ delay: 0.75 }}
+              className="mt-3 text-[11px] text-white/50"
             >
-              Manteve-se
+              Seus eixos moveram <span className="font-mono font-bold text-purple-300">{profileShift.toFixed(1)}</span> pontos
             </motion.p>
           )}
         </motion.div>
 
-        {/* Primary CTA */}
+        {/* Primary CTA — back to home menu */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.8 }}
         >
           <Link
-            href="/decks"
+            href="/"
             className="glass-button inline-flex items-center gap-2.5 rounded-full border border-white/18 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(139,92,246,0.16)]"
           >
-            <svg className="h-4 w-4 text-cyan-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z" />
+            <svg className="h-4 w-4 text-cyan-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7m-9 2v8a1 1 0 001 1h4a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h4a1 1 0 001-1v-8m-9 0l-2-2m0 0l2 2" />
             </svg>
-            Proximo Deck
+            Voltar ao menu
           </Link>
         </motion.div>
 
