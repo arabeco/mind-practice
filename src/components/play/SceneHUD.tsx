@@ -23,6 +23,7 @@ interface SceneHUDProps {
 }
 
 const PHASE_LABELS: Record<ScenePhase, string> = {
+  ready: 'Prepare-se',
   context: 'Leitura da sala',
   event: 'O corte',
   delay: 'Seu corpo processa',

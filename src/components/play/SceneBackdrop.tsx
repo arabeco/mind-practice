@@ -7,6 +7,7 @@ interface SceneBackdropProps {
   profile: ScenePresentationProfile;
   phase: ScenePhase;
   reducedMotion?: boolean;
+  coverImage?: string;
 }
 
 const BOKEH_SPOTS = [
@@ -20,11 +21,37 @@ export default function SceneBackdrop({
   profile,
   phase,
   reducedMotion = false,
+  coverImage,
 }: SceneBackdropProps) {
   const isChargedPhase = phase === 'event' || phase === 'delay';
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Cover image — first layer, heavily darkened */}
+      {coverImage && (
+        <motion.div
+          className="absolute inset-0 bg-cover bg-center"
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={reducedMotion ? { opacity: 0.55 } : { scale: [1.08, 1.14, 1.08], opacity: 0.55 }}
+          transition={{
+            scale: { duration: 18, repeat: Infinity, ease: 'easeInOut' },
+            opacity: { duration: 1.2, ease: 'easeOut' },
+          }}
+          style={{
+            backgroundImage: `url(${coverImage})`,
+            filter: 'saturate(0.85) contrast(1.05)',
+          }}
+        />
+      )}
+      {coverImage && (
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.72) 55%, rgba(0,0,0,0.88) 100%)`,
+          }}
+        />
+      )}
+
       <motion.div
         className="absolute inset-0"
         animate={reducedMotion ? undefined : { scale: [1, 1.03, 1] }}
@@ -34,7 +61,9 @@ export default function SceneBackdrop({
           ease: 'easeInOut',
         }}
         style={{
-          background: `radial-gradient(circle at top, ${profile.palette.accentSoft} 0%, transparent 40%), linear-gradient(180deg, ${profile.palette.bgStart} 0%, ${profile.palette.bgEnd} 100%)`,
+          background: `radial-gradient(circle at top, ${profile.palette.accentSoft} 0%, transparent 40%), linear-gradient(180deg, ${profile.palette.bgStart}${coverImage ? '55' : ''} 0%, ${profile.palette.bgEnd}${coverImage ? '55' : ''} 100%)`,
+          mixBlendMode: coverImage ? 'multiply' : 'normal',
+          opacity: coverImage ? 0.7 : 1,
         }}
       />
 

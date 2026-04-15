@@ -39,6 +39,7 @@ import {
 type GameAction =
   | { type: 'START_DECK'; deck: Deck }
   | { type: 'ANSWER'; weights: Partial<Record<StatKey, number>>; tone: Tone; responseTimeMs?: number }
+  | { type: 'TIMEOUT' }
   | { type: 'NEXT_QUESTION' }
   | { type: 'FINISH_DECK' }
   | { type: 'CLAIM_DAILY' }
@@ -194,6 +195,26 @@ function gameReducer(state: GameState, action: GameAction): GameState {
           state.activeRun && question
             ? appendRunAnswer(state.activeRun, question.id, action.tone, action.weights, action.responseTimeMs)
             : state.activeRun,
+      };
+    }
+
+    case 'TIMEOUT': {
+      const question = state.activeDeck?.questions[state.currentQuestion];
+      if (!state.activeRun || !question) return state;
+      const event = {
+        questionId: question.id,
+        tone: null,
+        weights: {},
+        dominantAxis: null,
+        timedOut: true,
+      };
+      return {
+        ...state,
+        activeRun: {
+          ...state.activeRun,
+          timeoutCount: state.activeRun.timeoutCount + 1,
+          answers: [...state.activeRun.answers, event],
+        },
       };
     }
 

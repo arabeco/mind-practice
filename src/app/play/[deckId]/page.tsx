@@ -15,6 +15,7 @@ import { usePresentationPrefs } from '@/hooks/usePresentationPrefs';
 import { useSceneAudio } from '@/hooks/useSceneAudio';
 import { useSceneDirector } from '@/hooks/useSceneDirector';
 import { getScenePresentationProfile } from '@/lib/scenePresentation';
+import { getDeckArt } from '@/lib/deckArt';
 import type { Option } from '@/types/game';
 
 export default function PlayPage({ params }: { params: Promise<{ deckId: string }> }) {
@@ -56,16 +57,24 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
     vibrate(18);
   }, [dispatch, playUiCue, vibrate]);
 
+  const handleTimeout = useCallback(() => {
+    dispatch({ type: 'TIMEOUT' });
+    vibrate([20, 40, 20]);
+  }, [dispatch, vibrate]);
+
   const {
     phase,
     selectedFeedback,
     canTapAdvance,
+    optionsDeadline,
     handleTapAdvance,
     handleAnswer,
+    startScene,
   } = useSceneDirector({
     question,
     reducedMotion: prefs.reducedMotion,
     onAnswerResolved: handleResolvedAnswer,
+    onTimeout: handleTimeout,
   });
 
   const presentation = deck && question
@@ -140,7 +149,12 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
         unlock();
       }}
     >
-      <SceneBackdrop profile={presentation} phase={phase} reducedMotion={prefs.reducedMotion} />
+      <SceneBackdrop
+        profile={presentation}
+        phase={phase}
+        reducedMotion={prefs.reducedMotion}
+        coverImage={getDeckArt(deck).imageSrc}
+      />
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_40%)]" />
 
@@ -226,7 +240,41 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
             onAnswer={handleAnswer}
             profile={presentation}
             enableHaptics={prefs.hapticsEnabled}
+            deadlineTs={optionsDeadline}
           />
+        )}
+
+        {phase === 'ready' && (
+          <motion.div
+            key={`${question.id}-ready`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 z-20 flex items-center justify-center px-5"
+            onClick={startScene}
+          >
+            <div className="mx-auto max-w-sm text-center">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/40">
+                {deck.name}
+              </p>
+              <h2 className="mt-3 text-2xl font-bold text-white/92 leading-tight">
+                {question.sceneHook ?? 'Preparado?'}
+              </h2>
+              <p className="mt-2 text-xs text-white/55">
+                Cena {questionIdx + 1} de {totalQuestions} · 12s para responder com conviccao
+              </p>
+              <motion.button
+                type="button"
+                onClick={startScene}
+                className="mt-6 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90 backdrop-blur-md transition-colors hover:bg-white/18"
+                animate={{ opacity: [0.85, 1, 0.85] }}
+                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                Tocar para comecar
+              </motion.button>
+            </div>
+          </motion.div>
         )}
 
         {phase === 'feedback' && (

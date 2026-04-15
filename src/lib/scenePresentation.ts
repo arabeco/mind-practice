@@ -1,7 +1,8 @@
 import type { Deck, Question, QuestionType, Ambiente } from '@/types/game';
 import { getSceneDelay } from '@/types/game';
 
-export type ScenePhase = 'context' | 'event' | 'delay' | 'options' | 'feedback';
+export type ScenePhase = 'ready' | 'context' | 'event' | 'delay' | 'options' | 'feedback';
+export const OPTIONS_TIME_LIMIT_MS = 12_000;
 export type TensionBand = 'leve' | 'media' | 'alta';
 
 export interface PresentationPrefs {
