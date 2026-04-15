@@ -200,60 +200,79 @@ export default function QuickScene({
                 </div>
               )}
 
-              {/* Intensity picker below the focused option */}
-              <AnimatePresence>
-                {isFocused && (
-                  <motion.div
-                    key="intensity"
-                    initial={{ opacity: 0, y: -6, height: 0 }}
-                    animate={{ opacity: 1, y: 0, height: 'auto' }}
-                    exit={{ opacity: 0, y: -6, height: 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="overflow-hidden"
-                  >
-                    <p className="mt-3 mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
-                      Quanto isso é você?
-                    </p>
-                    <div className="flex flex-col gap-1.5">
-                      {INTENSITY_ORDER.map((lvl) => (
-                        <button
-                          key={lvl}
-                          type="button"
-                          onClick={() => commit(i, lvl)}
-                          className="group flex items-center justify-between rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-left backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/12"
-                          style={{
-                            borderLeftWidth: '3px',
-                            borderLeftColor:
-                              lvl === 'alta'
-                                ? holdColor
-                                : lvl === 'media'
-                                ? `${holdColor}99`
-                                : `${holdColor}44`,
-                          }}
-                        >
-                          <span className="text-[13px] font-semibold text-white/92">
-                            {INTENSITY_LABELS[lvl]}
-                          </span>
-                          <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">
-                            {INTENSITY_HINT[lvl]}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setPicking(null)}
-                      className="mt-2 w-full text-center text-[10px] uppercase tracking-[0.22em] text-white/35 hover:text-white/60"
-                    >
-                      voltar
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
           );
         })}
       </div>
+
+      {/* Intensity picker (bottom-docked modal when an option is picked) */}
+      <AnimatePresence>
+        {picking !== null && (
+          <motion.div
+            key="intensity-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-40 flex items-end justify-center bg-black/55 backdrop-blur-sm"
+            onClick={() => setPicking(null)}
+          >
+            <motion.div
+              key="intensity-panel"
+              initial={{ y: 60, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 60, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-t-3xl border-t border-white/15 bg-[#0c0c12]/95 px-5 pb-8 pt-5 shadow-[0_-20px_60px_rgba(0,0,0,0.6)]"
+            >
+              <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/25" />
+              <p className="mb-1 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
+                Quanto isso é você?
+              </p>
+              <p className="mb-4 text-center text-[13px] leading-snug text-white/80">
+                {shuffled[picking].text}
+              </p>
+              <div className="flex flex-col gap-2">
+                {INTENSITY_ORDER.map((lvl) => {
+                  const holdColor = STAT_COLORS[getDominantAxis(shuffled[picking].weights)];
+                  return (
+                    <button
+                      key={lvl}
+                      type="button"
+                      onClick={() => commit(picking, lvl)}
+                      className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-left backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/12 active:scale-[0.98]"
+                      style={{
+                        borderLeftWidth: '4px',
+                        borderLeftColor:
+                          lvl === 'alta'
+                            ? holdColor
+                            : lvl === 'media'
+                            ? `${holdColor}99`
+                            : `${holdColor}44`,
+                      }}
+                    >
+                      <span className="text-[14px] font-semibold text-white/92">
+                        {INTENSITY_LABELS[lvl]}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">
+                        {INTENSITY_HINT[lvl]}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                type="button"
+                onClick={() => setPicking(null)}
+                className="mt-3 w-full py-2 text-center text-[10px] uppercase tracking-[0.22em] text-white/40 hover:text-white/70"
+              >
+                voltar
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {picking === null && (
         <p className="mt-auto pt-8 text-center text-[10px] uppercase tracking-[0.22em] text-white/30">
