@@ -96,14 +96,32 @@ export default function DeckTarotCard({
 
         {/* Cover image */}
         {art.imageSrc && (
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${art.imageSrc})`,
-              opacity: locked ? 0.3 : 0.45,
-              mixBlendMode: 'luminosity',
-            }}
-          />
+          <>
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${art.imageSrc})`,
+                opacity: locked ? 0.55 : 1,
+              }}
+            />
+            {/* Subtle tier-tint wash so palette still reads without hiding art */}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: art.palette.background,
+                opacity: 0.22,
+                mixBlendMode: 'color',
+              }}
+            />
+            {/* Dark vignette for text legibility at bottom */}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.55) 100%)',
+              }}
+            />
+          </>
         )}
 
         {/* SVG ornament layer — tier-based */}
