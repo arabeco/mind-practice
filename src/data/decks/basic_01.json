@@ -11,7 +11,7 @@
     {
       "id": "q1",
       "type": "NORMAL",
-      "sceneHook": "De modo geral",
+      "sceneHook": "Supermercado lotado, fim do dia",
       "metadata": {
         "tensao": 2,
         "ambiente": "Publico",
@@ -22,41 +22,41 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Quando alguem furra sua vez na fila, voce..."
+          "texto": "Alguem furra a fila na sua frente sem olhar pra tras. Voce..."
         }
       ],
       "options": [
         {
-          "text": "Fala na hora, sem drama.",
+          "text": "Falo na hora: 'Amigo, a fila e ali atras.'",
           "subtext": "Marca territorio",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 2, "harmonia": -1 },
+          "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 },
           "feedback": "Direto. Voce nao deixa passar."
         },
         {
-          "text": "Finge que nao vi. Nao vale a energia.",
-          "subtext": "Deixa pra la",
+          "text": "Deixo quieto. Nao vale minha energia.",
+          "subtext": "Vira a pagina",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
+          "weights": { "desapego": 3, "vigor": -2, "presenca": -1 },
           "feedback": "Escolheu a paz. Nem todo combate interessa."
         },
         {
           "text": "Depende do dia — as vezes falo, as vezes passo.",
           "subtext": "Leitura do momento",
           "tone": "neutro",
-          "weights": { "filtro": 2, "harmonia": 1, "presenca": -1 },
-          "feedback": "Voce lê o momento antes de reagir."
+          "weights": { "filtro": 3, "vigor": -1, "desapego": -1, "harmonia": -1 },
+          "feedback": "Voce le o momento antes de reagir."
         }
       ]
     },
     {
       "id": "q2",
       "type": "NORMAL",
-      "sceneHook": "Alguem proximo de voce — amigo, familia",
+      "sceneHook": "Roda de amigos proximos. Clima leve",
       "metadata": {
         "tensao": 3,
-        "ambiente": "Publico",
-        "relacao": "Proximo",
+        "ambiente": "Social",
+        "relacao": "Par",
         "aposta": "Paz Emocional",
         "pilar": "ego",
         "proximidade": "alta"
@@ -64,29 +64,29 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "...faz uma piada as suas custas na frente dos outros."
+          "texto": "Um amigo solta uma piada as suas custas na frente do grupo."
         }
       ],
       "options": [
         {
-          "text": "Devolvo com outra piada. Jogo junto.",
-          "subtext": "Joga o jogo",
-          "tone": "pragmatico",
-          "weights": { "desapego": 2, "harmonia": 2, "vigor": 1, "filtro": -1 },
-          "feedback": "Voce nao leva pro pessoal."
-        },
-        {
-          "text": "Corto seco: 'Nao curti.'",
+          "text": "Corto seco: 'Nao curti essa.'",
           "subtext": "Marca o limite",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 2, "harmonia": -2 },
+          "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 },
           "feedback": "Amigo ou nao, voce tem limite claro."
         },
         {
-          "text": "Fico quieto ali, converso em particular depois.",
+          "text": "Devolvo com outra piada. Jogo junto.",
+          "subtext": "Joga o jogo",
+          "tone": "pragmatico",
+          "weights": { "harmonia": 3, "desapego": 1, "vigor": -2, "filtro": -2 },
+          "feedback": "Voce nao leva pro pessoal."
+        },
+        {
+          "text": "Falo com ele depois, em privado.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "weights": { "filtro": 3, "harmonia": 2, "presenca": -1, "desapego": -1 },
+          "weights": { "filtro": 3, "presenca": -1, "desapego": -1, "vigor": -1 },
           "feedback": "Voce separa briga publica de resolucao."
         }
       ]
@@ -94,9 +94,9 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Transito, fim de expediente, voce cansado",
+      "sceneHook": "Transito pesado. Voce ja cansado",
       "metadata": {
-        "tensao": 3,
+        "tensao": 4,
         "ambiente": "Publico",
         "relacao": "Desconhecido",
         "aposta": "Paz Emocional",
@@ -105,48 +105,48 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Carro do lado fecha voce feio. O motorista ainda te xinga."
+          "texto": "Um carro fecha voce feio e o motorista ainda te xinga pela janela."
         }
       ],
       "options": [
         {
-          "text": "Buzino e devolvo o dedo. Nao fica assim.",
+          "text": "Buzino longo e devolvo o dedo.",
           "subtext": "Reage na hora",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -3, "filtro": -2 },
-          "feedback": "Sangue quente. Nao engole."
-        },
-        {
-          "text": "Solto um palavrao so pra mim e sigo.",
-          "subtext": "Libera e passa",
-          "tone": "neutro",
-          "weights": { "filtro": 2, "desapego": 2, "vigor": -1 },
-          "feedback": "Descarrega por dentro, segue a vida."
+          "weights": { "vigor": 3, "harmonia": -2, "filtro": -1 },
+          "feedback": "Sangue quente. Voce nao engole."
         },
         {
           "text": "Nem ligo. Gente assim nao merece meu minuto.",
-          "subtext": "Totalmente desapegado",
+          "subtext": "Segue a vida",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "harmonia": 1, "vigor": -2, "presenca": -2 },
+          "weights": { "desapego": 3, "vigor": -2, "presenca": -1 },
           "feedback": "Voce nao alimenta briga de estranho."
+        },
+        {
+          "text": "Xingo sozinho no carro e sigo.",
+          "subtext": "Libera e passa",
+          "tone": "neutro",
+          "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "desapego": -1 },
+          "feedback": "Descarrega por dentro, segue a vida."
         }
       ]
     },
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Grupo de amigos — gente que voce confia",
+      "sceneHook": "Grupo de amigos que voce confia",
       "metadata": {
         "tensao": 2,
         "ambiente": "Social",
-        "relacao": "Proximo",
+        "relacao": "Par",
         "aposta": "Imagem Publica",
         "pilar": "pertencimento"
       },
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Todo mundo concorda com algo que voce acha uma besteira. O que faz?"
+          "texto": "Todo mundo concorda com algo que voce acha uma besteira. E agora?"
         }
       ],
       "options": [
@@ -154,21 +154,21 @@
           "text": "Falo. Prefiro discordar do que fingir.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "weights": { "vigor": 2, "presenca": 3, "harmonia": -1 },
+          "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 },
           "feedback": "Voce nao finge so pra caber."
         },
         {
           "text": "Concordo pra manter o clima, penso depois.",
           "subtext": "Mantem a paz",
           "tone": "evasivo",
-          "weights": { "harmonia": 3, "desapego": 1, "vigor": -2, "presenca": -2 },
+          "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 },
           "feedback": "Voce protege o clima antes da razao."
         },
         {
           "text": "Faco uma pergunta esperta pra eles repensarem.",
-          "subtext": "Discorda no esguelha",
+          "subtext": "Discorda no esguelho",
           "tone": "neutro",
-          "weights": { "filtro": 3, "presenca": 1, "harmonia": 1, "vigor": -1 },
+          "weights": { "filtro": 3, "presenca": -1, "harmonia": -1, "vigor": -1 },
           "feedback": "Voce desmonta sem brigar."
         }
       ]
@@ -180,7 +180,7 @@
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",
-        "relacao": "Proximo",
+        "relacao": "Par",
         "aposta": "Paz Emocional",
         "pilar": "ego",
         "proximidade": "alta"
@@ -193,24 +193,24 @@
       ],
       "options": [
         {
-          "text": "Avisa: 'Hoje nao, tô exausto(a).'",
-          "subtext": "Pede espaco",
+          "text": "Aviso: 'Hoje nao, tô exausto(a).'",
+          "subtext": "Nomeia o limite",
           "tone": "pragmatico",
-          "weights": { "vigor": 1, "presenca": 2, "filtro": 2, "harmonia": -1 },
+          "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 },
           "feedback": "Voce nomeia o que sente antes de errar."
         },
         {
-          "text": "Engole e responde como se nada fosse.",
+          "text": "Engulo e respondo como se nada fosse.",
           "subtext": "Nao mostra",
           "tone": "evasivo",
-          "weights": { "harmonia": 2, "filtro": 1, "vigor": -2, "presenca": -2, "desapego": -1 },
+          "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 },
           "feedback": "Voce segura — mas acumula."
         },
         {
           "text": "Estouro. Desconto na outra pessoa.",
           "subtext": "Explode",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "harmonia": -3, "filtro": -3, "presenca": 1 },
+          "weights": { "vigor": 3, "harmonia": -2, "filtro": -1 },
           "feedback": "O cansaco virou voz."
         }
       ]
@@ -218,9 +218,9 @@
     {
       "id": "q6",
       "type": "NORMAL",
-      "sceneHook": "No trabalho — colega que voce mal conhece",
+      "sceneHook": "Reuniao de trabalho. Colega de outra area",
       "metadata": {
-        "tensao": 2,
+        "tensao": 3,
         "ambiente": "Profissional",
         "relacao": "Par",
         "aposta": "Imagem Publica",
@@ -235,24 +235,24 @@
       ],
       "options": [
         {
-          "text": "Corrige na hora: 'Legal, foi o que falei outro dia ne.'",
+          "text": "Corrijo na hora: 'Legal, foi o que falei outro dia ne.'",
           "subtext": "Reclama credito",
           "tone": "pragmatico",
-          "weights": { "vigor": 2, "presenca": 3, "harmonia": -1 },
+          "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 },
           "feedback": "Voce nao abre mao do que e seu."
         },
         {
-          "text": "Deixa passar. Nao vou brigar por isso aqui.",
+          "text": "Deixo passar. Nao vale brigar por isso aqui.",
           "subtext": "Nao vale a briga",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "harmonia": 2, "vigor": -2, "presenca": -2 },
+          "weights": { "desapego": 3, "presenca": -2, "vigor": -1 },
           "feedback": "Voce escolhe as batalhas com cuidado."
         },
         {
           "text": "Depois, em privado, pergunto direto pra ela.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "weights": { "filtro": 3, "vigor": 1, "harmonia": 1, "desapego": -1 },
+          "weights": { "filtro": 3, "vigor": -1, "harmonia": -1, "desapego": -1 },
           "feedback": "Voce enfrenta — mas sem plateia."
         }
       ]
@@ -279,19 +279,22 @@
           "text": "Penso ate resolver na cabeca, nem que demore.",
           "subtext": "Mastiga tudo",
           "tone": "neutro",
-          "weights": { "filtro": 3, "presenca": 1, "desapego": -2 }
+          "weights": { "filtro": 3, "desapego": -2, "harmonia": -1 },
+          "feedback": "Voce nao solta enquanto nao entende."
         },
         {
           "text": "Largo. Coloco outra coisa na cabeca.",
           "subtext": "Vira a pagina",
           "tone": "pragmatico",
-          "weights": { "desapego": 3, "harmonia": 1, "filtro": -1 }
+          "weights": { "desapego": 3, "filtro": -2, "presenca": -1 },
+          "feedback": "Voce sabe quando parar de mastigar."
         },
         {
           "text": "Falo com alguem — jogo pra fora.",
           "subtext": "Processa junto",
           "tone": "neutro",
-          "weights": { "harmonia": 2, "presenca": 2, "desapego": -1, "filtro": -1 }
+          "weights": { "presenca": 3, "desapego": -2, "filtro": -1 },
+          "feedback": "Voce pensa alto, junto."
         }
       ]
     }

@@ -68,25 +68,42 @@ const STORAGE_KEY = 'mindpractice_state';
 const UNLOCK_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
 /**
+ * Conviction amplifier based on response time.
+ * Fast instinctive answers weigh more; hesitation weighs less.
+ *   <2500ms  → 1.20x (instinto sincero)
+ *   2500–7000ms → 1.00x (pensou, normal)
+ *   >7000ms  → 0.85x (hesitou, pesa menos)
+ *   undefined → 1.00x (sem medição — default neutro)
+ */
+function convictionMultiplier(responseTimeMs?: number): number {
+  if (responseTimeMs === undefined) return 1.0;
+  if (responseTimeMs < 2500) return 1.2;
+  if (responseTimeMs > 7000) return 0.85;
+  return 1.0;
+}
+
+/**
  * Apply dampened weights to calibration axes.
- * Formula: axis += weight / min(totalResponses + 1, CALIBRATION_WINDOW)
+ * Formula: axis += weight * tensionMult * convictionMult / min(totalResponses + 1, CALIBRATION_WINDOW)
  */
 function applyDampenedWeights(
   cal: CalibrationState,
   weights: Partial<Record<StatKey, number>>,
   tone: Tone,
   tensao: number = 2,
+  responseTimeMs?: number,
 ): CalibrationState {
   const divisor = Math.min(cal.totalResponses + 1, CALIBRATION_WINDOW);
   const tensionMultiplier = 0.5 + (tensao * 0.5);
   // tensao 1 → 1.0x, tensao 2 → 1.5x, tensao 3 → 2.0x, tensao 4 → 2.5x, tensao 5 → 3.0x
+  const conviction = convictionMultiplier(responseTimeMs);
   const newAxes = { ...cal.axes };
   const newRecent = { ...cal.recentWeights };
 
   for (const key of STAT_KEYS) {
     const w = weights[key];
     if (w !== undefined) {
-      const adjustedW = w * tensionMultiplier;
+      const adjustedW = w * tensionMultiplier * conviction;
       newAxes[key] = newAxes[key] + adjustedW / divisor;
 
       // Update recent weights window for consistency tracking
@@ -223,7 +240,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
       return {
         ...state,
-        calibration: applyDampenedWeights(state.calibration, action.weights, action.tone, tensao),
+        calibration: applyDampenedWeights(state.calibration, action.weights, action.tone, tensao, action.responseTimeMs),
         activeRun:
           state.activeRun && question
             ? appendRunAnswer(state.activeRun, question.id, action.tone, action.weights, action.responseTimeMs)
