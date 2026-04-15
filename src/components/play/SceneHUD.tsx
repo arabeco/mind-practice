@@ -18,6 +18,7 @@ interface SceneHUDProps {
   phase: ScenePhase;
   soundEnabled: boolean;
   onToggleSound: () => void;
+  onExit: () => void;
   profile: ScenePresentationProfile;
 }
 
@@ -38,6 +39,7 @@ export default function SceneHUD({
   phase,
   soundEnabled,
   onToggleSound,
+  onExit,
   profile,
 }: SceneHUDProps) {
   const typeMeta = QUESTION_TYPE_META[question.type];
@@ -60,6 +62,18 @@ export default function SceneHUD({
           </div>
         </div>
 
+        <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={onExit}
+          className="inline-flex h-11 items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-3.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80 backdrop-blur-md transition-colors hover:border-white/30 hover:bg-black/55 hover:text-white"
+          aria-label="Sair da cena"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-4 w-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+          </svg>
+          Sair
+        </button>
         <button
           type="button"
           onClick={onToggleSound}
@@ -84,6 +98,7 @@ export default function SceneHUD({
             )}
           </svg>
         </button>
+        </div>
       </div>
 
       <div className="mx-auto mt-3 w-full max-w-5xl">

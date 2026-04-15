@@ -23,7 +23,31 @@
       "Bash(xargs ls:*)",
       "Bash(npx next:*)",
       "Bash(xargs grep:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(npx tsx:*)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(node -e \"const d = require\\(''./src/data/decks/basic_01.json''\\); console.log\\(''Questions:'', d.questions.length\\); d.questions.forEach\\(q => { console.log\\(q.id, q.type, ''opts:'', q.options.length, ''tensao:'', q.metadata.tensao\\); q.options.forEach\\(\\(o, i\\) => { const ws = Object.values\\(o.weights\\); const sum = ws.reduce\\(\\(a,b\\)=>a+b,0\\); const hasPos = ws.some\\(w=>w>0\\); const hasNeg = ws.some\\(w=>w<0\\); const allInRange = ws.every\\(w => Math.abs\\(w\\) >= 1 && Math.abs\\(w\\) <= 3\\); console.log\\(''  opt'', i, ''sum:'', sum, ''hasPos:'', hasPos, ''hasNeg:'', hasNeg, ''inRange:'', allInRange, ''|'', o.text.split\\('' ''\\).length, ''words''\\); }\\); }\\);\")",
+      "Bash(node -e ':*)",
+      "Bash(mv \"estoica-feminino.png\" \"estoico-feminino.png\")",
+      "Bash(mv \"justiceira-feminino.png\" \"justiceiro-feminino.png\")",
+      "Bash(rm -f \"tubarÃo-masculino.png\")",
+      "Bash(cp \"../../../arquetipos/M_TUBARÃO.png\" \"tubarao-masculino.png\")",
+      "Bash(cp \"../../../arquetipos/F_TUBARAO.png\" \"tubarao-feminino.png\")",
+      "WebSearch",
+      "WebFetch(domain:unsplash.com)",
+      "Bash(curl -sI -L \"https://images.unsplash.com/photo-YlKuMvNUD5k?w=600&q=80\")",
+      "WebFetch(domain:www.pexels.com)",
+      "Bash(curl -sI -L \"https://source.unsplash.com/featured/600x900/?dark,mirror,reflection\")",
+      "WebFetch(domain:pixabay.com)",
+      "Bash(curl -sI -L -H \"User-Agent: Mozilla/5.0\" \"https://unsplash.com/photos/YlKuMvNUD5k/download?force=true\")",
+      "Bash(curl -sI -L -H \"User-Agent: Mozilla/5.0\" \"https://picsum.photos/600/900\")",
+      "Bash(curl -sL -o C:/Users/Afonso/Desktop/mindpractice/public/covers/espelho.jpg \"https://unsplash.com/photos/YlKuMvNUD5k/download?force=true\")",
+      "Bash(curl -sI -L \"https://unsplash.com/photos/YlKuMvNUD5k/download?force=true\")",
+      "Bash(curl -sL -o C:/Users/Afonso/Desktop/mindpractice/public/covers/espelho.jpg \"https://images.unsplash.com/photo-1701303829215-8f885756d1a3?w=600&q=80&fit=crop&crop=entropy&fm=jpg\")",
+      "Bash(xxd -l 16 C:/Users/Afonso/Desktop/mindpractice/public/covers/basic_01.jpg)",
+      "Bash(xxd -l 4 C:/Users/Afonso/Desktop/mindpractice/public/covers/basic_01.jpg)",
+      "Bash(taskkill //F //IM node.exe)"
     ]
   }
 }

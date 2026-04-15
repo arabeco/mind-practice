@@ -1,7 +1,7 @@
 'use client';
 
-import { use, useCallback, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { use, useCallback, useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import SceneBackdrop from '@/components/play/SceneBackdrop';
 import SceneDelayStage from '@/components/play/SceneDelayStage';
@@ -101,6 +101,14 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
     dispatch({ type: 'NEXT_QUESTION' });
   }, [isLast, dispatch, router, deckId]);
 
+  const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
+
+  const confirmExit = useCallback(() => {
+    stopAmbience();
+    setExitConfirmOpen(false);
+    router.push('/decks');
+  }, [router, stopAmbience]);
+
   const handleToggleSound = useCallback(() => {
     const next = !prefs.soundEnabled;
     setSoundEnabled(next);
@@ -145,8 +153,50 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
         phase={phase}
         soundEnabled={prefs.soundEnabled}
         onToggleSound={handleToggleSound}
+        onExit={() => setExitConfirmOpen(true)}
         profile={presentation}
       />
+
+      <AnimatePresence>
+        {exitConfirmOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-6"
+            onClick={() => setExitConfirmOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.92 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm rounded-2xl border border-white/15 bg-[#0c0c12] p-5 shadow-[0_0_40px_rgba(0,0,0,0.6)]"
+            >
+              <h3 className="text-base font-bold text-white/92">Sair da cena?</h3>
+              <p className="mt-1.5 text-xs text-white/55">Seu progresso neste deck sera perdido.</p>
+              <div className="mt-5 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setExitConfirmOpen(false)}
+                  className="flex-1 rounded-full border border-white/20 bg-white/8 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-white/80 hover:bg-white/15"
+                >
+                  Continuar
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmExit}
+                  className="flex-1 rounded-full border border-red-400/40 bg-red-500/18 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-red-200 hover:bg-red-500/28"
+                >
+                  Sair
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence mode="wait">
         {(phase === 'context' || phase === 'event') && (
