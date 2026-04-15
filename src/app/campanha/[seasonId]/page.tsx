@@ -355,9 +355,9 @@ function EndingReveal({
   const [stage, setStage] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
-    const t0 = window.setTimeout(() => setStage(1), 900);   // kicker
-    const t1 = window.setTimeout(() => setStage(2), 2200);  // title + tagline
-    const t2 = window.setTimeout(() => setStage(3), 4200);  // body + rating + exit
+    const t0 = window.setTimeout(() => setStage(1), 1800);   // kicker
+    const t1 = window.setTimeout(() => setStage(2), 4800);   // title + tagline
+    const t2 = window.setTimeout(() => setStage(3), 9500);   // body + rating + exit
     return () => {
       window.clearTimeout(t0);
       window.clearTimeout(t1);
@@ -365,8 +365,19 @@ function EndingReveal({
     };
   }, []);
 
+  const skipReveal = () => setStage(3);
+
   return (
     <div className="relative flex flex-1 flex-col items-center justify-center text-center">
+      {/* Tap-through to skip the dramatic reveal */}
+      {stage < 3 && (
+        <button
+          type="button"
+          onClick={skipReveal}
+          aria-label="Revelar final"
+          className="absolute inset-0 z-20"
+        />
+      )}
       {/* Full blackout for dramatic reveal */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -517,19 +528,31 @@ function SceneView({
     if (phase !== 'ready' && selectedIdx == null) return;
   }, [phase, selectedIdx]);
 
+  // Auto-advance timers, with a "Proximo" button available to skip ahead
+  const CONTEXT_MS = 5000;
+  const EVENT_MS = 5000;
+  useEffect(() => {
+    if (phase === 'context') {
+      const id = window.setTimeout(() => setPhase('event'), contextText ? CONTEXT_MS : 0);
+      return () => window.clearTimeout(id);
+    }
+    if (phase === 'event') {
+      const id = window.setTimeout(() => setPhase('options'), eventText ? EVENT_MS : 0);
+      return () => window.clearTimeout(id);
+    }
+  }, [phase, contextText, eventText]);
+
   const beginScene = useCallback(() => {
-    setPhase('context');
-    // Ramp: context (stays) → event after ~2.4s → options after +3.2s
-    const t1 = window.setTimeout(() => setPhase('event'), contextText ? 2400 : 0);
-    const t2 = window.setTimeout(
-      () => setPhase('options'),
-      (contextText ? 2400 : 0) + (eventText ? 3200 : 500),
-    );
-    return () => {
-      window.clearTimeout(t1);
-      window.clearTimeout(t2);
-    };
+    setPhase(contextText ? 'context' : eventText ? 'event' : 'options');
   }, [contextText, eventText]);
+
+  const advancePhase = useCallback(() => {
+    setPhase(p => {
+      if (p === 'context') return eventText ? 'event' : 'options';
+      if (p === 'event') return 'options';
+      return p;
+    });
+  }, [eventText]);
 
   useEffect(() => {
     if (selectedIdx != null) setPhase('feedback');
@@ -635,6 +658,23 @@ function SceneView({
                 </motion.p>
               )}
             </div>
+
+            {/* Next button during context/event — skip ahead if ready */}
+            {(phase === 'context' || phase === 'event') && (
+              <motion.button
+                type="button"
+                onClick={advancePhase}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="mt-5 flex items-center justify-center gap-2 self-end rounded-full border border-white/20 bg-white/8 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70 backdrop-blur-md hover:border-white/35 hover:bg-white/14 hover:text-white/95"
+              >
+                Proximo
+                <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </motion.button>
+            )}
 
             {/* Options with Hold — only after event ramp completes */}
             {(phase === 'options' || phase === 'feedback') && (
