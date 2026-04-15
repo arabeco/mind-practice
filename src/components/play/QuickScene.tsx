@@ -41,12 +41,8 @@ function seededShuffle<T>(arr: T[], seed: string): T[] {
   return copy;
 }
 
-const INTENSITY_ORDER: AnswerIntensity[] = ['alta', 'media', 'baixa'];
-const INTENSITY_HINT: Record<AnswerIntensity, string> = {
-  alta: 'É exatamente eu',
-  media: 'Faz sentido',
-  baixa: 'Depende do dia',
-};
+// Order left → right: crescente (hesitante → convicto)
+const INTENSITY_ORDER: AnswerIntensity[] = ['baixa', 'media', 'alta'];
 
 export default function QuickScene({
   question,
@@ -211,36 +207,36 @@ export default function QuickScene({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="mt-6 flex flex-col items-center"
+            className="mt-8 flex flex-col items-center"
           >
-            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
+            <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.32em] text-white/40">
               Quanto isso é você?
             </p>
-            <div className="flex items-center justify-center gap-5">
+            <div className="flex items-end justify-center gap-6">
               {INTENSITY_ORDER.map((lvl) => {
-                const holdColor = STAT_COLORS[getDominantAxis(shuffled[picking].weights)];
-                const sizes: Record<AnswerIntensity, number> = { alta: 56, media: 44, baixa: 32 };
+                const sizes: Record<AnswerIntensity, number> = { baixa: 22, media: 32, alta: 46 };
+                const borderOpacity: Record<AnswerIntensity, number> = { baixa: 0.28, media: 0.45, alta: 0.7 };
+                const fillOpacity: Record<AnswerIntensity, number> = { baixa: 0.04, media: 0.08, alta: 0.16 };
                 const size = sizes[lvl];
-                const fillOpacity = lvl === 'alta' ? 1 : lvl === 'media' ? 0.6 : 0.3;
                 return (
                   <button
                     key={lvl}
                     type="button"
                     onClick={() => commit(picking, lvl)}
-                    className="flex flex-col items-center gap-2 transition-transform active:scale-90"
+                    className="group flex flex-col items-center gap-2.5 transition-transform active:scale-90"
+                    aria-label={INTENSITY_LABELS[lvl]}
                   >
                     <span
-                      className="rounded-full border-2"
+                      className="rounded-full border transition-all group-hover:scale-110"
                       style={{
                         width: size,
                         height: size,
-                        borderColor: holdColor,
-                        backgroundColor: holdColor,
-                        opacity: fillOpacity,
-                        boxShadow: `0 0 ${size / 3}px ${holdColor}66`,
+                        borderColor: `rgba(255,255,255,${borderOpacity[lvl]})`,
+                        backgroundColor: `rgba(255,255,255,${fillOpacity[lvl]})`,
+                        boxShadow: lvl === 'alta' ? '0 0 14px rgba(255,255,255,0.08)' : undefined,
                       }}
                     />
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">
+                    <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/45 group-hover:text-white/80">
                       {INTENSITY_LABELS[lvl]}
                     </span>
                   </button>
@@ -250,7 +246,7 @@ export default function QuickScene({
             <button
               type="button"
               onClick={() => setPicking(null)}
-              className="mt-5 text-[10px] uppercase tracking-[0.22em] text-white/35 hover:text-white/60"
+              className="mt-6 text-[10px] uppercase tracking-[0.22em] text-white/25 hover:text-white/55"
             >
               voltar
             </button>
