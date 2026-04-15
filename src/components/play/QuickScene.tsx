@@ -151,23 +151,25 @@ export default function QuickScene({
           const dominantAxis = getDominantAxis(option.weights);
           const holdColor = STAT_COLORS[dominantAxis];
           const isFocused = picking === i;
-          const isDimmed =
-            (picking !== null && picking !== i) ||
-            (holdingIdx !== null && holdingIdx !== i);
+          const isHidden = picking !== null && picking !== i;
+          const isDimmed = holdingIdx !== null && holdingIdx !== i;
 
           return (
             <motion.div
               key={`${question.id}-${i}`}
               initial={{ opacity: 0, y: 12 }}
               animate={{
-                opacity: isDimmed ? 0.12 : 1,
+                opacity: isHidden ? 0 : isDimmed ? 0.12 : 1,
                 y: 0,
                 scale: isDimmed ? 0.97 : 1,
+                height: isHidden ? 0 : 'auto',
+                marginTop: isHidden ? -8 : 0,
               }}
               transition={{
                 delay: picking === null && holdingIdx === null ? 0.35 + i * 0.07 : 0,
                 duration: 0.3,
               }}
+              style={{ pointerEvents: isHidden ? 'none' : 'auto', overflow: 'hidden' }}
             >
               {picking === null ? (
                 <HoldButton
@@ -185,91 +187,73 @@ export default function QuickScene({
                 </HoldButton>
               ) : (
                 <div
-                  className={`w-full rounded-2xl border px-4 py-3.5 text-left ${
-                    isFocused
-                      ? 'border-white/30 bg-white/10'
-                      : 'border-white/8 bg-white/4'
-                  }`}
-                  style={
-                    isFocused
-                      ? { boxShadow: `0 0 22px ${holdColor}33` }
-                      : undefined
-                  }
+                  className="w-full rounded-2xl border px-4 py-3.5 text-left"
+                  style={{
+                    borderColor: isFocused ? `${holdColor}66` : 'rgba(255,255,255,0.08)',
+                    backgroundColor: isFocused ? `${holdColor}14` : 'rgba(255,255,255,0.04)',
+                    boxShadow: isFocused ? `0 0 22px ${holdColor}33` : undefined,
+                  }}
                 >
                   <OptionRow option={option} index={i} holdColor={holdColor} />
                 </div>
               )}
-
             </motion.div>
           );
         })}
       </div>
 
-      {/* Intensity picker (bottom-docked modal when an option is picked) */}
+      {/* Intensity dots — inline, below the focused option */}
       <AnimatePresence>
         {picking !== null && (
           <motion.div
-            key="intensity-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-40 flex items-end justify-center bg-black/55 backdrop-blur-sm"
-            onClick={() => setPicking(null)}
+            key="intensity-dots"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="mt-6 flex flex-col items-center"
           >
-            <motion.div
-              key="intensity-panel"
-              initial={{ y: 60, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 60, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-md rounded-t-3xl border-t border-white/15 bg-[#0c0c12]/95 px-5 pb-8 pt-5 shadow-[0_-20px_60px_rgba(0,0,0,0.6)]"
-            >
-              <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/25" />
-              <p className="mb-1 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
-                Quanto isso é você?
-              </p>
-              <p className="mb-4 text-center text-[13px] leading-snug text-white/80">
-                {shuffled[picking].text}
-              </p>
-              <div className="flex flex-col gap-2">
-                {INTENSITY_ORDER.map((lvl) => {
-                  const holdColor = STAT_COLORS[getDominantAxis(shuffled[picking].weights)];
-                  return (
-                    <button
-                      key={lvl}
-                      type="button"
-                      onClick={() => commit(picking, lvl)}
-                      className="flex items-center justify-between rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-left backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/12 active:scale-[0.98]"
+            <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
+              Quanto isso é você?
+            </p>
+            <div className="flex items-center justify-center gap-5">
+              {INTENSITY_ORDER.map((lvl) => {
+                const holdColor = STAT_COLORS[getDominantAxis(shuffled[picking].weights)];
+                const sizes: Record<AnswerIntensity, number> = { alta: 56, media: 44, baixa: 32 };
+                const size = sizes[lvl];
+                const fillOpacity = lvl === 'alta' ? 1 : lvl === 'media' ? 0.6 : 0.3;
+                return (
+                  <button
+                    key={lvl}
+                    type="button"
+                    onClick={() => commit(picking, lvl)}
+                    className="flex flex-col items-center gap-2 transition-transform active:scale-90"
+                  >
+                    <span
+                      className="rounded-full border-2"
                       style={{
-                        borderLeftWidth: '4px',
-                        borderLeftColor:
-                          lvl === 'alta'
-                            ? holdColor
-                            : lvl === 'media'
-                            ? `${holdColor}99`
-                            : `${holdColor}44`,
+                        width: size,
+                        height: size,
+                        borderColor: holdColor,
+                        backgroundColor: holdColor,
+                        opacity: fillOpacity,
+                        boxShadow: `0 0 ${size / 3}px ${holdColor}66`,
                       }}
-                    >
-                      <span className="text-[14px] font-semibold text-white/92">
-                        {INTENSITY_LABELS[lvl]}
-                      </span>
-                      <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">
-                        {INTENSITY_HINT[lvl]}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-              <button
-                type="button"
-                onClick={() => setPicking(null)}
-                className="mt-3 w-full py-2 text-center text-[10px] uppercase tracking-[0.22em] text-white/40 hover:text-white/70"
-              >
-                voltar
-              </button>
-            </motion.div>
+                    />
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">
+                      {INTENSITY_LABELS[lvl]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={() => setPicking(null)}
+              className="mt-5 text-[10px] uppercase tracking-[0.22em] text-white/35 hover:text-white/60"
+            >
+              voltar
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
