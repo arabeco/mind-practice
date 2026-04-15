@@ -5,11 +5,21 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
-import { getWeeklyFreeDeckIds, ALL_DECKS } from '@/data/decks/index';
+import { getWeeklyFreeDeckIds, ALL_DECKS, getDeckById } from '@/data/decks/index';
 import type { Deck } from '@/types/game';
 import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
 import MiniRadar from '@/components/MiniRadar';
+import {
+  CURRENT_SEASON_ID,
+  getCurrentSeason,
+  isSeasonActive,
+  daysRemainingInSeason,
+  canPlayCampaignNow,
+  msUntilNextUnlock,
+  formatCountdown,
+} from '@/lib/season';
+import { getDeckArt } from '@/lib/deckArt';
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 const fadeUp = { hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.4 } } };
@@ -25,6 +35,25 @@ export default function Home() {
   const [archetypeChanged, setArchetypeChanged] = useState(false);
 
   const archetype = getArchetype();
+
+  // Campaign hero
+  const season = getCurrentSeason();
+  const seasonActive = isSeasonActive();
+  const campaignDeck = getDeckById(season.campaignDeckId);
+  const campaignProgress = state.campaigns?.[season.id] ?? null;
+  const campaignArt = campaignDeck ? getDeckArt(campaignDeck) : null;
+  const campaignUnlocked = canPlayCampaignNow(campaignProgress);
+  const campaignFinished = !!campaignProgress?.endingId;
+  const campaignDayNumber = (campaignProgress?.path.length ?? 0) + (campaignUnlocked && !campaignFinished ? 1 : 0);
+  const campaignTotalDays = 7;
+  const daysLeftInSeason = daysRemainingInSeason();
+  const [nowTick, setNowTick] = useState(() => Date.now());
+  useEffect(() => {
+    if (campaignUnlocked || campaignFinished) return;
+    const id = setInterval(() => setNowTick(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [campaignUnlocked, campaignFinished]);
+  const unlockIn = msUntilNextUnlock(campaignProgress, new Date(nowTick));
 
   // Check if archetype changed since last visit
   useEffect(() => {
@@ -48,12 +77,12 @@ export default function Home() {
 
   // Suggestions: uncompleted unlocked decks first, then weekly free
   const suggestions = ALL_DECKS
-    .filter(d => !(d.deckId in state.completedDecks) && (!isDeckLocked(d.deckId) || weeklyFree.includes(d.deckId)))
+    .filter(d => d.category !== 'campanha' && !(d.deckId in state.completedDecks) && (!isDeckLocked(d.deckId) || weeklyFree.includes(d.deckId)))
     .slice(0, 3);
 
   // Premium teaser: locked decks
   const premiumDecks = ALL_DECKS
-    .filter(d => isDeckLocked(d.deckId) && !weeklyFree.includes(d.deckId))
+    .filter(d => d.category !== 'campanha' && isDeckLocked(d.deckId) && !weeklyFree.includes(d.deckId))
     .slice(0, 3);
 
   const handlePlay = () => {
@@ -98,6 +127,116 @@ export default function Home() {
         </div>
         <MiniRadar axes={state.calibration.axes} size={120} />
       </motion.div>
+
+      {/* Campaign hero — centered, highlighted */}
+      {seasonActive && campaignDeck && campaignArt && (
+        <motion.button
+          variants={fadeUp}
+          onClick={() => router.push(`/campanha/${CURRENT_SEASON_ID}`)}
+          className="relative w-full overflow-hidden rounded-2xl border border-accent-purple/30 text-left"
+          style={{
+            boxShadow: '0 0 36px rgba(139,92,246,0.22), inset 0 0 40px rgba(212,175,55,0.06)',
+          }}
+        >
+          {/* Cover backdrop */}
+          {campaignArt.imageSrc ? (
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url(${campaignArt.imageSrc})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            />
+          ) : (
+            <div className="absolute inset-0" style={{ background: campaignArt.palette.background }} />
+          )}
+          {/* Darken overlay */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(8,4,14,0.35) 0%, rgba(8,4,14,0.78) 60%, rgba(8,4,14,0.94) 100%)',
+            }}
+          />
+          {/* Purple/gold sheen */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(circle at 50% 110%, rgba(139,92,246,0.35) 0%, transparent 60%), radial-gradient(circle at 50% 0%, rgba(212,175,55,0.16) 0%, transparent 55%)',
+            }}
+          />
+
+          <div className="relative flex flex-col items-center gap-3 px-5 py-6 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent-gold/30 bg-black/30 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.28em] text-accent-gold/90 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-gold shadow-[0_0_10px_rgba(212,175,55,0.9)]" />
+              Temporada ativa
+            </span>
+
+            <div className="flex flex-col items-center gap-1">
+              <h2 className="text-lg font-bold leading-tight text-white/95" style={{ textShadow: '0 2px 16px rgba(0,0,0,0.6)' }}>
+                {campaignDeck.name}
+              </h2>
+              <p className="text-[11px] text-white/60 max-w-[16rem]">{campaignArt.caption}</p>
+            </div>
+
+            {/* Day progress */}
+            <div className="mt-1 flex items-center gap-2">
+              {Array.from({ length: campaignTotalDays }).map((_, i) => {
+                const done = i < (campaignProgress?.path.length ?? 0);
+                const current = i === (campaignProgress?.path.length ?? 0) && campaignUnlocked && !campaignFinished;
+                return (
+                  <span
+                    key={i}
+                    className={`h-1.5 rounded-full transition-all ${
+                      done
+                        ? 'w-5 bg-accent-gold shadow-[0_0_8px_rgba(212,175,55,0.7)]'
+                        : current
+                        ? 'w-5 bg-accent-purple shadow-[0_0_10px_rgba(139,92,246,0.9)]'
+                        : 'w-3 bg-white/15'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Status line */}
+            <div className="mt-1 flex items-center gap-2 text-[11px] text-white/70">
+              {campaignFinished ? (
+                <span className="font-semibold text-accent-gold">Jornada concluida</span>
+              ) : campaignUnlocked ? (
+                <>
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.9)] animate-pulse" />
+                  <span className="font-semibold text-white/90">
+                    Dia {Math.max(1, campaignDayNumber)} / {campaignTotalDays} disponivel
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-white/50">Proxima cena em</span>
+                  <span className="font-mono font-semibold text-white/90">{formatCountdown(unlockIn)}</span>
+                </>
+              )}
+            </div>
+
+            {/* CTA */}
+            <span
+              className={`mt-2 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-xs font-semibold tracking-[0.14em] uppercase ${
+                campaignUnlocked
+                  ? 'border-accent-purple/50 bg-accent-purple/20 text-white shadow-[0_0_24px_rgba(139,92,246,0.4)]'
+                  : 'border-white/20 bg-white/5 text-white/70'
+              }`}
+            >
+              {campaignFinished ? 'Ver desfecho' : campaignUnlocked ? 'Entrar na cena' : 'Abrir livro'}
+            </span>
+
+            <span className="text-[9px] uppercase tracking-[0.24em] text-white/35">
+              {daysLeftInSeason} dia{daysLeftInSeason !== 1 ? 's' : ''} de temporada
+            </span>
+          </div>
+        </motion.button>
+      )}
 
       {/* Archetype change banner */}
       <AnimatePresence>

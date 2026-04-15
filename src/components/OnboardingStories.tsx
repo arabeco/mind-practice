@@ -97,11 +97,11 @@ export default function OnboardingStories({ onComplete }: OnboardingStoriesProps
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  finish('/play/basic_01');
+                  finish('/');
                 }}
                 className="mt-8 px-8 py-3 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-medium backdrop-blur-sm hover:bg-cyan-500/30 transition-colors relative z-10"
               >
-                Jogar agora
+                Entrar
               </button>
             )}
           </motion.div>
