@@ -14,7 +14,22 @@ import {
   isSeasonActive,
   msUntilNextUnlock,
 } from '@/lib/season';
-import type { CampaignProgress, Option, Question } from '@/types/game';
+import HoldButton from '@/components/HoldButton';
+import { STAT_COLORS, STAT_KEYS } from '@/types/game';
+import type { CampaignEnding, CampaignProgress, Option, Question, StatKey } from '@/types/game';
+
+function getDominantAxis(weights: Partial<Record<StatKey, number>>): StatKey {
+  let max: StatKey = 'vigor';
+  let maxVal = -Infinity;
+  for (const key of STAT_KEYS) {
+    const v = weights[key];
+    if (v !== undefined && v > maxVal) {
+      maxVal = v;
+      max = key;
+    }
+  }
+  return max;
+}
 
 export default function CampaignPage({ params }: { params: Promise<{ seasonId: string }> }) {
   const { seasonId } = use(params);
@@ -158,56 +173,12 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
 
         {/* Ending state */}
         {ending ? (
-          <div className="flex flex-1 flex-col items-center justify-center text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="w-full rounded-2xl border border-purple-300/25 bg-black/60 p-6 backdrop-blur-xl shadow-[0_0_48px_rgba(139,92,246,0.18)]"
-            >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-purple-300/80">Final alcancado</p>
-              <h1 className="mt-2 text-2xl font-black leading-tight text-white/95">{ending.title}</h1>
-              <p className="mt-2 text-sm italic text-white/70">&ldquo;{ending.tagline}&rdquo;</p>
-              <p className="mt-4 text-[13px] leading-relaxed text-white/70">{ending.description}</p>
-              {ending.flavor && (
-                <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">{ending.flavor}</p>
-              )}
-
-              {/* Rating */}
-              <div className="mt-6 border-t border-white/12 pt-5">
-                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                  {rating ? 'Obrigado pela avaliacao' : 'Avalie a campanha'}
-                </p>
-                <div className="flex items-center justify-center gap-1">
-                  {[1, 2, 3, 4, 5].map(r => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => !rating && handleRate(r)}
-                      disabled={!!rating}
-                      className={`transition-transform ${!rating ? 'hover:scale-110' : ''}`}
-                    >
-                      <svg
-                        className={`h-7 w-7 ${rating && r <= rating ? 'text-amber-300' : 'text-white/25'}`}
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2l2.9 7h7.1l-5.8 4.2 2.2 7.1L12 16l-6.4 4.3 2.2-7.1L2 9h7.1z" />
-                      </svg>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => router.push('/')}
-                className="mt-6 w-full rounded-full border border-white/25 bg-white/10 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90 hover:bg-white/18"
-              >
-                Voltar ao inicio
-              </button>
-            </motion.div>
-          </div>
+          <EndingReveal
+            ending={ending}
+            rating={rating}
+            onRate={handleRate}
+            onExit={() => router.push('/')}
+          />
         ) : !progress ? (
           /* Hub — campaign not started yet */
           <HubView
@@ -366,6 +337,150 @@ function LockedView({
 // Scene view
 // ============================================================================
 
+// ============================================================================
+// Ending reveal — dramatic final scene
+// ============================================================================
+
+function EndingReveal({
+  ending,
+  rating,
+  onRate,
+  onExit,
+}: {
+  ending: CampaignEnding;
+  rating: number | null;
+  onRate: (r: number) => void;
+  onExit: () => void;
+}) {
+  const [stage, setStage] = useState<0 | 1 | 2 | 3>(0);
+
+  useEffect(() => {
+    const t0 = window.setTimeout(() => setStage(1), 900);   // kicker
+    const t1 = window.setTimeout(() => setStage(2), 2200);  // title + tagline
+    const t2 = window.setTimeout(() => setStage(3), 4200);  // body + rating + exit
+    return () => {
+      window.clearTimeout(t0);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, []);
+
+  return (
+    <div className="relative flex flex-1 flex-col items-center justify-center text-center">
+      {/* Full blackout for dramatic reveal */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="pointer-events-none absolute inset-0 -mx-4 -mt-5 bg-black"
+      />
+      {/* Golden godray */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: stage >= 1 ? 1 : 0 }}
+        transition={{ duration: 2 }}
+        className="pointer-events-none absolute inset-0 -mx-4 -mt-5"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 40%, rgba(212,175,55,0.22) 0%, rgba(139,92,246,0.12) 30%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative z-10 w-full">
+        <AnimatePresence>
+          {stage >= 1 && (
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: '0.5em' }}
+              animate={{ opacity: 1, letterSpacing: '0.32em' }}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
+              className="text-[11px] font-semibold uppercase text-accent-gold/85"
+            >
+              Final alcancado
+            </motion.p>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {stage >= 2 && (
+            <>
+              <motion.h1
+                initial={{ opacity: 0, y: 20, scale: 0.94 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-4 text-4xl font-black leading-[1.05] tracking-tight text-white"
+                style={{ textShadow: '0 4px 32px rgba(212,175,55,0.35)' }}
+              >
+                {ending.title}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                className="mt-4 text-base italic text-white/75"
+              >
+                &ldquo;{ending.tagline}&rdquo;
+              </motion.p>
+            </>
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {stage >= 3 && (
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mt-8 rounded-2xl border border-purple-300/25 bg-black/55 p-5 backdrop-blur-xl"
+            >
+              <p className="text-[13px] leading-relaxed text-white/75">{ending.description}</p>
+              {ending.flavor && (
+                <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-accent-gold/70">
+                  {ending.flavor}
+                </p>
+              )}
+
+              <div className="mt-6 border-t border-white/12 pt-5">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                  {rating ? 'Obrigado pela avaliacao' : 'Avalie a campanha'}
+                </p>
+                <div className="flex items-center justify-center gap-1">
+                  {[1, 2, 3, 4, 5].map(r => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => !rating && onRate(r)}
+                      disabled={!!rating}
+                      className={`transition-transform ${!rating ? 'hover:scale-110' : ''}`}
+                    >
+                      <svg
+                        className={`h-7 w-7 ${rating && r <= rating ? 'text-amber-300' : 'text-white/25'}`}
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M12 2l2.9 7h7.1l-5.8 4.2 2.2 7.1L12 16l-6.4 4.3 2.2-7.1L2 9h7.1z" />
+                      </svg>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={onExit}
+                className="mt-6 w-full rounded-full border border-white/25 bg-white/10 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90 hover:bg-white/18"
+              >
+                Voltar ao inicio
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+type ScenePhase = 'ready' | 'context' | 'event' | 'options' | 'feedback';
+
 function SceneView({
   scene,
   selectedIdx,
@@ -389,102 +504,232 @@ function SceneView({
   const eventText = scene.slides.find(s => s.tipo === 'evento')?.texto;
 
   const selected = selectedIdx != null ? scene.options[selectedIdx] : null;
+  const isFinalChapter = step >= totalSteps;
+  const willTriggerEnding = selected?.endingId != null;
+
+  // Phase machine — brings back the "preparo" beat so campaign feels like decks
+  const [phase, setPhase] = useState<ScenePhase>('ready');
+  useEffect(() => {
+    setPhase('ready');
+  }, [scene.id]);
+
+  useEffect(() => {
+    if (phase !== 'ready' && selectedIdx == null) return;
+  }, [phase, selectedIdx]);
+
+  const beginScene = useCallback(() => {
+    setPhase('context');
+    // Ramp: context (stays) → event after ~2.4s → options after +3.2s
+    const t1 = window.setTimeout(() => setPhase('event'), contextText ? 2400 : 0);
+    const t2 = window.setTimeout(
+      () => setPhase('options'),
+      (contextText ? 2400 : 0) + (eventText ? 3200 : 500),
+    );
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [contextText, eventText]);
+
+  useEffect(() => {
+    if (selectedIdx != null) setPhase('feedback');
+  }, [selectedIdx]);
 
   return (
     <motion.div
       key={scene.id}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.45 }}
       className="flex flex-1 flex-col"
     >
-      <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-purple-300/70">
-        {scene.sceneHook ?? `Cena ${step}`}
-      </p>
-      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/38">Dia {step} de {totalSteps}</p>
-
-      <div className="mt-4 space-y-3">
-        {contextText && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.1, duration: 0.4 }}
-            className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-[13px] leading-relaxed text-white/72"
-          >
-            {contextText}
-          </motion.p>
-        )}
-        {eventText && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="rounded-xl border border-amber-300/18 bg-gradient-to-b from-amber-500/8 to-black/50 px-4 py-3 text-[14px] font-semibold leading-relaxed text-white/92"
-          >
-            {eventText}
-          </motion.p>
-        )}
-      </div>
-
-      {/* Options — unchosen fade out after answer */}
-      <div className="mt-5 space-y-2">
-        {scene.options.map((opt, i) => {
-          const isSelected = selectedIdx === i;
-          const isHidden = selectedIdx != null && !isSelected;
-          return (
-            <motion.button
-              key={i}
-              type="button"
-              disabled={selectedIdx != null}
-              onClick={() => onAnswer(i)}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{
-                opacity: isHidden ? 0 : 1,
-                y: 0,
-                scale: isHidden ? 0.96 : 1,
-              }}
-              transition={{ delay: 0.5 + i * 0.08, duration: 0.35 }}
-              className={`w-full rounded-xl border px-4 py-3 text-left backdrop-blur-md transition-all ${
-                isSelected
-                  ? 'border-purple-300/50 bg-purple-500/20 shadow-[0_0_24px_rgba(139,92,246,0.3)]'
-                  : 'border-white/12 bg-white/6 hover:border-white/25 hover:bg-white/10'
-              } ${isHidden ? 'pointer-events-none' : ''}`}
-            >
-              <p className="text-[13px] leading-snug text-white/90">{opt.text}</p>
-              <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/40">{opt.subtext}</p>
-            </motion.button>
-          );
-        })}
-      </div>
-
-      {/* Feedback of chosen option */}
+      {/* Ending transition — fade-to-black when final choice is made */}
       <AnimatePresence>
-        {selected && (
+        {willTriggerEnding && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="mt-4 rounded-xl border border-purple-300/25 bg-gradient-to-b from-purple-500/15 to-black/60 px-4 py-3"
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-300/80">Consequencia</p>
-            <p className="mt-1 text-[13px] leading-relaxed italic text-white/82">{selected.feedback}</p>
-          </motion.div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.4, delay: 0.2 }}
+            className="pointer-events-none fixed inset-0 z-40 bg-black"
+          />
         )}
       </AnimatePresence>
 
-      {/* Next scene countdown — appears after answer (if not ending) */}
-      <AnimatePresence>
-        {showNextCountdown && !progress.endingId && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mt-auto pt-6"
+      <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-purple-300/70">
+        {scene.sceneHook ?? `Cena ${step}`}
+      </p>
+      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-white/38">
+        {isFinalChapter ? 'CAPITULO FINAL' : `Dia ${step} de ${totalSteps}`}
+      </p>
+
+      {/* ============== READY PHASE — preparation gate ================== */}
+      <AnimatePresence mode="wait">
+        {phase === 'ready' && (
+          <motion.button
+            key="ready"
+            type="button"
+            onClick={beginScene}
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.96 }}
+            transition={{ duration: 0.5 }}
+            className="mt-auto mb-auto flex flex-col items-center justify-center gap-4 py-10"
           >
-            <div className="rounded-2xl border border-white/12 bg-black/55 px-4 py-4 text-center backdrop-blur-xl">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/48">Proxima cena abre as 00:00</p>
-              <p className="mt-1 font-mono text-xl font-bold text-white/90">{formatCountdown(msUntilNext)}</p>
+            <motion.div
+              animate={{
+                scale: [1, 1.08, 1],
+                opacity: [0.55, 1, 0.55],
+              }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              className="flex h-20 w-20 items-center justify-center rounded-full border border-purple-300/35"
+              style={{
+                boxShadow: isFinalChapter
+                  ? '0 0 48px rgba(212,175,55,0.5), inset 0 0 24px rgba(139,92,246,0.3)'
+                  : '0 0 36px rgba(139,92,246,0.35)',
+                background: isFinalChapter
+                  ? 'radial-gradient(circle, rgba(212,175,55,0.25), rgba(139,92,246,0.15))'
+                  : 'radial-gradient(circle, rgba(139,92,246,0.2), transparent)',
+              }}
+            >
+              <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke={isFinalChapter ? '#d4af37' : '#c084fc'} strokeWidth={1.6}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m-6-8h12" />
+              </svg>
+            </motion.div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/50">
+              {isFinalChapter ? 'O desfecho aguarda' : 'Respire antes de entrar'}
+            </p>
+            <p className="text-base font-bold uppercase tracking-[0.18em] text-white/90">
+              Tocar para abrir a cena
+            </p>
+          </motion.button>
+        )}
+
+        {/* ============== SCENE TEXT PHASES ================== */}
+        {(phase === 'context' || phase === 'event' || phase === 'options' || phase === 'feedback') && (
+          <motion.div
+            key="scene"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-1 flex-col"
+          >
+            <div className="mt-4 space-y-3">
+              {contextText && (
+                <motion.p
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.55 }}
+                  className="rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-[13px] leading-relaxed text-white/72"
+                >
+                  {contextText}
+                </motion.p>
+              )}
+              {eventText && (phase === 'event' || phase === 'options' || phase === 'feedback') && (
+                <motion.p
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded-xl border border-amber-300/20 bg-gradient-to-b from-amber-500/10 to-black/55 px-4 py-3 text-[14px] font-semibold leading-relaxed text-white/95 shadow-[0_0_24px_rgba(212,175,55,0.1)]"
+                >
+                  {eventText}
+                </motion.p>
+              )}
             </div>
+
+            {/* Options with Hold — only after event ramp completes */}
+            {(phase === 'options' || phase === 'feedback') && (
+              <div className="mt-5 space-y-2">
+                <p className="mb-1 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/35">
+                  Segure para confirmar
+                </p>
+                {scene.options.map((opt, i) => {
+                  const isSelected = selectedIdx === i;
+                  const isHidden = selectedIdx != null && !isSelected;
+                  const holdColor = STAT_COLORS[getDominantAxis(opt.weights)];
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{
+                        opacity: isHidden ? 0 : 1,
+                        y: 0,
+                        scale: isHidden ? 0.96 : 1,
+                      }}
+                      transition={{ delay: phase === 'options' ? 0.15 + i * 0.08 : 0, duration: 0.35 }}
+                      className={isHidden ? 'pointer-events-none' : ''}
+                    >
+                      <HoldButton
+                        onConfirm={() => onAnswer(i)}
+                        holdColor={holdColor}
+                        disabled={selectedIdx != null}
+                        className={`w-full rounded-xl border px-4 py-3 text-left backdrop-blur-md transition-colors ${
+                          isSelected
+                            ? 'border-purple-300/50 bg-purple-500/20 shadow-[0_0_28px_rgba(139,92,246,0.35)]'
+                            : 'border-white/12 bg-white/6 hover:border-white/25 hover:bg-white/10'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span
+                            className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[10px] font-bold"
+                            style={{
+                              borderColor: `${holdColor}55`,
+                              color: holdColor,
+                              backgroundColor: `${holdColor}18`,
+                            }}
+                          >
+                            {String.fromCharCode(65 + i)}
+                          </span>
+                          <div>
+                            <p className="text-[13px] leading-snug text-white/90">{opt.text}</p>
+                            {opt.subtext && (
+                              <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-white/40">
+                                {opt.subtext}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </HoldButton>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Feedback of chosen option */}
+            <AnimatePresence>
+              {selected && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                  className="mt-4 rounded-xl border border-purple-300/25 bg-gradient-to-b from-purple-500/15 to-black/60 px-4 py-3"
+                >
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-300/80">
+                    Consequencia
+                  </p>
+                  <p className="mt-1 text-[13px] leading-relaxed italic text-white/82">{selected.feedback}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Next scene countdown — appears after answer (if not ending) */}
+            <AnimatePresence>
+              {showNextCountdown && !progress.endingId && !willTriggerEnding && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="mt-auto pt-6"
+                >
+                  <div className="rounded-2xl border border-white/12 bg-black/55 px-4 py-4 text-center backdrop-blur-xl">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/48">
+                      Proxima cena abre as 00:00
+                    </p>
+                    <p className="mt-1 font-mono text-xl font-bold text-white/90">{formatCountdown(msUntilNext)}</p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         )}
       </AnimatePresence>
