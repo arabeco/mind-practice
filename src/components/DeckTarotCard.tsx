@@ -58,7 +58,7 @@ export default function DeckTarotCard({
       onClick={onClick}
       disabled={locked}
       className={`group relative w-full overflow-hidden rounded-2xl text-left transition-all ${
-        locked ? 'cursor-not-allowed opacity-50 grayscale-[0.3]' : 'hover:brightness-110'
+        locked ? 'cursor-not-allowed' : 'hover:brightness-110'
       } ${selected ? 'ring-2 ring-cyan-300/50 ring-offset-2 ring-offset-[#0a0a0f]' : ''}`}
     >
       {/* Outer glow for tier 3+ */}
@@ -101,7 +101,7 @@ export default function DeckTarotCard({
               className="absolute inset-0 bg-cover bg-center"
               style={{
                 backgroundImage: `url(${art.imageSrc})`,
-                opacity: locked ? 0.55 : 1,
+                opacity: 1,
               }}
             />
             {/* Subtle tier-tint wash so palette still reads without hiding art */}
@@ -249,15 +249,22 @@ export default function DeckTarotCard({
           )}
         </div>
 
-        {/* Lock overlay — keeps bottom name visible */}
+        {/* Lock overlay — image stays visible underneath */}
         {locked && (
           <>
-            <div className="absolute inset-x-0 top-0 bottom-[40%] z-20 flex items-center justify-center bg-[rgba(4,4,8,0.45)] backdrop-blur-[2px]">
-              <svg className="h-6 w-6 text-accent-gold/50" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-              </svg>
+            {/* Soft dark wash so lock reads clearly, but image still shows */}
+            <div className="absolute inset-0 z-20 bg-[rgba(4,4,8,0.35)] backdrop-blur-[1px]" />
+            {/* Centered lock chip */}
+            <div className="absolute inset-0 z-30 flex items-center justify-center">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-accent-gold/50 bg-black/55 backdrop-blur-sm"
+                style={{ boxShadow: '0 0 18px rgba(212,175,55,0.35)' }}
+              >
+                <svg className="h-5 w-5 text-accent-gold" fill="currentColor" viewBox="0 0 24 24">
+                  <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
+                </svg>
+              </div>
             </div>
-            <div className="absolute inset-x-0 bottom-0 top-[60%] z-20 bg-[rgba(4,4,8,0.3)]" />
           </>
         )}
       </div>
