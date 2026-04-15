@@ -215,8 +215,8 @@ export default function QuickScene({
             <div className="flex items-end justify-center gap-6">
               {INTENSITY_ORDER.map((lvl) => {
                 const sizes: Record<AnswerIntensity, number> = { baixa: 14, media: 18, alta: 24 };
-                const borderOpacity: Record<AnswerIntensity, number> = { baixa: 0.28, media: 0.45, alta: 0.7 };
-                const fillOpacity: Record<AnswerIntensity, number> = { baixa: 0.04, media: 0.08, alta: 0.16 };
+                const borderOpacity: Record<AnswerIntensity, number> = { baixa: 0.3, media: 0.5, alta: 0.85 };
+                const fillOpacity: Record<AnswerIntensity, number> = { baixa: 0.04, media: 0.08, alta: 0.14 };
                 const size = sizes[lvl];
                 return (
                   <button
@@ -231,9 +231,9 @@ export default function QuickScene({
                       style={{
                         width: size,
                         height: size,
-                        borderColor: `rgba(255,255,255,${borderOpacity[lvl]})`,
-                        backgroundColor: `rgba(255,255,255,${fillOpacity[lvl]})`,
-                        boxShadow: lvl === 'alta' ? '0 0 14px rgba(255,255,255,0.08)' : undefined,
+                        borderColor: `rgba(212,175,55,${borderOpacity[lvl]})`,
+                        backgroundColor: `rgba(212,175,55,${fillOpacity[lvl]})`,
+                        boxShadow: lvl === 'alta' ? '0 0 10px rgba(212,175,55,0.18)' : undefined,
                       }}
                     />
                     <span className="text-[9px] font-medium uppercase tracking-[0.2em] text-white/45 group-hover:text-white/80">
