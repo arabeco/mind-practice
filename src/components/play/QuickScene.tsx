@@ -214,7 +214,7 @@ export default function QuickScene({
             </p>
             <div className="flex items-end justify-center gap-6">
               {INTENSITY_ORDER.map((lvl) => {
-                const sizes: Record<AnswerIntensity, number> = { baixa: 22, media: 32, alta: 46 };
+                const sizes: Record<AnswerIntensity, number> = { baixa: 14, media: 18, alta: 24 };
                 const borderOpacity: Record<AnswerIntensity, number> = { baixa: 0.28, media: 0.45, alta: 0.7 };
                 const fillOpacity: Record<AnswerIntensity, number> = { baixa: 0.04, media: 0.08, alta: 0.16 };
                 const size = sizes[lvl];
