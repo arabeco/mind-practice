@@ -3,6 +3,7 @@
 import { use, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import QuickScene from '@/components/play/QuickScene';
 import SceneBackdrop from '@/components/play/SceneBackdrop';
 import SceneDelayStage from '@/components/play/SceneDelayStage';
 import SceneFeedbackStage from '@/components/play/SceneFeedbackStage';
@@ -136,6 +137,96 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
     return (
       <div className="-mb-20 flex min-h-[100dvh] items-center justify-center bg-black px-6">
         <p className="text-sm uppercase tracking-[0.28em] text-white/35">Carregando cena</p>
+      </div>
+    );
+  }
+
+  // Quick calibration format — bypass the 3-phase ritual and timer.
+  if (deck.format === 'quick') {
+    const handleQuickAnswer = (option: Option, responseTimeMs: number) => {
+      dispatch({ type: 'ANSWER', weights: option.weights, tone: option.tone, responseTimeMs });
+      vibrate(18);
+      // Auto-advance to next or finish after a short beat to let the feedback register.
+      window.setTimeout(() => {
+        if (isLast) {
+          dispatch({ type: 'FINISH_DECK' });
+          router.push(`/resultado/${deckId}`);
+        } else {
+          dispatch({ type: 'NEXT_QUESTION' });
+        }
+      }, 420);
+    };
+
+    return (
+      <div className="-mb-20 relative min-h-[100dvh] overflow-hidden bg-black">
+        <SceneBackdrop
+          profile={presentation}
+          phase="options"
+          reducedMotion={prefs.reducedMotion}
+          coverImage={getDeckArt(deck).imageSrc}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(0,0,0,0.45),rgba(0,0,0,0.75))]" />
+        <div className="relative z-10">
+          {/* Exit pill */}
+          <button
+            type="button"
+            onClick={() => setExitConfirmOpen(true)}
+            className="absolute left-4 top-4 z-20 inline-flex items-center gap-1.5 rounded-full border border-white/18 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/80 backdrop-blur-md hover:bg-black/65"
+          >
+            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            Sair
+          </button>
+          <QuickScene
+            question={question}
+            questionIdx={questionIdx}
+            totalQuestions={totalQuestions}
+            deckName={deck.name}
+            onAnswer={handleQuickAnswer}
+            enableHaptics={prefs.hapticsEnabled}
+          />
+        </div>
+
+        {/* Exit confirm modal (same as main flow) */}
+        <AnimatePresence>
+          {exitConfirmOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+              onClick={() => setExitConfirmOpen(false)}
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                onClick={e => e.stopPropagation()}
+                className="mx-5 w-full max-w-xs rounded-2xl border border-white/15 bg-[#0b0a14] p-5 text-center"
+              >
+                <p className="text-sm font-semibold text-white/90">Sair da calibragem?</p>
+                <p className="mt-1 text-[11px] text-white/55">Suas respostas ate aqui ficam salvas.</p>
+                <div className="mt-4 flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setExitConfirmOpen(false)}
+                    className="flex-1 rounded-full border border-white/18 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/80 hover:bg-white/10"
+                  >
+                    Continuar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={confirmExit}
+                    className="flex-1 rounded-full border border-red-400/50 bg-red-500/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-red-200 hover:bg-red-500/30"
+                  >
+                    Sair
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     );
   }

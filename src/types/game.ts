@@ -109,6 +109,8 @@ export interface Deck {
   tier: 1 | 2 | 3 | 4 | 5 | 6;
   difficulty: 1 | 2 | 3 | 4 | 5;
   coverImage?: string;
+  /** Optional presentation format. "quick" skips the 3-phase ritual for fast calibration decks. */
+  format?: 'quick';
   questions: Question[];
   /** Campaign only: id of the opening scene. Required when category === 'campanha'. */
   startSceneId?: string;

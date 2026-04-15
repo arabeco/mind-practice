@@ -116,12 +116,31 @@ export function getUnlockedDecks(completedDecks: Record<string, string>): string
     const prevId = DECK_UNLOCK_ORDER[i - 1];
     const prevAt = completedDecks[prevId];
     if (!prevAt) break;
+    // Calibragem decks unlock the next one immediately on completion.
+    // Non-calibragem decks still honor the 24h cooldown.
+    const prevIsCalibragem = CALIBRAGEM_IDS.has(prevId);
+    if (prevIsCalibragem) {
+      unlocked.push(deckId);
+      continue;
+    }
     const elapsed = Date.now() - new Date(prevAt).getTime();
     if (elapsed >= UNLOCK_COOLDOWN_MS) unlocked.push(deckId);
     else break;
   }
   return unlocked;
 }
+
+/** Deck IDs that belong to the "calibragem" category — fast unlock + reward. */
+const CALIBRAGEM_IDS = new Set([
+  'basic_01',
+  'espelho',
+  'mascara',
+  'roda',
+  'teste',
+  'limite',
+  'escolha',
+]);
+const CALIBRAGEM_COMPLETION_FICHAS = 5;
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -259,6 +278,11 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += 20; // weekly streak bonus
       const noTimeouts = state.activeRun ? state.activeRun.timeoutCount === 0 : false;
       if (noTimeouts) bonusFichas += 5;
+      // Calibragem completion — rewarded every time (not just first of day)
+      // because each calibragem feeds into the profile and unlocks the next one.
+      if (deckId && CALIBRAGEM_IDS.has(deckId)) {
+        bonusFichas += CALIBRAGEM_COMPLETION_FICHAS;
+      }
 
       const prevArchId = ARCHETYPES.find(a => a.name === state.activeRun?.startArchetype)?.id;
       const archetype = matchArchetype(
