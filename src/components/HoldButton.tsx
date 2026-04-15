@@ -6,6 +6,8 @@ import { HOLD_DURATION_MS } from '@/types/game';
 
 interface HoldButtonProps {
   onConfirm: () => void;
+  onHoldStart?: () => void;
+  onHoldCancel?: () => void;
   holdColor: string;
   durationMs?: number;
   disabled?: boolean;
@@ -16,6 +18,8 @@ interface HoldButtonProps {
 
 export default function HoldButton({
   onConfirm,
+  onHoldStart,
+  onHoldCancel,
   holdColor,
   durationMs,
   disabled = false,
@@ -55,14 +59,17 @@ export default function HoldButton({
     startRef.current = Date.now();
     setHolding(true);
     setProgress(0);
+    onHoldStart?.();
     rafRef.current = requestAnimationFrame(animate);
-  }, [disabled, animate]);
+  }, [disabled, animate, onHoldStart]);
 
   const handleEnd = useCallback(() => {
     cancelAnimationFrame(rafRef.current);
+    const wasHolding = !confirmedRef.current;
     setHolding(false);
     setProgress(0);
-  }, []);
+    if (wasHolding) onHoldCancel?.();
+  }, [onHoldCancel]);
 
   return (
     <button

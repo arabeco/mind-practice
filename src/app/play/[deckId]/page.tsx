@@ -17,7 +17,7 @@ import { useSceneAudio } from '@/hooks/useSceneAudio';
 import { useSceneDirector } from '@/hooks/useSceneDirector';
 import { getScenePresentationProfile } from '@/lib/scenePresentation';
 import { getDeckArt } from '@/lib/deckArt';
-import type { Option } from '@/types/game';
+import type { AnswerIntensity, Option } from '@/types/game';
 
 export default function PlayPage({ params }: { params: Promise<{ deckId: string }> }) {
   const { deckId } = use(params);
@@ -143,8 +143,8 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
 
   // Quick calibration format — bypass the 3-phase ritual and timer.
   if (deck.format === 'quick') {
-    const handleQuickAnswer = (option: Option, responseTimeMs: number) => {
-      dispatch({ type: 'ANSWER', weights: option.weights, tone: option.tone, responseTimeMs });
+    const handleQuickAnswer = (option: Option, responseTimeMs: number, intensity: AnswerIntensity) => {
+      dispatch({ type: 'ANSWER', weights: option.weights, tone: option.tone, responseTimeMs, intensity });
       vibrate(18);
       // Auto-advance to next or finish after a short beat to let the feedback register.
       window.setTimeout(() => {

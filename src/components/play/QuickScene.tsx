@@ -1,17 +1,17 @@
 'use client';
 
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import HoldButton from '@/components/HoldButton';
-import { STAT_COLORS, STAT_KEYS } from '@/types/game';
-import type { Option, Question, StatKey } from '@/types/game';
+import { INTENSITY_LABELS, STAT_COLORS, STAT_KEYS } from '@/types/game';
+import type { AnswerIntensity, Option, Question, StatKey } from '@/types/game';
 
 interface QuickSceneProps {
   question: Question;
   questionIdx: number;
   totalQuestions: number;
   deckName: string;
-  onAnswer: (option: Option, responseTimeMs: number) => void;
+  onAnswer: (option: Option, responseTimeMs: number, intensity: AnswerIntensity) => void;
   enableHaptics: boolean;
 }
 
@@ -41,11 +41,13 @@ function seededShuffle<T>(arr: T[], seed: string): T[] {
   return copy;
 }
 
-/**
- * Single-screen scene for quick calibration decks.
- * No 3-phase ritual, no 12s timer — just a prompt and hold options.
- * The player sets their own pace.
- */
+const INTENSITY_ORDER: AnswerIntensity[] = ['alta', 'media', 'baixa'];
+const INTENSITY_HINT: Record<AnswerIntensity, string> = {
+  alta: 'É exatamente eu',
+  media: 'Faz sentido',
+  baixa: 'Depende do dia',
+};
+
 export default function QuickScene({
   question,
   questionIdx,
@@ -59,7 +61,6 @@ export default function QuickScene({
     [question.id, question.options],
   );
 
-  // Prefer event slide as the prompt; fall back to context or first slide.
   const prompt = useMemo(() => {
     const event = question.slides.find(s => s.tipo === 'evento')?.texto;
     const context = question.slides.find(s => s.tipo === 'contexto')?.texto;
@@ -73,6 +74,16 @@ export default function QuickScene({
 
   const startedAt = useMemo(() => Date.now(), [question.id]);
 
+  // null = picking option; number = option index whose hold finished → pick intensity
+  const [picking, setPicking] = useState<number | null>(null);
+  // track which option is currently being held so siblings can fade
+  const [holdingIdx, setHoldingIdx] = useState<number | null>(null);
+
+  const commit = (idx: number, intensity: AnswerIntensity) => {
+    const option = shuffled[idx];
+    onAnswer(option, Date.now() - startedAt, intensity);
+  };
+
   return (
     <motion.div
       key={question.id}
@@ -84,9 +95,7 @@ export default function QuickScene({
       {/* Top meta */}
       <div className="mb-5 flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.24em] text-white/45">
         <span>{deckName}</span>
-        <span>
-          {questionIdx + 1} / {totalQuestions}
-        </span>
+        <span>{questionIdx + 1} / {totalQuestions}</span>
       </div>
 
       {/* Progress dots */}
@@ -105,11 +114,10 @@ export default function QuickScene({
         ))}
       </div>
 
-      {/* Scene hook — the "dia" / framing */}
       {question.sceneHook && (
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: picking !== null ? 0.3 : 1 }}
           transition={{ delay: 0.1, duration: 0.4 }}
           className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-accent-gold/75"
         >
@@ -117,11 +125,10 @@ export default function QuickScene({
         </motion.p>
       )}
 
-      {/* Optional scenario line — the situation */}
       {scenario && (
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: picking !== null ? 0.3 : 1 }}
           transition={{ delay: 0.18, duration: 0.4 }}
           className="mb-3 text-[12px] leading-relaxed text-white/55"
         >
@@ -129,10 +136,9 @@ export default function QuickScene({
         </motion.p>
       )}
 
-      {/* Main prompt */}
       <motion.h2
         initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: picking !== null ? 0.5 : 1, y: 0 }}
         transition={{ delay: 0.25, duration: 0.45 }}
         className="mb-6 text-[19px] font-semibold leading-snug text-white/95"
       >
@@ -144,48 +150,149 @@ export default function QuickScene({
         {shuffled.map((option, i) => {
           const dominantAxis = getDominantAxis(option.weights);
           const holdColor = STAT_COLORS[dominantAxis];
+          const isFocused = picking === i;
+          const isDimmed =
+            (picking !== null && picking !== i) ||
+            (holdingIdx !== null && holdingIdx !== i);
+
           return (
             <motion.div
               key={`${question.id}-${i}`}
               initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 + i * 0.07, duration: 0.3 }}
+              animate={{
+                opacity: isDimmed ? 0.12 : 1,
+                y: 0,
+                scale: isDimmed ? 0.97 : 1,
+              }}
+              transition={{
+                delay: picking === null && holdingIdx === null ? 0.35 + i * 0.07 : 0,
+                duration: 0.3,
+              }}
             >
-              <HoldButton
-                onConfirm={() => onAnswer(option, Date.now() - startedAt)}
-                holdColor={holdColor}
-                enableHaptics={enableHaptics}
-                className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-left backdrop-blur-md transition-colors hover:border-white/22 hover:bg-white/10"
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[10px] font-bold"
-                    style={{
-                      borderColor: `${holdColor}55`,
-                      color: holdColor,
-                      backgroundColor: `${holdColor}18`,
-                    }}
-                  >
-                    {String.fromCharCode(65 + i)}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[14px] leading-snug text-white/92">{option.text}</p>
-                    {option.subtext && (
-                      <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-white/42">
-                        {option.subtext}
-                      </p>
-                    )}
-                  </div>
+              {picking === null ? (
+                <HoldButton
+                  onConfirm={() => {
+                    setHoldingIdx(null);
+                    setPicking(i);
+                  }}
+                  onHoldStart={() => setHoldingIdx(i)}
+                  onHoldCancel={() => setHoldingIdx(null)}
+                  holdColor={holdColor}
+                  enableHaptics={enableHaptics}
+                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-left backdrop-blur-md transition-colors hover:border-white/22 hover:bg-white/10"
+                >
+                  <OptionRow option={option} index={i} holdColor={holdColor} />
+                </HoldButton>
+              ) : (
+                <div
+                  className={`w-full rounded-2xl border px-4 py-3.5 text-left ${
+                    isFocused
+                      ? 'border-white/30 bg-white/10'
+                      : 'border-white/8 bg-white/4'
+                  }`}
+                  style={
+                    isFocused
+                      ? { boxShadow: `0 0 22px ${holdColor}33` }
+                      : undefined
+                  }
+                >
+                  <OptionRow option={option} index={i} holdColor={holdColor} />
                 </div>
-              </HoldButton>
+              )}
+
+              {/* Intensity picker below the focused option */}
+              <AnimatePresence>
+                {isFocused && (
+                  <motion.div
+                    key="intensity"
+                    initial={{ opacity: 0, y: -6, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -6, height: 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="mt-3 mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.28em] text-white/55">
+                      Quanto isso é você?
+                    </p>
+                    <div className="flex flex-col gap-1.5">
+                      {INTENSITY_ORDER.map((lvl) => (
+                        <button
+                          key={lvl}
+                          type="button"
+                          onClick={() => commit(i, lvl)}
+                          className="group flex items-center justify-between rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-left backdrop-blur-md transition-all hover:border-white/30 hover:bg-white/12"
+                          style={{
+                            borderLeftWidth: '3px',
+                            borderLeftColor:
+                              lvl === 'alta'
+                                ? holdColor
+                                : lvl === 'media'
+                                ? `${holdColor}99`
+                                : `${holdColor}44`,
+                          }}
+                        >
+                          <span className="text-[13px] font-semibold text-white/92">
+                            {INTENSITY_LABELS[lvl]}
+                          </span>
+                          <span className="text-[10px] uppercase tracking-[0.18em] text-white/45">
+                            {INTENSITY_HINT[lvl]}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setPicking(null)}
+                      className="mt-2 w-full text-center text-[10px] uppercase tracking-[0.22em] text-white/35 hover:text-white/60"
+                    >
+                      voltar
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           );
         })}
       </div>
 
-      <p className="mt-auto pt-8 text-center text-[10px] uppercase tracking-[0.22em] text-white/30">
-        Segure para confirmar · sem tempo, no seu ritmo
-      </p>
+      {picking === null && (
+        <p className="mt-auto pt-8 text-center text-[10px] uppercase tracking-[0.22em] text-white/30">
+          Segure para confirmar · sem tempo, no seu ritmo
+        </p>
+      )}
     </motion.div>
+  );
+}
+
+function OptionRow({
+  option,
+  index,
+  holdColor,
+}: {
+  option: Option;
+  index: number;
+  holdColor: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <span
+        className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[10px] font-bold"
+        style={{
+          borderColor: `${holdColor}55`,
+          color: holdColor,
+          backgroundColor: `${holdColor}18`,
+        }}
+      >
+        {String.fromCharCode(65 + index)}
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="text-[14px] leading-snug text-white/92">{option.text}</p>
+        {option.subtext && (
+          <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-white/42">
+            {option.subtext}
+          </p>
+        )}
+      </div>
+    </div>
   );
 }

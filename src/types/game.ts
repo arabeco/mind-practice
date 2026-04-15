@@ -13,6 +13,24 @@ export type DeckCategory = 'calibragem' | 'eixo' | 'cenario' | 'campanha';
 export type ArchetypeCategory = 'puro' | 'cruzado' | 'especial';
 export type SceneProximidade = 'baixa' | 'media' | 'alta';
 export type SceneUrgencia = 'baixa' | 'media' | 'alta';
+export type AnswerIntensity = 'alta' | 'media' | 'baixa';
+
+/** Intensity multiplier applied on top of weights.
+ *  alta = "com certeza" (player owns it)
+ *  media = "é isso" (normal)
+ *  baixa = "isso mas depende" (qualified)
+ */
+export const INTENSITY_MULTIPLIERS: Record<AnswerIntensity, number> = {
+  alta: 1.35,
+  media: 1.0,
+  baixa: 0.6,
+};
+
+export const INTENSITY_LABELS: Record<AnswerIntensity, string> = {
+  alta: 'Com certeza',
+  media: 'É isso',
+  baixa: 'Mais ou menos',
+};
 
 // ============================================================
 // Scene / Question
