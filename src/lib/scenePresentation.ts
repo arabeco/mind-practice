@@ -144,6 +144,12 @@ const TIER_PALETTES: Record<Deck['tier'], Pick<ScenePalette, 'accent' | 'highlig
     textTint: 'rgba(255,250,236,0.96)',
     urgent: '#f97316',
   },
+  6: {
+    accent: '#c084fc',
+    highlight: '#d4af37',
+    textTint: 'rgba(250,240,255,0.96)',
+    urgent: '#f97316',
+  },
 };
 
 export const QUESTION_TYPE_META: Record<QuestionType, { label: string; className: string }> = {

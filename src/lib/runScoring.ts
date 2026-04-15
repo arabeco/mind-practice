@@ -151,6 +151,7 @@ export function normalizeGameState(raw: Partial<GameState>): GameState {
     lastTrainingDate: raw.lastTrainingDate ?? null,
     streak: raw.streak ?? 0,
     lastPlayDate: raw.lastPlayDate ?? null,
+    campaigns: (raw as any).campaigns ?? {},
   };
 }
 

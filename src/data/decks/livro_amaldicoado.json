@@ -1,15 +1,47 @@
 {
   "deckId": "livro_amaldicoado",
   "name": "O Livro Amaldicoado",
-  "description": "Modo campanha. Um manuscrito antigo antecipa conflitos e cobra um preco por cada resposta.",
-  "tema": "Season",
-  "category": "cenario",
-  "tier": 5,
+  "description": "Temporada 0. Um manuscrito antigo antecipa conflitos e cobra um preco por cada resposta. Uma cena por dia, sete dias de caminho, ate um dos quatro finais possiveis.",
+  "tema": "Temporada 0 — Campanha narrativa ramificada",
+  "category": "campanha",
+  "tier": 6,
   "difficulty": 5,
+  "startSceneId": "la1",
+  "endings": [
+    {
+      "id": "selo_quebrado",
+      "title": "O Selo Quebrado",
+      "tagline": "Voce rasgou o pacto. O livro ficou em silencio.",
+      "description": "Escolhas frontais, sem negociacao. O livro deixou de sussurrar porque nao tinha mais nada a te oferecer.",
+      "flavor": "Caminho do Vigor / Presenca"
+    },
+    {
+      "id": "pacto_frio",
+      "title": "O Pacto Frio",
+      "tagline": "Voce entrou no jogo sem entregar a alma.",
+      "description": "Manipulou o manuscrito com a mesma frieza com que ele te manipulava. O pacto ficou, mas voce ficou no comando.",
+      "flavor": "Caminho do Filtro"
+    },
+    {
+      "id": "cinzas",
+      "title": "Cinzas",
+      "tagline": "Voce nao quis o livro nem a historia que ele oferecia.",
+      "description": "Escolheu apagar tudo antes que o manuscrito te definisse. Saiu limpo — e talvez vazio.",
+      "flavor": "Caminho do Desapego"
+    },
+    {
+      "id": "reescrita",
+      "title": "A Reescrita",
+      "tagline": "Voce entrou na historia antes de virar objeto dela.",
+      "description": "Nem confronto, nem fuga. Negociou os termos e saiu com uma versao nova de si. O livro virou sua testemunha, nao seu dono.",
+      "flavor": "Caminho da Presenca / Harmonia"
+    }
+  ],
   "questions": [
     {
       "id": "la1",
       "type": "NORMAL",
+      "sceneHook": "Dia 1 — O sebo vazio",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -27,41 +59,47 @@
           "subtext": "Vigor/Ruptura",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Quebrou o feitico na forca. O clima morreu ali."
+          "feedback": "Quebrou o feitico na forca. O clima morreu ali.",
+          "nextSceneId": "la3"
         },
         {
           "text": "Seguro o celular com calma: 'Isso nao e teu pra contar.'",
           "subtext": "Vigor/Limite firme",
           "tone": "protetor",
           "weights": { "vigor": 2, "filtro": 2, "harmonia": -1, "desapego": -2 },
-          "feedback": "Acao firme sem explosao. Ele parou, mas ficou ressentido."
+          "feedback": "Acao firme sem explosao. Ele parou, mas ficou ressentido.",
+          "nextSceneId": "la3"
         },
         {
           "text": "Deixo postar. Nao vou entrar no show do livro.",
           "subtext": "Desapego/Nao alimenta",
           "tone": "evasivo",
           "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
-          "feedback": "Recusou o palco, mas entregou a narrativa ao outro."
+          "feedback": "Recusou o palco, mas entregou a narrativa ao outro.",
+          "nextSceneId": "la5"
         },
         {
           "text": "Encaro ele: 'Se for contar, conta comigo junto.'",
           "subtext": "Presenca/Reescrita",
           "tone": "neutro",
           "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
-          "feedback": "Entrou na historia antes de virar objeto dela."
+          "feedback": "Entrou na historia antes de virar objeto dela.",
+          "nextSceneId": "la3"
         },
         {
           "text": "Deixo postar e comento algo que muda todo o tom.",
           "subtext": "Filtro/Contrajogo",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "presenca": 1, "harmonia": -1, "desapego": -2 },
-          "feedback": "Jogou por cima sem confronto. Estrategia fria e eficaz."
+          "feedback": "Jogou por cima sem confronto. Estrategia fria e eficaz.",
+          "nextSceneId": "la5"
         }
       ]
     },
     {
       "id": "la3",
       "type": "NORMAL",
+      "sceneHook": "Dia 2 — Reuniao sob pressao",
       "metadata": {
         "tensao": 5,
         "ambiente": "Profissional",
@@ -79,41 +117,39 @@
           "subtext": "Vigor/Defesa frontal",
           "tone": "pragmatico",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
-          "feedback": "Rasgou a narrativa dele em publico. Sem volta."
+          "feedback": "Rasgou a narrativa dele em publico. Sem volta.",
+          "nextSceneId": "la5"
         },
         {
           "text": "Jogo de volta: 'Quem assinou a decisao foi voce.'",
           "subtext": "Vigor/Contra-ataque",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -1 },
-          "feedback": "Virou o jogo, mas declarou guerra aberta."
+          "feedback": "Virou o jogo, mas declarou guerra aberta.",
+          "nextSceneId": "la5"
         },
         {
           "text": "Anoto tudo e deixo a resposta pra depois, por escrito.",
           "subtext": "Filtro/Xadrez",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "vigor": -1 },
-          "feedback": "Nao comprou a guerra na hora. Silencio calculado."
+          "feedback": "Nao comprou a guerra na hora. Silencio calculado.",
+          "nextSceneId": "la8"
         },
         {
           "text": "Calmo: 'Posso contextualizar pra sala nao sair confusa.'",
           "subtext": "Presenca/Reposicionamento",
           "tone": "neutro",
           "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "desapego": -1 },
-          "feedback": "Corrigiu a historia sem incendiar a sala."
-        },
-        {
-          "text": "Fico quieto, olhando firme ate o silencio pesar.",
-          "subtext": "Presenca/Pressao muda",
-          "tone": "neutro",
-          "weights": { "presenca": 2, "filtro": 2, "harmonia": -1, "vigor": -2 },
-          "feedback": "O silencio disse tudo. Ele sentiu o peso."
+          "feedback": "Corrigiu a historia sem incendiar a sala.",
+          "nextSceneId": "la8"
         }
       ]
     },
     {
       "id": "la5",
       "type": "NORMAL",
+      "sceneHook": "Dia 3 — O estranho no metro",
       "metadata": {
         "tensao": 3,
         "ambiente": "Publico",
@@ -131,34 +167,81 @@
           "subtext": "Vigor/Defesa de posse",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Marcou territorio na forca. Ele recuou, mas te marcou."
+          "feedback": "Marcou territorio na forca. Ele recuou, mas te marcou.",
+          "nextSceneId": "la7"
         },
         {
           "text": "Saio no proximo vagao sem responder. Sem negocio.",
           "subtext": "Filtro/Saida limpa",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "vigor": -1 },
-          "feedback": "Saiu inteiro. Sobrevivencia tambem e maestria."
+          "feedback": "Saiu inteiro. Sobrevivencia tambem e maestria.",
+          "nextSceneId": "la8"
         },
         {
           "text": "Seguro o livro: 'Se sabe o que e, sabe que me ameacar e erro.'",
           "subtext": "Presenca/Aviso",
           "tone": "neutro",
           "weights": { "presenca": 3, "filtro": 1, "vigor": -1, "desapego": -2 },
-          "feedback": "Ficou ali, inteiro. Bastou pra quebrar o apetite dele."
+          "feedback": "Ficou ali, inteiro. Bastou pra quebrar o apetite dele.",
+          "nextSceneId": "la7"
         },
         {
           "text": "Ignoro e continuo lendo como se ele nao existisse.",
           "subtext": "Desapego/Apagamento",
           "tone": "evasivo",
           "weights": { "desapego": 3, "filtro": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Virou invisivel. Ele ficou confuso, mas nao desistiu."
+          "feedback": "Virou invisivel. Ele ficou confuso, mas nao desistiu.",
+          "nextSceneId": "la8"
+        }
+      ]
+    },
+    {
+      "id": "la7",
+      "type": "NORMAL",
+      "sceneHook": "Dia 4 — A copia na rua",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Status",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        { "tipo": "contexto", "texto": "Uma pagina do livro amanhece em voce mesmo, com uma foto atual sua numa esquina que voce conhece." },
+        { "tipo": "evento", "texto": "Voce passa no local. Um desconhecido tira uma foto sua sem disfarcar e sorri pra camera." }
+      ],
+      "options": [
+        {
+          "text": "Vou ate ele e exijo apagar ali na frente.",
+          "subtext": "Vigor/Confronto direto",
+          "tone": "provocativo",
+          "weights": { "vigor": 3, "presenca": 2, "harmonia": -2, "filtro": -1 },
+          "feedback": "Imps a lei com o corpo. Saiu dali marcado, mas dono da cena.",
+          "nextSceneId": "la8"
+        },
+        {
+          "text": "Finjo nao ver e sigo andando num ritmo firme.",
+          "subtext": "Desapego/Despriorizar",
+          "tone": "evasivo",
+          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
+          "feedback": "Negou a interacao. O livro nao conseguiu escrever a cena.",
+          "nextSceneId": "la8"
+        },
+        {
+          "text": "Tiro foto dele tirando foto de mim.",
+          "subtext": "Filtro/Inverte o jogo",
+          "tone": "pragmatico",
+          "weights": { "filtro": 3, "presenca": 2, "desapego": -1, "harmonia": -2 },
+          "feedback": "Converteu ameaca em prova. Frio e eficaz.",
+          "nextSceneId": "la8"
         }
       ]
     },
     {
       "id": "la8",
       "type": "NORMAL",
+      "sceneHook": "Dia 5 — A carta acusatoria",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -176,34 +259,89 @@
           "subtext": "Vigor/Interrogatorio",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Forcou a verdade a se defender. Quarto ficou pequeno."
+          "feedback": "Forcou a verdade a se defender. Quarto ficou pequeno.",
+          "nextSceneId": "la9"
         },
         {
           "text": "Guardo a carta e observo cada gesto antes de agir.",
           "subtext": "Filtro/Observacao fria",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "desapego": 2, "presenca": -2, "harmonia": -1 },
-          "feedback": "Nao entregou o jogo. O livro nao soube se venceu."
+          "feedback": "Nao entregou o jogo. O livro nao soube se venceu.",
+          "nextSceneId": "la9"
         },
         {
           "text": "Pergunto sobre aquele periodo sem revelar a carta.",
           "subtext": "Harmonia/Teste de verdade",
           "tone": "neutro",
           "weights": { "harmonia": 3, "presenca": 2, "vigor": -2, "desapego": -1 },
-          "feedback": "Abriu fresta em vez de explodir. Paciente e inteligente."
+          "feedback": "Abriu fresta em vez de explodir. Paciente e inteligente.",
+          "nextSceneId": "la9"
         },
         {
           "text": "Queimo a carta ali mesmo. O livro nao vai vencer.",
           "subtext": "Desapego/Recusa do jogo",
           "tone": "protetor",
           "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
-          "feedback": "Destruiu a isca. Livre do veneno, sem a resposta."
+          "feedback": "Destruiu a isca. Livre do veneno, sem a resposta.",
+          "nextSceneId": "la9"
+        }
+      ]
+    },
+    {
+      "id": "la9",
+      "type": "NORMAL",
+      "sceneHook": "Dia 6 — O oferecimento",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        { "tipo": "contexto", "texto": "Uma bilhete no livro pede pra voce ir a um endereco a meia-noite. So voce." },
+        { "tipo": "evento", "texto": "Uma mulher te espera com um cofre aberto. 'Troca. O livro pelo que voce sempre quis.'" }
+      ],
+      "options": [
+        {
+          "text": "Pego o que esta no cofre e saio com o livro debaixo do braco.",
+          "subtext": "Vigor/Tomada",
+          "tone": "provocativo",
+          "weights": { "vigor": 3, "desapego": 1, "harmonia": -2, "filtro": -1 },
+          "feedback": "Rompeu o contrato. Fez inimiga nova e levou o premio.",
+          "nextSceneId": "la10"
+        },
+        {
+          "text": "Rejeito a troca sem olhar pro cofre. Saio.",
+          "subtext": "Presenca/Integridade",
+          "tone": "neutro",
+          "weights": { "presenca": 3, "desapego": 2, "vigor": -1, "harmonia": -1 },
+          "feedback": "Nao comprou a cena. O livro ficou quieto no caminho de casa.",
+          "nextSceneId": "la10"
+        },
+        {
+          "text": "Negocio outros termos ali mesmo, sem ceder o livro.",
+          "subtext": "Filtro/Ponte fria",
+          "tone": "pragmatico",
+          "weights": { "filtro": 3, "presenca": 1, "harmonia": -1, "desapego": -2 },
+          "feedback": "Virou o jogo sem bater de frente. Saiu com mais informacao.",
+          "nextSceneId": "la10"
+        },
+        {
+          "text": "Jogo o livro no cofre e ela desaparece junto.",
+          "subtext": "Desapego/Cortar raiz",
+          "tone": "protetor",
+          "weights": { "desapego": 3, "harmonia": 1, "vigor": -2, "presenca": -1 },
+          "feedback": "Entregou o problema ao proprio problema. Livre — mas sem a prova.",
+          "nextSceneId": "la10"
         }
       ]
     },
     {
       "id": "la10",
       "type": "NORMAL",
+      "sceneHook": "Dia 7 — A oferta final",
       "metadata": {
         "tensao": 5,
         "ambiente": "Privado",
@@ -221,35 +359,40 @@
           "subtext": "Vigor/Ruptura final",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
-          "feedback": "Escolheu guerra aberta. O livro vibrou aprovando."
+          "feedback": "Escolheu guerra aberta. O livro vibrou aprovando.",
+          "endingId": "selo_quebrado"
         },
         {
           "text": "Recuso e jogo o livro no chao na frente dela.",
           "subtext": "Vigor/Desprezo total",
           "tone": "provocativo",
           "weights": { "vigor": 2, "desapego": 2, "filtro": -2, "harmonia": -1 },
-          "feedback": "Destruiu o pacto e a ponte. Livre, mas so."
+          "feedback": "Destruiu o pacto e a ponte. Livre, mas so.",
+          "endingId": "cinzas"
         },
         {
           "text": "Aceito por agora e escondo a jogada real pra depois.",
           "subtext": "Filtro/Pacto frio",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "desapego": 1, "presenca": -2, "harmonia": -1 },
-          "feedback": "Entrou no pacto sem entregar a alma. Perigoso."
+          "feedback": "Entrou no pacto sem entregar a alma. Perigoso.",
+          "endingId": "pacto_frio"
         },
         {
           "text": "Digo: 'Negocio em termos claros ou nao negocio nada.'",
           "subtext": "Presenca/Ultima mesa",
           "tone": "neutro",
           "weights": { "presenca": 3, "harmonia": 2, "vigor": -2, "filtro": -1 },
-          "feedback": "Recusou ser engolido. Se houver acordo, sera seu."
+          "feedback": "Recusou ser engolido. Se houver acordo, sera seu.",
+          "endingId": "reescrita"
         },
         {
           "text": "Devolvo: 'Nao preciso disso pra saber quem voce e.'",
           "subtext": "Desapego/Libertacao",
           "tone": "protetor",
           "weights": { "desapego": 3, "presenca": 2, "vigor": -2, "filtro": -1 },
-          "feedback": "Largou a arma e saiu inteiro. Sem poder, sem corrente."
+          "feedback": "Largou a arma e saiu inteiro. Sem poder, sem corrente.",
+          "endingId": "cinzas"
         }
       ]
     }

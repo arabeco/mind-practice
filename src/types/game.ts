@@ -47,6 +47,43 @@ export interface Option {
   tone: Tone;
   weights: Partial<Record<StatKey, number>>;
   feedback: string;
+  /** Campaign only: id of the next scene to load after this choice.
+   *  If omitted and `endingId` also omitted in a campaign, deck is treated linear (next in list). */
+  nextSceneId?: string;
+  /** Campaign only: id of the ending this choice resolves to.
+   *  Marks a terminal option in the narrative graph. */
+  endingId?: string;
+}
+
+// ============================================================
+// Campaign / Season
+// ============================================================
+
+export interface CampaignEnding {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  /** Optional dominant-trait hint that inspired the ending. */
+  flavor?: string;
+}
+
+export interface CampaignScenePath {
+  sceneId: string;
+  optionIndex: number;
+  answeredAt: string; // ISO
+}
+
+export interface CampaignProgress {
+  deckId: string;
+  seasonId: string;
+  startedAt: string;           // ISO
+  lastAnsweredAt: string | null; // ISO — gates the 00:00 unlock
+  currentSceneId: string;      // next scene to play
+  path: CampaignScenePath[];
+  endingId: string | null;     // set when campaign finishes
+  rating: number | null;       // 1..5
+  completedAt: string | null;  // ISO when ending reached
 }
 
 export interface Question {
@@ -69,10 +106,14 @@ export interface Deck {
   tema: string;
   category: DeckCategory;
   focusAxis?: StatKey;
-  tier: 1 | 2 | 3 | 4 | 5;
+  tier: 1 | 2 | 3 | 4 | 5 | 6;
   difficulty: 1 | 2 | 3 | 4 | 5;
   coverImage?: string;
   questions: Question[];
+  /** Campaign only: id of the opening scene. Required when category === 'campanha'. */
+  startSceneId?: string;
+  /** Campaign only: all possible endings the narrative graph can resolve to. */
+  endings?: CampaignEnding[];
 }
 
 // ============================================================
@@ -172,6 +213,8 @@ export interface GameState {
   lastTrainingDate: string | null;
   streak: number;
   lastPlayDate: string | null;
+  /** Persisted campaign progress — keyed by seasonId. */
+  campaigns: Record<string, CampaignProgress>;
 }
 
 // ============================================================

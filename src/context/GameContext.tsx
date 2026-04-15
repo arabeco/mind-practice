@@ -46,7 +46,19 @@ type GameAction =
   | { type: 'SPEND_FICHAS'; amount: number; itemId: string }
   | { type: 'EARN_FICHAS'; amount: number; reason: string }
   | { type: 'RESET_ALL' }
-  | { type: 'HYDRATE'; state: GameState };
+  | { type: 'HYDRATE'; state: GameState }
+  | { type: 'CAMPAIGN_START'; seasonId: string; deck: Deck }
+  | { type: 'CAMPAIGN_ANSWER';
+      seasonId: string;
+      sceneId: string;
+      optionIndex: number;
+      nextSceneId: string | null;
+      endingId: string | null;
+      weights: Partial<Record<StatKey, number>>;
+      tone: Tone;
+      tensao: number;
+    }
+  | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number };
 
 // ---------------------------------------------------------------------------
 // Constants & Helpers
@@ -126,6 +138,7 @@ const initialState: GameState = {
   lastTrainingDate: null,
   streak: 0,
   lastPlayDate: null,
+  campaigns: {},
 };
 
 // ---------------------------------------------------------------------------
@@ -156,6 +169,7 @@ function migrateV1(raw: Record<string, unknown>): GameState | null {
       lastTrainingDate: (raw.lastTrainingDate as string) ?? null,
       streak: 0,
       lastPlayDate: null,
+      campaigns: {},
     };
   }
   return null;
@@ -330,6 +344,79 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         ...normalizeGameState(action.state),
         unlockedDecks: getUnlockedDecks(action.state.completedDecks),
       };
+
+    case 'CAMPAIGN_START': {
+      if (state.campaigns[action.seasonId]) return state; // idempotent
+      const startSceneId = action.deck.startSceneId ?? action.deck.questions[0]?.id;
+      if (!startSceneId) return state;
+      const now = new Date().toISOString();
+      return {
+        ...state,
+        campaigns: {
+          ...state.campaigns,
+          [action.seasonId]: {
+            deckId: action.deck.deckId,
+            seasonId: action.seasonId,
+            startedAt: now,
+            lastAnsweredAt: null,
+            currentSceneId: startSceneId,
+            path: [],
+            endingId: null,
+            rating: null,
+            completedAt: null,
+          },
+        },
+      };
+    }
+
+    case 'CAMPAIGN_ANSWER': {
+      const progress = state.campaigns[action.seasonId];
+      if (!progress || progress.endingId) return state;
+
+      const now = new Date().toISOString();
+      const step = {
+        sceneId: action.sceneId,
+        optionIndex: action.optionIndex,
+        answeredAt: now,
+      };
+
+      // Apply calibration like a normal ANSWER so campaign responses still
+      // shape the player's profile.
+      const newCalibration = applyDampenedWeights(
+        state.calibration,
+        action.weights,
+        action.tone,
+        action.tensao,
+      );
+
+      return {
+        ...state,
+        calibration: newCalibration,
+        campaigns: {
+          ...state.campaigns,
+          [action.seasonId]: {
+            ...progress,
+            lastAnsweredAt: now,
+            path: [...progress.path, step],
+            currentSceneId: action.nextSceneId ?? progress.currentSceneId,
+            endingId: action.endingId,
+            completedAt: action.endingId ? now : null,
+          },
+        },
+      };
+    }
+
+    case 'CAMPAIGN_RATE': {
+      const progress = state.campaigns[action.seasonId];
+      if (!progress || !progress.endingId) return state;
+      return {
+        ...state,
+        campaigns: {
+          ...state.campaigns,
+          [action.seasonId]: { ...progress, rating: action.rating },
+        },
+      };
+    }
 
     default:
       return state;

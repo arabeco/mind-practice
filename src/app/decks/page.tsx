@@ -9,6 +9,7 @@ import type { Deck, DeckCategory } from '@/types/game';
 import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
 import { getWeeklyDiscountDeckId, getDiscountTimeRemaining } from '@/lib/weeklyDiscount';
+import { CURRENT_SEASON_ID } from '@/lib/season';
 
 type TabId = DeckCategory | 'loja';
 
@@ -141,7 +142,14 @@ export default function DecksPage() {
                 completed={completed}
                 free={isWeeklyFree}
                 badge={badge}
-                onClick={() => !locked && setSelectedDeck(deck)}
+                onClick={() => {
+                  if (locked) return;
+                  if (deck.category === 'campanha') {
+                    router.push(`/campanha/${CURRENT_SEASON_ID}`);
+                    return;
+                  }
+                  setSelectedDeck(deck);
+                }}
               />
             );
           })}

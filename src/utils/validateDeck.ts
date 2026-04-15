@@ -11,7 +11,7 @@ export function validateDeck(deck: Deck): string[] {
   // Check required root fields
   if (!deck.category) errors.push('Missing category');
   if (!deck.difficulty) errors.push('Missing difficulty');
-  if (!deck.tier || deck.tier < 1 || deck.tier > 5) errors.push('Invalid tier (must be 1-5)');
+  if (!deck.tier || deck.tier < 1 || deck.tier > 6) errors.push('Invalid tier (must be 1-6)');
 
   // Question count check
   if (deck.questions.length < 5 || deck.questions.length > 10) {
