@@ -47,7 +47,8 @@
       "Bash(curl -sL -o C:/Users/Afonso/Desktop/mindpractice/public/covers/espelho.jpg \"https://images.unsplash.com/photo-1701303829215-8f885756d1a3?w=600&q=80&fit=crop&crop=entropy&fm=jpg\")",
       "Bash(xxd -l 16 C:/Users/Afonso/Desktop/mindpractice/public/covers/basic_01.jpg)",
       "Bash(xxd -l 4 C:/Users/Afonso/Desktop/mindpractice/public/covers/basic_01.jpg)",
-      "Bash(taskkill //F //IM node.exe)"
+      "Bash(taskkill //F //IM node.exe)",
+      "Bash(npm uninstall *)"
     ]
   }
 }

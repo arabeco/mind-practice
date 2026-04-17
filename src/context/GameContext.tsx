@@ -533,33 +533,54 @@ const GameContext = createContext<GameContextValue | null>(null);
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
-  // Hydrate from localStorage (with v1 migration)
+  // Hydrate — try cloud first, fall back to localStorage
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw);
+    (async () => {
+      // 1. Try cloud
+      try {
+        const { loadStateFromCloud } = await import('@/lib/supabase/sync');
+        const cloud = await loadStateFromCloud();
+        if (cloud) {
+          dispatch({ type: 'HYDRATE', state: normalizeGameState(cloud as GameState) });
+          return;
+        }
+      } catch { /* Supabase not configured — fall through */ }
 
-      // Try v1 migration first
-      const migrated = migrateV1(parsed);
-      if (migrated) {
-        dispatch({ type: 'HYDRATE', state: migrated });
-        return;
+      // 2. Fall back to localStorage
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+
+        const migrated = migrateV1(parsed);
+        if (migrated) {
+          dispatch({ type: 'HYDRATE', state: migrated });
+          return;
+        }
+
+        dispatch({ type: 'HYDRATE', state: normalizeGameState(parsed as GameState) });
+      } catch {
+        // corrupted — start fresh
       }
-
-      // v2 format
-      dispatch({ type: 'HYDRATE', state: normalizeGameState(parsed as GameState) });
-    } catch {
-      // corrupted — start fresh
-    }
+    })();
   }, []);
 
-  // Persist (exclude activeDeck and activeRun)
+  // Persist to localStorage (exclude activeDeck and activeRun)
   useEffect(() => {
     try {
       const { activeDeck: _, activeRun: __, ...persistable } = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
     } catch {}
+  }, [state]);
+
+  // Cloud sync — debounced save to Supabase when logged in
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      import('@/lib/supabase/sync').then(({ saveStateToCloud }) => {
+        saveStateToCloud(state).catch(() => {});
+      });
+    }, 2000); // 2s debounce
+    return () => clearTimeout(timer);
   }, [state]);
 
   const isDeckLocked = useCallback(
