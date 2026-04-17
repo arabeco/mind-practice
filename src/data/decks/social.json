@@ -10,13 +10,8 @@
     {
       "id": "s2",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Privado",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
+      "sceneHook": "Algo ta errado com o novo namoro do amigo",
+      "metadata": { "tensao": 4, "ambiente": "Privado", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "seguranca", "proximidade": "alta" },
       "slides": [
         { "tipo": "contexto", "texto": "Seu melhor amigo comecou a namorar alguem novo. Algo parece errado." },
         { "tipo": "evento", "texto": "O parceiro dele manipula, isola e controla. Seu amigo nao enxerga." }
@@ -24,30 +19,30 @@
       "options": [
         {
           "text": "Sento e digo na cara: 'Essa pessoa ta te destruindo.'",
-          "subtext": "Vigor/Verdade Crua",
+          "subtext": "Verdade crua",
           "tone": "pragmatico",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
           "feedback": "A verdade doeu. Ele pode se afastar, mas voce falou."
         },
         {
           "text": "Me afasto. Ele vai ter que aprender sozinho.",
-          "subtext": "Nonchalant/Desapego Protetor",
+          "subtext": "Desapego protetor",
           "tone": "evasivo",
           "weights": { "desapego": 3, "filtro": 1, "harmonia": -1, "presenca": -2 },
           "feedback": "Se protegeu. Seu amigo perdeu uma voz de alerta."
         },
         {
           "text": "Fico por perto e faco perguntas que facam ele refletir.",
-          "subtext": "Harmonia/Paciencia Estrategica",
+          "subtext": "Paciencia estrategica",
           "tone": "protetor",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -1, "desapego": -2 },
+          "weights": { "harmonia": 3, "filtro": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Plantou sementes sem forcar. Mudanca vem de dentro."
         },
         {
           "text": "Junto provas e mostro uma de cada vez, com calma.",
-          "subtext": "Presenca/Estrategia Gradual",
+          "subtext": "Estrategia gradual",
           "tone": "neutro",
-          "weights": { "presenca": 3, "harmonia": 1, "desapego": -2, "vigor": -1 },
+          "weights": { "presenca": 3, "filtro": 1, "desapego": -2, "vigor": -1 },
           "feedback": "Montou o caso com paciencia. Dificil de ignorar."
         }
       ]
@@ -55,13 +50,8 @@
     {
       "id": "s3",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Digital",
-        "relacao": "Desconhecido",
-        "aposta": "Status",
-        "pilar": "ego"
-      },
+      "sceneHook": "Voce virou meme. Post inocente",
+      "metadata": { "tensao": 4, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Status", "pilar": "ego" },
       "slides": [
         { "tipo": "contexto", "texto": "Voce postou uma foto normal nas redes. So seu dia a dia." },
         { "tipo": "evento", "texto": "Conta anonima faz comentario cruel. O post viralizou como meme." }
@@ -69,28 +59,28 @@
       "options": [
         {
           "text": "Respondo publicamente desmontando o anonimo ponto a ponto.",
-          "subtext": "Vigor/Contra-ataque Publico",
+          "subtext": "Contra-ataque publico",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -1 },
           "feedback": "Entrou na guerra digital. Heroi ou mais meme."
         },
         {
           "text": "Deleto o post, bloqueio a conta e sigo minha vida.",
-          "subtext": "Nonchalant/Reset",
+          "subtext": "Reset",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 2, "presenca": -2, "vigor": -1 },
+          "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
           "feedback": "Cortou o oxigenio do fogo. Nao alimentou nada."
         },
         {
           "text": "Faco um story com humor, desarmando a narrativa.",
-          "subtext": "Harmonia/Jiu-Jitsu Social",
+          "subtext": "Jiu-jitsu social",
           "tone": "neutro",
-          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1, "desapego": -2 },
+          "weights": { "presenca": 3, "harmonia": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Virou o ataque em conteudo. O anonimo perdeu poder."
         },
         {
           "text": "Ignoro em publico, mas investigo quem e o fake.",
-          "subtext": "Filtro/Investigacao Fria",
+          "subtext": "Investigacao fria",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "presenca": 1, "desapego": -2, "harmonia": -1 },
           "feedback": "Nao reagiu no calor, mas nao largou. Estrategico."
@@ -100,13 +90,8 @@
     {
       "id": "s5",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 5,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
+      "sceneHook": "Festa animada. Voce flagra algo",
+      "metadata": { "tensao": 5, "ambiente": "Publico", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "seguranca", "proximidade": "alta" },
       "slides": [
         { "tipo": "contexto", "texto": "Festa animada. Voce encontra um amigo que confia muito em voce." },
         { "tipo": "evento", "texto": "Voce flagra o parceiro dele ficando com outra num canto escondido." }
@@ -114,51 +99,39 @@
       "options": [
         {
           "text": "Vou direto no amigo e conto tudo ali mesmo.",
-          "subtext": "Vigor/Verdade Imediata",
+          "subtext": "Verdade imediata",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
           "feedback": "Bomba na festa. Caos total, mas nao segurou."
         },
         {
           "text": "Finjo que nao vi. Nao e meu relacionamento.",
-          "subtext": "Nonchalant/Nao Interferencia",
+          "subtext": "Nao interferencia",
           "tone": "evasivo",
-          "weights": { "desapego": 2, "filtro": 2, "harmonia": -1, "presenca": -2 },
+          "weights": { "desapego": 3, "filtro": 1, "harmonia": -1, "presenca": -2 },
           "feedback": "Se protegeu. O peso de saber vai ficar."
         },
         {
           "text": "No dia seguinte, chamo meu amigo e conto em particular.",
-          "subtext": "Harmonia/Timing",
+          "subtext": "Timing certo",
           "tone": "protetor",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -1, "desapego": -2 },
+          "weights": { "harmonia": 3, "filtro": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Escolheu o momento certo. Verdade com respeito."
         },
         {
           "text": "Confronto o traidor: 'Vi tudo. Conta ou eu conto.'",
-          "subtext": "Vigor/Pressao Direta",
+          "subtext": "Pressao direta",
           "tone": "pragmatico",
-          "weights": { "vigor": 2, "filtro": 2, "presenca": 1, "harmonia": -2, "desapego": -1 },
+          "weights": { "vigor": 3, "filtro": 1, "harmonia": -2, "desapego": -1 },
           "feedback": "Forcou a mao do traidor. Pode resolver ou explodir."
-        },
-        {
-          "text": "Registro com uma foto discreta. Prova pro amigo depois.",
-          "subtext": "Presenca/Evidencia Fria",
-          "tone": "neutro",
-          "weights": { "presenca": 3, "filtro": 1, "desapego": -2, "harmonia": -1 },
-          "feedback": "Evidencia concreta. Calculista, mas eficaz."
         }
       ]
     },
     {
       "id": "s9",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Publico",
-        "relacao": "Par",
-        "aposta": "Status",
-        "pilar": "ego"
-      },
+      "sceneHook": "Formatura do amigo. Voce no publico",
+      "metadata": { "tensao": 4, "ambiente": "Publico", "relacao": "Par", "aposta": "Status", "pilar": "ego", "proximidade": "alta" },
       "slides": [
         { "tipo": "contexto", "texto": "Formatura de um amigo proximo. Voce ta orgulhoso e feliz por ele." },
         { "tipo": "evento", "texto": "No discurso, contam uma historia constrangedora sua que era segredo. Todos riem." }
@@ -166,30 +139,30 @@
       "options": [
         {
           "text": "Levanto e saio irritado. Depois confronto quem vazou.",
-          "subtext": "Vigor/Saida Dramatica",
+          "subtext": "Saida dramatica",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
           "feedback": "Sua saida foi notada. O constrangimento mudou de alvo."
         },
         {
           "text": "Rio junto como se nao me afetasse. Processo depois.",
-          "subtext": "Nonchalant/Mascara Social",
+          "subtext": "Mascara social",
           "tone": "evasivo",
-          "weights": { "filtro": 2, "desapego": 2, "vigor": -1, "presenca": -1 },
+          "weights": { "filtro": 3, "desapego": 1, "vigor": -1, "presenca": -2 },
           "feedback": "Absorveu o golpe em publico. Ninguem viu a ferida."
         },
         {
           "text": "'Essa historia ficou melhor na versao dele!' e tomo o controle.",
-          "subtext": "Harmonia/Controle Narrativo",
+          "subtext": "Controle narrativo",
           "tone": "neutro",
-          "weights": { "presenca": 3, "harmonia": 1, "vigor": -1, "desapego": -2 },
+          "weights": { "presenca": 3, "harmonia": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Virou o jogo. A piada agora e sua."
         },
         {
           "text": "Fico quieto, depois puxo quem contou: 'Nao era pra sair.'",
-          "subtext": "Filtro/Confronto Privado",
+          "subtext": "Confronto privado",
           "tone": "pragmatico",
-          "weights": { "filtro": 2, "vigor": 2, "harmonia": -1, "desapego": -1 },
+          "weights": { "filtro": 3, "vigor": 1, "harmonia": -2, "desapego": -1 },
           "feedback": "Segurou na hora certa. Cobrou no lugar certo."
         }
       ]
@@ -197,13 +170,8 @@
     {
       "id": "s10",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 5,
-        "ambiente": "Privado",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
+      "sceneHook": "Descoberta grave sobre o melhor amigo",
+      "metadata": { "tensao": 5, "ambiente": "Privado", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "seguranca", "proximidade": "alta" },
       "slides": [
         { "tipo": "contexto", "texto": "Voce descobre algo grave sobre quem considerava seu melhor amigo." },
         { "tipo": "evento", "texto": "Provas de que ele te sabotou, falou mal e fingiu lealdade." }
@@ -211,38 +179,31 @@
       "options": [
         {
           "text": "Confronto na cara: 'Sei de tudo. Cada sabotagem. Acabou.'",
-          "subtext": "Vigor/Ruptura Total",
+          "subtext": "Ruptura total",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
           "feedback": "A mascara caiu. Doloroso, mas libertador."
         },
         {
           "text": "Sumo sem explicacao. Ele nao merece nem o confronto.",
-          "subtext": "Nonchalant/Desaparecimento",
+          "subtext": "Desaparecimento",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 2, "vigor": -1, "presenca": -2 },
+          "weights": { "desapego": 3, "filtro": 1, "vigor": -1, "presenca": -2 },
           "feedback": "O silencio e a pior resposta pra quem quer atencao."
         },
         {
           "text": "Afasto devagar. Paro de confiar, sem drama nenhum.",
-          "subtext": "Harmonia/Afastamento Gradual",
+          "subtext": "Afastamento gradual",
           "tone": "protetor",
-          "weights": { "filtro": 3, "desapego": 1, "harmonia": 1, "vigor": -2, "presenca": -1 },
+          "weights": { "filtro": 3, "harmonia": 1, "vigor": -2, "presenca": -1 },
           "feedback": "Saiu pela porta dos fundos. Sem guerra, sem cena."
         },
         {
           "text": "Mostro as provas e digo: 'Quero ouvir sua versao.'",
-          "subtext": "Presenca/Confronto Justo",
+          "subtext": "Confronto justo",
           "tone": "pragmatico",
-          "weights": { "presenca": 3, "vigor": 1, "harmonia": 1, "desapego": -2, "filtro": -1 },
+          "weights": { "presenca": 3, "vigor": 1, "harmonia": -1, "desapego": -2 },
           "feedback": "Deu chance de defesa. Justo, mas arriscado."
-        },
-        {
-          "text": "Uso as provas pra proteger outros amigos, sem revelar que sei.",
-          "subtext": "Harmonia/Protecao Silenciosa",
-          "tone": "neutro",
-          "weights": { "harmonia": 2, "presenca": 2, "filtro": 1, "vigor": -2, "desapego": -1 },
-          "feedback": "Protegeu os outros sem expor a mao."
         }
       ]
     }

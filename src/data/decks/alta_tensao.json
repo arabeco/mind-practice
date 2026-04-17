@@ -10,13 +10,8 @@
     {
       "id": "at1",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Privado",
-        "relacao": "Desconhecido",
-        "aposta": "Dinheiro",
-        "pilar": "propriedade"
-      },
+      "sceneHook": "Numero desconhecido. Tom urgente",
+      "metadata": { "tensao": 4, "ambiente": "Privado", "relacao": "Desconhecido", "aposta": "Dinheiro", "pilar": "propriedade" },
       "slides": [
         { "tipo": "contexto", "texto": "Ligacao de numero desconhecido. Tom urgente, diz ser do banco." },
         { "tipo": "evento", "texto": "Diz que sua conta foi invadida. Exige seus dados agora." }
@@ -24,51 +19,39 @@
       "options": [
         {
           "text": "Grito 'Para de me ligar, golpista!' e desligo.",
-          "subtext": "Vigor/Explosao",
+          "subtext": "Explosao",
           "tone": "provocativo",
-          "weights": { "vigor": 2, "presenca": 1, "filtro": -2, "harmonia": -1 },
+          "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -2 },
           "feedback": "Reagiu com raiva. Eficaz, mas a adrenalina ficou."
         },
         {
           "text": "Desligo sem falar nada e bloqueio o numero.",
-          "subtext": "Filtro/Corte Cirurgico",
+          "subtext": "Corte cirurgico",
           "tone": "pragmatico",
-          "weights": { "filtro": 2, "desapego": 2, "vigor": -1, "harmonia": -1 },
+          "weights": { "filtro": 3, "desapego": 2, "vigor": -2, "harmonia": -1 },
           "feedback": "Frio e preciso. Nenhuma info vazou."
         },
         {
           "text": "'Vou ligar pro banco confirmar. Obrigado.' Desligo.",
-          "subtext": "Harmonia/Protocolo",
+          "subtext": "Protocolo calmo",
           "tone": "neutro",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -2, "desapego": -1 },
+          "weights": { "harmonia": 3, "filtro": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Compostura mantida, procedimento correto."
         },
         {
           "text": "Fico na linha tentando arrancar info do golpista.",
-          "subtext": "Vigor/Contra-Ataque",
+          "subtext": "Contra-ataque",
           "tone": "provocativo",
-          "weights": { "vigor": 2, "presenca": 2, "desapego": -2, "filtro": -1 },
+          "weights": { "vigor": 3, "presenca": 2, "desapego": -2, "filtro": -2 },
           "feedback": "Jogou o jogo dele. Divertido, mas arriscado."
-        },
-        {
-          "text": "Congelo no telefone sem saber o que fazer.",
-          "subtext": "Paralisia/Pressao",
-          "tone": "evasivo",
-          "weights": { "presenca": -2, "filtro": -1, "harmonia": 1, "desapego": 1 },
-          "feedback": "A pressao te travou. Info pode ter vazado."
         }
       ]
     },
     {
       "id": "at2",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 5,
-        "ambiente": "Profissional",
-        "relacao": "Autoridade",
-        "aposta": "Status",
-        "pilar": "ego"
-      },
+      "sceneHook": "Entrevista dos sonhos. Sala intimidadora",
+      "metadata": { "tensao": 5, "ambiente": "Profissional", "relacao": "Autoridade", "aposta": "Status", "pilar": "ego" },
       "slides": [
         { "tipo": "contexto", "texto": "Entrevista pro emprego dos sonhos. Semanas de preparo. Sala intimidadora." },
         { "tipo": "evento", "texto": "Entrevistador diz: 'Olhando seu curriculo, nao sei o que faz aqui.'" }
@@ -76,51 +59,39 @@
       "options": [
         {
           "text": "'Sei que posso entregar. Me da 5 minutos.'",
-          "subtext": "Vigor/Autoafirmacao",
+          "subtext": "Autoafirmacao",
           "tone": "pragmatico",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
           "feedback": "Nao deixou a provocacao te diminuir."
         },
         {
           "text": "Sorrio: 'Deixo meu trabalho falar por mim.'",
-          "subtext": "Desapego/Confianca Fria",
+          "subtext": "Confianca fria",
           "tone": "pragmatico",
-          "weights": { "desapego": 2, "filtro": 2, "vigor": -1, "presenca": -1 },
+          "weights": { "desapego": 3, "filtro": 1, "vigor": -2, "presenca": -1 },
           "feedback": "Absorveu o golpe sem piscar. Controle total."
         },
         {
           "text": "'Entendo a surpresa. Posso explicar minha trajetoria?'",
-          "subtext": "Harmonia/Construcao",
+          "subtext": "Construcao",
           "tone": "neutro",
           "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Transformou ceticismo em chance de narrativa."
         },
         {
           "text": "Levanto e saio: 'Nao provo nada pra quem ja decidiu.'",
-          "subtext": "Vigor/Orgulho",
+          "subtext": "Orgulho",
           "tone": "provocativo",
-          "weights": { "vigor": 2, "desapego": 2, "harmonia": -3, "presenca": -1 },
+          "weights": { "vigor": 3, "desapego": 1, "harmonia": -3, "presenca": -1 },
           "feedback": "Cabeca erguida, mas perdeu a chance."
-        },
-        {
-          "text": "Fico calado, processando o impacto do que ouvi.",
-          "subtext": "Paralisia/Choque",
-          "tone": "evasivo",
-          "weights": { "filtro": 1, "presenca": -2, "vigor": -1, "harmonia": 1 },
-          "feedback": "O silencio falou. Ele viu que te abalou."
         }
       ]
     },
     {
       "id": "at5",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 5,
-        "ambiente": "Privado",
-        "relacao": "Par",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
+      "sceneHook": "De noite, mexendo no celular",
+      "metadata": { "tensao": 5, "ambiente": "Privado", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "seguranca", "proximidade": "alta" },
       "slides": [
         { "tipo": "contexto", "texto": "De noite no quarto, mexendo no celular. Algo te faz checar uma conversa." },
         { "tipo": "evento", "texto": "Mensagens provam que alguem proximo traiu sua confianca." }
@@ -128,35 +99,28 @@
       "options": [
         {
           "text": "Confronto na hora: 'Vi tudo. Me explica agora.'",
-          "subtext": "Vigor/Confronto Imediato",
+          "subtext": "Confronto imediato",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -2 },
           "feedback": "A bomba estourou. Consequencias imprevisiveis."
         },
         {
           "text": "Guardo a info. Preciso pensar antes de agir.",
-          "subtext": "Filtro/Calculo Estrategico",
+          "subtext": "Calculo estrategico",
           "tone": "pragmatico",
           "weights": { "filtro": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Engoliu o veneno e guardou a carta."
         },
         {
           "text": "Espero ate amanha e puxo conversa com calma.",
-          "subtext": "Harmonia/Maturidade",
+          "subtext": "Maturidade",
           "tone": "neutro",
-          "weights": { "harmonia": 2, "filtro": 2, "vigor": -1, "desapego": -1 },
+          "weights": { "harmonia": 3, "filtro": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Deu tempo pro emocional acalmar."
         },
         {
-          "text": "Guardo, mas passo a noite sem dormir remoendo.",
-          "subtext": "Filtro/Tormento Interno",
-          "tone": "evasivo",
-          "weights": { "filtro": 2, "harmonia": 1, "desapego": -3, "presenca": -1 },
-          "feedback": "Segurou por fora, destruido por dentro."
-        },
-        {
           "text": "Decido que acabou. Nao preciso de explicacao.",
-          "subtext": "Desapego/Corte Radical",
+          "subtext": "Corte radical",
           "tone": "pragmatico",
           "weights": { "desapego": 3, "vigor": 1, "harmonia": -2, "presenca": -1 },
           "feedback": "Cortou limpo. Sem drama, sem escuta."
@@ -166,13 +130,8 @@
     {
       "id": "at7",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 4,
-        "ambiente": "Publico",
-        "relacao": "Desconhecido",
-        "aposta": "Paz Emocional",
-        "pilar": "seguranca"
-      },
+      "sceneHook": "Encontro indo bem. Clima otimo",
+      "metadata": { "tensao": 4, "ambiente": "Publico", "relacao": "Desconhecido", "aposta": "Paz Emocional", "pilar": "seguranca" },
       "slides": [
         { "tipo": "contexto", "texto": "Encontro indo bem. Conversa fluindo, clima otimo entre voces." },
         { "tipo": "evento", "texto": "A pessoa faz piada desrespeitosa sobre seu corpo, rindo como se nada." }
@@ -180,30 +139,30 @@
       "options": [
         {
           "text": "'Isso nao tem graca.' Peco a conta na hora.",
-          "subtext": "Vigor/Limite Duro",
+          "subtext": "Limite duro",
           "tone": "pragmatico",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
           "feedback": "Cortou na hora. Respeito proprio acima de tudo."
         },
         {
-          "text": "Finjo que nao ouvi e planejo minha saida discreta.",
-          "subtext": "Filtro/Saida Silenciosa",
-          "tone": "evasivo",
-          "weights": { "filtro": 2, "desapego": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Nao deu palco, mas engoliu o desconforto."
-        },
-        {
           "text": "'Esse tipo de piada nao rola comigo.' Mudo de assunto.",
-          "subtext": "Harmonia/Firmeza Calibrada",
+          "subtext": "Firmeza calibrada",
           "tone": "neutro",
-          "weights": { "harmonia": 2, "presenca": 2, "filtro": 1, "vigor": -2, "desapego": -1 },
+          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Limite marcado sem destruir o momento."
         },
         {
-          "text": "Rio junto pra disfarcar, mas por dentro doi.",
-          "subtext": "Harmonia/Mascara",
+          "text": "Finjo que nao ouvi e planejo minha saida discreta.",
+          "subtext": "Saida silenciosa",
           "tone": "evasivo",
-          "weights": { "harmonia": 1, "filtro": 1, "vigor": -2, "presenca": -1, "desapego": 1 },
+          "weights": { "filtro": 3, "desapego": 1, "vigor": -2, "presenca": -1 },
+          "feedback": "Nao deu palco, mas engoliu o desconforto."
+        },
+        {
+          "text": "Rio junto pra disfarcar, mas por dentro doi.",
+          "subtext": "Mascara",
+          "tone": "evasivo",
+          "weights": { "harmonia": 2, "desapego": 1, "vigor": -2, "presenca": -1 },
           "feedback": "Protegeu o clima, traiu a si mesmo."
         }
       ]
@@ -211,13 +170,8 @@
     {
       "id": "at10",
       "type": "NORMAL",
-      "metadata": {
-        "tensao": 5,
-        "ambiente": "Profissional",
-        "relacao": "Autoridade",
-        "aposta": "Dinheiro",
-        "pilar": "propriedade"
-      },
+      "sceneHook": "Sexta, fim do expediente. Porta fechada",
+      "metadata": { "tensao": 5, "ambiente": "Profissional", "relacao": "Autoridade", "aposta": "Dinheiro", "pilar": "propriedade" },
       "slides": [
         { "tipo": "contexto", "texto": "Sexta, fim do expediente. Chefe te chama na sala e fecha a porta." },
         { "tipo": "evento", "texto": "'A empresa reestruturou. Seu cargo foi eliminado. Hoje e seu ultimo dia.'" }
@@ -225,37 +179,30 @@
       "options": [
         {
           "text": "'Depois de tudo que entreguei? Falta de respeito.'",
-          "subtext": "Vigor/Indignacao",
+          "subtext": "Indignacao",
           "tone": "provocativo",
           "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -2 },
           "feedback": "Raiva justa, mas a ponte pode queimar."
         },
         {
           "text": "'Entendido. Manda os documentos pro meu email.'",
-          "subtext": "Filtro/Pragmatismo Frio",
+          "subtext": "Pragmatismo frio",
           "tone": "pragmatico",
-          "weights": { "filtro": 3, "desapego": 1, "vigor": -1, "harmonia": -1 },
+          "weights": { "filtro": 3, "desapego": 1, "vigor": -2, "harmonia": -1 },
           "feedback": "Processou o golpe sem demonstrar. Controle maximo."
         },
         {
           "text": "'Entendo. Existe transicao ou posicao alternativa?'",
-          "subtext": "Harmonia/Negociacao",
+          "subtext": "Negociacao",
           "tone": "neutro",
-          "weights": { "harmonia": 2, "filtro": 2, "presenca": 1, "vigor": -2, "desapego": -1 },
+          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
           "feedback": "Transformou o fim em negociacao."
         },
         {
-          "text": "'Entendido.' Mas por dentro desmorona completamente.",
-          "subtext": "Filtro/Colapso Interno",
-          "tone": "evasivo",
-          "weights": { "filtro": 2, "harmonia": 1, "desapego": -2, "presenca": -1 },
-          "feedback": "Segurou a mascara, chao sumiu por dentro."
-        },
-        {
           "text": "Levanto, aperto a mao e saio sem dizer nada.",
-          "subtext": "Desapego/Saida Limpa",
+          "subtext": "Saida limpa",
           "tone": "pragmatico",
-          "weights": { "desapego": 3, "presenca": 1, "vigor": -1, "harmonia": -1 },
+          "weights": { "desapego": 3, "presenca": 1, "vigor": -1, "harmonia": -2 },
           "feedback": "Saida limpa. Nenhuma palavra desperdicada."
         }
       ]
