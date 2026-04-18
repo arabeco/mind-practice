@@ -11,20 +11,10 @@ export const metadata: Metadata = {
   title: 'MindPractice - Simulador de Reatividade Social',
   description: 'Descubra seu arquetipo comportamental atraves de micro-conflitos sob pressao.',
   manifest: '/manifest.json',
-  icons: {
-    icon: [
-      { url: '/icon.png', type: 'image/png', sizes: '512x512' },
-    ],
-    apple: [
-      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
-    ],
-    shortcut: ['/icon.png'],
-  },
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
     title: 'MindPractice',
-    startupImage: ['/icon.png'],
   },
 };
 
