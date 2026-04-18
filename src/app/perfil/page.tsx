@@ -126,10 +126,10 @@ export default function PerfilPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           </button>
-          <button type="button" onClick={toggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Trocar variante">
-            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+          <button type="button" onClick={toggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/60 transition-colors hover:text-white/90" title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}>
+            <span className="text-[13px] font-bold leading-none" aria-hidden>
+              {variant === 'masculino' ? '♀' : '♂'}
+            </span>
           </button>
         </div>
 
@@ -330,6 +330,40 @@ export default function PerfilPage() {
       )}
 
       {/* ================================================================ */}
+      {/* Auth pill — sempre visivel quando Supabase configurado           */}
+      {/* ================================================================ */}
+      {authEnabled && (
+        <motion.section variants={fadeUp} className="mt-3">
+          <div className="rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5">
+            {user ? (
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                    Conta
+                  </p>
+                  <p className="truncate text-xs text-white/82">{user.email ?? 'Logado'}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => { signOut(); }}
+                  className="shrink-0 rounded-full border border-white/18 bg-white/6 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/75 hover:bg-white/12"
+                >
+                  Sair
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center justify-center gap-2 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-gold/90 transition-colors hover:bg-accent-gold/12"
+              >
+                Entrar — salvar na nuvem
+              </Link>
+            )}
+          </div>
+        </motion.section>
+      )}
+
+      {/* ================================================================ */}
       {/* Reset button — only visible in edit mode                         */}
       {/* ================================================================ */}
       <AnimatePresence>
@@ -341,36 +375,6 @@ export default function PerfilPage() {
             transition={{ duration: 0.2 }}
             className="mt-3 overflow-hidden"
           >
-            {/* Auth pill — só aparece se o Supabase estiver configurado */}
-            {authEnabled && (
-              <div className="mb-2 rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5">
-                {user ? (
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
-                        Conta
-                      </p>
-                      <p className="truncate text-xs text-white/82">{user.email ?? 'Logado'}</p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => { signOut(); }}
-                      className="shrink-0 rounded-full border border-white/18 bg-white/6 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/75 hover:bg-white/12"
-                    >
-                      Sair
-                    </button>
-                  </div>
-                ) : (
-                  <Link
-                    href="/login"
-                    className="flex items-center justify-center gap-2 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-gold/90 transition-colors hover:bg-accent-gold/12"
-                  >
-                    Entrar — salvar na nuvem
-                  </Link>
-                )}
-              </div>
-            )}
-
             <button
               type="button"
               onClick={() => setResetModalOpen(true)}
@@ -439,12 +443,12 @@ export default function PerfilPage() {
               <button
                 type="button"
                 onClick={toggleVariant}
-                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/70 backdrop-blur-sm transition-colors hover:text-white/95"
-                title="Trocar variante"
+                className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/80 backdrop-blur-sm transition-colors hover:text-white"
+                title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}
               >
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
+                <span className="text-base font-bold leading-none" aria-hidden>
+                  {variant === 'masculino' ? '♀' : '♂'}
+                </span>
               </button>
 
               {/* Close / Sair button — prominent */}
