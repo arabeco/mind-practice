@@ -2,6 +2,30 @@ import { getSupabase } from './client';
 import type { GameState } from '@/types/game';
 
 /**
+ * Sincroniza nickname + avatar variant na tabela profiles.
+ * Chamado quando usuário edita o nickname ou troca o avatar no /perfil.
+ * Silently fails se Supabase não configurado ou usuário não logado.
+ */
+export async function saveProfileToCloud(opts: {
+  nickname?: string;
+  avatarVariant?: 'masculino' | 'feminino';
+}): Promise<void> {
+  const sb = getSupabase();
+  if (!sb) return;
+
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) return;
+
+  const patch: Record<string, unknown> = { id: user.id };
+  if (opts.nickname !== undefined) patch.nickname = opts.nickname;
+  if (opts.avatarVariant !== undefined) patch.avatar_variant = opts.avatarVariant;
+
+  // upsert pra cobrir o caso (raro) em que o trigger handle_new_user
+  // ainda não rodou ou falhou — não trava o app
+  await sb.from('profiles').upsert(patch);
+}
+
+/**
  * Save game state to Supabase for the logged-in user.
  * Silently fails if Supabase isn't configured or user isn't logged in.
  */

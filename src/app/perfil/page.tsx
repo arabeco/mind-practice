@@ -58,6 +58,16 @@ export default function PerfilPage() {
     }
   }, []);
 
+  // Quando user loga, empurra o profile local atual pro Supabase
+  // (resolve o caso "joguei offline, depois criei conta").
+  useEffect(() => {
+    if (!user) return;
+    import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
+      saveProfileToCloud({ nickname, avatarVariant: variant }).catch(() => {});
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
+
   // Reset image state when archetype/variant changes
   useEffect(() => {
     setImageIndex(0);
@@ -84,6 +94,10 @@ export default function PerfilPage() {
     if (trimmed.length > 0) {
       setNickname(trimmed);
       localStorage.setItem(NICKNAME_KEY, trimmed);
+      // Sync pro Supabase se logado — silently fails caso contrário
+      import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
+        saveProfileToCloud({ nickname: trimmed }).catch(() => {});
+      });
     }
     setEditingNickname(false);
   }
@@ -103,6 +117,10 @@ export default function PerfilPage() {
     const next: AvatarVariant = variant === 'masculino' ? 'feminino' : 'masculino';
     setVariant(next);
     localStorage.setItem(VARIANT_KEY, next);
+    // Sync pro Supabase se logado
+    import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
+      saveProfileToCloud({ avatarVariant: next }).catch(() => {});
+    });
   }
 
   return (
