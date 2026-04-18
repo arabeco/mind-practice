@@ -4,6 +4,7 @@ import { AuthProvider } from '@/context/AuthContext';
 import { GameProvider } from '@/context/GameContext';
 import BottomNav from '@/components/BottomNav';
 import OnboardingGate from '@/components/OnboardingGate';
+import LoginGate from '@/components/LoginGate';
 import DevTools from '@/components/DevTools';
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar';
 
@@ -33,10 +34,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ServiceWorkerRegistrar />
         <AuthProvider>
           <GameProvider>
-            <OnboardingGate>
-              <main className="min-h-screen pb-20">{children}</main>
-              <BottomNav />
-            </OnboardingGate>
+            <LoginGate>
+              <OnboardingGate>
+                <main className="min-h-screen pb-20">{children}</main>
+                <BottomNav />
+              </OnboardingGate>
+            </LoginGate>
           </GameProvider>
         </AuthProvider>
       </body>
