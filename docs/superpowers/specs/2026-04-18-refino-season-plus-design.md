@@ -178,18 +178,31 @@ Benefícios ativos enquanto a assinatura está ativa:
 
 ### Tema
 
-Cada season tem mote coeso. Ex:
-- Season 0 (retrofit): temas variados dos decks existentes.
-- Season 1: "Trabalho & Autoridade"
-- Season 2: "Amor & Lealdade"
-- Season 3: "Dinheiro & Família"
+Cada season tem mote coeso. Proposta inicial:
+- **Season 0** (retrofit): temas variados dos decks existentes. Sem mote único. Selo: `"Fundação"`.
+- **Season 1 — "Ocupando Espaço"**: trabalho, autoridade, pertencimento profissional. Quando você vira figura na sala e quando ainda é visita.
+  - Campanha: **"A Vaga"** — você descobre que a promoção que você mirava tá sendo oferecida pra outra pessoa. 6 cenas até um de vários endings.
+  - Lendária: **"Reunião das 7"** — reunião antecipada, decisiva, onde um único erro de leitura social muda carreira.
+- **Season 2 — "O Que Não Se Diz"**: amor, lealdade, silêncios. O que você não fala e por quê.
+- **Season 3 — "Conta Fechada"**: dinheiro, família, dívida invisível.
 
-A Lendária + a Campanha da season são conectadas tematicamente.
+A Lendária + a Campanha da season são conectadas tematicamente (personagens podem se cruzar entre as duas).
+
+### Selo por Season
+
+Cada season tem um **selo SVG próprio** (tipo brasão de expansão — escudo/selo estilizado, 24×24px). Aparece:
+- No **canto superior direito de cada card de deck** daquela season (identidade visual coletiva).
+- Grande na **tela de lançamento da season**.
+- No perfil, numa "estante" de seasons que o jogador tem pelo menos 1 deck desbloqueado.
+
+Vira coleção visual: depois de 4-5 seasons o jogador vê sua estante e identifica "de qual era cada deck".
+
+Selos ficam em `src/components/seals/<SeasonId>Seal.tsx` (SVG como componente React pra escalar sem perder qualidade).
 
 ### Season 0 (retrofit)
 
 Os 12 decks atuais:
-- **Calibragem (fora de raridade, grátis sempre):** candidatos por `category: 'calibragem'` ou `format: 'quick'` — lista a confirmar (provavelmente basic_01, espelho, escolha, limite, mascara, roda, teste).
+- **Calibragem (fora de raridade, grátis sempre):** critério `category === 'calibragem' || format === 'quick'` — pelos arquivos atuais cai em basic_01, espelho, escolha, limite, mascara, roda, teste.
 - **Com raridade aplicada:** os decks de experiência restantes — provavelmente `alta_tensao`, `social`, `profissional`, `holofote` (4 decks normais) + `livro_amaldicoado` (1 campanha).
 - **Trabalho de retrofit:** aplicar refino (dossiê + ambiguidade + pesos contextuais) em todos os decks não-calibragem, classificar raridade individualmente por densidade narrativa atual, setar `priceFichas`.
 
@@ -334,14 +347,31 @@ Nova regra: se `responseTimeMs > threshold` (ex: 30s) ou `timedOut`, weight da o
 - Tela "Nova Season!" no `/decks` (destaque da campanha e da lendária)
 - Push opt-in pra lançamento (aproveita infra existente)
 
-### Fase 4 — Plus + IAP (4-5 dias)
+### Fase 4 — Plus + IAP (4-5 dias, parcial)
 
-- Integração IAP (Mercado Pago com Pix preferido pelo BR)
-- Edge Function `process-payment-webhook` que credita fichas ou ativa Plus
-- UI "Torne-se Plus" + comparativo visual
-- Tela de pacotes de fichas (4 tiers)
-- Claim diário Plus (+10 fichas)
-- Badge Plus no perfil e feed
+**Enquanto é PWA/webapp (agora):** IAP real fica como **placeholder não-funcional**.
+- UI "Torne-se Plus" + comparativo visual implementado, mas botão final mostra "Disponível no app". Plus pode ser ativado manualmente via painel GM pra testes.
+- Claim diário Plus (+10 fichas) já implementado (aciona quando `plusSubscription.active === true`).
+- Badge Plus no perfil e feed.
+- Pacotes de fichas visíveis mas compra desabilitada.
+
+**Quando virar app (Capacitor APK/iOS):** plugar gateway real.
+- Gateway preferido: **MercadoPago com Pix** (converte mais no BR) — decisão confirmada na migração pra app.
+- Edge Function `process-payment-webhook` credita fichas ou ativa Plus via `SET_PLUS_STATUS`.
+- Stores: Google Play Billing e/ou App Store IAP (depende da política da loja — Plus pode ter que ir via billing nativo da loja).
+
+## Teaser de Season na Home
+
+Não usar modal obrigatório (barulhento). Em vez disso: **card persistente na home** que anuncia a season atual/próxima.
+
+### Estados do card
+
+- **Season em pré-lançamento** (ex: 7 dias antes): card com selo da nova season + headline ("Season 1 — Ocupando Espaço · 23 de maio"), botão "Me avisa" (opt-in push).
+- **Season recém-lançada** (primeiros 14 dias): card destacado com shimmer, selo grande, headline ("Chegou a Season 1"), CTA "Ver decks novos" → leva pra `/decks?season=season-1`.
+- **Season em curso** (após 14 dias): card minimizado só com selo + texto curto "Season 1 ativa — 3 decks novos".
+- **Entre seasons**: sem card.
+
+Componente: `<SeasonTeaserCard />` em `src/components/home/` — recebe `season` do calendário de seasons (`src/data/seasons.ts` com `{ id, title, theme, launchDate, sealComponent }`).
 
 ## Riscos e mitigações
 
@@ -359,7 +389,14 @@ Nova regra: se `responseTimeMs > threshold` (ex: 30s) ou `timedOut`, weight da o
 
 ## Decisões pendentes
 
-1. Nomes oficiais da Season 1 (tema, título, nome da lendária e da campanha).
-2. Gateway de pagamento definitivo (MercadoPago com Pix vs Stripe).
-3. Validação de quais decks da Season 0 são calibragem (critério atual: `format: 'quick'` + `category: 'calibragem'`).
-4. Se tela "Nova Season!" é modal obrigatório ou só destaque no /decks.
+Todas as decisões originais foram fechadas:
+
+1. ✅ **Season 1**: "Ocupando Espaço" · Campanha "A Vaga" · Lendária "Reunião das 7". Themas das próximas seasons também definidos.
+2. ✅ **Gateway de pagamento**: placeholder enquanto PWA. MercadoPago com Pix quando virar app.
+3. ✅ **Calibragem**: critério `category === 'calibragem' || format === 'quick'`.
+4. ✅ **Teaser de Season**: card persistente na home (3 estados), não modal.
+
+**Pendentes de produção (não bloqueiam início):**
+- Design visual de cada selo SVG (um por season).
+- Conteúdo concreto das cenas refinadas (trabalho de escrita durante Fase 2 e Fase 3).
+- Preço em reais dos pacotes de fichas (afeta Fase 4).
