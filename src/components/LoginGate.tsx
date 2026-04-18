@@ -1,31 +1,32 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 
 const LOGIN_SEEN_KEY = 'mindpractice_login_seen';
 
-type Stage = 'idle' | 'sending' | 'sent' | 'error';
+type Mode = 'signin' | 'signup';
+type Stage = 'idle' | 'loading' | 'error';
 
 /**
  * Gate mostrado na PRIMEIRA visita ao app (antes do onboarding).
- * Dá 3 opções: Google, magic link, ou jogar sem conta.
+ * Opções: Google, email+senha (entrar ou criar conta), ou jogar sem conta.
  *
- * Depois da primeira interação (login OU skip), nunca mais aparece
- * — a flag `mindpractice_login_seen` fica em localStorage.
+ * Depois da primeira interação, nunca mais aparece — a flag
+ * `mindpractice_login_seen` fica em localStorage.
  *
  * Se o usuário quiser logar depois, usa o botão "Entrar — salvar na nuvem"
  * no /perfil (sempre visível).
  */
 export default function LoginGate({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-  const { user, enabled, loading, signInWithGoogle, signInWithEmail } = useAuth();
+  const { user, enabled, loading, signInWithGoogle, signInWithPassword, signUpWithPassword } = useAuth();
   const [checked, setChecked] = useState(false);
   const [needsLogin, setNeedsLogin] = useState(false);
 
+  const [mode, setMode] = useState<Mode>('signup');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [stage, setStage] = useState<Stage>('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -54,32 +55,53 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
     markSeen();
   };
 
-  const handleEmail = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg(null);
+
     if (!email.includes('@')) {
-      setErrorMsg('Digite um email valido');
+      setErrorMsg('Digite um email válido.');
       setStage('error');
       return;
     }
-    setStage('sending');
-    setErrorMsg(null);
-    const { error } = await signInWithEmail(email.trim());
+    if (password.length < 6) {
+      setErrorMsg('Senha precisa ter no mínimo 6 caracteres.');
+      setStage('error');
+      return;
+    }
+
+    setStage('loading');
+    const action = mode === 'signin' ? signInWithPassword : signUpWithPassword;
+    const { error } = await action(email.trim(), password);
+
     if (error) {
       setErrorMsg(error);
       setStage('error');
       return;
     }
-    setStage('sent');
+    // Sucesso: o useEffect do user dispara markSeen automaticamente.
+    setStage('idle');
   };
 
   const handleGoogle = () => {
-    // Não marcamos seen aqui — o redirect do Google sai da app.
-    // Quando voltar autenticado, o useEffect do user seta a flag.
     signInWithGoogle();
+  };
+
+  const toggleMode = () => {
+    setMode(m => (m === 'signin' ? 'signup' : 'signin'));
+    setErrorMsg(null);
+    setStage('idle');
   };
 
   if (!checked) return null;
   if (!needsLogin) return <>{children}</>;
+
+  const isLoading = stage === 'loading';
+  const submitLabel = isLoading
+    ? 'Aguarde...'
+    : mode === 'signin'
+      ? 'Entrar'
+      : 'Criar conta';
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center px-5 py-10">
@@ -93,9 +115,11 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
           <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-accent-gold/75">
             MindPractice
           </p>
-          <h1 className="mt-3 text-2xl font-bold text-white/92">Como quer começar?</h1>
+          <h1 className="mt-3 text-2xl font-bold text-white/92">
+            {mode === 'signin' ? 'Bem-vindo de volta' : 'Criar sua conta'}
+          </h1>
           <p className="mt-2 text-sm text-white/55">
-            Com conta, seu progresso sincroniza entre dispositivos.
+            Progresso sincronizado entre dispositivos.
           </p>
         </div>
 
@@ -104,7 +128,8 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
           <button
             type="button"
             onClick={handleGoogle}
-            className="flex w-full items-center justify-center gap-2.5 rounded-full border border-white/18 bg-white/8 py-3 text-sm font-semibold text-white/92 transition hover:bg-white/15"
+            disabled={isLoading}
+            className="flex w-full items-center justify-center gap-2.5 rounded-full border border-white/18 bg-white/8 py-3 text-sm font-semibold text-white/92 transition hover:bg-white/15 disabled:opacity-50"
           >
             <svg className="h-4 w-4" viewBox="0 0 48 48" aria-hidden="true">
               <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.3 6.1 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.2-.1-2.3-.4-3.5z"/>
@@ -121,8 +146,8 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
             <div className="h-px flex-1 bg-white/12" />
           </div>
 
-          {/* Email magic link */}
-          <form onSubmit={handleEmail} className="space-y-3">
+          {/* Email + senha */}
+          <form onSubmit={handleSubmit} className="space-y-3">
             <label className="block">
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
                 Email
@@ -132,7 +157,7 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
                 inputMode="email"
                 autoComplete="email"
                 required
-                disabled={stage === 'sending' || stage === 'sent'}
+                disabled={isLoading}
                 value={email}
                 onChange={e => {
                   setEmail(e.target.value);
@@ -143,26 +168,35 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
               />
             </label>
 
+            <label className="block">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50">
+                Senha
+              </span>
+              <input
+                type="password"
+                autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
+                required
+                minLength={6}
+                disabled={isLoading}
+                value={password}
+                onChange={e => {
+                  setPassword(e.target.value);
+                  if (stage === 'error') setStage('idle');
+                }}
+                placeholder="mínimo 6 caracteres"
+                className="mt-1.5 w-full rounded-full border border-white/15 bg-black/30 px-4 py-2.5 text-sm text-white placeholder:text-white/28 focus:border-accent-gold/55 focus:outline-none"
+              />
+            </label>
+
             <button
               type="submit"
-              disabled={stage === 'sending' || stage === 'sent'}
+              disabled={isLoading}
               className="w-full rounded-full bg-accent-gold/90 py-3 text-sm font-bold text-black transition hover:bg-accent-gold disabled:opacity-60"
             >
-              {stage === 'sending' ? 'Enviando...' :
-               stage === 'sent' ? 'Link enviado ✓' :
-               'Receber link mágico'}
+              {submitLabel}
             </button>
           </form>
 
-          {stage === 'sent' && (
-            <motion.p
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-3 text-center text-xs text-emerald-300/90"
-            >
-              Cheque seu email e clique no link.
-            </motion.p>
-          )}
           {stage === 'error' && errorMsg && (
             <motion.p
               initial={{ opacity: 0, y: 4 }}
@@ -172,12 +206,25 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
               {errorMsg}
             </motion.p>
           )}
+
+          {/* Toggle signin/signup */}
+          <button
+            type="button"
+            onClick={toggleMode}
+            disabled={isLoading}
+            className="mt-4 w-full text-center text-[11px] text-white/45 transition-colors hover:text-white/80"
+          >
+            {mode === 'signin'
+              ? 'Não tem conta? Criar uma →'
+              : 'Já tem conta? Entrar →'}
+          </button>
         </div>
 
         {/* Jogar sem conta */}
         <button
           type="button"
           onClick={handleSkip}
+          disabled={isLoading}
           className="mt-5 w-full text-center text-[11px] uppercase tracking-[0.24em] text-white/45 transition-colors hover:text-white/80"
         >
           Jogar sem conta →

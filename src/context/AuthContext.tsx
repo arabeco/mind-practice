@@ -8,7 +8,8 @@ interface AuthState {
   user: User | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
-  signInWithEmail: (email: string) => Promise<{ error: string | null }>;
+  signInWithPassword: (email: string, password: string) => Promise<{ error: string | null }>;
+  signUpWithPassword: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   /** True when Supabase env vars are configured */
   enabled: boolean;
@@ -18,7 +19,8 @@ const AuthContext = createContext<AuthState>({
   user: null,
   loading: true,
   signInWithGoogle: async () => {},
-  signInWithEmail: async () => ({ error: 'Supabase nao configurado' }),
+  signInWithPassword: async () => ({ error: 'Supabase nao configurado' }),
+  signUpWithPassword: async () => ({ error: 'Supabase nao configurado' }),
   signOut: async () => {},
   enabled: false,
 });
@@ -57,13 +59,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, [sb]);
 
-  const signInWithEmail = useCallback(async (email: string): Promise<{ error: string | null }> => {
+  const signInWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!sb) return { error: 'Login indisponivel — Supabase nao configurado.' };
-    const { error } = await sb.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: window.location.origin },
-    });
-    return { error: error?.message ?? null };
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) {
+      // Normalize common Supabase errors to PT-BR
+      const msg = error.message.toLowerCase();
+      if (msg.includes('invalid login')) return { error: 'Email ou senha incorretos.' };
+      if (msg.includes('email not confirmed')) return { error: 'Email ainda não confirmado.' };
+      return { error: error.message };
+    }
+    return { error: null };
+  }, [sb]);
+
+  const signUpWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
+    if (!sb) return { error: 'Login indisponivel — Supabase nao configurado.' };
+    const { error } = await sb.auth.signUp({ email, password });
+    if (error) {
+      const msg = error.message.toLowerCase();
+      if (msg.includes('already registered') || msg.includes('already been registered')) {
+        return { error: 'Esse email já tem conta. Use "Entrar".' };
+      }
+      if (msg.includes('password') && msg.includes('6')) {
+        return { error: 'Senha precisa ter no mínimo 6 caracteres.' };
+      }
+      return { error: error.message };
+    }
+    return { error: null };
   }, [sb]);
 
   const signOut = useCallback(async () => {
@@ -73,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [sb]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signOut, enabled }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithPassword, signUpWithPassword, signOut, enabled }}>
       {children}
     </AuthContext.Provider>
   );
