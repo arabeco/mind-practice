@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
-import { ALL_DECKS, getDecksByCategory, getWeeklyFreeDeckIds } from '@/data/decks/index';
+import { ALL_DECKS, DECK_UNLOCK_ORDER, getDecksByCategory, getWeeklyFreeDeckIds } from '@/data/decks/index';
 import type { Deck, DeckCategory } from '@/types/game';
 import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
@@ -79,12 +79,42 @@ export default function DecksPage() {
 
       {/* Header */}
       <div className="mb-4">
-        <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/68">
-          <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
-          Biblioteca
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/68">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
+              Biblioteca
+            </div>
+            <h2 className="mt-2 text-xl font-bold text-white/92">Decks</h2>
+            <p className="mt-0.5 text-xs text-white/46">Escolha seu desafio</p>
+          </div>
+
+          {/* Progresso da jornada — discreto, no canto */}
+          {(() => {
+            const doneIds = new Set(Object.keys(state.completedDecks));
+            const doneCount = DECK_UNLOCK_ORDER.filter(id => doneIds.has(id)).length;
+            const totalCount = DECK_UNLOCK_ORDER.length;
+            const pct = (doneCount / totalCount) * 100;
+            return (
+              <div className="shrink-0 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-right">
+                <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">
+                  Jornada
+                </p>
+                <p className="text-sm font-bold tabular-nums text-white/88">
+                  {doneCount}<span className="text-white/30"> / {totalCount}</span>
+                </p>
+                <div className="mt-1 h-1 w-16 overflow-hidden rounded-full bg-white/8">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-accent-purple to-accent-gold"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${pct}%` }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                  />
+                </div>
+              </div>
+            );
+          })()}
         </div>
-        <h2 className="mt-2 text-xl font-bold text-white/92">Decks</h2>
-        <p className="mt-0.5 text-xs text-white/46">Escolha seu desafio</p>
       </div>
 
       {/* Tabs */}

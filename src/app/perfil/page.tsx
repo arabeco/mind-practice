@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 import { useGame, getPrecisionLabel, getConsistencyLabel } from '@/context/GameContext';
 import {
   getArchetypeAvatarPaths,
@@ -25,6 +27,7 @@ const VARIANT_KEY = 'mindpractice_avatar_variant';
 
 export default function PerfilPage() {
   const { state, dispatch, getArchetype, precision, consistency, isIdentityValidated } = useGame();
+  const { user, enabled: authEnabled, signOut } = useAuth();
   const archetype = getArchetype();
   const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
 
@@ -338,6 +341,36 @@ export default function PerfilPage() {
             transition={{ duration: 0.2 }}
             className="mt-3 overflow-hidden"
           >
+            {/* Auth pill — só aparece se o Supabase estiver configurado */}
+            {authEnabled && (
+              <div className="mb-2 rounded-xl border border-white/12 bg-white/[0.04] px-3 py-2.5">
+                {user ? (
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <p className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
+                        Conta
+                      </p>
+                      <p className="truncate text-xs text-white/82">{user.email ?? 'Logado'}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => { signOut(); }}
+                      className="shrink-0 rounded-full border border-white/18 bg-white/6 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/75 hover:bg-white/12"
+                    >
+                      Sair
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-gold/90 transition-colors hover:bg-accent-gold/12"
+                  >
+                    Entrar — salvar na nuvem
+                  </Link>
+                )}
+              </div>
+            )}
+
             <button
               type="button"
               onClick={() => setResetModalOpen(true)}

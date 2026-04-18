@@ -20,6 +20,29 @@ const EYEBROWS = {
   event: 'O corte',
 };
 
+/**
+ * Tipografia reage à tensão da cena.
+ *  1 → ar, contemplativo    (weight 400, tracking +0.005em)
+ *  2 → leve peso            (weight 500)
+ *  3 → firme                (weight 600, tracking -0.005em)
+ *  4 → denso                (weight 700, tracking -0.012em)
+ *  5 → bloco, tremor sutil  (weight 800, tracking -0.018em + shake)
+ */
+function getTensionTypography(tensao: 1 | 2 | 3 | 4 | 5) {
+  switch (tensao) {
+    case 1:
+      return { fontWeight: 400, letterSpacing: '0.005em', shake: false };
+    case 2:
+      return { fontWeight: 500, letterSpacing: '0em', shake: false };
+    case 3:
+      return { fontWeight: 600, letterSpacing: '-0.005em', shake: false };
+    case 4:
+      return { fontWeight: 700, letterSpacing: '-0.012em', shake: false };
+    case 5:
+      return { fontWeight: 800, letterSpacing: '-0.018em', shake: true };
+  }
+}
+
 export default function SceneTextStage({
   question,
   phase,
@@ -33,6 +56,9 @@ export default function SceneTextStage({
 
   const isEvent = phase === 'event';
   const supportLine = getSceneSupportLine(question, phase);
+  const typo = getTensionTypography(question.metadata.tensao);
+  // Only apply tension-driven typo on the EVENT phase — context stays neutral.
+  const applyTypo = isEvent;
 
   // Swipe left to advance
   const startX = useRef(0);
@@ -81,13 +107,18 @@ export default function SceneTextStage({
                 {supportLine}
               </p>
             )}
-            <p
+            <motion.p
               className={`mt-3 leading-tight text-white/92 ${
-                isEvent ? 'text-2xl font-semibold sm:text-4xl' : 'text-lg sm:text-2xl'
-              }`}
+                isEvent ? 'text-2xl sm:text-4xl' : 'text-lg sm:text-2xl'
+              } ${applyTypo && typo.shake && !reducedMotion ? 'tension-shake' : ''}`}
+              style={
+                applyTypo
+                  ? { fontWeight: typo.fontWeight, letterSpacing: typo.letterSpacing }
+                  : { fontWeight: 600 }
+              }
             >
               {slide.texto}
-            </p>
+            </motion.p>
             <p className="mt-4 text-xs uppercase tracking-[0.24em] text-white/30">
               {canTapAdvance ? 'Toque para acelerar' : isEvent ? 'Segura o impacto...' : 'Lendo o clima...'}
             </p>

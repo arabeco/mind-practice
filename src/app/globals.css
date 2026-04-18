@@ -72,6 +72,25 @@
     0%, 100% { opacity: 0.28; transform: scaleX(0.98); }
     50% { opacity: 0.48; transform: scaleX(1.02); }
   }
+
+  @keyframes tension-shake {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    14% { transform: translate3d(-0.4px, 0.2px, 0); }
+    28% { transform: translate3d(0.5px, -0.3px, 0); }
+    42% { transform: translate3d(-0.3px, 0.4px, 0); }
+    58% { transform: translate3d(0.4px, 0.1px, 0); }
+    72% { transform: translate3d(-0.5px, -0.2px, 0); }
+    88% { transform: translate3d(0.3px, 0.3px, 0); }
+  }
+}
+
+.tension-shake {
+  animation: tension-shake 3.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tension-shake { animation: none; }
 }
 
 body {

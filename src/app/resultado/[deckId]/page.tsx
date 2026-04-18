@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { use } from 'react';
+import DeckTransitionCard from '@/components/DeckTransitionCard';
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
 import { useGame } from '@/context/GameContext';
@@ -256,6 +257,14 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
             Voltar ao menu
           </Link>
         </motion.div>
+
+        {/* Deltas + próximo deck + progresso da jornada */}
+        <DeckTransitionCard
+          snapshot={featuredSnapshot}
+          totalResponsesAfter={state.calibration.totalResponses}
+          unlockedDecks={state.unlockedDecks}
+          completedDecks={state.completedDecks}
+        />
 
         {/* Share card */}
         <motion.div

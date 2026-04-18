@@ -8,6 +8,7 @@ interface AuthState {
   user: User | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
+  signInWithEmail: (email: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
   /** True when Supabase env vars are configured */
   enabled: boolean;
@@ -17,6 +18,7 @@ const AuthContext = createContext<AuthState>({
   user: null,
   loading: true,
   signInWithGoogle: async () => {},
+  signInWithEmail: async () => ({ error: 'Supabase nao configurado' }),
   signOut: async () => {},
   enabled: false,
 });
@@ -55,6 +57,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, [sb]);
 
+  const signInWithEmail = useCallback(async (email: string): Promise<{ error: string | null }> => {
+    if (!sb) return { error: 'Login indisponivel — Supabase nao configurado.' };
+    const { error } = await sb.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.origin },
+    });
+    return { error: error?.message ?? null };
+  }, [sb]);
+
   const signOut = useCallback(async () => {
     if (!sb) return;
     await sb.auth.signOut();
@@ -62,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [sb]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signOut, enabled }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithEmail, signOut, enabled }}>
       {children}
     </AuthContext.Provider>
   );

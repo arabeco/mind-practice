@@ -3,6 +3,7 @@
 import { use, useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import ArchetypeDriftFlash from '@/components/play/ArchetypeDriftFlash';
 import QuickScene from '@/components/play/QuickScene';
 import SceneBackdrop from '@/components/play/SceneBackdrop';
 import SceneDelayStage from '@/components/play/SceneDelayStage';
@@ -17,6 +18,7 @@ import { useSceneAudio } from '@/hooks/useSceneAudio';
 import { useSceneDirector } from '@/hooks/useSceneDirector';
 import { getScenePresentationProfile } from '@/lib/scenePresentation';
 import { getDeckArt } from '@/lib/deckArt';
+import { HAPTIC_GRAMMAR } from '@/lib/hapticGrammar';
 import type { AnswerIntensity, Option } from '@/types/game';
 
 export default function PlayPage({ params }: { params: Promise<{ deckId: string }> }) {
@@ -29,6 +31,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
     setAmbience,
     stopAmbience,
     playEventImpact,
+    playDeckTriumph,
     playUiCue,
     vibrate,
   } = useSceneAudio({
@@ -92,7 +95,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
 
     if (phase === 'event') {
       playEventImpact(presentation.tensionBand);
-      vibrate(question.metadata.tensao >= 4 ? [20, 32, 16] : 16);
+      vibrate(question.metadata.tensao >= 4 ? HAPTIC_GRAMMAR.sceneImpactHigh : HAPTIC_GRAMMAR.sceneTap);
       return;
     }
 
@@ -103,13 +106,15 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
 
   const handleNext = useCallback(() => {
     if (isLast) {
+      playDeckTriumph();
+      vibrate(HAPTIC_GRAMMAR.triumph);
       dispatch({ type: 'FINISH_DECK' });
       router.push(`/resultado/${deckId}`);
       return;
     }
 
     dispatch({ type: 'NEXT_QUESTION' });
-  }, [isLast, dispatch, router, deckId]);
+  }, [isLast, dispatch, router, deckId, playDeckTriumph, vibrate]);
 
   const [exitConfirmOpen, setExitConfirmOpen] = useState(false);
 
@@ -145,10 +150,15 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
   if (deck.format === 'quick') {
     const handleQuickAnswer = (option: Option, responseTimeMs: number, intensity: AnswerIntensity) => {
       dispatch({ type: 'ANSWER', weights: option.weights, tone: option.tone, responseTimeMs, intensity });
-      vibrate(18);
+      const hapticKey = intensity === 'alta' ? HAPTIC_GRAMMAR.confirm
+        : intensity === 'baixa' ? HAPTIC_GRAMMAR.qualify
+        : HAPTIC_GRAMMAR.tap;
+      vibrate(hapticKey);
       // Auto-advance to next or finish after a short beat to let the feedback register.
       window.setTimeout(() => {
         if (isLast) {
+          playDeckTriumph();
+          vibrate(HAPTIC_GRAMMAR.triumph);
           dispatch({ type: 'FINISH_DECK' });
           router.push(`/resultado/${deckId}`);
         } else {
@@ -186,6 +196,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
             onAnswer={handleQuickAnswer}
             enableHaptics={prefs.hapticsEnabled}
           />
+          <ArchetypeDriftFlash />
         </div>
 
         {/* Exit confirm modal (same as main flow) */}
@@ -378,6 +389,8 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
           />
         )}
       </AnimatePresence>
+
+      <ArchetypeDriftFlash />
     </div>
   );
 }

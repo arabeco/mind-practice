@@ -6,6 +6,7 @@ import {
   useReducer,
   useEffect,
   useCallback,
+  useRef,
   type ReactNode,
 } from 'react';
 import {
@@ -132,6 +133,15 @@ function applyDampenedWeights(
   };
 }
 
+/**
+ * Decks are unlocked sequentially. Cooldown policy:
+ *   - Calibragem + eixo (primeiros 7 decks) → desbloqueio imediato ao completar o anterior
+ *   - Cenário (tier ≥ 3) → cooldown de 24h (rituais raros, espaçados)
+ *
+ * Motivação: a parede de 24h matava retenção D3-D7. Usuário nunca chegava
+ * nos cenários. Agora ele flui livre pela calibragem + eixos, e só encontra
+ * o cooldown quando já está investido.
+ */
 export function getUnlockedDecks(completedDecks: Record<string, string>): string[] {
   const unlocked: string[] = [];
   for (let i = 0; i < DECK_UNLOCK_ORDER.length; i++) {
@@ -140,13 +150,14 @@ export function getUnlockedDecks(completedDecks: Record<string, string>): string
     const prevId = DECK_UNLOCK_ORDER[i - 1];
     const prevAt = completedDecks[prevId];
     if (!prevAt) break;
-    // Calibragem decks unlock the next one immediately on completion.
-    // Non-calibragem decks still honor the 24h cooldown.
-    const prevIsCalibragem = CALIBRAGEM_IDS.has(prevId);
-    if (prevIsCalibragem) {
+
+    // Instant unlock for the warm-up tier (calibragem + eixos).
+    if (INSTANT_UNLOCK_IDS.has(prevId)) {
       unlocked.push(deckId);
       continue;
     }
+
+    // Cenário decks still honor the 24h cooldown to preserve ritual weight.
     const elapsed = Date.now() - new Date(prevAt).getTime();
     if (elapsed >= UNLOCK_COOLDOWN_MS) unlocked.push(deckId);
     else break;
@@ -165,6 +176,17 @@ const CALIBRAGEM_IDS = new Set([
   'escolha',
 ]);
 const CALIBRAGEM_COMPLETION_FICHAS = 5;
+
+/**
+ * Deck IDs que liberam o próximo imediatamente (sem cooldown).
+ * Inclui todas as calibragens + os primeiros decks de eixo narrativo.
+ * O cooldown só começa a partir dos cenários "pesados" (tier alto).
+ */
+const INSTANT_UNLOCK_IDS = new Set<string>([
+  ...CALIBRAGEM_IDS,
+  'holofote',
+  'alta_tensao',
+]);
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -532,41 +554,52 @@ const GameContext = createContext<GameContextValue | null>(null);
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+  // Tracks whether initial hydrate has finished. The persist effects gate on
+  // this flag so we never overwrite good localStorage/cloud data with the
+  // transient `initialState` during the async hydrate window.
+  const hydratedRef = useRef(false);
 
   // Hydrate — try cloud first, fall back to localStorage
   useEffect(() => {
     (async () => {
-      // 1. Try cloud
       try {
-        const { loadStateFromCloud } = await import('@/lib/supabase/sync');
-        const cloud = await loadStateFromCloud();
-        if (cloud) {
-          dispatch({ type: 'HYDRATE', state: normalizeGameState(cloud as GameState) });
-          return;
+        // 1. Try cloud
+        try {
+          const { loadStateFromCloud } = await import('@/lib/supabase/sync');
+          const cloud = await loadStateFromCloud();
+          if (cloud) {
+            dispatch({ type: 'HYDRATE', state: normalizeGameState(cloud as GameState) });
+            return;
+          }
+        } catch { /* Supabase not configured — fall through */ }
+
+        // 2. Fall back to localStorage
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const parsed = JSON.parse(raw);
+
+          const migrated = migrateV1(parsed);
+          if (migrated) {
+            dispatch({ type: 'HYDRATE', state: migrated });
+            return;
+          }
+
+          dispatch({ type: 'HYDRATE', state: normalizeGameState(parsed as GameState) });
+        } catch {
+          // corrupted — start fresh
         }
-      } catch { /* Supabase not configured — fall through */ }
-
-      // 2. Fall back to localStorage
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return;
-        const parsed = JSON.parse(raw);
-
-        const migrated = migrateV1(parsed);
-        if (migrated) {
-          dispatch({ type: 'HYDRATE', state: migrated });
-          return;
-        }
-
-        dispatch({ type: 'HYDRATE', state: normalizeGameState(parsed as GameState) });
-      } catch {
-        // corrupted — start fresh
+      } finally {
+        hydratedRef.current = true;
       }
     })();
   }, []);
 
-  // Persist to localStorage (exclude activeDeck and activeRun)
+  // Persist to localStorage (exclude activeDeck and activeRun).
+  // Gated on hydrate completing so the initial `initialState` render
+  // doesn't clobber real stored data during the async hydrate window.
   useEffect(() => {
+    if (!hydratedRef.current) return;
     try {
       const { activeDeck: _, activeRun: __, ...persistable } = state;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
@@ -575,6 +608,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
   // Cloud sync — debounced save to Supabase when logged in
   useEffect(() => {
+    if (!hydratedRef.current) return;
     const timer = setTimeout(() => {
       import('@/lib/supabase/sync').then(({ saveStateToCloud }) => {
         saveStateToCloud(state).catch(() => {});

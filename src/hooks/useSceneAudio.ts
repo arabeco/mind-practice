@@ -242,6 +242,17 @@ export function useSceneAudio({ soundEnabled, hapticsEnabled }: UseSceneAudioPar
     await playEnvelopeTone('sine', 260, 330, 0.11, 0.018);
   }, [playEnvelopeTone]);
 
+  /**
+   * Crescendo áudio para FINISH_DECK — três camadas empilhadas:
+   * sub grave (corpo), triangle medio (dourado), sine alto (brilho).
+   * Curta mas densa — a sensação de "acabei e venci".
+   */
+  const playDeckTriumph = useCallback(async () => {
+    await playEnvelopeTone('triangle', 240, 520, 0.62, 0.06);
+    await playEnvelopeTone('sine', 520, 880, 0.48, 0.045, 4);
+    await playEnvelopeTone('sine', 880, 1320, 0.34, 0.032, -6);
+  }, [playEnvelopeTone]);
+
   const playEventImpact = useCallback(async (tensionBand: TensionBand) => {
     if (tensionBand === 'alta') {
       await playEnvelopeTone('sawtooth', 250, 62, 0.42, 0.05);
@@ -281,6 +292,7 @@ export function useSceneAudio({ soundEnabled, hapticsEnabled }: UseSceneAudioPar
     setAmbience,
     stopAmbience,
     playEventImpact,
+    playDeckTriumph,
     playUiCue,
     vibrate,
   };
