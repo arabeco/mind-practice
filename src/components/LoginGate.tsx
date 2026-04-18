@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/components/Toast';
 
 const LOGIN_SEEN_KEY = 'mindpractice_login_seen';
 
@@ -21,6 +22,7 @@ type Stage = 'idle' | 'loading' | 'error';
  */
 export default function LoginGate({ children }: { children: React.ReactNode }) {
   const { user, enabled, loading, signInWithGoogle, signInWithPassword, signUpWithPassword } = useAuth();
+  const toast = useToast();
   const [checked, setChecked] = useState(false);
   const [needsLogin, setNeedsLogin] = useState(false);
 
@@ -53,6 +55,7 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
 
   const handleSkip = () => {
     markSeen();
+    toast.toast('Jogando sem conta');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -77,10 +80,12 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
     if (error) {
       setErrorMsg(error);
       setStage('error');
+      toast.error(error);
       return;
     }
     // Sucesso: o useEffect do user dispara markSeen automaticamente.
     setStage('idle');
+    toast.success(mode === 'signin' ? 'Bem-vindo de volta!' : 'Conta criada! Bem-vindo.');
   };
 
   const handleGoogle = () => {

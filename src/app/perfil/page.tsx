@@ -12,6 +12,7 @@ import {
 } from '@/lib/archetypeAvatar';
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
+import { useToast } from '@/components/Toast';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
 import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
@@ -28,6 +29,7 @@ const VARIANT_KEY = 'mindpractice_avatar_variant';
 export default function PerfilPage() {
   const { state, dispatch, getArchetype, precision, consistency, isIdentityValidated } = useGame();
   const { user, enabled: authEnabled, signOut } = useAuth();
+  const toast = useToast();
   const archetype = getArchetype();
   const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
 
@@ -46,6 +48,7 @@ export default function PerfilPage() {
   // --- Modals ---
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
   const [resetModalOpen, setResetModalOpen] = useState(false);
+  const [variantModalOpen, setVariantModalOpen] = useState(false);
 
   // Hydrate from localStorage
   useEffect(() => {
@@ -91,13 +94,19 @@ export default function PerfilPage() {
 
   function handleSaveNickname() {
     const trimmed = nicknameInput.trim();
-    if (trimmed.length > 0) {
+    if (trimmed.length > 0 && trimmed !== nickname) {
       setNickname(trimmed);
       localStorage.setItem(NICKNAME_KEY, trimmed);
-      // Sync pro Supabase se logado — silently fails caso contrário
-      import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
-        saveProfileToCloud({ nickname: trimmed }).catch(() => {});
-      });
+      // Sync pro Supabase se logado
+      if (user) {
+        import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
+          saveProfileToCloud({ nickname: trimmed })
+            .then(() => toast.success('Nickname salvo na nuvem'))
+            .catch(() => toast.error('Falha ao sincronizar nickname'));
+        });
+      } else {
+        toast.success('Nickname atualizado');
+      }
     }
     setEditingNickname(false);
   }
@@ -111,16 +120,36 @@ export default function PerfilPage() {
     dispatch({ type: 'RESET_ALL' });
     localStorage.removeItem('mindpractice_state');
     setResetModalOpen(false);
+    toast.success('Progresso resetado');
   }
 
-  function toggleVariant() {
+  function requestToggleVariant() {
+    setVariantModalOpen(true);
+  }
+
+  function confirmToggleVariant() {
     const next: AvatarVariant = variant === 'masculino' ? 'feminino' : 'masculino';
     setVariant(next);
     localStorage.setItem(VARIANT_KEY, next);
-    // Sync pro Supabase se logado
-    import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
-      saveProfileToCloud({ avatarVariant: next }).catch(() => {});
-    });
+    setVariantModalOpen(false);
+    if (user) {
+      import('@/lib/supabase/sync').then(({ saveProfileToCloud }) => {
+        saveProfileToCloud({ avatarVariant: next })
+          .then(() => toast.success(`Avatar: ${next}`))
+          .catch(() => toast.error('Falha ao sincronizar avatar'));
+      });
+    } else {
+      toast.success(`Avatar: ${next}`);
+    }
+  }
+
+  async function handleSignOut() {
+    try {
+      await signOut();
+      toast.success('Você saiu da conta');
+    } catch {
+      toast.error('Falha ao sair');
+    }
   }
 
   return (
@@ -144,7 +173,7 @@ export default function PerfilPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           </button>
-          <button type="button" onClick={toggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/60 transition-colors hover:text-white/90" title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}>
+          <button type="button" onClick={requestToggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/60 transition-colors hover:text-white/90" title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}>
             <span className="text-[13px] font-bold leading-none" aria-hidden>
               {variant === 'masculino' ? '♀' : '♂'}
             </span>
@@ -363,7 +392,7 @@ export default function PerfilPage() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => { signOut(); }}
+                  onClick={handleSignOut}
                   className="shrink-0 rounded-full border border-white/18 bg-white/6 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/75 hover:bg-white/12"
                 >
                   Sair
@@ -460,7 +489,7 @@ export default function PerfilPage() {
               {/* Variant toggle */}
               <button
                 type="button"
-                onClick={toggleVariant}
+                onClick={requestToggleVariant}
                 className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white/80 backdrop-blur-sm transition-colors hover:text-white"
                 title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}
               >
@@ -529,6 +558,57 @@ export default function PerfilPage() {
                   className="flex-1 rounded-xl bg-red-500/20 py-2.5 text-sm font-semibold text-red-400 transition-colors hover:bg-red-500/30"
                 >
                   Resetar
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ================================================================ */}
+      {/* Variant Toggle Confirmation Modal                                */}
+      {/* ================================================================ */}
+      <AnimatePresence>
+        {variantModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+            onClick={() => setVariantModalOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 10 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-6 w-full max-w-xs rounded-2xl border border-white/10 bg-[#0c0c14] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.6)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-accent-purple/15 text-xl">
+                <span aria-hidden>{variant === 'masculino' ? '♀' : '♂'}</span>
+              </div>
+              <h3 className="text-base font-bold text-white/90">
+                Trocar para {variant === 'masculino' ? 'feminino' : 'masculino'}?
+              </h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-white/50">
+                Muda só a aparência do seu avatar. Seus stats, arquétipo e runs ficam iguais.
+              </p>
+              <div className="mt-5 flex gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setVariantModalOpen(false)}
+                  className="flex-1 rounded-xl bg-white/8 py-2.5 text-sm font-semibold text-white/70 transition-colors hover:bg-white/12"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmToggleVariant}
+                  className="flex-1 rounded-xl bg-accent-purple/25 py-2.5 text-sm font-semibold text-accent-purple transition-colors hover:bg-accent-purple/35"
+                >
+                  Trocar
                 </button>
               </div>
             </motion.div>
