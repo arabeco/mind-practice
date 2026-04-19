@@ -1,6 +1,7 @@
 import { getDeckById } from '@/data/decks';
 import {
   EMPTY_STAT_RECORD,
+  INITIAL_PLUS_SUBSCRIPTION,
   STAT_KEYS,
   type Deck,
   type DeckSnapshot,
@@ -152,6 +153,8 @@ export function normalizeGameState(raw: Partial<GameState>): GameState {
     streak: raw.streak ?? 0,
     lastPlayDate: raw.lastPlayDate ?? null,
     campaigns: (raw as any).campaigns ?? {},
+    ownedDeckIds: Array.isArray((raw as any).ownedDeckIds) ? (raw as any).ownedDeckIds : [],
+    plusSubscription: (raw as any).plusSubscription ?? { ...INITIAL_PLUS_SUBSCRIPTION },
   };
 }
 
