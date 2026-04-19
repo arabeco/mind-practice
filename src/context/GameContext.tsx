@@ -74,7 +74,9 @@ type GameAction =
     }
   | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number }
   | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string }
-  | { type: 'UNLOCK_DECK'; deckId: string; cost: number };
+  | { type: 'UNLOCK_DECK'; deckId: string; cost: number }
+  | { type: 'SET_PLUS_STATUS'; active: boolean; expiresAt: string | null; startedAt?: string }
+  | { type: 'CLAIM_DAILY_PLUS_BONUS' };
 
 // ---------------------------------------------------------------------------
 // Constants & Helpers
@@ -555,6 +557,40 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         campaigns: {
           ...state.campaigns,
           [action.seasonId]: { ...progress, rating: action.rating },
+        },
+      };
+    }
+
+    case 'SET_PLUS_STATUS': {
+      const now = new Date().toISOString();
+      const startedAt = action.active
+        ? (state.plusSubscription.startedAt ?? action.startedAt ?? now)
+        : state.plusSubscription.startedAt;
+      return {
+        ...state,
+        plusSubscription: {
+          ...state.plusSubscription,
+          active: action.active,
+          expiresAt: action.expiresAt,
+          startedAt,
+        },
+      };
+    }
+
+    case 'CLAIM_DAILY_PLUS_BONUS': {
+      if (!state.plusSubscription.active) return state;
+      const today = new Date().toISOString().split('T')[0];
+      if (state.plusSubscription.lastPlusDailyClaim === today) return state;
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas + PLUS_DAILY_BONUS,
+          totalEarned: state.wallet.totalEarned + PLUS_DAILY_BONUS,
+        },
+        plusSubscription: {
+          ...state.plusSubscription,
+          lastPlusDailyClaim: today,
         },
       };
     }
