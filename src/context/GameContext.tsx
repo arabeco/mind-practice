@@ -18,17 +18,24 @@ import {
   type Archetype,
   type Wallet,
   type AnswerIntensity,
+  type PlusSubscription,
   STAT_KEYS,
   INITIAL_CALIBRATION,
   INITIAL_WALLET,
+  INITIAL_PLUS_SUBSCRIPTION,
   DAILY_FICHAS,
   CALIBRATION_WINDOW,
   CONSISTENCY_WINDOW,
   INTENSITY_MULTIPLIERS,
   RUN_PISO_FICHAS,
   RUN_PISO_CAP_PER_DAY,
+  FIRST_RUN_OF_DAY_BONUS,
+  STREAK_7_BONUS,
+  DECK_FIRST_TIME_BONUS,
+  NO_TIMEOUT_RUN_BONUS,
   CAMPAIGN_ENDING_BONUS,
   SKIP_COOLDOWN_COST,
+  PLUS_DAILY_BONUS,
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
@@ -209,6 +216,8 @@ const initialState: GameState = {
   streak: 0,
   lastPlayDate: null,
   campaigns: {},
+  ownedDeckIds: [],
+  plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
 };
 
 // ---------------------------------------------------------------------------
@@ -240,6 +249,8 @@ function migrateV1(raw: Record<string, unknown>): GameState | null {
       streak: 0,
       lastPlayDate: null,
       campaigns: {},
+      ownedDeckIds: [],
+      plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
     };
   }
   return null;
@@ -431,6 +442,9 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...normalizeGameState(action.state),
         unlockedDecks: getUnlockedDecks(action.state.completedDecks),
+        // migração silenciosa pra saves antigos que não tinham esses campos
+        ownedDeckIds: action.state.ownedDeckIds ?? [],
+        plusSubscription: action.state.plusSubscription ?? { ...INITIAL_PLUS_SUBSCRIPTION },
       };
 
     case 'CAMPAIGN_START': {
