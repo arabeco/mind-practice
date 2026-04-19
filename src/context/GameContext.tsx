@@ -180,6 +180,36 @@ export function getUnlockedDecks(completedDecks: Record<string, string>): string
   return unlocked;
 }
 
+/**
+ * Determina se um deck pode ser jogado pelo usuário agora.
+ *
+ * Regras:
+ *  - Se priceFichas === null → só depende de unlockedDecks (flow sequencial antigo).
+ *  - Se priceFichas > 0 e seasonId === 'season-0' → só depende de unlockedDecks
+ *    (Season 0 mantém flow antigo pra não quebrar quem já jogou).
+ *  - Se priceFichas > 0 e seasonId !== 'season-0' → precisa estar em ownedDeckIds
+ *    OU plusSubscription.active (+ não `plusOnly` com active=false).
+ *
+ * Fase 1 mantém Season 0 destravada pra retrocompatibilidade.
+ * A partir de Season 1 o paywall entra em vigor.
+ */
+export function isDeckPlayable(deck: Deck, state: GameState): boolean {
+  // Gating sequencial antigo ainda aplica para Season 0.
+  const sequentialOk = state.unlockedDecks.includes(deck.deckId);
+
+  // Grátis (calibragem ou promocional) → só flow sequencial
+  if (deck.priceFichas === null) return sequentialOk;
+
+  // Season 0 paga → legado: ignora ownership
+  if (deck.seasonId === 'season-0') return sequentialOk;
+
+  // Season 1+ paywall
+  const owned = state.ownedDeckIds.includes(deck.deckId);
+  const plusActive = state.plusSubscription.active;
+  if (deck.plusOnly) return plusActive;
+  return owned || plusActive;
+}
+
 /** Deck IDs that belong to the "calibragem" category — fast unlock + reward. */
 const CALIBRAGEM_IDS = new Set([
   'basic_01',
