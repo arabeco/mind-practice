@@ -31,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body className="antialiased">
-        <DevTools />
         <ServiceWorkerRegistrar />
         <AuthProvider>
           <GameProvider>
@@ -43,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </OnboardingGate>
               </LoginGate>
             </ToastProvider>
+            <DevTools />
           </GameProvider>
         </AuthProvider>
       </body>
