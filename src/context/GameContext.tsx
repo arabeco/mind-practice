@@ -344,18 +344,21 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       const nextRunsPaidToday = pisoFichas > 0 ? runsPaidSoFar + 1 : runsPaidSoFar;
 
       let bonusFichas = pisoFichas;
-      // First run of the calendar day → +3 on top of piso (→ total 5).
+      // First run of the calendar day
       const firstOfDay = state.lastPlayDate !== todayStr;
-      if (firstOfDay) bonusFichas += 3;
-      // Weekly streak bonus.
-      if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += 20;
-      // Zero-timeout run.
+      if (firstOfDay) bonusFichas += FIRST_RUN_OF_DAY_BONUS;
+      // Weekly streak bonus (a cada 7 dias consecutivos)
+      if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += STREAK_7_BONUS;
+      // Zero-timeout run
       const noTimeouts = state.activeRun ? state.activeRun.timeoutCount === 0 : false;
-      if (noTimeouts) bonusFichas += 5;
-      // Calibragem — always rewarded (feeds profile + unlocks next).
+      if (noTimeouts) bonusFichas += NO_TIMEOUT_RUN_BONUS;
+      // Calibragem — always rewarded (feeds profile + unlocks next)
       if (deckId && CALIBRAGEM_IDS.has(deckId)) {
         bonusFichas += CALIBRAGEM_COMPLETION_FICHAS;
       }
+      // NEW: primeira vez completando este deck (não paga em completar de novo)
+      const isFirstTimeDeck = deckId ? !state.completedDecks[deckId] : false;
+      if (isFirstTimeDeck) bonusFichas += DECK_FIRST_TIME_BONUS;
 
       const prevArchId = ARCHETYPES.find(a => a.name === state.activeRun?.startArchetype)?.id;
       const archetype = matchArchetype(
