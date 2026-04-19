@@ -11,6 +11,7 @@ import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
 import MiniRadar from '@/components/MiniRadar';
 import ProfileCardCompact from '@/components/ProfileCardCompact';
+import { SeasonTeaserCard } from '@/components/home/SeasonTeaserCard';
 import {
   CURRENT_SEASON_ID,
   getCurrentSeason,
@@ -114,6 +115,11 @@ export default function Home() {
       {/* Card horizontal de perfil */}
       <motion.div variants={fadeUp}>
         <ProfileCardCompact />
+      </motion.div>
+
+      {/* Season teaser — aparece condicionalmente conforme proximidade/freshness da Season */}
+      <motion.div variants={fadeUp}>
+        <SeasonTeaserCard />
       </motion.div>
 
       {/* Streak + Radar row */}
