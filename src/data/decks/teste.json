@@ -15,84 +15,483 @@
       "id": "q1",
       "type": "NORMAL",
       "sceneHook": "Prazo apertado. Colega te passa erro",
-      "metadata": { "tensao": 4, "ambiente": "Profissional", "relacao": "Par", "aposta": "Tempo", "pilar": "propriedade" },
-      "slides": [{ "tipo": "evento", "texto": "Uma hora antes da entrega, um erro grave cai no seu colo." }],
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Uma hora antes da entrega, um erro grave cai no seu colo."
+        }
+      ],
       "options": [
-        { "text": "Asumo o controle e conserto.", "subtext": "Voce resolve", "tone": "pragmatico", "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce vira o barco antes de afundar." },
-        { "text": "Aceito e respondo no automatico.", "subtext": "Engole e faz", "tone": "evasivo", "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce entrega — mas acumula por dentro." },
-        { "text": "Chamo o time. Isso e coisa nossa.", "subtext": "Distribui", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "vigor": -1, "harmonia": -1 }, "feedback": "Voce divide o peso na pressao." }
+        {
+          "text": "Asumo o controle e conserto.",
+          "subtext": "Voce resolve",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce vira o barco antes de afundar.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Aceito e respondo no automatico.",
+          "subtext": "Engole e faz",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce entrega — mas acumula por dentro.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Chamo o time. Isso e coisa nossa.",
+          "subtext": "Distribui",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "vigor": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce divide o peso na pressao.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q2",
       "type": "NORMAL",
       "sceneHook": "Chefe te cobra publicamente",
-      "metadata": { "tensao": 4, "ambiente": "Profissional", "relacao": "Autoridade", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Numa reuniao, o chefe desanca voce na frente do time." }],
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Numa reuniao, o chefe desanca voce na frente do time."
+        }
+      ],
       "options": [
-        { "text": "Respondo firme, la mesmo.", "subtext": "Defende o seu", "tone": "pragmatico", "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao abaixa a cabeca na plateia." },
-        { "text": "Aceito calado. Falo em privado depois.", "subtext": "Nao vira cena", "tone": "evasivo", "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce separa cena de resolucao." },
-        { "text": "Redireciono: 'Podemos falar disso depois?'", "subtext": "Pausa tecnica", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "harmonia": -1 }, "feedback": "Voce compra tempo sem ceder." }
+        {
+          "text": "Respondo firme, la mesmo.",
+          "subtext": "Defende o seu",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao abaixa a cabeca na plateia.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Aceito calado. Falo em privado depois.",
+          "subtext": "Nao vira cena",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce separa cena de resolucao.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Redireciono: 'Podemos falar disso depois?'",
+          "subtext": "Pausa tecnica",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce compra tempo sem ceder.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q3",
       "type": "NORMAL",
       "sceneHook": "Voce tem que apresentar pra 50 pessoas",
-      "metadata": { "tensao": 3, "ambiente": "Profissional", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Cinco minutos antes de subir, voce trava." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Cinco minutos antes de subir, voce trava."
+        }
+      ],
       "options": [
-        { "text": "Subo mesmo assim. Medo passa depois.", "subtext": "Encara", "tone": "pragmatico", "weights": { "presenca": 3, "harmonia": -2, "filtro": -1 }, "feedback": "Voce nao espera o medo sair." },
-        { "text": "Peco 5 minutos pra recompor.", "subtext": "Nomeia o bloqueio", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "harmonia": -1, "vigor": -1 }, "feedback": "Voce cuida do seu estado antes de entregar." },
-        { "text": "Respiro, esqueco todo mundo, so leio.", "subtext": "Modo automatico", "tone": "evasivo", "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce entrega no minimo, sem travar." }
+        {
+          "text": "Subo mesmo assim. Medo passa depois.",
+          "subtext": "Encara",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce nao espera o medo sair.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Peco 5 minutos pra recompor.",
+          "subtext": "Nomeia o bloqueio",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "harmonia": -1,
+            "vigor": -1
+          },
+          "feedback": "Voce cuida do seu estado antes de entregar.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Respiro, esqueco todo mundo, so leio.",
+          "subtext": "Modo automatico",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce entrega no minimo, sem travar.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q4",
       "type": "NORMAL",
       "sceneHook": "Voce e o unico contra",
-      "metadata": { "tensao": 3, "ambiente": "Profissional", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "pertencimento" },
-      "slides": [{ "tipo": "evento", "texto": "Reuniao fechada em consenso. Voce tem problema serio com a decisao." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Reuniao fechada em consenso. Voce tem problema serio com a decisao."
+        }
+      ],
       "options": [
-        { "text": "Levanto e coloco minha discordancia.", "subtext": "Voz contraria", "tone": "pragmatico", "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao deixa isso passar." },
-        { "text": "Deixo passar. Era voto vencido mesmo.", "subtext": "Aceita derrota", "tone": "evasivo", "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce escolhe onde plantar bandeira." },
-        { "text": "Mando email depois com a pergunta chave.", "subtext": "Semeia duvida depois", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "harmonia": -1 }, "feedback": "Voce faz o questionamento sem plateia." }
+        {
+          "text": "Levanto e coloco minha discordancia.",
+          "subtext": "Voz contraria",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao deixa isso passar.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Deixo passar. Era voto vencido mesmo.",
+          "subtext": "Aceita derrota",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce escolhe onde plantar bandeira.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Mando email depois com a pergunta chave.",
+          "subtext": "Semeia duvida depois",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce faz o questionamento sem plateia.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q5",
       "type": "NORMAL",
       "sceneHook": "Voce errou feio. O erro veio a publico",
-      "metadata": { "tensao": 4, "ambiente": "Profissional", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "O erro que voce fez foi exposto na frente do time." }],
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "O erro que voce fez foi exposto na frente do time."
+        }
+      ],
       "options": [
-        { "text": "Assumo: 'Foi meu. Ja to resolvendo.'", "subtext": "Cara e coragem", "tone": "pragmatico", "weights": { "presenca": 3, "vigor": -1, "harmonia": -2 }, "feedback": "Voce paga a conta na hora." },
-        { "text": "Minimizo. 'Nao e grande coisa.'", "subtext": "Defende imagem", "tone": "evasivo", "weights": { "harmonia": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce protege o rosto antes da verdade." },
-        { "text": "Explico o contexto sem fugir da culpa.", "subtext": "Contextualiza", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "harmonia": -1 }, "feedback": "Voce assume — mas enquadra." }
+        {
+          "text": "Assumo: 'Foi meu. Ja to resolvendo.'",
+          "subtext": "Cara e coragem",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "vigor": -1,
+            "harmonia": -2
+          },
+          "feedback": "Voce paga a conta na hora.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Minimizo. 'Nao e grande coisa.'",
+          "subtext": "Defende imagem",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce protege o rosto antes da verdade.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Explico o contexto sem fugir da culpa.",
+          "subtext": "Contextualiza",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce assume — mas enquadra.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q6",
       "type": "NORMAL",
       "sceneHook": "Voce acabou a semana no limite",
-      "metadata": { "tensao": 3, "ambiente": "Privado", "relacao": "Desconhecido", "aposta": "Paz Emocional", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Sexta a noite. Voce ta esgotado(a). E ainda tem um monte por fazer." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Sexta a noite. Voce ta esgotado(a). E ainda tem um monte por fazer."
+        }
+      ],
       "options": [
-        { "text": "Paro tudo. Domingo resolvo.", "subtext": "Corta o dia", "tone": "pragmatico", "weights": { "presenca": 3, "harmonia": -2, "vigor": -1 }, "feedback": "Voce sabe que nada sai bem cansado." },
-        { "text": "Forco mais uma hora. Ja tava em ritmo.", "subtext": "Insiste", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "filtro": -1 }, "feedback": "Voce aposta na inercia — as vezes cedo demais." },
-        { "text": "Faco o minimo urgente e desligo.", "subtext": "Triagem curta", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "desapego": -1 }, "feedback": "Voce separa fogo de fumaca." }
+        {
+          "text": "Paro tudo. Domingo resolvo.",
+          "subtext": "Corta o dia",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce sabe que nada sai bem cansado.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Forco mais uma hora. Ja tava em ritmo.",
+          "subtext": "Insiste",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce aposta na inercia — as vezes cedo demais.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Faco o minimo urgente e desligo.",
+          "subtext": "Triagem curta",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce separa fogo de fumaca.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q7",
       "type": "NORMAL",
       "sceneHook": "Situacao desconhecida, decisao rapida",
-      "metadata": { "tensao": 3, "ambiente": "Publico", "relacao": "Desconhecido", "aposta": "Tempo", "pilar": "seguranca" },
-      "slides": [{ "tipo": "evento", "texto": "Alguem passa mal na sua frente na rua. Decisao: 10 segundos." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Alguem passa mal na sua frente na rua. Decisao: 10 segundos."
+        }
+      ],
       "options": [
-        { "text": "Chego junto. Pergunto o que fazer.", "subtext": "Entra em cena", "tone": "protetor", "weights": { "presenca": 3, "harmonia": -1, "filtro": -2 }, "feedback": "Voce aparece quando precisa." },
-        { "text": "Ligo 192 e observo de perto.", "subtext": "Aciona quem sabe", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "harmonia": -1 }, "feedback": "Voce aciona o sistema que resolve." },
-        { "text": "Paro, confiro se alguem ja ta junto.", "subtext": "Observa", "tone": "evasivo", "weights": { "harmonia": 3, "vigor": -2, "presenca": -1 }, "feedback": "Voce nao atropela quem ja ta ajudando." }
+        {
+          "text": "Chego junto. Pergunto o que fazer.",
+          "subtext": "Entra em cena",
+          "tone": "protetor",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -1,
+            "filtro": -2
+          },
+          "feedback": "Voce aparece quando precisa.",
+          "intent": "protecao",
+          "baseWeights": {
+            "presenca": 2,
+            "filtro": -1
+          }
+        },
+        {
+          "text": "Ligo 192 e observo de perto.",
+          "subtext": "Aciona quem sabe",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce aciona o sistema que resolve.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Paro, confiro se alguem ja ta junto.",
+          "subtext": "Observa",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Voce nao atropela quem ja ta ajudando.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "vigor": -1
+          }
+        }
       ]
     }
   ]

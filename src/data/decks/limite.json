@@ -15,84 +15,483 @@
       "id": "q1",
       "type": "NORMAL",
       "sceneHook": "Vizinho encheu o saco de novo",
-      "metadata": { "tensao": 3, "ambiente": "Privado", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "propriedade" },
-      "slides": [{ "tipo": "evento", "texto": "Terceira noite de som alto do vizinho. Voce..." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Terceira noite de som alto do vizinho. Voce..."
+        }
+      ],
       "options": [
-        { "text": "Subo e bato na porta agora.", "subtext": "Confronto direto", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao enrola ate o quarto dia." },
-        { "text": "Coloco abafador e durmo.", "subtext": "Resolve sozinho", "tone": "evasivo", "weights": { "desapego": 3, "vigor": -2, "presenca": -1 }, "feedback": "Voce cuida do seu sono sem guerra." },
-        { "text": "Mando mensagem educada pelo zap.", "subtext": "Aviso por texto", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce avisa sem subir escada." }
+        {
+          "text": "Subo e bato na porta agora.",
+          "subtext": "Confronto direto",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao enrola ate o quarto dia.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Coloco abafador e durmo.",
+          "subtext": "Resolve sozinho",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Voce cuida do seu sono sem guerra.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Mando mensagem educada pelo zap.",
+          "subtext": "Aviso por texto",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce avisa sem subir escada.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q2",
       "type": "NORMAL",
       "sceneHook": "Alguem fura sua fila no restaurante",
-      "metadata": { "tensao": 2, "ambiente": "Publico", "relacao": "Desconhecido", "aposta": "Tempo", "pilar": "propriedade" },
-      "slides": [{ "tipo": "evento", "texto": "Um casal passa na sua frente descaradamente." }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Um casal passa na sua frente descaradamente."
+        }
+      ],
       "options": [
-        { "text": "Chamo o garcom e marco: 'Eu tava antes.'", "subtext": "Reivindica", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao abre mao do seu lugar." },
-        { "text": "Deixo. Cinco minutos nao matam.", "subtext": "Solta", "tone": "evasivo", "weights": { "desapego": 3, "vigor": -2, "presenca": -1 }, "feedback": "Voce escolhe onde plantar raiz." },
-        { "text": "Comento alto pra eles ouvirem.", "subtext": "Passivo-agressivo", "tone": "provocativo", "weights": { "vigor": 3, "filtro": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce sinaliza sem encarar direto." }
+        {
+          "text": "Chamo o garcom e marco: 'Eu tava antes.'",
+          "subtext": "Reivindica",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao abre mao do seu lugar.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Deixo. Cinco minutos nao matam.",
+          "subtext": "Solta",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Voce escolhe onde plantar raiz.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Comento alto pra eles ouvirem.",
+          "subtext": "Passivo-agressivo",
+          "tone": "provocativo",
+          "weights": {
+            "vigor": 3,
+            "filtro": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce sinaliza sem encarar direto.",
+          "intent": "confronto_publico",
+          "baseWeights": {
+            "vigor": 1,
+            "filtro": -1
+          }
+        }
       ]
     },
     {
       "id": "q3",
       "type": "NORMAL",
       "sceneHook": "Familiar pede favor desconfortavel",
-      "metadata": { "tensao": 3, "ambiente": "Privado", "relacao": "Par", "aposta": "Tempo", "pilar": "pertencimento", "proximidade": "alta" },
-      "slides": [{ "tipo": "evento", "texto": "Pede emprestado o que voce nao quer emprestar." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Tempo",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Pede emprestado o que voce nao quer emprestar."
+        }
+      ],
       "options": [
-        { "text": "Falo nao, direto.", "subtext": "Corta seco", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao enrola o nao." },
-        { "text": "Digo sim e depois me remoo.", "subtext": "Nao sabe negar", "tone": "evasivo", "weights": { "harmonia": 3, "vigor": -2, "filtro": -1 }, "feedback": "Voce ganha paz — perde em outra moeda." },
-        { "text": "Invento uma razao pra nao poder.", "subtext": "Nao desaponta", "tone": "evasivo", "weights": { "filtro": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce evita a cena mas paga em verdade." }
+        {
+          "text": "Falo nao, direto.",
+          "subtext": "Corta seco",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao enrola o nao.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Digo sim e depois me remoo.",
+          "subtext": "Nao sabe negar",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "vigor": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce ganha paz — perde em outra moeda.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Invento uma razao pra nao poder.",
+          "subtext": "Nao desaponta",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce evita a cena mas paga em verdade.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "filtro": 2,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q4",
       "type": "NORMAL",
       "sceneHook": "Alguem te faz uma pergunta invasiva",
-      "metadata": { "tensao": 2, "ambiente": "Social", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Conhecido pergunta algo que voce considera intimo demais." }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Conhecido pergunta algo que voce considera intimo demais."
+        }
+      ],
       "options": [
-        { "text": "Respondo: 'Isso fica comigo.'", "subtext": "Fecha o assunto", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce protege o que e seu com uma frase." },
-        { "text": "Respondo pouco e mudo de assunto.", "subtext": "Desvia sutil", "tone": "evasivo", "weights": { "desapego": 3, "presenca": -1, "vigor": -2 }, "feedback": "Voce sai da cena sem bater porta." },
-        { "text": "Respondo com outra pergunta.", "subtext": "Devolve", "tone": "provocativo", "weights": { "filtro": 3, "vigor": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce mantem o controle do campo." }
+        {
+          "text": "Respondo: 'Isso fica comigo.'",
+          "subtext": "Fecha o assunto",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce protege o que e seu com uma frase.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Respondo pouco e mudo de assunto.",
+          "subtext": "Desvia sutil",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "presenca": -1,
+            "vigor": -2
+          },
+          "feedback": "Voce sai da cena sem bater porta.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Respondo com outra pergunta.",
+          "subtext": "Devolve",
+          "tone": "provocativo",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce mantem o controle do campo.",
+          "intent": "provocacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q5",
       "type": "NORMAL",
       "sceneHook": "Colega passa trabalho extra pra voce",
-      "metadata": { "tensao": 3, "ambiente": "Profissional", "relacao": "Par", "aposta": "Tempo", "pilar": "propriedade" },
-      "slides": [{ "tipo": "evento", "texto": "Terceira vez essa semana. Nao e sua funcao." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Terceira vez essa semana. Nao e sua funcao."
+        }
+      ],
       "options": [
-        { "text": "Falo: 'Isso aqui e seu.'", "subtext": "Devolve", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao e pallet de carga dos outros." },
-        { "text": "Faco e engulo.", "subtext": "Aceita a tarefa", "tone": "evasivo", "weights": { "harmonia": 3, "vigor": -2, "desapego": -1 }, "feedback": "Voce evita briga — mas soma ressentimento." },
-        { "text": "Passo pro meu gestor: 'Ta rolando isso.'", "subtext": "Escala", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce aciona o sistema certo." }
+        {
+          "text": "Falo: 'Isso aqui e seu.'",
+          "subtext": "Devolve",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao e pallet de carga dos outros.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Faco e engulo.",
+          "subtext": "Aceita a tarefa",
+          "tone": "evasivo",
+          "weights": {
+            "harmonia": 3,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce evita briga — mas soma ressentimento.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Passo pro meu gestor: 'Ta rolando isso.'",
+          "subtext": "Escala",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce aciona o sistema certo.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q6",
       "type": "NORMAL",
       "sceneHook": "Parente politico faz piada grosseira",
-      "metadata": { "tensao": 3, "ambiente": "Social", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "pertencimento" },
-      "slides": [{ "tipo": "evento", "texto": "Tio(a) solta uma piada das piores. Voce nao ri." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Tio(a) solta uma piada das piores. Voce nao ri."
+        }
+      ],
       "options": [
-        { "text": "Falo na mesa: 'Nao deu graca.'", "subtext": "Corta", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao engole pra manter mesa." },
-        { "text": "Saio da mesa. Vou no banheiro.", "subtext": "Se retira", "tone": "evasivo", "weights": { "desapego": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce nao participa do que nao te serve." },
-        { "text": "Silencio frio. Nao rio nem respondo.", "subtext": "Gela", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "harmonia": -1, "presenca": -1 }, "feedback": "Voce nao alimenta — e eles sentem." }
+        {
+          "text": "Falo na mesa: 'Nao deu graca.'",
+          "subtext": "Corta",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao engole pra manter mesa.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Saio da mesa. Vou no banheiro.",
+          "subtext": "Se retira",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce nao participa do que nao te serve.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Silencio frio. Nao rio nem respondo.",
+          "subtext": "Gela",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "harmonia": -1,
+            "presenca": -1
+          },
+          "feedback": "Voce nao alimenta — e eles sentem.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q7",
       "type": "NORMAL",
       "sceneHook": "Ataque direto no seu feed",
-      "metadata": { "tensao": 3, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Comentario pesado e pessoal no seu post." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Comentario pesado e pessoal no seu post."
+        }
+      ],
       "options": [
-        { "text": "Respondo la, a altura.", "subtext": "Devolve no lugar", "tone": "pragmatico", "weights": { "vigor": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao foge de campo aberto." },
-        { "text": "Bloqueio e sigo.", "subtext": "Sai do campo", "tone": "pragmatico", "weights": { "desapego": 3, "vigor": -1, "harmonia": -2 }, "feedback": "Voce nao da holofote." },
-        { "text": "Deixo o comentario la. Plateia decide.", "subtext": "Nao moderar", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "desapego": -1 }, "feedback": "Voce deixa a cena falar por si." }
+        {
+          "text": "Respondo la, a altura.",
+          "subtext": "Devolve no lugar",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao foge de campo aberto.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Bloqueio e sigo.",
+          "subtext": "Sai do campo",
+          "tone": "pragmatico",
+          "weights": {
+            "desapego": 3,
+            "vigor": -1,
+            "harmonia": -2
+          },
+          "feedback": "Voce nao da holofote.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Deixo o comentario la. Plateia decide.",
+          "subtext": "Nao moderar",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce deixa a cena falar por si.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     }
   ]

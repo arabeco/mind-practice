@@ -15,84 +15,483 @@
       "id": "q1",
       "type": "NORMAL",
       "sceneHook": "Foto saiu otima. Voce ta bem",
-      "metadata": { "tensao": 2, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Voce pensa em postar. Hesita. O que faz?" }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Voce pensa em postar. Hesita. O que faz?"
+        }
+      ],
       "options": [
-        { "text": "Posto. Se to bem, mostro.", "subtext": "Sem cerimonia", "tone": "pragmatico", "weights": { "presenca": 3, "desapego": -2, "filtro": -1 }, "feedback": "Voce nao esconde o bom." },
-        { "text": "Guardo pra mim. Nem todo momento e pra tela.", "subtext": "Reserva", "tone": "neutro", "weights": { "desapego": 3, "presenca": -2, "harmonia": -1 }, "feedback": "Voce vive sem precisar exibir." },
-        { "text": "Mando privado pra tres pessoas.", "subtext": "So os proximos", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "desapego": -1, "harmonia": -1 }, "feedback": "Voce escolhe quem ve o que." }
+        {
+          "text": "Posto. Se to bem, mostro.",
+          "subtext": "Sem cerimonia",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce nao esconde o bom.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "desapego": -1
+          }
+        },
+        {
+          "text": "Guardo pra mim. Nem todo momento e pra tela.",
+          "subtext": "Reserva",
+          "tone": "neutro",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Voce vive sem precisar exibir.",
+          "intent": "adesao",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Mando privado pra tres pessoas.",
+          "subtext": "So os proximos",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "desapego": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce escolhe quem ve o que.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q2",
       "type": "NORMAL",
       "sceneHook": "Briga publica no Twitter/X",
-      "metadata": { "tensao": 3, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Tem uma discussao ardendo e voce tem uma opiniao." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Tem uma discussao ardendo e voce tem uma opiniao."
+        }
+      ],
       "options": [
-        { "text": "Entro e solto meu ponto.", "subtext": "Voz propria", "tone": "pragmatico", "weights": { "presenca": 3, "desapego": -2, "harmonia": -1 }, "feedback": "Voce nao comenta so no sofa." },
-        { "text": "Leio e passo. Meu minuto vale mais.", "subtext": "Nao alimenta", "tone": "evasivo", "weights": { "desapego": 3, "presenca": -2, "vigor": -1 }, "feedback": "Voce nao vai pra cada briga." },
-        { "text": "Curto quem ja disse o que eu pensava.", "subtext": "Apoio silencioso", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "vigor": -1, "desapego": -1 }, "feedback": "Voce marca presenca sem expor rosto." }
+        {
+          "text": "Entro e solto meu ponto.",
+          "subtext": "Voz propria",
+          "tone": "pragmatico",
+          "weights": {
+            "presenca": 3,
+            "desapego": -2,
+            "harmonia": -1
+          },
+          "feedback": "Voce nao comenta so no sofa.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "presenca": 2,
+            "desapego": -1
+          }
+        },
+        {
+          "text": "Leio e passo. Meu minuto vale mais.",
+          "subtext": "Nao alimenta",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce nao vai pra cada briga.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Curto quem ja disse o que eu pensava.",
+          "subtext": "Apoio silencioso",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "vigor": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce marca presenca sem expor rosto.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q3",
       "type": "NORMAL",
       "sceneHook": "Amigo(a) comeca a dar hits",
-      "metadata": { "tensao": 2, "ambiente": "Digital", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Alguem proximo explode nas redes. Muita gente junto." }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Alguem proximo explode nas redes. Muita gente junto."
+        }
+      ],
       "options": [
-        { "text": "Comento e compartilho. Feliz por ele(a).", "subtext": "Bota o rosto", "tone": "protetor", "weights": { "presenca": 3, "desapego": -2, "filtro": -1 }, "feedback": "Voce celebra junto, sem receio." },
-        { "text": "Mando privado. Publico nao mostra sinceridade.", "subtext": "Reserva genuina", "tone": "neutro", "weights": { "desapego": 3, "presenca": -2, "harmonia": -1 }, "feedback": "Voce se emociona sem vitrine." },
-        { "text": "Dou like e sigo o dia.", "subtext": "Minimo social", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce marca presenca sem esforco." }
+        {
+          "text": "Comento e compartilho. Feliz por ele(a).",
+          "subtext": "Bota o rosto",
+          "tone": "protetor",
+          "weights": {
+            "presenca": 3,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce celebra junto, sem receio.",
+          "intent": "protecao",
+          "baseWeights": {
+            "presenca": 2,
+            "desapego": -1
+          }
+        },
+        {
+          "text": "Mando privado. Publico nao mostra sinceridade.",
+          "subtext": "Reserva genuina",
+          "tone": "neutro",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Voce se emociona sem vitrine.",
+          "intent": "adesao",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Dou like e sigo o dia.",
+          "subtext": "Minimo social",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce marca presenca sem esforco.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q4",
       "type": "NORMAL",
       "sceneHook": "Comentario azedo na sua foto",
-      "metadata": { "tensao": 3, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Um perfil estranho deixa um comentario ironico no seu post." }],
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Um perfil estranho deixa um comentario ironico no seu post."
+        }
+      ],
       "options": [
-        { "text": "Respondo na hora, ironico tambem.", "subtext": "Devolve", "tone": "provocativo", "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce nao engole provocacao publica." },
-        { "text": "Apago o comentario e sigo.", "subtext": "Limpa o espaco", "tone": "pragmatico", "weights": { "desapego": 3, "presenca": -1, "vigor": -2 }, "feedback": "Voce cuida do seu espaco sem plateia." },
-        { "text": "Nem ligo. Ignoro mesmo.", "subtext": "Nao alimenta", "tone": "evasivo", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "harmonia": -1 }, "feedback": "Voce escolhe nao dar atencao." }
+        {
+          "text": "Respondo na hora, ironico tambem.",
+          "subtext": "Devolve",
+          "tone": "provocativo",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce nao engole provocacao publica.",
+          "intent": "provocacao",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Apago o comentario e sigo.",
+          "subtext": "Limpa o espaco",
+          "tone": "pragmatico",
+          "weights": {
+            "desapego": 3,
+            "presenca": -1,
+            "vigor": -2
+          },
+          "feedback": "Voce cuida do seu espaco sem plateia.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "vigor": -1
+          }
+        },
+        {
+          "text": "Nem ligo. Ignoro mesmo.",
+          "subtext": "Nao alimenta",
+          "tone": "evasivo",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "harmonia": -1
+          },
+          "feedback": "Voce escolhe nao dar atencao.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     },
     {
       "id": "q5",
       "type": "NORMAL",
       "sceneHook": "Conhecido postou algo patetico",
-      "metadata": { "tensao": 2, "ambiente": "Digital", "relacao": "Par", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "O feed mostrou algo cringe de alguem que voce conhece." }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "O feed mostrou algo cringe de alguem que voce conhece."
+        }
+      ],
       "options": [
-        { "text": "Mostro no grupo e zuo um pouco.", "subtext": "Comenta com amigos", "tone": "provocativo", "weights": { "presenca": 3, "harmonia": -2, "desapego": -1 }, "feedback": "Voce tem opiniao — e compartilha." },
-        { "text": "Nem noto. Cada um posta o que quer.", "subtext": "Nao julga", "tone": "evasivo", "weights": { "desapego": 3, "presenca": -2, "filtro": -1 }, "feedback": "Voce nao gasta tempo com o que nao e seu." },
-        { "text": "Acho tosco mas nao falo. Guardo pra mim.", "subtext": "Filtra por dentro", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "harmonia": -1, "desapego": -1 }, "feedback": "Voce forma juizo sem precisar expressar." }
+        {
+          "text": "Mostro no grupo e zuo um pouco.",
+          "subtext": "Comenta com amigos",
+          "tone": "provocativo",
+          "weights": {
+            "presenca": 3,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Voce tem opiniao — e compartilha.",
+          "intent": "provocacao",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Nem noto. Cada um posta o que quer.",
+          "subtext": "Nao julga",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce nao gasta tempo com o que nao e seu.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Acho tosco mas nao falo. Guardo pra mim.",
+          "subtext": "Filtra por dentro",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "harmonia": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce forma juizo sem precisar expressar.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q6",
       "type": "NORMAL",
       "sceneHook": "Voce pensou numa resposta incrivel",
-      "metadata": { "tensao": 2, "ambiente": "Digital", "relacao": "Desconhecido", "aposta": "Imagem Publica", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Aquela frase matadora. Posta ou nao?" }],
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Imagem Publica",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Aquela frase matadora. Posta ou nao?"
+        }
+      ],
       "options": [
-        { "text": "Posto. E bom demais pra guardar.", "subtext": "Pra ser visto", "tone": "provocativo", "weights": { "presenca": 3, "desapego": -2, "filtro": -1 }, "feedback": "Voce honra a frase, nao a plateia." },
-        { "text": "Guardo. Sei que e boa, so pra mim basta.", "subtext": "Auto-suficiente", "tone": "neutro", "weights": { "desapego": 3, "presenca": -2, "harmonia": -1 }, "feedback": "Voce nao precisa da validacao." },
-        { "text": "Mando pra um amigo que ia rir.", "subtext": "Audiencia certa", "tone": "neutro", "weights": { "filtro": 3, "presenca": -1, "desapego": -1, "vigor": -1 }, "feedback": "Voce mede antes de publicar." }
+        {
+          "text": "Posto. E bom demais pra guardar.",
+          "subtext": "Pra ser visto",
+          "tone": "provocativo",
+          "weights": {
+            "presenca": 3,
+            "desapego": -2,
+            "filtro": -1
+          },
+          "feedback": "Voce honra a frase, nao a plateia.",
+          "intent": "provocacao",
+          "baseWeights": {
+            "presenca": 2,
+            "desapego": -1
+          }
+        },
+        {
+          "text": "Guardo. Sei que e boa, so pra mim basta.",
+          "subtext": "Auto-suficiente",
+          "tone": "neutro",
+          "weights": {
+            "desapego": 3,
+            "presenca": -2,
+            "harmonia": -1
+          },
+          "feedback": "Voce nao precisa da validacao.",
+          "intent": "adesao",
+          "baseWeights": {
+            "desapego": 2,
+            "presenca": -1
+          }
+        },
+        {
+          "text": "Mando pra um amigo que ia rir.",
+          "subtext": "Audiencia certa",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "presenca": -1,
+            "desapego": -1,
+            "vigor": -1
+          },
+          "feedback": "Voce mede antes de publicar.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "presenca": -1
+          }
+        }
       ]
     },
     {
       "id": "q7",
       "type": "NORMAL",
       "sceneHook": "Pegou o celular so pra ver a hora",
-      "metadata": { "tensao": 1, "ambiente": "Privado", "relacao": "Desconhecido", "aposta": "Tempo", "pilar": "ego" },
-      "slides": [{ "tipo": "evento", "texto": "Trinta minutos depois ainda ta rolando o feed." }],
+      "metadata": {
+        "tensao": 1,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Tempo",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "evento",
+          "texto": "Trinta minutos depois ainda ta rolando o feed."
+        }
+      ],
       "options": [
-        { "text": "Largo o celular. Perdi tempo.", "subtext": "Corta o vicio", "tone": "pragmatico", "weights": { "vigor": 3, "presenca": -1, "harmonia": -2 }, "feedback": "Voce se pega e reage." },
-        { "text": "Deixo rolar. Relaxar tambem e isso.", "subtext": "Sem culpa", "tone": "evasivo", "weights": { "desapego": 3, "filtro": -2, "vigor": -1 }, "feedback": "Voce nao faz tempestade em meia hora." },
-        { "text": "Ja era, mas anoto pra prestar atencao.", "subtext": "Observa o padrao", "tone": "neutro", "weights": { "filtro": 3, "vigor": -1, "presenca": -1, "desapego": -1 }, "feedback": "Voce reconhece sem punir." }
+        {
+          "text": "Largo o celular. Perdi tempo.",
+          "subtext": "Corta o vicio",
+          "tone": "pragmatico",
+          "weights": {
+            "vigor": 3,
+            "presenca": -1,
+            "harmonia": -2
+          },
+          "feedback": "Voce se pega e reage.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "harmonia": -1
+          }
+        },
+        {
+          "text": "Deixo rolar. Relaxar tambem e isso.",
+          "subtext": "Sem culpa",
+          "tone": "evasivo",
+          "weights": {
+            "desapego": 3,
+            "filtro": -2,
+            "vigor": -1
+          },
+          "feedback": "Voce nao faz tempestade em meia hora.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "filtro": -1
+          }
+        },
+        {
+          "text": "Ja era, mas anoto pra prestar atencao.",
+          "subtext": "Observa o padrao",
+          "tone": "neutro",
+          "weights": {
+            "filtro": 3,
+            "vigor": -1,
+            "presenca": -1,
+            "desapego": -1
+          },
+          "feedback": "Voce reconhece sem punir.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 1,
+            "vigor": -1
+          }
+        }
       ]
     }
   ]

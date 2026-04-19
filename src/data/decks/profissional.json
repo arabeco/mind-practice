@@ -14,39 +14,95 @@
       "id": "p1",
       "type": "NORMAL",
       "sceneHook": "Sua apresentacao. Ninguem prestando atencao",
-      "metadata": { "tensao": 3, "ambiente": "Profissional", "relacao": "Autoridade", "aposta": "Status", "pilar": "ego" },
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
       "slides": [
-        { "tipo": "contexto", "texto": "Reuniao de equipe. Voce preparou uma apresentacao importante com dados novos." },
-        { "tipo": "evento", "texto": "Na hora de falar, todos no celular. Seu chefe boceja." }
+        {
+          "tipo": "contexto",
+          "texto": "Reuniao de equipe. Voce preparou uma apresentacao importante com dados novos."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Na hora de falar, todos no celular. Seu chefe boceja."
+        }
       ],
       "options": [
         {
           "text": "Paro e digo: 'Quando quiserem ouvir, continuo.'",
           "subtext": "Imposicao direta",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
-          "feedback": "Exigiu atencao. Silencio pesou, mas agora te olham."
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Exigiu atencao. Silencio pesou, mas agora te olham.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1
+          }
         },
         {
           "text": "Termino rapido e mando os slides por email.",
           "subtext": "Eficiencia fria",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "presenca": -2, "vigor": -1 },
-          "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de voce."
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de voce.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "filtro": 1,
+            "presenca": -1
+          }
         },
         {
           "text": "'Tenho um dado que vai mudar a visao de voces.'",
           "subtext": "Reconquista da sala",
           "tone": "neutro",
-          "weights": { "presenca": 3, "harmonia": 1, "filtro": -2, "vigor": -1 },
-          "feedback": "Recapturou a sala sem criar clima. Lideranca sutil."
+          "weights": {
+            "presenca": 3,
+            "harmonia": 1,
+            "filtro": -2,
+            "vigor": -1
+          },
+          "feedback": "Recapturou a sala sem criar clima. Lideranca sutil.",
+          "intent": "adesao",
+          "baseWeights": {
+            "presenca": 2,
+            "harmonia": 1,
+            "filtro": -1
+          }
         },
         {
           "text": "Sigo falando normalmente, fingindo que nao notei.",
           "subtext": "Persistencia silenciosa",
           "tone": "evasivo",
-          "weights": { "filtro": 3, "desapego": 1, "presenca": -2, "vigor": -1 },
-          "feedback": "Manteve compostura, mas ninguem notou o esforco."
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "presenca": -2,
+            "vigor": -1
+          },
+          "feedback": "Manteve compostura, mas ninguem notou o esforco.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "filtro": 2,
+            "desapego": 1,
+            "presenca": -1
+          }
         }
       ]
     },
@@ -54,39 +110,95 @@
       "id": "p2",
       "type": "NORMAL",
       "sceneHook": "Sexta, 18h. Mochila pronta",
-      "metadata": { "tensao": 3, "ambiente": "Profissional", "relacao": "Autoridade", "aposta": "Tempo", "pilar": "propriedade" },
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Tempo",
+        "pilar": "propriedade"
+      },
       "slides": [
-        { "tipo": "contexto", "texto": "Sexta, 18h. Voce ja esta de mochila pronta pra ir embora." },
-        { "tipo": "evento", "texto": "Chefe aparece: 'Surgiu demanda urgente. Preciso pra segunda.'" }
+        {
+          "tipo": "contexto",
+          "texto": "Sexta, 18h. Voce ja esta de mochila pronta pra ir embora."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Chefe aparece: 'Surgiu demanda urgente. Preciso pra segunda.'"
+        }
       ],
       "options": [
         {
           "text": "'Nao vai dar. Tenho compromisso. Resolvo segunda cedo.'",
           "subtext": "Limite claro",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
-          "feedback": "Colocou limite. Chefe nao curtiu, mas voce priorizou."
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Colocou limite. Chefe nao curtiu, mas voce priorizou.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1
+          }
         },
         {
           "text": "Suspiro, tiro a mochila e fico. Nao vale a briga.",
           "subtext": "Submissao",
           "tone": "evasivo",
-          "weights": { "harmonia": 3, "filtro": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Cedeu pra evitar conflito. Quantas sextas mais aguenta?"
+          "weights": {
+            "harmonia": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Cedeu pra evitar conflito. Quantas sextas mais aguenta?",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "harmonia": 2,
+            "filtro": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "'Faco a parte critica agora, finalizo remoto amanha.'",
           "subtext": "Negociacao",
           "tone": "neutro",
-          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
-          "feedback": "Achou meio termo. Entregou sem perder a noite."
+          "weights": {
+            "harmonia": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Achou meio termo. Entregou sem perder a noite.",
+          "intent": "adesao",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Digo 'claro' sorrindo, mas por dentro to furioso.",
           "subtext": "Raiva contida",
           "tone": "evasivo",
-          "weights": { "filtro": 3, "harmonia": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Mascara perfeita, mas a raiva cobra depois."
+          "weights": {
+            "filtro": 3,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Mascara perfeita, mas a raiva cobra depois.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "filtro": 2,
+            "harmonia": 1,
+            "vigor": -1
+          }
         }
       ]
     },
@@ -94,39 +206,95 @@
       "id": "p4",
       "type": "NORMAL",
       "sceneHook": "Almoco com a equipe. Clima leve",
-      "metadata": { "tensao": 4, "ambiente": "Profissional", "relacao": "Par", "aposta": "Paz Emocional", "pilar": "seguranca" },
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "seguranca"
+      },
       "slides": [
-        { "tipo": "contexto", "texto": "Almoco com a equipe. Clima leve, todo mundo relaxado." },
-        { "tipo": "evento", "texto": "Colega faz piada sexista. Parte da mesa fica desconfortavel." }
+        {
+          "tipo": "contexto",
+          "texto": "Almoco com a equipe. Clima leve, todo mundo relaxado."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Colega faz piada sexista. Parte da mesa fica desconfortavel."
+        }
       ],
       "options": [
         {
           "text": "'Essa piada nao tem graca. Voce sabe disso, ne?'",
           "subtext": "Confronto direto",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "desapego": -1 },
-          "feedback": "Cortou o momento. Necessario pra quem tava mal."
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "desapego": -1
+          },
+          "feedback": "Cortou o momento. Necessario pra quem tava mal.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1
+          }
         },
         {
           "text": "Nao rio e mudo de assunto. Meu silencio fala.",
           "subtext": "Silencio posicionado",
           "tone": "evasivo",
-          "weights": { "filtro": 3, "desapego": 1, "presenca": -1, "vigor": -2 },
-          "feedback": "Nao compactuou, mas nao enfrentou. Mensagem ambigua."
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "presenca": -1,
+            "vigor": -2
+          },
+          "feedback": "Nao compactuou, mas nao enfrentou. Mensagem ambigua.",
+          "intent": "contra_movimento",
+          "baseWeights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Tom firme: 'Pega leve, tem gente desconfortavel aqui.'",
           "subtext": "Mediacao",
           "tone": "protetor",
-          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
-          "feedback": "Apontou sem criar tribunal. Equilibrio raro."
+          "weights": {
+            "harmonia": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Apontou sem criar tribunal. Equilibrio raro.",
+          "intent": "protecao",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Fico calado. Nao e problema meu.",
           "subtext": "Indiferenca",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "harmonia": -2, "presenca": -1 },
-          "feedback": "Se distanciou. Protegeu a si, ignorou os outros."
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "harmonia": -2,
+            "presenca": -1
+          },
+          "feedback": "Se distanciou. Protegeu a si, ignorou os outros.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "filtro": 1,
+            "harmonia": -1
+          }
         }
       ]
     },
@@ -134,39 +302,95 @@
       "id": "p5",
       "type": "NORMAL",
       "sceneHook": "Voce descobre o salario do colega",
-      "metadata": { "tensao": 4, "ambiente": "Profissional", "relacao": "Par", "aposta": "Dinheiro", "pilar": "propriedade" },
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
+      },
       "slides": [
-        { "tipo": "contexto", "texto": "Voce descobre por acaso o salario de um colega da mesma funcao." },
-        { "tipo": "evento", "texto": "Ele ganha 40% mais fazendo o mesmo. Seu sangue ferve." }
+        {
+          "tipo": "contexto",
+          "texto": "Voce descobre por acaso o salario de um colega da mesma funcao."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele ganha 40% mais fazendo o mesmo. Seu sangue ferve."
+        }
       ],
       "options": [
         {
           "text": "Vou no RH: 'Preciso entender os criterios salariais.'",
           "subtext": "Acao direta",
           "tone": "pragmatico",
-          "weights": { "vigor": 3, "presenca": 1, "filtro": -2, "harmonia": -1 },
-          "feedback": "Foi buscar respostas. Direto, lutando pelo seu."
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "filtro": -2,
+            "harmonia": -1
+          },
+          "feedback": "Foi buscar respostas. Direto, lutando pelo seu.",
+          "intent": "confronto_privado",
+          "baseWeights": {
+            "vigor": 2,
+            "presenca": 1,
+            "filtro": -1
+          }
         },
         {
           "text": "Guardo a info e comeco a procurar outro emprego.",
           "subtext": "Estrategia de saida",
           "tone": "pragmatico",
-          "weights": { "filtro": 3, "desapego": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Nao brigou, planejou. Vinganca pode vir como proposta."
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Nao brigou, planejou. Vinganca pode vir como proposta.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Marco reuniao com meu gestor pra discutir salario.",
           "subtext": "Negociacao interna",
           "tone": "neutro",
-          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
-          "feedback": "Canalizou raiva em estrategia. Calculado e profissional."
+          "weights": {
+            "harmonia": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Canalizou raiva em estrategia. Calculado e profissional.",
+          "intent": "adesao",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Engulo seco e sigo trabalhando. Reclamar nao muda nada.",
           "subtext": "Resignacao",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "harmonia": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Aceitou, mas resignacao pode virar amargura."
+          "weights": {
+            "desapego": 3,
+            "harmonia": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Aceitou, mas resignacao pode virar amargura.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "harmonia": 1,
+            "vigor": -1
+          }
         }
       ]
     },
@@ -174,39 +398,95 @@
       "id": "p10",
       "type": "NORMAL",
       "sceneHook": "Call com cliente. Time inteiro ouvindo",
-      "metadata": { "tensao": 5, "ambiente": "Profissional", "relacao": "Desconhecido", "aposta": "Status", "pilar": "ego" },
+      "metadata": {
+        "tensao": 5,
+        "ambiente": "Profissional",
+        "relacao": "Desconhecido",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
       "slides": [
-        { "tipo": "contexto", "texto": "Call com cliente importante. Sua equipe inteira esta ouvindo." },
-        { "tipo": "evento", "texto": "Cliente grita e te acusa de incompetente. Parte e mentira." }
+        {
+          "tipo": "contexto",
+          "texto": "Call com cliente importante. Sua equipe inteira esta ouvindo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Cliente grita e te acusa de incompetente. Parte e mentira."
+        }
       ],
       "options": [
         {
           "text": "'Vou parar aqui. Essas acusacoes nao procedem.'",
           "subtext": "Defesa firme",
           "tone": "provocativo",
-          "weights": { "vigor": 3, "presenca": 1, "harmonia": -2, "filtro": -1 },
-          "feedback": "Enfrentou o cliente. Equipe te respeita, contrato treme."
+          "weights": {
+            "vigor": 3,
+            "presenca": 1,
+            "harmonia": -2,
+            "filtro": -1
+          },
+          "feedback": "Enfrentou o cliente. Equipe te respeita, contrato treme.",
+          "intent": "confronto_publico",
+          "baseWeights": {
+            "vigor": 2,
+            "presenca": 1,
+            "harmonia": -1
+          }
         },
         {
           "text": "Deixo falar e digo: 'Respondo por email com os dados.'",
           "subtext": "Absorcao tatica",
           "tone": "pragmatico",
-          "weights": { "filtro": 3, "desapego": 1, "vigor": -2, "presenca": -1 },
-          "feedback": "Absorveu sem reagir. Resposta documentada vai falar."
+          "weights": {
+            "filtro": 3,
+            "desapego": 1,
+            "vigor": -2,
+            "presenca": -1
+          },
+          "feedback": "Absorveu sem reagir. Resposta documentada vai falar.",
+          "intent": "investigacao",
+          "baseWeights": {
+            "filtro": 2,
+            "desapego": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "'Entendo a frustracao. Vamos marcar pra resolver com calma.'",
           "subtext": "Desescalada",
           "tone": "neutro",
-          "weights": { "harmonia": 3, "presenca": 1, "vigor": -2, "desapego": -1 },
-          "feedback": "Transformou grito em agenda. Cliente acalmou."
+          "weights": {
+            "harmonia": 3,
+            "presenca": 1,
+            "vigor": -2,
+            "desapego": -1
+          },
+          "feedback": "Transformou grito em agenda. Cliente acalmou.",
+          "intent": "adesao",
+          "baseWeights": {
+            "harmonia": 2,
+            "presenca": 1,
+            "vigor": -1
+          }
         },
         {
           "text": "Fico em silencio total ate ele parar. Sem combustivel.",
           "subtext": "Muro",
           "tone": "evasivo",
-          "weights": { "desapego": 3, "filtro": 1, "vigor": -2, "harmonia": -1 },
-          "feedback": "Virou um muro. Ele cansou, equipe ficou tensa."
+          "weights": {
+            "desapego": 3,
+            "filtro": 1,
+            "vigor": -2,
+            "harmonia": -1
+          },
+          "feedback": "Virou um muro. Ele cansou, equipe ficou tensa.",
+          "intent": "retirada",
+          "baseWeights": {
+            "desapego": 2,
+            "filtro": 1,
+            "vigor": -1
+          }
         }
       ]
     }
