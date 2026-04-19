@@ -60,3 +60,52 @@ self.addEventListener('fetch', (event) => {
     );
   }
 });
+
+// -----------------------------------------------------------------
+// Push notifications (VAPID / Web Push)
+// -----------------------------------------------------------------
+
+self.addEventListener('push', (event) => {
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch {
+    payload = { title: 'MindPractice', body: event.data ? event.data.text() : '' };
+  }
+
+  const title = payload.title || 'MindPractice';
+  const options = {
+    body: payload.body || '',
+    icon: payload.icon || '/icon-192.png',
+    badge: payload.badge || '/icon-192.png',
+    tag: payload.tag || 'mindpractice',
+    data: {
+      url: payload.url || '/',
+      ...(payload.data || {}),
+    },
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const target = (event.notification.data && event.notification.data.url) || '/';
+  event.waitUntil(
+    (async () => {
+      const allClients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      // Focus existing tab if one is already open on the app.
+      for (const client of allClients) {
+        try {
+          const url = new URL(client.url);
+          if (url.origin === self.location.origin) {
+            await client.focus();
+            if (client.navigate) await client.navigate(target);
+            return;
+          }
+        } catch { /* ignore */ }
+      }
+      await self.clients.openWindow(target);
+    })()
+  );
+});

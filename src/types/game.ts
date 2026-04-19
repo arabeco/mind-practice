@@ -65,6 +65,21 @@ export interface Option {
   tone: Tone;
   weights: Partial<Record<StatKey, number>>;
   feedback: string;
+  /**
+   * Post-decision narrative beat. Usado principalmente em campanha,
+   * onde a pessoa fica olhando essa tela até a próxima cena destravar (até 24h).
+   *
+   * Convenção: 2-4 frases que **(a)** mostram consequência imediata e
+   * **(b)** antecipam/ancoram a próxima cena — mudança de lugar, clima,
+   * quem vai estar lá. Funciona como ponte narrativa.
+   *
+   * Ex: "Você sai batendo a porta. Amanhã, a Juliana vai estar na sala
+   *      de reunião com o chefe. E o chefe já sabe o que aconteceu."
+   *
+   * Se não definido, cai pro `feedback` (1 frase curta, suficiente
+   * pra cenários normais).
+   */
+  aftermath?: string;
   /** Campaign only: id of the next scene to load after this choice.
    *  If omitted and `endingId` also omitted in a campaign, deck is treated linear (next in list). */
   nextSceneId?: string;
@@ -102,6 +117,9 @@ export interface CampaignProgress {
   endingId: string | null;     // set when campaign finishes
   rating: number | null;       // 1..5
   completedAt: string | null;  // ISO when ending reached
+  /** If equal to `currentSceneId`, bypasses the daily cooldown (paid skip).
+   *  Cleared automatically when the next CAMPAIGN_ANSWER is dispatched. */
+  pendingSkipSceneId?: string | null;
 }
 
 export interface Question {
@@ -211,6 +229,10 @@ export interface Wallet {
   lastDailyClaim: string | null; // ISO date string e.g. '2026-04-05'
   totalEarned: number;
   totalSpent: number;
+  /** Number of runs that have paid the piso today (resets at date change). */
+  runsPaidToday?: number;
+  /** Local date ('YYYY-MM-DD') that `runsPaidToday` refers to. */
+  runsPaidDate?: string | null;
 }
 
 export const INITIAL_WALLET: Wallet = {
@@ -218,9 +240,18 @@ export const INITIAL_WALLET: Wallet = {
   lastDailyClaim: null,
   totalEarned: 20,
   totalSpent: 0,
+  runsPaidToday: 0,
+  runsPaidDate: null,
 };
 
 export const DAILY_FICHAS = 10;
+
+// Ficha economy — fonts/sinks.
+export const RUN_PISO_FICHAS = 2;          // every run pays this (subject to cap)
+export const RUN_PISO_CAP_PER_DAY = 5;     // max runs/day that pay the piso
+export const CAMPAIGN_ENDING_BONUS = 30;   // reaching an ending in a campaign
+export const FRIEND_ACCEPT_BONUS = 5;      // when a friend request you sent is accepted
+export const SKIP_COOLDOWN_COST = 10;      // to bypass the 24h campaign wait
 
 export interface GameState {
   calibration: CalibrationState;

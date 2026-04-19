@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { CURRENT_SEASON_ID } from '@/lib/season';
 
 const tabs = [
   {
@@ -11,10 +12,23 @@ const tabs = [
     icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1',
   },
   {
+    label: 'Temporada',
+    href: `/campanha/${CURRENT_SEASON_ID}`,
+    // livro aberto
+    icon: 'M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25',
+    matchPrefix: '/campanha',
+  },
+  {
     label: 'Decks',
     href: '/decks',
     icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
     isCenter: true,
+  },
+  {
+    label: 'Mundo',
+    href: '/mundo',
+    // globo + linha horizontal
+    icon: 'M12 21a9 9 0 100-18 9 9 0 000 18zm0 0c2.5-2.5 4-5.7 4-9s-1.5-6.5-4-9m0 18c-2.5-2.5-4-5.7-4-9s1.5-6.5 4-9M3 12h18',
   },
   {
     label: 'Perfil',
@@ -35,8 +49,9 @@ export default function BottomNav() {
       <div className="glass-nav px-1 py-2">
         <div className="flex items-end justify-around gap-0.5">
           {tabs.map((tab) => {
-            const isActive =
-              tab.href === '/'
+            const isActive = tab.matchPrefix
+              ? pathname.startsWith(tab.matchPrefix)
+              : tab.href === '/'
                 ? pathname === '/'
                 : pathname.startsWith(tab.href);
 

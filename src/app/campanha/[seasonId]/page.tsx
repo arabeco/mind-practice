@@ -15,7 +15,9 @@ import {
   msUntilNextUnlock,
 } from '@/lib/season';
 import HoldButton from '@/components/HoldButton';
-import { STAT_COLORS, STAT_KEYS } from '@/types/game';
+import EndingShareButton from '@/components/EndingShareButton';
+import { useLocalProfile } from '@/hooks/useLocalProfile';
+import { STAT_COLORS, STAT_KEYS, SKIP_COOLDOWN_COST } from '@/types/game';
 import type { CampaignEnding, CampaignProgress, Option, Question, StatKey } from '@/types/game';
 
 function getDominantAxis(weights: Partial<Record<StatKey, number>>): StatKey {
@@ -131,6 +133,16 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
   const art = getDeckArt(deck);
   const ending = progress?.endingId ? deck.endings?.find(e => e.id === progress.endingId) ?? null : null;
 
+  // Última escolha (pra mostrar aftermath na tela de espera)
+  const lastChosenOption: Option | null = useMemo(() => {
+    if (!deck || !progress || progress.path.length === 0) return null;
+    const last = progress.path[progress.path.length - 1];
+    const scene = deck.questions.find(q => q.id === last.sceneId);
+    return scene?.options[last.optionIndex] ?? null;
+  }, [deck, progress]);
+
+  const lastAftermath = lastChosenOption?.aftermath ?? lastChosenOption?.feedback ?? null;
+
   // --- Render ----------------------------------------------------------------
 
   return (
@@ -178,6 +190,8 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
             rating={rating}
             onRate={handleRate}
             onExit={() => router.push('/')}
+            seasonLabel={season?.label ?? 'Temporada'}
+            deckName={deck.name}
           />
         ) : !progress ? (
           /* Hub — campaign not started yet */
@@ -210,6 +224,9 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
             totalSteps={totalSteps}
             msLeft={msLeft}
             daysLeft={daysLeft}
+            aftermath={lastAftermath}
+            fichas={state.wallet.fichas}
+            onSkip={() => dispatch({ type: 'SKIP_CAMPAIGN_COOLDOWN', seasonId })}
           />
         )}
       </div>
@@ -297,38 +314,85 @@ function LockedView({
   totalSteps,
   msLeft,
   daysLeft,
+  aftermath,
+  fichas,
+  onSkip,
 }: {
   deckName: string;
   step: number;
   totalSteps: number;
   msLeft: number;
   daysLeft: number;
+  aftermath: string | null;
+  fichas: number;
+  onSkip: () => void;
 }) {
+  const canAfford = fichas >= SKIP_COOLDOWN_COST;
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45 }}
-      className="flex flex-1 flex-col items-center justify-center text-center"
+      className="flex flex-1 flex-col justify-center"
     >
-      <div className="w-full rounded-2xl border border-white/12 bg-black/55 p-6 backdrop-blur-xl">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-purple-300/70">{deckName}</p>
-        <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-white/50">
+      {/* Aftermath — o "portal narrativo" que fica na tela até amanhã */}
+      {aftermath && (
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mb-6 rounded-2xl border border-purple-300/25 bg-gradient-to-b from-purple-500/12 to-black/70 p-5 shadow-[0_0_42px_rgba(139,92,246,0.22)] backdrop-blur-xl"
+        >
+          <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-purple-300/80">
+            Depois da escolha
+          </p>
+          <p className="mt-3 text-[15px] leading-relaxed italic text-white/88">
+            {aftermath}
+          </p>
+        </motion.div>
+      )}
+
+      {/* Countdown compacto */}
+      <div className="rounded-2xl border border-white/12 bg-black/55 p-5 text-center backdrop-blur-xl">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.26em] text-white/40">
+          {deckName}
+        </p>
+        <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/48">
           Dia {step}/{totalSteps} respondido
         </p>
 
-        <div className="my-6 flex flex-col items-center">
-          <svg className="h-10 w-10 text-purple-300/70" fill="currentColor" viewBox="0 0 24 24">
+        <div className="my-4 flex flex-col items-center">
+          <svg className="h-7 w-7 text-purple-300/60" fill="currentColor" viewBox="0 0 24 24">
             <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3A5.25 5.25 0 0012 1.5zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
           </svg>
-          <p className="mt-3 text-sm text-white/68">Proxima cena abre as 00:00</p>
-          <p className="mt-1 font-mono text-2xl font-bold text-white/92">{formatCountdown(msLeft)}</p>
+          <p className="mt-2 text-[11px] text-white/55">Proxima cena abre as 00:00</p>
+          <p className="mt-0.5 font-mono text-xl font-bold text-white/90">{formatCountdown(msLeft)}</p>
         </div>
 
-        <p className="text-[11px] text-white/45">
-          Voce tem {daysLeft} dias ate a temporada fechar. Volte amanha pra continuar a historia.
+        <p className="text-[10px] text-white/38">
+          {daysLeft} dia{daysLeft !== 1 ? 's' : ''} ate a temporada fechar
         </p>
       </div>
+
+      {/* Pular espera com fichas */}
+      <button
+        type="button"
+        onClick={onSkip}
+        disabled={!canAfford}
+        className="mt-4 w-full rounded-2xl border border-amber-300/30 bg-gradient-to-b from-amber-400/10 to-amber-600/15 px-4 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-amber-100 shadow-[0_0_18px_rgba(251,191,36,0.12)] transition hover:brightness-110 disabled:opacity-40 disabled:hover:brightness-100"
+      >
+        <span className="flex items-center justify-center gap-2">
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+          </svg>
+          Pular espera · {SKIP_COOLDOWN_COST} fichas
+        </span>
+        {!canAfford && (
+          <span className="mt-1 block text-[10px] font-normal normal-case tracking-normal text-amber-100/60">
+            Voce tem {fichas} ficha{fichas !== 1 ? 's' : ''}
+          </span>
+        )}
+      </button>
     </motion.div>
   );
 }
@@ -346,13 +410,18 @@ function EndingReveal({
   rating,
   onRate,
   onExit,
+  seasonLabel,
+  deckName,
 }: {
   ending: CampaignEnding;
   rating: number | null;
   onRate: (r: number) => void;
   onExit: () => void;
+  seasonLabel: string;
+  deckName: string;
 }) {
   const [stage, setStage] = useState<0 | 1 | 2 | 3>(0);
+  const { nickname } = useLocalProfile();
 
   useEffect(() => {
     const t0 = window.setTimeout(() => setStage(1), 1800);   // kicker
@@ -475,13 +544,21 @@ function EndingReveal({
                 </div>
               </div>
 
-              <button
-                type="button"
-                onClick={onExit}
-                className="mt-6 w-full rounded-full border border-white/25 bg-white/10 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90 hover:bg-white/18"
-              >
-                Voltar ao inicio
-              </button>
+              <div className="mt-6 flex flex-col gap-3">
+                <EndingShareButton
+                  ending={ending}
+                  seasonLabel={seasonLabel}
+                  deckName={deckName}
+                  nickname={nickname}
+                />
+                <button
+                  type="button"
+                  onClick={onExit}
+                  className="w-full rounded-full border border-white/25 bg-white/10 py-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90 hover:bg-white/18"
+                >
+                  Voltar ao inicio
+                </button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -735,7 +812,7 @@ function SceneView({
               </div>
             )}
 
-            {/* Feedback of chosen option */}
+            {/* Aftermath — bridge narrativo pra próxima cena */}
             <AnimatePresence>
               {selected && (
                 <motion.div
@@ -745,9 +822,11 @@ function SceneView({
                   className="mt-4 rounded-xl border border-purple-300/25 bg-gradient-to-b from-purple-500/15 to-black/60 px-4 py-3"
                 >
                   <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-purple-300/80">
-                    Consequencia
+                    Depois da escolha
                   </p>
-                  <p className="mt-1 text-[13px] leading-relaxed italic text-white/82">{selected.feedback}</p>
+                  <p className="mt-1.5 text-[13px] leading-relaxed italic text-white/85">
+                    {selected.aftermath ?? selected.feedback}
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>

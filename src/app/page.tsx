@@ -10,6 +10,7 @@ import type { Deck } from '@/types/game';
 import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
 import MiniRadar from '@/components/MiniRadar';
+import ProfileCardCompact from '@/components/ProfileCardCompact';
 import {
   CURRENT_SEASON_ID,
   getCurrentSeason,
@@ -108,6 +109,11 @@ export default function Home() {
           <span className="text-sm font-bold text-white/80">{state.wallet.fichas}</span>
           <span className="text-[10px] uppercase tracking-[0.12em] text-white/50">fichas</span>
         </div>
+      </motion.div>
+
+      {/* Card horizontal de perfil */}
+      <motion.div variants={fadeUp}>
+        <ProfileCardCompact />
       </motion.div>
 
       {/* Streak + Radar row */}

@@ -66,6 +66,10 @@ export function nextMidnight(from: Date = new Date()): Date {
 export function canPlayCampaignNow(progress: CampaignProgress | null, now: Date = new Date()): boolean {
   if (!progress) return true; // never started → day 1 is always playable
   if (progress.endingId) return false; // already finished
+  // Paid skip: bypass the 24h wait for the current scene.
+  if (progress.pendingSkipSceneId && progress.pendingSkipSceneId === progress.currentSceneId) {
+    return true;
+  }
   if (!progress.lastAnsweredAt) return true; // started but haven't answered day 1 yet
   const last = new Date(progress.lastAnsweredAt);
   // Compare local calendar days.

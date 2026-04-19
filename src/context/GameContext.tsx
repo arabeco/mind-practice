@@ -25,6 +25,10 @@ import {
   CALIBRATION_WINDOW,
   CONSISTENCY_WINDOW,
   INTENSITY_MULTIPLIERS,
+  RUN_PISO_FICHAS,
+  RUN_PISO_CAP_PER_DAY,
+  CAMPAIGN_ENDING_BONUS,
+  SKIP_COOLDOWN_COST,
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
@@ -61,7 +65,8 @@ type GameAction =
       tone: Tone;
       tensao: number;
     }
-  | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number };
+  | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number }
+  | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string };
 
 // ---------------------------------------------------------------------------
 // Constants & Helpers
@@ -318,14 +323,25 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         newStreak = 1;
       }
 
-      // Bonus fichas from gameplay
-      let bonusFichas = 3; // first deck of day
-      if (state.lastPlayDate === todayStr) bonusFichas = 0; // already played today
-      if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += 20; // weekly streak bonus
+      // --- Ficha economy -----------------------------------------------------
+      // Reset per-day run counter if we crossed midnight.
+      const sameDay = state.wallet.runsPaidDate === todayStr;
+      const runsPaidSoFar = sameDay ? (state.wallet.runsPaidToday ?? 0) : 0;
+
+      // Piso: every run pays RUN_PISO_FICHAS, capped at RUN_PISO_CAP_PER_DAY runs.
+      const pisoFichas = runsPaidSoFar < RUN_PISO_CAP_PER_DAY ? RUN_PISO_FICHAS : 0;
+      const nextRunsPaidToday = pisoFichas > 0 ? runsPaidSoFar + 1 : runsPaidSoFar;
+
+      let bonusFichas = pisoFichas;
+      // First run of the calendar day → +3 on top of piso (→ total 5).
+      const firstOfDay = state.lastPlayDate !== todayStr;
+      if (firstOfDay) bonusFichas += 3;
+      // Weekly streak bonus.
+      if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += 20;
+      // Zero-timeout run.
       const noTimeouts = state.activeRun ? state.activeRun.timeoutCount === 0 : false;
       if (noTimeouts) bonusFichas += 5;
-      // Calibragem completion — rewarded every time (not just first of day)
-      // because each calibragem feeds into the profile and unlocks the next one.
+      // Calibragem — always rewarded (feeds profile + unlocks next).
       if (deckId && CALIBRAGEM_IDS.has(deckId)) {
         bonusFichas += CALIBRAGEM_COMPLETION_FICHAS;
       }
@@ -359,6 +375,8 @@ function gameReducer(state: GameState, action: GameAction): GameState {
           ...state.wallet,
           fichas: state.wallet.fichas + bonusFichas,
           totalEarned: state.wallet.totalEarned + bonusFichas,
+          runsPaidToday: nextRunsPaidToday,
+          runsPaidDate: todayStr,
         },
         calibration: {
           ...state.calibration,
@@ -459,9 +477,20 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         action.tensao,
       );
 
+      // +30 fichas when an ending is reached.
+      const reachedEnding = !!action.endingId;
+      const endingBonus = reachedEnding ? CAMPAIGN_ENDING_BONUS : 0;
+
       return {
         ...state,
         calibration: newCalibration,
+        wallet: endingBonus > 0
+          ? {
+              ...state.wallet,
+              fichas: state.wallet.fichas + endingBonus,
+              totalEarned: state.wallet.totalEarned + endingBonus,
+            }
+          : state.wallet,
         campaigns: {
           ...state.campaigns,
           [action.seasonId]: {
@@ -471,6 +500,30 @@ function gameReducer(state: GameState, action: GameAction): GameState {
             currentSceneId: action.nextSceneId ?? progress.currentSceneId,
             endingId: action.endingId,
             completedAt: action.endingId ? now : null,
+            pendingSkipSceneId: null, // consume any paid skip
+          },
+        },
+      };
+    }
+
+    case 'SKIP_CAMPAIGN_COOLDOWN': {
+      const progress = state.campaigns[action.seasonId];
+      if (!progress || progress.endingId) return state;
+      if (state.wallet.fichas < SKIP_COOLDOWN_COST) return state;
+      // Already skipped for this scene — no-op.
+      if (progress.pendingSkipSceneId === progress.currentSceneId) return state;
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas - SKIP_COOLDOWN_COST,
+          totalSpent: state.wallet.totalSpent + SKIP_COOLDOWN_COST,
+        },
+        campaigns: {
+          ...state.campaigns,
+          [action.seasonId]: {
+            ...progress,
+            pendingSkipSceneId: progress.currentSceneId,
           },
         },
       };
@@ -616,6 +669,80 @@ export function GameProvider({ children }: { children: ReactNode }) {
     }, 2000); // 2s debounce
     return () => clearTimeout(timer);
   }, [state]);
+
+  // Social feed — detecta novos snapshots (deck concluído) e novos arquétipos,
+  // e publica eventos no feed se usuário logado.
+  const lastSnapshotCountRef = useRef<number | null>(null);
+  const lastArchetypeRef = useRef<string | null>(null);
+  const lastLevelRef = useRef<number | null>(null);
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    const snapshots = state.calibration.snapshots;
+    const currentCount = snapshots.length;
+    const currentLevel = Math.floor(state.calibration.totalResponses / 20) + 1;
+    const currentArch = snapshots.length > 0
+      ? snapshots[snapshots.length - 1].archetypeAtCompletion
+      : null;
+
+    // Primeira passada após hydrate — só memoriza, não loga histórico
+    if (lastSnapshotCountRef.current === null) {
+      lastSnapshotCountRef.current = currentCount;
+      lastArchetypeRef.current = currentArch;
+      lastLevelRef.current = currentLevel;
+      return;
+    }
+
+    (async () => {
+      try {
+        const { logFeedEvent } = await import('@/lib/supabase/social');
+
+        // Deck concluído?
+        if (currentCount > (lastSnapshotCountRef.current ?? 0)) {
+          const latest = snapshots[snapshots.length - 1];
+          if (latest) {
+            const { getDeckById } = await import('@/data/decks/index');
+            const deck = getDeckById(latest.deckId);
+            await logFeedEvent('deck_completed', {
+              deckId: latest.deckId,
+              deckName: deck?.name ?? latest.deckId,
+              score: latest.runScore,
+              archetype: latest.archetypeAtCompletion,
+            });
+
+            // Mudança de arquétipo (detectada no próprio snapshot)
+            if (latest.archetypeChanged && latest.archetypeBeforeRun) {
+              await logFeedEvent('archetype_changed', {
+                archetype: latest.archetypeAtCompletion,
+                from: latest.archetypeBeforeRun,
+              });
+            }
+          }
+        }
+
+        // Level up?
+        if (lastLevelRef.current !== null && currentLevel > lastLevelRef.current) {
+          await logFeedEvent('level_up', { level: currentLevel });
+        }
+
+        // Streak milestone (a cada 7 dias)?
+        if (state.streak > 0 && state.streak % 7 === 0) {
+          // Só loga uma vez por milestone — compara com ref
+          if (lastLevelRef.current !== null) {
+            // reusa currentCount check — só loga quando sobe snapshot (jogou hoje)
+            if (currentCount > (lastSnapshotCountRef.current ?? 0)) {
+              await logFeedEvent('streak_milestone', { streak: state.streak });
+            }
+          }
+        }
+      } catch {
+        // Supabase indisponível ou usuário deslogado — silencioso
+      } finally {
+        lastSnapshotCountRef.current = currentCount;
+        lastArchetypeRef.current = currentArch;
+        lastLevelRef.current = currentLevel;
+      }
+    })();
+  }, [state.calibration.snapshots, state.calibration.totalResponses, state.streak]);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),
