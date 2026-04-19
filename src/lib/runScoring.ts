@@ -143,6 +143,8 @@ export function normalizeGameState(raw: Partial<GameState>): GameState {
       lastDailyClaim: (raw as any).wallet?.lastDailyClaim ?? null,
       totalEarned: typeof (raw as any).wallet?.totalEarned === 'number' ? (raw as any).wallet.totalEarned : 20,
       totalSpent: typeof (raw as any).wallet?.totalSpent === 'number' ? (raw as any).wallet.totalSpent : 0,
+      runsPaidToday: typeof (raw as any).wallet?.runsPaidToday === 'number' ? (raw as any).wallet.runsPaidToday : 0,
+      runsPaidDate: (raw as any).wallet?.runsPaidDate ?? null,
     },
     activeDeck: null,
     activeRun: null,
