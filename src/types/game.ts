@@ -10,6 +10,20 @@ export type Aposta = 'Status' | 'Paz Emocional' | 'Dinheiro' | 'Tempo';
 export type Pilar = 'ego' | 'propriedade' | 'seguranca';
 export type Tone = 'pragmatico' | 'provocativo' | 'protetor' | 'evasivo' | 'neutro';
 export type DeckCategory = 'calibragem' | 'eixo' | 'cenario' | 'campanha';
+
+export type Rarity = 'comum' | 'raro' | 'epico' | 'lendario' | 'campanha';
+
+export const RARITY_ORDER: Rarity[] = ['comum', 'raro', 'epico', 'lendario', 'campanha'];
+
+/** Preco default em fichas por raridade. Pode ser sobrescrito por deck (campanha especial grátis, etc). */
+export const RARITY_DEFAULT_PRICE: Record<Rarity, number> = {
+  comum: 60,
+  raro: 150,
+  epico: 350,
+  lendario: 800,
+  campanha: 100,
+};
+
 export type ArchetypeCategory = 'puro' | 'cruzado' | 'especial';
 export type SceneProximidade = 'baixa' | 'media' | 'alta';
 export type SceneUrgencia = 'baixa' | 'media' | 'alta';
@@ -152,6 +166,14 @@ export interface Deck {
   startSceneId?: string;
   /** Campaign only: all possible endings the narrative graph can resolve to. */
   endings?: CampaignEnding[];
+  /** Raridade do deck no sistema de season. Afeta UI (cor/glow), preço e gating. */
+  rarity: Rarity;
+  /** ID da season a qual o deck pertence. Ex: 'season-0', 'season-1'. */
+  seasonId: string;
+  /** Preço em fichas para desbloquear avulso. `null` = gratuito (calibragem, promocionais). */
+  priceFichas: number | null;
+  /** Se true, só acessível via assinatura Plus (sem compra avulsa). Default: false. */
+  plusOnly?: boolean;
 }
 
 // ============================================================
@@ -247,11 +269,33 @@ export const INITIAL_WALLET: Wallet = {
 export const DAILY_FICHAS = 10;
 
 // Ficha economy — fonts/sinks.
-export const RUN_PISO_FICHAS = 2;          // every run pays this (subject to cap)
-export const RUN_PISO_CAP_PER_DAY = 5;     // max runs/day that pay the piso
-export const CAMPAIGN_ENDING_BONUS = 30;   // reaching an ending in a campaign
-export const FRIEND_ACCEPT_BONUS = 5;      // when a friend request you sent is accepted
-export const SKIP_COOLDOWN_COST = 10;      // to bypass the 24h campaign wait
+export const RUN_PISO_FICHAS = 3;             // era 2
+export const RUN_PISO_CAP_PER_DAY = 5;
+export const FIRST_RUN_OF_DAY_BONUS = 5;      // era +3 inline
+export const STREAK_7_BONUS = 20;             // valor explicito (era inline)
+export const DECK_FIRST_TIME_BONUS = 15;      // NOVO — primeira vez completando deck
+export const NO_TIMEOUT_RUN_BONUS = 5;        // mantido (era inline)
+export const CAMPAIGN_ENDING_BONUS = 40;      // era 30
+export const FRIEND_ACCEPT_BONUS = 5;
+export const SKIP_COOLDOWN_COST = 10;
+export const PLUS_DAILY_BONUS = 10;           // NOVO — claim diario Plus
+
+export interface PlusSubscription {
+  active: boolean;
+  /** ISO timestamp de quando começou (null se nunca teve). */
+  startedAt: string | null;
+  /** ISO timestamp da próxima renovação / expiração. null se active=false. */
+  expiresAt: string | null;
+  /** ISO yyyy-mm-dd do último claim diário do bônus Plus. null se nunca claimou. */
+  lastPlusDailyClaim: string | null;
+}
+
+export const INITIAL_PLUS_SUBSCRIPTION: PlusSubscription = {
+  active: false,
+  startedAt: null,
+  expiresAt: null,
+  lastPlusDailyClaim: null,
+};
 
 export interface GameState {
   calibration: CalibrationState;
@@ -266,6 +310,10 @@ export interface GameState {
   lastPlayDate: string | null;
   /** Persisted campaign progress — keyed by seasonId. */
   campaigns: Record<string, CampaignProgress>;
+  /** Decks desbloqueados via compra (SPEND_FICHAS ou bundle). Persistentes mesmo após cancelar Plus. */
+  ownedDeckIds: string[];
+  /** Estado da assinatura Plus do usuário. */
+  plusSubscription: PlusSubscription;
 }
 
 // ============================================================
