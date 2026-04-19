@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { enablePush, getPushSupport } from '@/lib/push';
 import { getSupabase } from '@/lib/supabase/client';
+import { useGame } from '@/context/GameContext';
 
 /**
  * Floating dev panel — só aparece em NODE_ENV !== 'production'.
@@ -13,6 +14,7 @@ export default function DevTools() {
   const [permission, setPermission] = useState<NotificationPermission | 'unsupported'>('default');
   const [busy, setBusy] = useState(false);
   const [lastMsg, setLastMsg] = useState<string | null>(null);
+  const { dispatch } = useGame();
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') return;
@@ -146,6 +148,39 @@ export default function DevTools() {
             <span className="mt-0.5 block text-[9px] font-normal text-fuchsia-100/55">
               Chama Edge Function send-push-test
             </span>
+          </button>
+
+          {/* --- Plus testing --- */}
+          <button
+            type="button"
+            onClick={() => {
+              const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+              dispatch({ type: 'SET_PLUS_STATUS', active: true, expiresAt: expires });
+              setLastMsg('Plus ATIVADO por 30 dias');
+            }}
+            className="w-full rounded-lg border border-amber-400/50 bg-amber-400/10 px-3 py-2 text-left text-[11px] font-semibold text-amber-200 transition hover:bg-amber-400/20"
+          >
+            4. Ativar Plus (30d)
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch({ type: 'SET_PLUS_STATUS', active: false, expiresAt: null });
+              setLastMsg('Plus DESATIVADO');
+            }}
+            className="w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-left text-[11px] text-white/70 transition hover:bg-white/10"
+          >
+            5. Desativar Plus
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch({ type: 'CLAIM_DAILY_PLUS_BONUS' });
+              setLastMsg('Bonus diario Plus claimado (+10 fichas, idempotente)');
+            }}
+            className="w-full rounded-lg border border-emerald-400/50 bg-emerald-400/10 px-3 py-2 text-left text-[11px] font-semibold text-emerald-200 transition hover:bg-emerald-400/20"
+          >
+            6. Claim diario Plus
           </button>
 
           {lastMsg && (
