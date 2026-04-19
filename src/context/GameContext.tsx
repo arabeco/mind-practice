@@ -475,12 +475,11 @@ function gameReducer(state: GameState, action: GameAction): GameState {
       return { ...initialState, unlockedDecks: getUnlockedDecks({}) };
 
     case 'HYDRATE':
+      // normalizeGameState ja aplica defaults pra ownedDeckIds/plusSubscription
+      // (migração silenciosa de saves antigos). Fonte única de coerção.
       return {
         ...normalizeGameState(action.state),
         unlockedDecks: getUnlockedDecks(action.state.completedDecks),
-        // migração silenciosa pra saves antigos que não tinham esses campos
-        ownedDeckIds: action.state.ownedDeckIds ?? [],
-        plusSubscription: action.state.plusSubscription ?? { ...INITIAL_PLUS_SUBSCRIPTION },
       };
 
     case 'CAMPAIGN_START': {
@@ -692,6 +691,7 @@ interface GameContextValue {
   state: GameState;
   dispatch: React.Dispatch<GameAction>;
   isDeckLocked: (deckId: string) => boolean;
+  isDeckPlayable: (deck: Deck) => boolean;
   getTimeUntilUnlock: (deckId: string) => number;
   getArchetype: () => Archetype;
   precision: number;
@@ -849,6 +849,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
     [state.unlockedDecks],
   );
 
+  const isDeckPlayableBound = useCallback(
+    (deck: Deck) => isDeckPlayable(deck, state),
+    [state],
+  );
+
   const getTimeUntilUnlock = useCallback(
     (deckId: string): number => {
       const idx = DECK_UNLOCK_ORDER.indexOf(deckId);
@@ -896,6 +901,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
         state,
         dispatch,
         isDeckLocked,
+        isDeckPlayable: isDeckPlayableBound,
         getTimeUntilUnlock,
         getArchetype,
         precision,
