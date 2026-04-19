@@ -21,6 +21,7 @@ type Axis = (typeof VALID_AXES)[number];
 
 const VALID_PROXIMIDADE = ["baixa", "media", "alta"];
 const VALID_URGENCIA = ["baixa", "media", "alta"];
+const VALID_RARITIES = ["comum", "raro", "epico", "lendario", "campanha"] as const;
 
 // ── Helpers ───────────────────────────────────────────────────────────
 function wordCount(text: string): number {
@@ -65,6 +66,21 @@ function validateDeck(filePath: string): ValidationResult {
     if (typeof deck.tier !== "number" || deck.tier < 1 || deck.tier > 5) {
       err(`tier must be a number between 1 and 5 (got ${deck.tier})`);
     }
+  }
+
+  // Rarity validation
+  if (!(VALID_RARITIES as readonly string[]).includes(deck.rarity)) {
+    err(`rarity obrigatorio e deve ser um de: ${VALID_RARITIES.join(', ')}`);
+  }
+
+  // SeasonId validation
+  if (typeof deck.seasonId !== "string" || !deck.seasonId.startsWith("season-")) {
+    err(`seasonId obrigatorio e deve começar com 'season-' (ex: 'season-0')`);
+  }
+
+  // PriceFichas validation
+  if (deck.priceFichas !== null && (typeof deck.priceFichas !== "number" || deck.priceFichas < 0)) {
+    err(`priceFichas deve ser null ou numero >= 0`);
   }
 
   // 2. Questions array
