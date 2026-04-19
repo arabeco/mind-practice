@@ -63,8 +63,8 @@ function validateDeck(filePath: string): ValidationResult {
     }
   }
   if (deck.tier !== undefined) {
-    if (typeof deck.tier !== "number" || deck.tier < 1 || deck.tier > 5) {
-      err(`tier must be a number between 1 and 5 (got ${deck.tier})`);
+    if (typeof deck.tier !== "number" || deck.tier < 1 || deck.tier > 6) {
+      err(`tier must be a number between 1 and 6 (got ${deck.tier})`);
     }
   }
 
