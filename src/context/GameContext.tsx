@@ -73,7 +73,8 @@ type GameAction =
       tensao: number;
     }
   | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number }
-  | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string };
+  | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string }
+  | { type: 'UNLOCK_DECK'; deckId: string; cost: number };
 
 // ---------------------------------------------------------------------------
 // Constants & Helpers
@@ -555,6 +556,22 @@ function gameReducer(state: GameState, action: GameAction): GameState {
           ...state.campaigns,
           [action.seasonId]: { ...progress, rating: action.rating },
         },
+      };
+    }
+
+    case 'UNLOCK_DECK': {
+      // Já possui — idempotente.
+      if (state.ownedDeckIds.includes(action.deckId)) return state;
+      // Sem saldo — rejeita silenciosamente. UI deve ter desabilitado o botão.
+      if (state.wallet.fichas < action.cost) return state;
+      return {
+        ...state,
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas - action.cost,
+          totalSpent: state.wallet.totalSpent + action.cost,
+        },
+        ownedDeckIds: [...state.ownedDeckIds, action.deckId],
       };
     }
 
