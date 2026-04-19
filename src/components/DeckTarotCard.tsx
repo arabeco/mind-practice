@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import type { Deck } from '@/types/game';
 import { TIER_CONFIG, type TierLevel } from '@/types/game';
 import { getDeckArt } from '@/lib/deckArt';
+import { getSeason } from '@/data/seasons';
+import { RarityBadge } from '@/components/decks/RarityBadge';
 
 interface DeckTarotCardProps {
   deck: Deck;
@@ -49,6 +51,8 @@ export default function DeckTarotCard({
   const rarity = getTierRarity(tierConfig.color, tier);
   const art = getDeckArt(deck);
   const isLegendary = tier >= 5;
+  const season = getSeason(deck.seasonId);
+  const Seal = season?.Seal;
 
   return (
     <motion.button
@@ -234,11 +238,21 @@ export default function DeckTarotCard({
           </div>
         )}
 
+        {/* Season seal — bottom-right corner, subtle */}
+        {Seal && (
+          <div className="pointer-events-none absolute bottom-2 right-2 z-10 opacity-70" title={season?.title}>
+            <Seal size={20} />
+          </div>
+        )}
+
         {/* Bottom: name + info */}
         <div className="absolute inset-x-0 bottom-0 z-10 bg-[linear-gradient(180deg,transparent,rgba(0,0,0,0.7)_40%)] px-3.5 pb-3.5 pt-12">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55">
-            {deck.questions.length} cenas
-          </p>
+          <div className="flex items-center gap-1.5">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55">
+              {deck.questions.length} cenas
+            </p>
+            <RarityBadge rarity={deck.rarity} showLabel={false} className="scale-90" />
+          </div>
           <p className="mt-0.5 text-base font-bold leading-tight text-white/90">
             {deck.name}
           </p>
