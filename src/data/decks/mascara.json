@@ -7,6 +7,9 @@
   "tier": 1,
   "difficulty": 2,
   "format": "quick",
+  "rarity": "comum",
+  "seasonId": "season-0",
+  "priceFichas": null,
   "questions": [
     {
       "id": "q1",

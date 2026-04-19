@@ -6,6 +6,9 @@
   "category": "cenario",
   "tier": 4,
   "difficulty": 5,
+  "rarity": "epico",
+  "seasonId": "season-0",
+  "priceFichas": 350,
   "questions": [
     {
       "id": "s2",

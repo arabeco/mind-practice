@@ -6,6 +6,9 @@
   "category": "campanha",
   "tier": 6,
   "difficulty": 5,
+  "rarity": "campanha",
+  "seasonId": "season-0",
+  "priceFichas": 100,
   "startSceneId": "la1",
   "endings": [
     {

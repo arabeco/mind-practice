@@ -7,6 +7,9 @@
   "focusAxis": "presenca",
   "tier": 3,
   "difficulty": 3,
+  "rarity": "epico",
+  "seasonId": "season-0",
+  "priceFichas": 350,
   "questions": [
     {
       "id": "h1",

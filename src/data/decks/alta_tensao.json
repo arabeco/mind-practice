@@ -6,6 +6,9 @@
   "category": "cenario",
   "tier": 2,
   "difficulty": 4,
+  "rarity": "raro",
+  "seasonId": "season-0",
+  "priceFichas": 150,
   "questions": [
     {
       "id": "at1",
