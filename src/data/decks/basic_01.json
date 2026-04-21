@@ -43,6 +43,16 @@
           "baseWeights": {
             "vigor": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "vigor": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -59,6 +69,16 @@
           "baseWeights": {
             "desapego": 2,
             "vigor": -1
+          },
+          "evidence": {
+            "desapego": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -76,6 +96,16 @@
           "baseWeights": {
             "filtro": 1,
             "vigor": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -113,6 +143,16 @@
           "baseWeights": {
             "vigor": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "vigor": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -132,6 +172,20 @@
             "desapego": 1,
             "vigor": -1,
             "filtro": -1
+          },
+          "evidence": {
+            "harmonia": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "desapego": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -149,6 +203,16 @@
           "baseWeights": {
             "filtro": 1,
             "presenca": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "presenca": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -185,6 +249,16 @@
           "baseWeights": {
             "vigor": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "vigor": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -201,6 +275,16 @@
           "baseWeights": {
             "desapego": 2,
             "vigor": -1
+          },
+          "evidence": {
+            "desapego": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -218,6 +302,16 @@
           "baseWeights": {
             "filtro": 1,
             "vigor": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -254,6 +348,16 @@
           "baseWeights": {
             "presenca": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "presenca": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -270,6 +374,16 @@
           "baseWeights": {
             "harmonia": 2,
             "presenca": -1
+          },
+          "evidence": {
+            "harmonia": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "presenca": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -287,6 +401,16 @@
           "baseWeights": {
             "filtro": 1,
             "presenca": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "presenca": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -324,6 +448,16 @@
           "baseWeights": {
             "presenca": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "presenca": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -340,6 +474,16 @@
           "baseWeights": {
             "harmonia": 2,
             "presenca": -1
+          },
+          "evidence": {
+            "harmonia": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "presenca": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -356,6 +500,16 @@
           "baseWeights": {
             "vigor": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "vigor": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -393,6 +547,16 @@
           "baseWeights": {
             "presenca": 2,
             "harmonia": -1
+          },
+          "evidence": {
+            "presenca": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "harmonia": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -409,6 +573,16 @@
           "baseWeights": {
             "desapego": 2,
             "presenca": -1
+          },
+          "evidence": {
+            "desapego": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "presenca": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -426,6 +600,16 @@
           "baseWeights": {
             "filtro": 1,
             "vigor": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.55,
+              "confidence": 0.6
+            },
+            "vigor": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
@@ -462,6 +646,16 @@
           "baseWeights": {
             "filtro": 2,
             "desapego": -1
+          },
+          "evidence": {
+            "filtro": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "desapego": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -478,6 +672,16 @@
           "baseWeights": {
             "desapego": 2,
             "filtro": -1
+          },
+          "evidence": {
+            "desapego": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "filtro": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         },
         {
@@ -494,6 +698,16 @@
           "baseWeights": {
             "presenca": 2,
             "desapego": -1
+          },
+          "evidence": {
+            "presenca": {
+              "min": 0.6,
+              "confidence": 0.75
+            },
+            "desapego": {
+              "max": 0.45,
+              "confidence": 0.6
+            }
           }
         }
       ]
