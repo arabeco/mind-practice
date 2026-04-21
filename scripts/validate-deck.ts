@@ -27,6 +27,8 @@ const VALID_INTENTS = [
   'contra_movimento', 'investigacao', 'provocacao', 'protecao',
 ] as const;
 
+const VALID_STATS = ["vigor", "harmonia", "filtro", "presenca", "desapego"] as const;
+
 // ── Helpers ───────────────────────────────────────────────────────────
 function wordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
@@ -172,8 +174,47 @@ function validateDeck(filePath: string): ValidationResult {
       if (hasBase && !hasIntent) {
         err(`${oLabel}: baseWeights presente mas intent ausente`);
       }
-      if (!hasIntent && !hasLegacy) {
-        err(`${oLabel}: Option precisa de (intent+baseWeights) ou weights (legacy)`);
+      // 4c. Evidence (bayesiano, Fase 3+)
+      const hasEvidence = opt.evidence && typeof opt.evidence === 'object';
+      if (hasEvidence) {
+        const axes = Object.keys(opt.evidence);
+        if (axes.length < 1 || axes.length > 3) {
+          err(`${oLabel}: evidence deve declarar entre 1 e 3 eixos (tem ${axes.length})`);
+        }
+        let hasMin = false;
+        let hasMax = false;
+        for (const [axis, ax] of Object.entries(opt.evidence as Record<string, any>)) {
+          if (!(VALID_STATS as readonly string[]).includes(axis)) {
+            err(`${oLabel}: evidence.${axis} — eixo invalido`);
+            continue;
+          }
+          if (typeof ax.confidence !== 'number' || ax.confidence < 0.5 || ax.confidence > 0.99) {
+            err(`${oLabel}: evidence.${axis}.confidence deve estar em [0.5, 0.99] (got ${ax.confidence})`);
+          }
+          const hasMinField = typeof ax.min === 'number';
+          const hasMaxField = typeof ax.max === 'number';
+          if (!hasMinField && !hasMaxField) {
+            err(`${oLabel}: evidence.${axis} precisa de min ou max`);
+          }
+          if (hasMinField && (ax.min < 0 || ax.min > 1)) {
+            err(`${oLabel}: evidence.${axis}.min deve estar em [0,1] (got ${ax.min})`);
+          }
+          if (hasMaxField && (ax.max < 0 || ax.max > 1)) {
+            err(`${oLabel}: evidence.${axis}.max deve estar em [0,1] (got ${ax.max})`);
+          }
+          if (hasMinField && hasMaxField && ax.min > ax.max) {
+            err(`${oLabel}: evidence.${axis}: min (${ax.min}) > max (${ax.max})`);
+          }
+          if (hasMinField) hasMin = true;
+          if (hasMaxField) hasMax = true;
+        }
+        if (axes.length >= 2 && !(hasMin && hasMax)) {
+          warn(`${oLabel}: evidence sem trade-off (só min ou só max em todos os eixos)`);
+        }
+      }
+
+      if (!hasIntent && !hasLegacy && !hasEvidence) {
+        err(`${oLabel}: Option precisa de evidence, (intent+baseWeights), ou weights (legacy)`);
       }
 
       // Checa forma dos weights que existirem (base e/ou legacy)
@@ -227,6 +268,26 @@ function validateDeck(filePath: string): ValidationResult {
     for (const [axis, count] of Object.entries(axisAppearances)) {
       if (count < minPerAxis) {
         warn(`Calibragem: axis "${axis}" is dominant in ${count}/${totalOptions} options (need ${minPerAxis} for 20%)`);
+      }
+    }
+  }
+
+  // Training deck: 60% das options precisam declarar evidência no trainingTarget
+  if (deck.isTraining === true) {
+    if (!deck.trainingTarget || !(VALID_STATS as readonly string[]).includes(deck.trainingTarget)) {
+      err(`isTraining=true requer trainingTarget valido (vigor|harmonia|filtro|presenca|desapego)`);
+    } else {
+      let totalOptions = 0;
+      let targeted = 0;
+      for (const q of questions) {
+        for (const opt of q.options ?? []) {
+          totalOptions += 1;
+          if (opt.evidence && (opt.evidence as any)[deck.trainingTarget]) targeted += 1;
+        }
+      }
+      const ratio = totalOptions > 0 ? targeted / totalOptions : 0;
+      if (ratio < 0.6) {
+        err(`Training deck deve ter >=60% options com evidence em "${deck.trainingTarget}" (got ${(ratio * 100).toFixed(0)}%)`);
       }
     }
   }
