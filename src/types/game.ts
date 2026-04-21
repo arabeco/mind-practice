@@ -1,5 +1,13 @@
 import type { OptionIntent } from '@/lib/narrativeEngine/intents';
 
+// Re-exports do motor bayesiano (fonte única da verdade para AxisBelief etc.)
+export type {
+  AxisBelief,
+  PlayerBeliefs,
+  AxisEvidence,
+  OptionEvidence,
+} from '@/lib/bayesEngine/types';
+
 // ============================================================
 // Core types
 // ============================================================
@@ -86,14 +94,22 @@ export interface Option {
    */
   weights?: Partial<Record<StatKey, number>>;
 
-  /** Intenção declarada do jogador ao escolher (Fase 2+). */
+  /** @deprecated Substituído por `evidence` (Fase 3). Mantido durante migração. */
   intent?: OptionIntent;
 
   /**
+   * @deprecated Substituído por `evidence` (Fase 3). Mantido durante migração.
    * Pesos base — "intenção pura", sem contexto. ±1 a ±2 por eixo.
    * Modifiers de `CONTEXT_MODIFIERS[intent]` somam em cima.
    */
   baseWeights?: Partial<Record<StatKey, number>>;
+
+  /**
+   * Evidência bayesiana declarada nesta opção (Fase 3+).
+   * Quem escolhe esta opção é evidência sobre θ em cada eixo declarado.
+   * Substitui `baseWeights`. Durante migração, ambos coexistem.
+   */
+  evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
 
   feedback: string;
   /**
@@ -191,6 +207,18 @@ export interface Deck {
   priceFichas: number | null;
   /** Se true, só acessível via assinatura Plus (sem compra avulsa). Default: false. */
   plusOnly?: boolean;
+
+  /** Se true, runs deste deck NÃO persistem no perfil bayesiano. */
+  isTraining?: boolean;
+  /** Eixo-foco do deck de treino (validado: ≥60% das options devem declarar evidência nesse eixo). */
+  trainingTarget?: StatKey;
+
+  /**
+   * Gênero sugerido do protagonista nas cenas deste deck.
+   * Usado pra filtrar decks com situações gendered (ex: flerte) pra usuários
+   * com identidade compatível. Omitido → deck aparece pra todo mundo.
+   */
+  protagonistGender?: 'M' | 'F';
 }
 
 // ============================================================
@@ -213,6 +241,8 @@ export interface Archetype {
 
 export interface CalibrationState {
   axes: Record<StatKey, number>;
+  /** Distribuições bayesianas por eixo (Fase 3+). */
+  beliefs?: import('@/lib/bayesEngine/types').PlayerBeliefs;
   totalResponses: number;
   recentWeights: Record<StatKey, number[]>;
   toneHistory: Tone[];
