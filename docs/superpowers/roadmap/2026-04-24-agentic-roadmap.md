@@ -11,7 +11,7 @@
 
 | Fase | Nome | Nível | Duração | SQL? |
 |------|------|-------|---------|------|
-| **F3** | Persistência indestrutível | 5→6 | 3-5 dias | ❌ |
+| **F3** | Persistência indestrutível ✅ | 5→6 | 3-5 dias | ❌ |
 | **F4** | Motor bayesiano em produção | 6 | 5-7 dias | ❌ |
 | **F5** | Design System + telas rituais | 6 | 5-7 dias | ❌ |
 | **F6** | Social real-time + leaderboard | 6→7 | 7-10 dias | 🗄️ sim |
@@ -360,5 +360,17 @@ R$ 10k MRR. Depois R$ 50k. Depois você decide.
 
 ## ✅ PRÓXIMA AÇÃO IMEDIATA
 
-Fale **"rodar Fase 3"** que eu começo brainstorm + spec de Persistência Indestrutível agora.
+Fale **"rodar Fase 4"** que eu começo a execução agêntica de Motor Bayesiano (plan já pronto).
 Se quiser alterar qualquer fase, me fala antes — esse doc é vivo.
+
+---
+
+## 📌 STATUS
+
+- **Fase 3 (Persistência Indestrutível):** ✅ **FECHADA em 2026-04-24**
+  - 15 tasks executadas, 58 testes verdes, `tsc --noEmit` 0 erros, build 10 rotas OK.
+  - `GameContext.tsx`: 324 → **142 LOC** (abaixo do target 150).
+  - Novos módulos: `src/lib/gameState/{schema,defaults,migrations,normalize,persistence,sync}.ts`, `src/context/{gameReducer,useSocialFeed,useGameStatePersistence}.ts`, `src/components/SyncConflictModal.tsx`.
+  - Schema Zod v3 com migrations v1→v2→v3; conflict matrix de 8 casos; debounce 500ms local + 2000ms cloud.
+  - Commit final SHA: `af95ff6`.
+  - **Nível 6 batido.**
