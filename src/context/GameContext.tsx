@@ -18,6 +18,7 @@ import {
   type Archetype,
   type Wallet,
   type AnswerIntensity,
+  type Option,
   type PlusSubscription,
   STAT_KEYS,
   INITIAL_CALIBRATION,
@@ -38,6 +39,7 @@ import {
   PLUS_DAILY_BONUS,
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
+import { resolveWeights, timeFactor } from '@/lib/narrativeEngine';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
 import {
   appendRunAnswer,
@@ -52,7 +54,7 @@ import {
 
 type GameAction =
   | { type: 'START_DECK'; deck: Deck }
-  | { type: 'ANSWER'; weights: Partial<Record<StatKey, number>>; tone: Tone; responseTimeMs?: number; intensity?: AnswerIntensity }
+  | { type: 'ANSWER'; option: Option; responseTimeMs?: number; intensity?: AnswerIntensity }
   | { type: 'TIMEOUT' }
   | { type: 'NEXT_QUESTION' }
   | { type: 'FINISH_DECK' }
@@ -86,26 +88,12 @@ const STORAGE_KEY = 'mindpractice_state';
 const UNLOCK_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
 /**
- * Light time-based tempero (tempero, not main seasoning).
- * Reading speed varies — we don't punish/reward much for it.
- *   <2000ms     → 1.05x (instintivo)
- *   2000–9000ms → 1.00x (normal)
- *   >9000ms     → 0.95x (bem lento)
- *   undefined   → 1.00x
- */
-function timeTempero(responseTimeMs?: number): number {
-  if (responseTimeMs === undefined) return 1.0;
-  if (responseTimeMs < 2000) return 1.05;
-  if (responseTimeMs > 9000) return 0.95;
-  return 1.0;
-}
-
-/**
  * Apply dampened weights to calibration axes.
- * Formula: axis += weight * tensionMult * intensityMult * timeTempero / min(totalResponses + 1, CALIBRATION_WINDOW)
+ * Formula: axis += weight * tensionMult * intensityMult * timeFactor / min(totalResponses + 1, CALIBRATION_WINDOW)
  *
  * Intensity is the PRIMARY conviction signal — player declares it after choosing.
- * Time is a light tempero only, since reading speed varies.
+ * Time is a real penalty curve (`timeFactor`) — hesitation over 6s
+ * progressively drops the weight toward 0.3 at the 12s timeout.
  */
 function applyDampenedWeights(
   cal: CalibrationState,
@@ -119,7 +107,7 @@ function applyDampenedWeights(
   const tensionMultiplier = 0.5 + (tensao * 0.5);
   // tensao 1 → 1.0x, tensao 2 → 1.5x, tensao 3 → 2.0x, tensao 4 → 2.5x, tensao 5 → 3.0x
   const intensityMult = intensity ? INTENSITY_MULTIPLIERS[intensity] : 1.0;
-  const timeMult = timeTempero(responseTimeMs);
+  const timeMult = timeFactor(responseTimeMs);
   const newAxes = { ...cal.axes };
   const newRecent = { ...cal.recentWeights };
 
@@ -314,15 +302,30 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'ANSWER': {
       const question = state.activeDeck?.questions[state.currentQuestion];
-      const tensao = question?.metadata?.tensao ?? 2;
+      if (!question) return state;
+
+      const resolved = resolveWeights(action.option, question.metadata, action.responseTimeMs);
+      const tensao = question.metadata.tensao;
 
       return {
         ...state,
-        calibration: applyDampenedWeights(state.calibration, action.weights, action.tone, tensao, action.responseTimeMs, action.intensity),
-        activeRun:
-          state.activeRun && question
-            ? appendRunAnswer(state.activeRun, question.id, action.tone, action.weights, action.responseTimeMs)
-            : state.activeRun,
+        calibration: applyDampenedWeights(
+          state.calibration,
+          resolved.finalWeights,
+          action.option.tone,
+          tensao,
+          action.responseTimeMs,
+          action.intensity,
+        ),
+        activeRun: state.activeRun
+          ? appendRunAnswer(
+              state.activeRun,
+              question.id,
+              action.option.tone,
+              resolved.finalWeights,
+              action.responseTimeMs,
+            )
+          : state.activeRun,
       };
     }
 

@@ -56,7 +56,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
   const isLast = questionIdx >= totalQuestions - 1;
 
   const handleResolvedAnswer = useCallback((option: Option, responseTimeMs: number) => {
-    dispatch({ type: 'ANSWER', weights: option.weights ?? {}, tone: option.tone, responseTimeMs });
+    dispatch({ type: 'ANSWER', option, responseTimeMs });
     playUiCue('hold-confirm');
     vibrate(18);
   }, [dispatch, playUiCue, vibrate]);
@@ -149,7 +149,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
   // Quick calibration format — bypass the 3-phase ritual and timer.
   if (deck.format === 'quick') {
     const handleQuickAnswer = (option: Option, responseTimeMs: number, intensity: AnswerIntensity) => {
-      dispatch({ type: 'ANSWER', weights: option.weights ?? {}, tone: option.tone, responseTimeMs, intensity });
+      dispatch({ type: 'ANSWER', option, responseTimeMs, intensity });
       const hapticKey = intensity === 'alta' ? HAPTIC_GRAMMAR.confirm
         : intensity === 'baixa' ? HAPTIC_GRAMMAR.qualify
         : HAPTIC_GRAMMAR.tap;
