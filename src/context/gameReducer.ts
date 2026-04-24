@@ -138,6 +138,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
               question.id,
               action.option.tone,
               resolved.finalWeights,
+              action.option.evidence,
               action.responseTimeMs,
             )
           : state.activeRun,

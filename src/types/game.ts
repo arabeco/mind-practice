@@ -252,7 +252,10 @@ export interface CalibrationState {
 export interface RunAnswerEvent {
   questionId: string;
   tone: Tone | null;
+  /** @deprecated — use `evidence`. Mantido pra snapshots legados. */
   weights: Partial<Record<StatKey, number>>;
+  /** Evidência bayesiana aplicada nesta resposta (Fase 3+). */
+  evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
   dominantAxis: StatKey | null;
   responseTimeMs?: number;
   timedOut: boolean;

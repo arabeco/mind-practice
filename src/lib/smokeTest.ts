@@ -125,7 +125,7 @@ function testRunScoring(): TestResult {
     // Simulate answering first question
     const q = deck.questions[0];
     const opt = q.options[0];
-    const updated = appendRunAnswer(session, q.id, opt.tone, opt.weights ?? {}, 3000);
+    const updated = appendRunAnswer(session, q.id, opt.tone, opt.weights ?? {}, opt.evidence, 3000);
     assert(updated.answers.length === 1, 'should have 1 answer after append');
 
     // Create snapshot

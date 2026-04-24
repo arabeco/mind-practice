@@ -1,6 +1,7 @@
 import { getDeckById } from '@/data/decks';
 import {
   EMPTY_STAT_RECORD,
+  INITIAL_PLUS_SUBSCRIPTION,
   STAT_KEYS,
   type Deck,
   type DeckSnapshot,
@@ -58,12 +59,14 @@ export function appendRunAnswer(
   questionId: string,
   tone: Tone,
   weights: Partial<Record<StatKey, number>>,
+  evidence: import('@/lib/bayesEngine/types').OptionEvidence | undefined,
   responseTimeMs?: number,
 ): RunSession {
   const event: RunAnswerEvent = {
     questionId,
     tone,
     weights,
+    evidence,
     dominantAxis: getDominantAxisFromWeights(weights),
     timedOut: false,
     responseTimeMs,
@@ -117,9 +120,47 @@ export function createDeckSnapshot({
   };
 }
 
-// Re-export do boundary unico de persistencia. Mantido aqui por compat com
-// callers externos (ex: smokeTest.ts) que importam deste caminho.
-export { normalizeGameState } from '@/lib/gameState/normalize';
+export function normalizeGameState(raw: Partial<GameState>): GameState {
+  const calibration: Partial<GameState['calibration']> = raw.calibration ?? {};
+  const completedDecks = raw.completedDecks ?? {};
+
+  return {
+    calibration: {
+      axes: { ...EMPTY_STAT_RECORD, ...(calibration.axes ?? {}) },
+      totalResponses: calibration.totalResponses ?? 0,
+      recentWeights: {
+        vigor: calibration.recentWeights?.vigor ?? [],
+        harmonia: calibration.recentWeights?.harmonia ?? [],
+        filtro: calibration.recentWeights?.filtro ?? [],
+        presenca: calibration.recentWeights?.presenca ?? [],
+        desapego: calibration.recentWeights?.desapego ?? [],
+      },
+      toneHistory: Array.isArray(calibration.toneHistory) ? calibration.toneHistory : [],
+      snapshots: Array.isArray(calibration.snapshots)
+        ? calibration.snapshots.map(normalizeDeckSnapshot)
+        : [],
+    },
+    wallet: {
+      fichas: typeof (raw as any).wallet?.fichas === 'number' ? (raw as any).wallet.fichas : 20,
+      lastDailyClaim: (raw as any).wallet?.lastDailyClaim ?? null,
+      totalEarned: typeof (raw as any).wallet?.totalEarned === 'number' ? (raw as any).wallet.totalEarned : 20,
+      totalSpent: typeof (raw as any).wallet?.totalSpent === 'number' ? (raw as any).wallet.totalSpent : 0,
+      runsPaidToday: typeof (raw as any).wallet?.runsPaidToday === 'number' ? (raw as any).wallet.runsPaidToday : 0,
+      runsPaidDate: (raw as any).wallet?.runsPaidDate ?? null,
+    },
+    activeDeck: null,
+    activeRun: null,
+    currentQuestion: typeof raw.currentQuestion === 'number' ? raw.currentQuestion : 0,
+    unlockedDecks: Array.isArray(raw.unlockedDecks) ? raw.unlockedDecks : [],
+    completedDecks,
+    lastTrainingDate: raw.lastTrainingDate ?? null,
+    streak: raw.streak ?? 0,
+    lastPlayDate: raw.lastPlayDate ?? null,
+    campaigns: (raw as any).campaigns ?? {},
+    ownedDeckIds: Array.isArray((raw as any).ownedDeckIds) ? (raw as any).ownedDeckIds : [],
+    plusSubscription: (raw as any).plusSubscription ?? { ...INITIAL_PLUS_SUBSCRIPTION },
+  };
+}
 
 export function normalizeDeckSnapshot(raw: Partial<DeckSnapshot>): DeckSnapshot {
   const runScore = typeof raw.runScore === 'number' ? raw.runScore : null;
