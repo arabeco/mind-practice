@@ -292,13 +292,21 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'RESET_ALL':
       return { ...initialState, unlockedDecks: getUnlockedDecks({}) };
 
-    case 'HYDRATE':
+    case 'HYDRATE': {
       // normalizeGameState ja aplica defaults pra ownedDeckIds/plusSubscription
-      // (migração silenciosa de saves antigos). Fonte única de coerção.
+      // (migracao silenciosa de saves antigos). Fonte unica de coercao.
+      // PersistedGameState omite activeDeck/activeRun (transientes) — recompoe.
+      const normalized = normalizeGameState(action.state) as unknown as Omit<
+        GameState,
+        'activeDeck' | 'activeRun'
+      >;
       return {
-        ...normalizeGameState(action.state),
+        ...normalized,
+        activeDeck: null,
+        activeRun: null,
         unlockedDecks: getUnlockedDecks(action.state.completedDecks),
       };
+    }
 
     case 'CAMPAIGN_START': {
       if (state.campaigns[action.seasonId]) return state; // idempotent
