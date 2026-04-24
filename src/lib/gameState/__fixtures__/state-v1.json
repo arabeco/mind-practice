@@ -1,0 +1,20 @@
+{
+  "userStats": {
+    "vigor": 1.8,
+    "harmonia": 0.4,
+    "filtro": -0.3,
+    "presenca": 1.2,
+    "desapego": 0.1
+  },
+  "completedDecks": {
+    "basic_01": "2026-01-05T10:00:00.000Z",
+    "alta_tensao": "2026-01-08T18:30:00.000Z"
+  },
+  "lastTrainingDate": "2026-01-08",
+  "wallet": {
+    "fichas": 85,
+    "lastDailyClaim": "2026-01-08",
+    "totalEarned": 120,
+    "totalSpent": 35
+  }
+}

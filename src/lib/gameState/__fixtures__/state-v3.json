@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 3,
+  "updatedAt": "2026-04-24T12:00:00.000Z",
+  "devicePersistedAt": "2026-04-24T11:59:58.000Z",
+  "calibration": {
+    "axes": {
+      "vigor": 2.1,
+      "harmonia": 0.6,
+      "filtro": -0.2,
+      "presenca": 1.4,
+      "desapego": 0.3
+    },
+    "totalResponses": 42,
+    "recentWeights": {
+      "vigor": [3, 2, 1],
+      "harmonia": [0, -1, 0],
+      "filtro": [0, 0, 0],
+      "presenca": [1, 2, 1],
+      "desapego": [0, 0, 0]
+    },
+    "toneHistory": ["pragmatico", "provocativo", "neutro"],
+    "snapshots": []
+  },
+  "wallet": {
+    "fichas": 150,
+    "lastDailyClaim": "2026-04-24",
+    "totalEarned": 220,
+    "totalSpent": 70,
+    "runsPaidToday": 2,
+    "runsPaidDate": "2026-04-24"
+  },
+  "currentQuestion": 0,
+  "unlockedDecks": ["basic_01", "alta_tensao", "profissional"],
+  "completedDecks": {
+    "basic_01": "2026-01-05T10:00:00.000Z",
+    "alta_tensao": "2026-01-08T18:30:00.000Z"
+  },
+  "lastTrainingDate": "2026-04-24",
+  "streak": 3,
+  "lastPlayDate": "2026-04-24",
+  "campaigns": {},
+  "ownedDeckIds": [],
+  "plusSubscription": {
+    "active": false,
+    "startedAt": null,
+    "expiresAt": null,
+    "lastPlusDailyClaim": null
+  }
+}
