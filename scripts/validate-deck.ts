@@ -22,6 +22,10 @@ type Axis = (typeof VALID_AXES)[number];
 const VALID_PROXIMIDADE = ["baixa", "media", "alta"];
 const VALID_URGENCIA = ["baixa", "media", "alta"];
 const VALID_RARITIES = ["comum", "raro", "epico", "lendario", "campanha"] as const;
+const VALID_INTENTS = [
+  'confronto_publico', 'confronto_privado', 'retirada', 'adesao',
+  'contra_movimento', 'investigacao', 'provocacao', 'protecao',
+] as const;
 
 // ── Helpers ───────────────────────────────────────────────────────────
 function wordCount(text: string): number {
@@ -154,25 +158,48 @@ function validateDeck(filePath: string): ValidationResult {
         err(`${oLabel}: feedback has ${feedbackWc} words (max 15)`);
       }
 
-      // 4b. Weights: at least one positive AND one negative
-      const weights: Record<string, number> = opt.weights ?? {};
-      const vals = Object.values(weights) as number[];
-      const hasPositive = vals.some((v) => v > 0);
-      const hasNegative = vals.some((v) => v < 0);
-      if (!hasPositive || !hasNegative) {
-        err(`${oLabel}: weights must have at least one positive AND one negative value`);
+      // 4b. Option precisa ter peso — novo (intent+baseWeights) ou legacy (weights)
+      const hasIntent = typeof opt.intent === 'string';
+      const hasBase = opt.baseWeights && typeof opt.baseWeights === 'object';
+      const hasLegacy = opt.weights && typeof opt.weights === 'object';
+
+      if (hasIntent && !(VALID_INTENTS as readonly string[]).includes(opt.intent)) {
+        err(`${oLabel}: intent "${opt.intent}" nao esta em VALID_INTENTS`);
+      }
+      if (hasIntent && !hasBase) {
+        err(`${oLabel}: intent presente mas baseWeights ausente`);
+      }
+      if (hasBase && !hasIntent) {
+        err(`${oLabel}: baseWeights presente mas intent ausente`);
+      }
+      if (!hasIntent && !hasLegacy) {
+        err(`${oLabel}: Option precisa de (intent+baseWeights) ou weights (legacy)`);
       }
 
-      // 7. Weight sum warning
-      const sum = vals.reduce((a, b) => a + b, 0);
-      if (Math.abs(sum) > 3) {
-        warn(`${oLabel}: weight sum is ${sum} (abs > 3)`);
-      }
+      // Checa forma dos weights que existirem (base e/ou legacy)
+      const checkShape = (label: string, w: Record<string, number>) => {
+        const vals = Object.values(w);
+        const hasPos = vals.some((v) => v > 0);
+        const hasNeg = vals.some((v) => v < 0);
+        if (!hasPos || !hasNeg) {
+          err(`${oLabel}: ${label} precisa de pelo menos um valor positivo E um negativo`);
+        }
+        const sum = vals.reduce((a, b) => a + b, 0);
+        if (Math.abs(sum) > 3) {
+          warn(`${oLabel}: ${label} sum ${sum} (abs > 3)`);
+        }
+      };
+
+      if (hasLegacy) checkShape('weights', opt.weights);
+      if (hasBase) checkShape('baseWeights', opt.baseWeights);
+
+      // Usa baseWeights se houver, senão weights, pro tracking de dominant axis
+      const effective: Record<string, number> = hasBase ? opt.baseWeights : (opt.weights ?? {});
 
       // Track dominant axis (highest absolute weight)
       let maxAbs = 0;
       let dominant = "";
-      for (const [axis, val] of Object.entries(weights)) {
+      for (const [axis, val] of Object.entries(effective)) {
         if (Math.abs(val as number) > maxAbs) {
           maxAbs = Math.abs(val as number);
           dominant = axis;
@@ -181,7 +208,7 @@ function validateDeck(filePath: string): ValidationResult {
       if (dominant) dominantAxes.add(dominant);
 
       // Track axis appearances across all options
-      for (const axis of Object.keys(weights)) {
+      for (const axis of Object.keys(effective)) {
         axisAppearances[axis] = (axisAppearances[axis] || 0) + 1;
       }
     });
