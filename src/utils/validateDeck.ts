@@ -79,7 +79,7 @@ export function validateDeck(deck: Deck): string[] {
     }
 
     for (const opt of q.options) {
-      const weights = Object.values(opt.weights);
+      const weights = Object.values(opt.weights ?? {});
       if (weights.length === 0) {
         errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." has no weights`);
       }

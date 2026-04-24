@@ -144,7 +144,7 @@ export default function QuickScene({
       {/* Options */}
       <div className="flex flex-col gap-2">
         {shuffled.map((option, i) => {
-          const dominantAxis = getDominantAxis(option.weights);
+          const dominantAxis = getDominantAxis(option.weights ?? {});
           const holdColor = STAT_COLORS[dominantAxis];
           const isFocused = picking === i;
           const isHidden = picking !== null && picking !== i;

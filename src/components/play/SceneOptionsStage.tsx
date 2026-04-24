@@ -122,7 +122,7 @@ export default function SceneOptionsStage({
 
         <div className={`grid gap-1.5 ${shuffledOptions.length >= 4 ? 'sm:grid-cols-2' : ''}`}>
           {shuffledOptions.map((option, index) => {
-            const dominantAxis = getDominantAxis(option.weights);
+            const dominantAxis = getDominantAxis(option.weights ?? {});
             const holdColor = STAT_COLORS[dominantAxis];
 
             return (

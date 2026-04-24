@@ -125,7 +125,7 @@ function testRunScoring(): TestResult {
     // Simulate answering first question
     const q = deck.questions[0];
     const opt = q.options[0];
-    const updated = appendRunAnswer(session, q.id, opt.tone, opt.weights, 3000);
+    const updated = appendRunAnswer(session, q.id, opt.tone, opt.weights ?? {}, 3000);
     assert(updated.answers.length === 1, 'should have 1 answer after append');
 
     // Create snapshot
@@ -184,7 +184,7 @@ function testOptionWeightsAreValid(): TestResult {
       for (const q of d.questions) {
         for (let i = 0; i < q.options.length; i++) {
           const o = q.options[i];
-          const keys = Object.keys(o.weights);
+          const keys = Object.keys(o.weights ?? {});
           for (const k of keys) {
             if (!STAT_KEYS.includes(k as StatKey)) {
               issues.push(`${d.deckId}/${q.id} opt${i}: invalid stat key "${k}"`);

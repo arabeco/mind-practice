@@ -1,3 +1,5 @@
+import type { OptionIntent } from '@/lib/narrativeEngine/intents';
+
 // ============================================================
 // Core types
 // ============================================================
@@ -77,7 +79,22 @@ export interface Option {
   text: string;
   subtext: string;
   tone: Tone;
-  weights: Partial<Record<StatKey, number>>;
+
+  /**
+   * @deprecated Preferir `intent + baseWeights` (Fase 2).
+   * Mantido como fallback até todo deck ser retaggeado e validado.
+   */
+  weights?: Partial<Record<StatKey, number>>;
+
+  /** Intenção declarada do jogador ao escolher (Fase 2+). */
+  intent?: OptionIntent;
+
+  /**
+   * Pesos base — "intenção pura", sem contexto. ±1 a ±2 por eixo.
+   * Modifiers de `CONTEXT_MODIFIERS[intent]` somam em cima.
+   */
+  baseWeights?: Partial<Record<StatKey, number>>;
+
   feedback: string;
   /**
    * Post-decision narrative beat. Usado principalmente em campanha,

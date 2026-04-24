@@ -87,7 +87,7 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
         optionIndex,
         nextSceneId: option.nextSceneId ?? null,
         endingId: option.endingId ?? null,
-        weights: option.weights,
+        weights: option.weights ?? {},
         tone: option.tone,
         tensao,
       });
@@ -762,7 +762,7 @@ function SceneView({
                 {scene.options.map((opt, i) => {
                   const isSelected = selectedIdx === i;
                   const isHidden = selectedIdx != null && !isSelected;
-                  const holdColor = STAT_COLORS[getDominantAxis(opt.weights)];
+                  const holdColor = STAT_COLORS[getDominantAxis(opt.weights ?? {})];
                   return (
                     <motion.div
                       key={i}
