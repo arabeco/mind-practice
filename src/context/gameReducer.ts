@@ -125,20 +125,25 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       const resolved = resolveWeights(action.option, question.metadata, action.responseTimeMs);
       const tensao = question.metadata.tensao;
+      const isTraining = state.activeDeck?.isTraining === true;
 
-      const baseCalibration = applyDampenedWeights(
-        state.calibration,
-        resolved.finalWeights,
-        action.option.tone,
-        tensao,
-        action.responseTimeMs,
-        action.intensity,
-      );
+      // Training decks: snapshot da run + activeRun avançam, mas perfil
+      // (axes/beliefs/recentWeights/totalResponses) fica intocado.
+      const baseCalibration = isTraining
+        ? state.calibration
+        : applyDampenedWeights(
+            state.calibration,
+            resolved.finalWeights,
+            action.option.tone,
+            tensao,
+            action.responseTimeMs,
+            action.intensity,
+          );
 
       // Bayesian beliefs run in parallel to the legacy axes so both motors stay in sync
-      // until Task 21 deletes the legacy pipeline.
+      // until Task 21 deletes the legacy pipeline. Training decks pulam o update.
       const evidence = action.option.evidence;
-      const nextBeliefs = evidence
+      const nextBeliefs = (!isTraining && evidence)
         ? updateProfile(
             baseCalibration.beliefs ?? createPriorProfile(),
             evidence,
