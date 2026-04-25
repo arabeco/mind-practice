@@ -1,4 +1,5 @@
 import type { OptionIntent } from '@/lib/narrativeEngine/intents';
+import { createPriorProfile } from '@/lib/bayesEngine';
 
 // Re-exports do motor bayesiano (fonte única da verdade para AxisBelief etc.)
 export type {
@@ -474,6 +475,7 @@ export const HOLD_DURATION_MS = 500;
 
 export const INITIAL_CALIBRATION: CalibrationState = {
   axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
+  beliefs: createPriorProfile(),
   totalResponses: 0,
   recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
   toneHistory: [],

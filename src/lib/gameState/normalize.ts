@@ -1,6 +1,7 @@
 import { GameStateSchema, VersionTooNewError, type PersistedGameState } from './schema';
 import { runMigrations } from './migrations';
 import { INITIAL_STATE } from './defaults';
+import { createPriorProfile } from '@/lib/bayesEngine';
 
 const CORRUPTED_KEY = 'mindpractice_state_corrupted';
 
@@ -50,6 +51,9 @@ export function normalizeGameState(raw: unknown): PersistedGameState {
     console.error('[gameState] schema parse failed', parsed.error.errors);
     snapshotCorrupted(raw);
     return buildInitial();
+  }
+  if (!parsed.data.calibration.beliefs) {
+    parsed.data.calibration.beliefs = createPriorProfile();
   }
   return parsed.data;
 }

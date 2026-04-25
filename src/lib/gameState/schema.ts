@@ -48,6 +48,7 @@ const StatArrayRecordSchema = z.object({
 
 const CalibrationSchema = z.object({
   axes: StatRecordSchema,
+  beliefs: z.any().optional(),
   totalResponses: z.number().int().min(0).default(0),
   recentWeights: StatArrayRecordSchema,
   toneHistory: z.array(z.string()).default([]),

@@ -1,5 +1,9 @@
-import { STAT_KEYS, type StatKey } from '@/types/game';
+import type { StatKey } from '@/types/game';
 import { BIN_COUNT, type AxisBelief, type PlayerBeliefs } from './types';
+
+// Inlined to break circular import (types/game.ts ↔ bayesEngine/belief.ts at module init,
+// since INITIAL_CALIBRATION calls createPriorProfile()).
+const STAT_KEYS: StatKey[] = ['vigor', 'harmonia', 'filtro', 'presenca', 'desapego'];
 
 /** Crença inicial: uniforme, 0 observações, timestamp agora. */
 export function createUniformBelief(now: Date = new Date()): AxisBelief {
