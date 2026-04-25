@@ -16,6 +16,7 @@ import { useToast } from '@/components/Toast';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
 import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
+import { archetypeDisplayState, globalConfidence, createPriorProfile } from '@/lib/bayesEngine';
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const fadeUp = {
@@ -32,6 +33,13 @@ export default function PerfilPage() {
   const toast = useToast();
   const archetype = getArchetype();
   const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
+  const beliefsProfile = state.calibration.beliefs ?? createPriorProfile();
+  const archetypeDisplay = archetypeDisplayState(beliefsProfile);
+  const globalConf = globalConfidence(beliefsProfile);
+  const confidenceLabel =
+    globalConf >= 0.6 ? 'Mindpractice te conhece bem'
+    : globalConf >= 0.3 ? 'Começando a entender você'
+    : 'Ainda descobrindo seu padrão';
 
   // --- Nickname ---
   const [nickname, setNickname] = useState('Jogador');
@@ -250,6 +258,14 @@ export default function PerfilPage() {
             {/* Archetype name + tagline */}
             <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
             <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
+            <p className="mt-1 text-[10px] text-white/55">
+              {confidenceLabel}
+              {archetypeDisplay.mode === 'firm' && archetypeDisplay.secondary && (
+                <span className="ml-1 text-white/45">
+                  · também: {archetypeDisplay.secondary.archetype.name}
+                </span>
+              )}
+            </p>
           </div>
         </div>
       </motion.section>

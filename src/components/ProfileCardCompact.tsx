@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
 import { useLocalProfile, computeLevel } from '@/hooks/useLocalProfile';
 import { getArchetypeAvatarVisual } from '@/lib/archetypeAvatar';
+import { archetypeDisplayState, createPriorProfile } from '@/lib/bayesEngine';
 
 /**
  * Card horizontal compacto de perfil — usado no topo da Home e reaproveitável
@@ -16,6 +17,12 @@ export default function ProfileCardCompact({ compact = false }: { compact?: bool
   const { nickname, variant } = useLocalProfile();
   const archetype = getArchetype();
   const visual = getArchetypeAvatarVisual(archetype);
+
+  const display = archetypeDisplayState(state.calibration.beliefs ?? createPriorProfile());
+  const archetypeLabel =
+    display.mode === 'discovering' ? 'Ainda te conhecendo…'
+    : display.mode === 'tendency' ? `Tendendo a ${display.primary?.archetype.name ?? archetype.name}`
+    : archetype.name;
 
   const { level, xpInLevel, xpForNext } = computeLevel(state.calibration.totalResponses);
   const xpPct = (xpInLevel / xpForNext) * 100;
@@ -67,7 +74,7 @@ export default function ProfileCardCompact({ compact = false }: { compact?: bool
               Lv {level}
             </span>
           </div>
-          <span className="truncate text-[11px] text-white/55">{archetype.name}</span>
+          <span className="truncate text-[11px] text-white/55">{archetypeLabel}</span>
 
           {!compact && (
             <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/8">
