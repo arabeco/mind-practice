@@ -6,6 +6,7 @@ import { useGame } from '@/context/GameContext';
 import { useLocalProfile, computeLevel } from '@/hooks/useLocalProfile';
 import { getArchetypeAvatarVisual } from '@/lib/archetypeAvatar';
 import { archetypeDisplayState, createPriorProfile } from '@/lib/bayesEngine';
+import { Card, Badge, Ring } from '@/components/ui';
 
 /**
  * Card horizontal compacto de perfil — usado no topo da Home e reaproveitável
@@ -27,7 +28,7 @@ export default function ProfileCardCompact({ compact = false }: { compact?: bool
   const { level, xpInLevel, xpForNext } = computeLevel(state.calibration.totalResponses);
   const xpPct = (xpInLevel / xpForNext) * 100;
 
-  const symbol = variant === 'masculino' ? '\u2642' : '\u2640';
+  const symbol = variant === 'masculino' ? '♂' : '♀';
 
   return (
     <Link href="/perfil" className="block">
@@ -35,72 +36,61 @@ export default function ProfileCardCompact({ compact = false }: { compact?: bool
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.32 }}
-        className="glass-card relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/12 px-3 py-2.5 transition-colors hover:bg-white/[0.04]"
       >
-        {/* Accent glow from archetype */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-40"
-          style={{
-            background: `radial-gradient(circle at 0% 50%, ${visual.glow} 0%, transparent 55%)`,
-          }}
-        />
-
-        {/* Avatar */}
-        <div
-          className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border"
-          style={{
-            background: visual.background,
-            borderColor: visual.line,
-            boxShadow: `0 0 14px ${visual.glow}`,
-          }}
+        <Card
+          variant="glass"
+          padding="none"
+          className="relative flex items-center gap-3 overflow-hidden border-border-default px-3 py-2.5 transition-colors hover:bg-bg-glass-strong"
         >
-          <span className="text-xl font-bold" style={{ color: visual.accent }}>
-            {symbol}
-          </span>
-        </div>
+          {/* Accent glow from archetype */}
+          <div
+            className="pointer-events-none absolute inset-0 opacity-40"
+            style={{
+              background: `radial-gradient(circle at 0% 50%, ${visual.glow} 0%, transparent 55%)`,
+            }}
+          />
 
-        {/* Info */}
-        <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-2">
-            <span className="truncate text-sm font-bold text-white/92">{nickname}</span>
-            <span
-              className="shrink-0 rounded-full border px-1.5 py-[1px] text-[9px] font-bold uppercase tracking-[0.14em]"
+          {/* Avatar circundado pelo Ring de XP (gold) — anel mostra progresso ate o proximo nivel */}
+          <Ring value={xpPct / 100} size={56} thickness={3} color="gold">
+            <div
+              className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border"
               style={{
+                background: visual.background,
                 borderColor: visual.line,
-                color: visual.accent,
-                background: 'rgba(0,0,0,0.25)',
+                boxShadow: `0 0 14px ${visual.glow}`,
               }}
             >
-              Lv {level}
-            </span>
-          </div>
-          <span className="truncate text-[11px] text-white/55">{archetypeLabel}</span>
-
-          {!compact && (
-            <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/8">
-              <div
-                className="h-full rounded-full transition-all"
-                style={{
-                  width: `${xpPct}%`,
-                  background: `linear-gradient(90deg, ${visual.accent}AA, ${visual.accent})`,
-                  boxShadow: `0 0 8px ${visual.glow}`,
-                }}
-              />
+              <span className="text-xl font-bold" style={{ color: visual.accent }}>
+                {symbol}
+              </span>
             </div>
-          )}
-        </div>
+          </Ring>
 
-        {/* Chevron */}
-        <svg
-          className="relative shrink-0 text-white/35"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+          {/* Info */}
+          <div className="relative flex min-w-0 flex-1 flex-col">
+            <div className="flex items-center gap-2">
+              <span className="truncate text-sm font-bold text-text-primary">{nickname}</span>
+              <Badge variant="gold" className="shrink-0 px-1.5 py-[1px] text-[9px] uppercase tracking-[0.14em]">
+                Lv {level}
+              </Badge>
+            </div>
+            <span className="truncate text-[11px] text-text-tertiary">{archetypeLabel}</span>
+            {/* compact prop preservada como flag no-op (legacy callers) — XP agora vive no Ring acima. */}
+            {compact && null}
+          </div>
+
+          {/* Chevron */}
+          <svg
+            className="relative shrink-0 text-text-tertiary"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M5 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </Card>
       </motion.div>
     </Link>
   );
