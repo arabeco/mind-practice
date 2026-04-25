@@ -11,7 +11,7 @@
  *  - Fallback: se o arquivo nao existir ou der erro de load, pula
  *    direto pro modal sem travar a UX.
  *
- * Para trocar/atualizar: substitua `public/levels/brain-scan.mp4`.
+ * Para trocar/atualizar: substitua `public/mind.mp4`.
  * Por enquanto o mesmo video roda pra todos os levels; pra video por
  * tier, troca `src` por `/levels/${tier}.mp4` e adiciona prop `tier`.
  */
@@ -24,7 +24,7 @@ interface LevelUpVideoProps {
   onComplete: () => void;
 }
 
-const DEFAULT_SRC = '/levels/brain-scan.mp4';
+const DEFAULT_SRC = '/mind.mp4';
 
 export default function LevelUpVideo({
   open,
