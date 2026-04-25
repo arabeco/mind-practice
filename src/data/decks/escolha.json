@@ -39,11 +39,6 @@
             "harmonia": -2
           },
           "feedback": "Voce nao confunde carinho com contrato.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -65,11 +60,6 @@
             "presenca": -1
           },
           "feedback": "Voce valoriza o que ja tem.",
-          "intent": "adesao",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -91,11 +81,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao escolhe — negocia.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -138,11 +123,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao vira ponte de fofoca.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -164,11 +144,6 @@
             "desapego": -1
           },
           "feedback": "Voce dissolve fronteira — e as vezes paga.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -190,11 +165,6 @@
             "presenca": -1
           },
           "feedback": "Voce entrega sem entregar — mas entregou.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -236,11 +206,6 @@
             "vigor": -1
           },
           "feedback": "Voce honra o combinado com voce mesmo.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -262,11 +227,6 @@
             "presenca": -1
           },
           "feedback": "Voce escolhe o time — a um custo.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "desapego": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -289,11 +249,6 @@
             "desapego": -1
           },
           "feedback": "Voce inventa a terceira via.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -335,11 +290,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao entra em campo minado.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -361,11 +311,6 @@
             "vigor": -1
           },
           "feedback": "Voce passa a bola — mas ta em campo.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -388,11 +333,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao arrebenta — mas nao faz de conta.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -435,11 +375,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao carrega a mentira do outro.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -461,11 +396,6 @@
             "desapego": -1
           },
           "feedback": "Voce paga o preco pela lealdade.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -488,11 +418,6 @@
             "presenca": -1
           },
           "feedback": "Voce cobre — mas com contrato.",
-          "intent": "adesao",
-          "baseWeights": {
-            "desapego": 1,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.55,
@@ -534,11 +459,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao fica refem da duvida.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -560,11 +480,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao decide sem sentar com o problema.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -586,11 +501,6 @@
             "harmonia": -1
           },
           "feedback": "Voce nao aceita escolha binaria.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "desapego": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -632,11 +542,6 @@
             "vigor": -1
           },
           "feedback": "Voce paga o preco da lealdade.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -658,11 +563,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao afunda com time que nao seguraria voce.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -685,11 +585,6 @@
             "desapego": -1
           },
           "feedback": "Voce caminha na beira sem cair dos dois lados.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,

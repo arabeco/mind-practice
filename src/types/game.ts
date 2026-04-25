@@ -1,4 +1,3 @@
-import type { OptionIntent } from '@/lib/narrativeEngine/intents';
 import { createPriorProfile } from '@/lib/bayesEngine';
 
 // Re-exports do motor bayesiano (fonte única da verdade para AxisBelief etc.)
@@ -90,25 +89,15 @@ export interface Option {
   tone: Tone;
 
   /**
-   * @deprecated Preferir `intent + baseWeights` (Fase 2).
-   * Mantido como fallback até todo deck ser retaggeado e validado.
+   * @deprecated Pesos legados consumidos pelo motor somatório (axes/recentWeights).
+   * Mantidos durante a transição UI: /perfil e /resultado ainda renderizam radar
+   * baseado em axes. Serão removidos quando esses surfaces migrarem pra beliefs.
    */
   weights?: Partial<Record<StatKey, number>>;
 
-  /** @deprecated Substituído por `evidence` (Fase 3). Mantido durante migração. */
-  intent?: OptionIntent;
-
   /**
-   * @deprecated Substituído por `evidence` (Fase 3). Mantido durante migração.
-   * Pesos base — "intenção pura", sem contexto. ±1 a ±2 por eixo.
-   * Modifiers de `CONTEXT_MODIFIERS[intent]` somam em cima.
-   */
-  baseWeights?: Partial<Record<StatKey, number>>;
-
-  /**
-   * Evidência bayesiana declarada nesta opção (Fase 3+).
+   * Evidência bayesiana declarada nesta opção. Fonte de verdade pra `beliefs`.
    * Quem escolhe esta opção é evidência sobre θ em cada eixo declarado.
-   * Substitui `baseWeights`. Durante migração, ambos coexistem.
    */
   evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
 

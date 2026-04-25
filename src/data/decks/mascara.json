@@ -39,11 +39,6 @@
             "filtro": -1
           },
           "feedback": "Voce nao esconde o bom.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -65,11 +60,6 @@
             "harmonia": -1
           },
           "feedback": "Voce vive sem precisar exibir.",
-          "intent": "adesao",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -92,11 +82,6 @@
             "harmonia": -1
           },
           "feedback": "Voce escolhe quem ve o que.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -138,11 +123,6 @@
             "harmonia": -1
           },
           "feedback": "Voce nao comenta so no sofa.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -164,11 +144,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao vai pra cada briga.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -191,11 +166,6 @@
             "desapego": -1
           },
           "feedback": "Voce marca presenca sem expor rosto.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -237,11 +207,6 @@
             "filtro": -1
           },
           "feedback": "Voce celebra junto, sem receio.",
-          "intent": "protecao",
-          "baseWeights": {
-            "presenca": 2,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -263,11 +228,6 @@
             "harmonia": -1
           },
           "feedback": "Voce se emociona sem vitrine.",
-          "intent": "adesao",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -290,11 +250,6 @@
             "desapego": -1
           },
           "feedback": "Voce marca presenca sem esforco.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -336,11 +291,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao engole provocacao publica.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -362,11 +312,6 @@
             "vigor": -2
           },
           "feedback": "Voce cuida do seu espaco sem plateia.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -389,11 +334,6 @@
             "harmonia": -1
           },
           "feedback": "Voce escolhe nao dar atencao.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -435,11 +375,6 @@
             "desapego": -1
           },
           "feedback": "Voce tem opiniao — e compartilha.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -461,11 +396,6 @@
             "filtro": -1
           },
           "feedback": "Voce nao gasta tempo com o que nao e seu.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -488,11 +418,6 @@
             "desapego": -1
           },
           "feedback": "Voce forma juizo sem precisar expressar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -534,11 +459,6 @@
             "filtro": -1
           },
           "feedback": "Voce honra a frase, nao a plateia.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "presenca": 2,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -560,11 +480,6 @@
             "harmonia": -1
           },
           "feedback": "Voce nao precisa da validacao.",
-          "intent": "adesao",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -587,11 +502,6 @@
             "vigor": -1
           },
           "feedback": "Voce mede antes de publicar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -633,11 +543,6 @@
             "harmonia": -2
           },
           "feedback": "Voce se pega e reage.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -659,11 +564,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao faz tempestade em meia hora.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -686,11 +586,6 @@
             "desapego": -1
           },
           "feedback": "Voce reconhece sem punir.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,

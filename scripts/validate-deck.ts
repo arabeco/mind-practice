@@ -22,10 +22,6 @@ type Axis = (typeof VALID_AXES)[number];
 const VALID_PROXIMIDADE = ["baixa", "media", "alta"];
 const VALID_URGENCIA = ["baixa", "media", "alta"];
 const VALID_RARITIES = ["comum", "raro", "epico", "lendario", "campanha"] as const;
-const VALID_INTENTS = [
-  'confronto_publico', 'confronto_privado', 'retirada', 'adesao',
-  'contra_movimento', 'investigacao', 'provocacao', 'protecao',
-] as const;
 
 const VALID_STATS = ["vigor", "harmonia", "filtro", "presenca", "desapego"] as const;
 
@@ -160,20 +156,8 @@ function validateDeck(filePath: string): ValidationResult {
         err(`${oLabel}: feedback has ${feedbackWc} words (max 15)`);
       }
 
-      // 4b. Option precisa ter peso — novo (intent+baseWeights) ou legacy (weights)
-      const hasIntent = typeof opt.intent === 'string';
-      const hasBase = opt.baseWeights && typeof opt.baseWeights === 'object';
+      // 4b. Option precisa ter peso legado (`weights`) durante a transição.
       const hasLegacy = opt.weights && typeof opt.weights === 'object';
-
-      if (hasIntent && !(VALID_INTENTS as readonly string[]).includes(opt.intent)) {
-        err(`${oLabel}: intent "${opt.intent}" nao esta em VALID_INTENTS`);
-      }
-      if (hasIntent && !hasBase) {
-        err(`${oLabel}: intent presente mas baseWeights ausente`);
-      }
-      if (hasBase && !hasIntent) {
-        err(`${oLabel}: baseWeights presente mas intent ausente`);
-      }
       // 4c. Evidence (bayesiano, Fase 3+)
       const hasEvidence = opt.evidence && typeof opt.evidence === 'object';
       if (hasEvidence) {
@@ -213,11 +197,11 @@ function validateDeck(filePath: string): ValidationResult {
         }
       }
 
-      if (!hasIntent && !hasLegacy && !hasEvidence) {
-        err(`${oLabel}: Option precisa de evidence, (intent+baseWeights), ou weights (legacy)`);
+      if (!hasLegacy && !hasEvidence) {
+        err(`${oLabel}: Option precisa de evidence ou weights (legacy)`);
       }
 
-      // Checa forma dos weights que existirem (base e/ou legacy)
+      // Checa forma dos weights legados que existirem
       const checkShape = (label: string, w: Record<string, number>) => {
         const vals = Object.values(w);
         const hasPos = vals.some((v) => v > 0);
@@ -232,10 +216,9 @@ function validateDeck(filePath: string): ValidationResult {
       };
 
       if (hasLegacy) checkShape('weights', opt.weights);
-      if (hasBase) checkShape('baseWeights', opt.baseWeights);
 
-      // Usa baseWeights se houver, senão weights, pro tracking de dominant axis
-      const effective: Record<string, number> = hasBase ? opt.baseWeights : (opt.weights ?? {});
+      // Usa weights pro tracking de dominant axis
+      const effective: Record<string, number> = opt.weights ?? {};
 
       // Track dominant axis (highest absolute weight)
       let maxAbs = 0;

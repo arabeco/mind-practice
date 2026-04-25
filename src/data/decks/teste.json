@@ -39,11 +39,6 @@
             "desapego": -1
           },
           "feedback": "Voce vira o barco antes de afundar.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -65,11 +60,6 @@
             "vigor": -1
           },
           "feedback": "Voce entrega — mas acumula por dentro.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -92,11 +82,6 @@
             "harmonia": -1
           },
           "feedback": "Voce divide o peso na pressao.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -138,11 +123,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao abaixa a cabeca na plateia.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -164,11 +144,6 @@
             "vigor": -1
           },
           "feedback": "Voce separa cena de resolucao.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -191,11 +166,6 @@
             "harmonia": -1
           },
           "feedback": "Voce compra tempo sem ceder.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -237,11 +207,6 @@
             "filtro": -1
           },
           "feedback": "Voce nao espera o medo sair.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -264,11 +229,6 @@
             "vigor": -1
           },
           "feedback": "Voce cuida do seu estado antes de entregar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -290,11 +250,6 @@
             "vigor": -1
           },
           "feedback": "Voce entrega no minimo, sem travar.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -336,11 +291,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao deixa isso passar.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -362,11 +312,6 @@
             "vigor": -1
           },
           "feedback": "Voce escolhe onde plantar bandeira.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -389,11 +334,6 @@
             "harmonia": -1
           },
           "feedback": "Voce faz o questionamento sem plateia.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -435,11 +375,6 @@
             "harmonia": -2
           },
           "feedback": "Voce paga a conta na hora.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -461,11 +396,6 @@
             "vigor": -1
           },
           "feedback": "Voce protege o rosto antes da verdade.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -488,11 +418,6 @@
             "harmonia": -1
           },
           "feedback": "Voce assume — mas enquadra.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -534,11 +459,6 @@
             "vigor": -1
           },
           "feedback": "Voce sabe que nada sai bem cansado.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -560,11 +480,6 @@
             "filtro": -1
           },
           "feedback": "Voce aposta na inercia — as vezes cedo demais.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -587,11 +502,6 @@
             "desapego": -1
           },
           "feedback": "Voce separa fogo de fumaca.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -633,11 +543,6 @@
             "filtro": -2
           },
           "feedback": "Voce aparece quando precisa.",
-          "intent": "protecao",
-          "baseWeights": {
-            "presenca": 2,
-            "filtro": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -660,11 +565,6 @@
             "harmonia": -1
           },
           "feedback": "Voce aciona o sistema que resolve.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -686,11 +586,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao atropela quem ja ta ajudando.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,

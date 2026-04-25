@@ -43,12 +43,6 @@
             "desapego": -1
           },
           "feedback": "Exigiu atencao. Silencio pesou, mas agora te olham.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -75,12 +69,6 @@
             "vigor": -1
           },
           "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de voce.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -107,12 +95,6 @@
             "vigor": -1
           },
           "feedback": "Recapturou a sala sem criar clima. Lideranca sutil.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "filtro": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -139,12 +121,6 @@
             "vigor": -1
           },
           "feedback": "Manteve compostura, mas ninguem notou o esforco.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -195,12 +171,6 @@
             "desapego": -1
           },
           "feedback": "Colocou limite. Chefe nao curtiu, mas voce priorizou.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -227,12 +197,6 @@
             "presenca": -1
           },
           "feedback": "Cedeu pra evitar conflito. Quantas sextas mais aguenta?",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -259,12 +223,6 @@
             "desapego": -1
           },
           "feedback": "Achou meio termo. Entregou sem perder a noite.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -291,12 +249,6 @@
             "presenca": -1
           },
           "feedback": "Mascara perfeita, mas a raiva cobra depois.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -347,12 +299,6 @@
             "desapego": -1
           },
           "feedback": "Cortou o momento. Necessario pra quem tava mal.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -379,12 +325,6 @@
             "vigor": -2
           },
           "feedback": "Nao compactuou, mas nao enfrentou. Mensagem ambigua.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -411,12 +351,6 @@
             "desapego": -1
           },
           "feedback": "Apontou sem criar tribunal. Equilibrio raro.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -443,12 +377,6 @@
             "presenca": -1
           },
           "feedback": "Se distanciou. Protegeu a si, ignorou os outros.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -499,12 +427,6 @@
             "harmonia": -1
           },
           "feedback": "Foi buscar respostas. Direto, lutando pelo seu.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -531,12 +453,6 @@
             "presenca": -1
           },
           "feedback": "Nao brigou, planejou. Vinganca pode vir como proposta.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -563,12 +479,6 @@
             "desapego": -1
           },
           "feedback": "Canalizou raiva em estrategia. Calculado e profissional.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -595,12 +505,6 @@
             "presenca": -1
           },
           "feedback": "Aceitou, mas resignacao pode virar amargura.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -651,12 +555,6 @@
             "filtro": -1
           },
           "feedback": "Enfrentou o cliente. Equipe te respeita, contrato treme.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -683,12 +581,6 @@
             "presenca": -1
           },
           "feedback": "Absorveu sem reagir. Resposta documentada vai falar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -715,12 +607,6 @@
             "desapego": -1
           },
           "feedback": "Transformou grito em agenda. Cliente acalmou.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -747,12 +633,6 @@
             "harmonia": -1
           },
           "feedback": "Virou um muro. Ele cansou, equipe ficou tensa.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,

@@ -44,12 +44,6 @@
             "desapego": -1
           },
           "feedback": "Puxou o foco de volta. A sala entendeu quem conduzia.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -76,12 +70,6 @@
             "vigor": -1
           },
           "feedback": "Clima preservado, mas sua autoria sumiu da conversa.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -108,12 +96,6 @@
             "desapego": -1
           },
           "feedback": "Retomou protagonismo sem virar duelo. Presenca limpa.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -140,12 +122,6 @@
             "desapego": -1
           },
           "feedback": "Marcou territorio, mas criou atrito na sala.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -196,12 +172,6 @@
             "desapego": -1
           },
           "feedback": "Carimbou seu nome no resultado. A sala registrou.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -228,12 +198,6 @@
             "vigor": -1
           },
           "feedback": "Segurou a disputa, mas abriu mao de aparecer.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -260,12 +224,6 @@
             "vigor": -1
           },
           "feedback": "Assumiu autoria sem soar carente. Classe com coluna.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "filtro": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -292,12 +250,6 @@
             "harmonia": -1
           },
           "feedback": "Jogou nos bastidores. Funcional, mas sem brilho publico.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -348,12 +300,6 @@
             "harmonia": -1
           },
           "feedback": "Entrou em quadro sem drama. Reuniao ganhou centro.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "filtro": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -380,12 +326,6 @@
             "vigor": -1
           },
           "feedback": "Se protegeu, mas recuou da vitrine.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -412,12 +352,6 @@
             "desapego": -1
           },
           "feedback": "Criou presenca antes do conteudo. Sala no seu ritmo.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -444,11 +378,6 @@
             "harmonia": -1
           },
           "feedback": "Apareceu, mas a ansiedade roubou sua clareza.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -495,12 +424,6 @@
             "desapego": -1
           },
           "feedback": "Se apresentou como quem sabe seu peso. Direto.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "filtro": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -527,12 +450,6 @@
             "vigor": -1
           },
           "feedback": "Tirou pressao com humor, mas ficou indefinido.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -559,12 +476,6 @@
             "desapego": -1
           },
           "feedback": "Se nomeou sem inflar nem encolher. Presenca nitida.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -591,11 +502,6 @@
             "harmonia": -1
           },
           "feedback": "Quis brilhar demais e a imagem saiu borrada.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -642,12 +548,6 @@
             "desapego": -1
           },
           "feedback": "Ocupou o palco inteiro. Resposta afiada e impossivel de ignorar.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -674,12 +574,6 @@
             "desapego": -1
           },
           "feedback": "Poucas palavras, muito peso. Presenca sem guerra.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -706,12 +600,6 @@
             "vigor": -1
           },
           "feedback": "Protegeu sua paz, mas sua versao ficou fora do palco.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -738,12 +626,6 @@
             "desapego": -1
           },
           "feedback": "Virou o jogo sem combate. Plateia ficou do seu lado.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,

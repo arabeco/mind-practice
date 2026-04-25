@@ -43,13 +43,6 @@
             "harmonia": -2
           },
           "feedback": "Reagiu com raiva. Eficaz, mas a adrenalina ficou.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "filtro": -1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -76,12 +69,6 @@
             "harmonia": -1
           },
           "feedback": "Frio e preciso. Nenhuma info vazou.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -108,12 +95,6 @@
             "desapego": -1
           },
           "feedback": "Compostura mantida, procedimento correto.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -140,13 +121,6 @@
             "filtro": -2
           },
           "feedback": "Jogou o jogo dele. Divertido, mas arriscado.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "desapego": -1,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -197,12 +171,6 @@
             "desapego": -1
           },
           "feedback": "Nao deixou a provocacao te diminuir.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -229,12 +197,6 @@
             "presenca": -1
           },
           "feedback": "Absorveu o golpe sem piscar. Controle total.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -261,12 +223,6 @@
             "desapego": -1
           },
           "feedback": "Transformou ceticismo em chance de narrativa.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -293,12 +249,6 @@
             "presenca": -1
           },
           "feedback": "Cabeca erguida, mas perdeu a chance.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "desapego": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -350,13 +300,6 @@
             "filtro": -2
           },
           "feedback": "A bomba estourou. Consequencias imprevisiveis.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -383,12 +326,6 @@
             "desapego": -1
           },
           "feedback": "Engoliu o veneno e guardou a carta.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -415,12 +352,6 @@
             "desapego": -1
           },
           "feedback": "Deu tempo pro emocional acalmar.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -447,12 +378,6 @@
             "presenca": -1
           },
           "feedback": "Cortou limpo. Sem drama, sem escuta.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "vigor": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -503,12 +428,6 @@
             "desapego": -1
           },
           "feedback": "Cortou na hora. Respeito proprio acima de tudo.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -535,12 +454,6 @@
             "desapego": -1
           },
           "feedback": "Limite marcado sem destruir o momento.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -567,12 +480,6 @@
             "presenca": -1
           },
           "feedback": "Nao deu palco, mas engoliu o desconforto.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -599,12 +506,6 @@
             "presenca": -1
           },
           "feedback": "Protegeu o clima, traiu a si mesmo.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 1,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.55,
@@ -655,13 +556,6 @@
             "filtro": -2
           },
           "feedback": "Raiva justa, mas a ponte pode queimar.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -688,12 +582,6 @@
             "harmonia": -1
           },
           "feedback": "Processou o golpe sem demonstrar. Controle maximo.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -720,12 +608,6 @@
             "desapego": -1
           },
           "feedback": "Transformou o fim em negociacao.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -752,12 +634,6 @@
             "harmonia": -2
           },
           "feedback": "Saida limpa. Nenhuma palavra desperdicada.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,

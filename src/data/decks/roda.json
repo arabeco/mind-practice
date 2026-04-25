@@ -40,11 +40,6 @@
             "filtro": -1
           },
           "feedback": "Voce nao finge que nao viu.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -66,11 +61,6 @@
             "presenca": -2
           },
           "feedback": "Voce nao mede amizade por convite.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -93,11 +83,6 @@
             "desapego": -1
           },
           "feedback": "Voce precisa de mais de um ponto pra tracar linha.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -140,11 +125,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao vira escada em silencio.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -166,11 +146,6 @@
             "harmonia": -1
           },
           "feedback": "Voce sabe sair sem fechar porta.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -193,11 +168,6 @@
             "desapego": -1
           },
           "feedback": "Voce mede a amizade pelos dois lados.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -240,11 +210,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao deixa isso apodrecer.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -266,11 +231,6 @@
             "filtro": -2
           },
           "feedback": "Voce sabe quando acabou.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -293,11 +253,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao reage a quente.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -339,11 +294,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao cabe so pra caber.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -365,11 +315,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao precisa convencer ninguem.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -392,11 +337,6 @@
             "filtro": -1
           },
           "feedback": "Voce sabe discordar sem chocar.",
-          "intent": "provocacao",
-          "baseWeights": {
-            "presenca": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.55,
@@ -439,11 +379,6 @@
             "desapego": -1
           },
           "feedback": "Voce cuida da amizade marcando limite.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -466,11 +401,6 @@
             "desapego": -1
           },
           "feedback": "Voce cede com contrato.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -492,11 +422,6 @@
             "vigor": -1
           },
           "feedback": "Voce aposta na amizade antes da conta.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -539,11 +464,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao deixa o grupo passar por cima.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -566,11 +486,6 @@
             "presenca": -1
           },
           "feedback": "Voce resolve sem virar cena.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -592,11 +507,6 @@
             "harmonia": -1
           },
           "feedback": "Voce nao alimenta — mas tambem nao embate.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -639,11 +549,6 @@
             "desapego": -2
           },
           "feedback": "Voce nao esconde quando nao da.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -665,11 +570,6 @@
             "vigor": -1
           },
           "feedback": "Voce protege o clima antes de abrir.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -692,11 +592,6 @@
             "vigor": -1
           },
           "feedback": "Voce escolhe quando abrir.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,

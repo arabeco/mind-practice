@@ -27,7 +27,6 @@ import {
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
 import { matchArchetypes } from '@/lib/bayesEngine';
-import { resolveWeights } from '@/lib/narrativeEngine';
 import {
   appendRunAnswer,
   createDeckSnapshot,
@@ -123,7 +122,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const question = state.activeDeck?.questions[state.currentQuestion];
       if (!question) return state;
 
-      const resolved = resolveWeights(action.option, question.metadata, action.responseTimeMs);
+      const optionWeights = action.option.weights ?? {};
       const tensao = question.metadata.tensao;
       const isTraining = state.activeDeck?.isTraining === true;
 
@@ -133,15 +132,15 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ? state.calibration
         : applyDampenedWeights(
             state.calibration,
-            resolved.finalWeights,
+            optionWeights,
             action.option.tone,
             tensao,
             action.responseTimeMs,
             action.intensity,
           );
 
-      // Bayesian beliefs run in parallel to the legacy axes so both motors stay in sync
-      // until Task 21 deletes the legacy pipeline. Training decks pulam o update.
+      // Bayesian beliefs run in parallel to the legacy axes — agora que removemos
+      // resolveWeights, a fonte de verdade pra crença é só `option.evidence`.
       const evidence = action.option.evidence;
       const nextBeliefs = (!isTraining && evidence)
         ? updateProfile(
@@ -163,7 +162,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
               state.activeRun,
               question.id,
               action.option.tone,
-              resolved.finalWeights,
+              optionWeights,
               action.option.evidence,
               action.responseTimeMs,
             )

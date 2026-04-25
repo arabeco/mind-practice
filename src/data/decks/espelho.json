@@ -40,11 +40,6 @@
             "presenca": -1
           },
           "feedback": "Voce nao segura o que pensa.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -66,11 +61,6 @@
             "desapego": -1
           },
           "feedback": "Voce respeita o tempo da fala do outro.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -93,11 +83,6 @@
             "desapego": -1
           },
           "feedback": "Voce fala, mas sem atropelar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -140,11 +125,6 @@
             "desapego": -1
           },
           "feedback": "Voce nao deixa passar, mesmo em casa.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -166,11 +146,6 @@
             "presenca": -1
           },
           "feedback": "Voce protege o clima — a um custo.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -193,11 +168,6 @@
             "desapego": -1
           },
           "feedback": "Voce sinaliza sem rachar a mesa.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -240,11 +210,6 @@
             "desapego": -1
           },
           "feedback": "Voce poe na mesa antes de azedar.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -266,11 +231,6 @@
             "presenca": -1
           },
           "feedback": "Voce filtra o que e pedra e o que e poeira.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "vigor": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -293,11 +253,6 @@
             "desapego": -1
           },
           "feedback": "Voce monta a frase antes de disparar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -339,11 +294,6 @@
             "harmonia": -2
           },
           "feedback": "Voce nao abre porta que ja fechou.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -365,11 +315,6 @@
             "harmonia": -2
           },
           "feedback": "Voce ja virou a pagina faz tempo.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -391,11 +336,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao fecha a porta por fechar.",
-          "intent": "adesao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -438,11 +378,6 @@
             "desapego": -2
           },
           "feedback": "Voce aparece quando precisa.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "desapego": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -464,11 +399,6 @@
             "desapego": -1
           },
           "feedback": "Voce sabe que sem voce dormindo ninguem ganha.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -491,11 +421,6 @@
             "desapego": -1
           },
           "feedback": "Voce triagem antes de acionar.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -538,11 +463,6 @@
             "harmonia": -2
           },
           "feedback": "Voce nao foge do que e seu.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -564,11 +484,6 @@
             "presenca": -1
           },
           "feedback": "Voce defende o seu — as vezes cedo demais.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -590,11 +505,6 @@
             "harmonia": -1
           },
           "feedback": "Voce aposta que o tempo limpa.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -636,11 +546,6 @@
             "vigor": -1
           },
           "feedback": "Voce nao inventa desculpa.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -662,11 +567,6 @@
             "vigor": -1
           },
           "feedback": "Voce prioriza o clima antes da verdade.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "harmonia": 2,
-            "presenca": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -688,11 +588,6 @@
             "filtro": -1
           },
           "feedback": "Voce paga o preco pra estar junto.",
-          "intent": "protecao",
-          "baseWeights": {
-            "vigor": 2,
-            "desapego": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,

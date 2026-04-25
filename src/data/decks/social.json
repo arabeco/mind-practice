@@ -44,12 +44,6 @@
             "filtro": -1
           },
           "feedback": "A verdade doeu. Ele pode se afastar, mas voce falou.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -76,12 +70,6 @@
             "presenca": -2
           },
           "feedback": "Se protegeu. Seu amigo perdeu uma voz de alerta.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -108,12 +96,6 @@
             "desapego": -1
           },
           "feedback": "Plantou sementes sem forcar. Mudanca vem de dentro.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -140,12 +122,6 @@
             "vigor": -1
           },
           "feedback": "Montou o caso com paciencia. Dificil de ignorar.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "filtro": 1,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -196,12 +172,6 @@
             "harmonia": -1
           },
           "feedback": "Entrou na guerra digital. Heroi ou mais meme.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "filtro": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -228,12 +198,6 @@
             "vigor": -1
           },
           "feedback": "Cortou o oxigenio do fogo. Nao alimentou nada.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -260,12 +224,6 @@
             "desapego": -1
           },
           "feedback": "Virou o ataque em conteudo. O anonimo perdeu poder.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -292,12 +250,6 @@
             "harmonia": -1
           },
           "feedback": "Nao reagiu no calor, mas nao largou. Estrategico.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "presenca": 1,
-            "desapego": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -349,12 +301,6 @@
             "filtro": -1
           },
           "feedback": "Bomba na festa. Caos total, mas nao segurou.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -381,12 +327,6 @@
             "presenca": -2
           },
           "feedback": "Se protegeu. O peso de saber vai ficar.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -413,12 +353,6 @@
             "desapego": -1
           },
           "feedback": "Escolheu o momento certo. Verdade com respeito.",
-          "intent": "protecao",
-          "baseWeights": {
-            "harmonia": 2,
-            "filtro": 1,
-            "vigor": -1
-          },
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -445,12 +379,6 @@
             "desapego": -1
           },
           "feedback": "Forcou a mao do traidor. Pode resolver ou explodir.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "vigor": 2,
-            "filtro": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -502,12 +430,6 @@
             "filtro": -1
           },
           "feedback": "Sua saida foi notada. O constrangimento mudou de alvo.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -534,12 +456,6 @@
             "presenca": -2
           },
           "feedback": "Absorveu o golpe em publico. Ninguem viu a ferida.",
-          "intent": "contra_movimento",
-          "baseWeights": {
-            "filtro": 2,
-            "desapego": 1,
-            "presenca": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -566,12 +482,6 @@
             "desapego": -1
           },
           "feedback": "Virou o jogo. A piada agora e sua.",
-          "intent": "adesao",
-          "baseWeights": {
-            "presenca": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -598,12 +508,6 @@
             "desapego": -1
           },
           "feedback": "Segurou na hora certa. Cobrou no lugar certo.",
-          "intent": "investigacao",
-          "baseWeights": {
-            "filtro": 2,
-            "vigor": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -655,12 +559,6 @@
             "filtro": -1
           },
           "feedback": "A mascara caiu. Doloroso, mas libertador.",
-          "intent": "confronto_publico",
-          "baseWeights": {
-            "vigor": 2,
-            "presenca": 1,
-            "harmonia": -1
-          },
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -687,12 +585,6 @@
             "presenca": -2
           },
           "feedback": "O silencio e a pior resposta pra quem quer atencao.",
-          "intent": "retirada",
-          "baseWeights": {
-            "desapego": 2,
-            "filtro": 1,
-            "presenca": -1
-          },
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -719,12 +611,6 @@
             "presenca": -1
           },
           "feedback": "Saiu pela porta dos fundos. Sem guerra, sem cena.",
-          "intent": "protecao",
-          "baseWeights": {
-            "filtro": 2,
-            "harmonia": 1,
-            "vigor": -1
-          },
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -751,12 +637,6 @@
             "desapego": -2
           },
           "feedback": "Deu chance de defesa. Justo, mas arriscado.",
-          "intent": "confronto_privado",
-          "baseWeights": {
-            "presenca": 2,
-            "vigor": 1,
-            "desapego": -1
-          },
           "evidence": {
             "presenca": {
               "min": 0.6,
