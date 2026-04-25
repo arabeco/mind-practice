@@ -107,7 +107,7 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
     return (
       <main className="mx-auto flex min-h-[100dvh] max-w-md items-center justify-center px-6 text-center">
         <div>
-          <p className="text-sm uppercase tracking-[0.24em] text-white/40">Temporada nao encontrada</p>
+          <p className="text-sm uppercase tracking-[0.24em] text-white/40">Temporada não encontrada</p>
           <button onClick={() => router.push('/decks')} className="mt-4 rounded-full border border-white/20 bg-white/8 px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
             Voltar
           </button>
@@ -356,7 +356,7 @@ function LockedView({
         </div>
 
         <p className="text-[10px] text-white/38">
-          {daysLeft} dia{daysLeft !== 1 ? 's' : ''} ate a temporada fechar
+          {daysLeft} dia{daysLeft !== 1 ? 's' : ''} até a temporada fechar
         </p>
       </div>
 
@@ -375,7 +375,7 @@ function LockedView({
         </span>
         {!canAfford && (
           <span className="mt-1 block text-[10px] font-normal normal-case tracking-normal text-amber-100/60">
-            Voce tem {fichas} ficha{fichas !== 1 ? 's' : ''}
+            Você tem {fichas} ficha{fichas !== 1 ? 's' : ''}
           </span>
         )}
       </button>

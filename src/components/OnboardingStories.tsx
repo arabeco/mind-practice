@@ -12,13 +12,13 @@ const slides = [
   {
     title: 'Situacoes reais.',
     subtitle: 'Reacoes suas.',
-    description: 'Cenarios do dia a dia que testam como voce reage sob pressao.',
+    description: 'Cenarios do dia a dia que testam como você reage sob pressao.',
     gradient: 'from-cyan-500/20 via-transparent to-transparent',
     accent: 'text-cyan-400',
   },
   {
     title: 'Cada escolha',
-    subtitle: 'revela quem voce e.',
+    subtitle: 'revela quem você e.',
     description: '5 eixos comportamentais. Nenhuma resposta certa. So a sua.',
     gradient: 'from-purple-500/20 via-transparent to-transparent',
     accent: 'text-purple-400',
@@ -26,7 +26,7 @@ const slides = [
   {
     title: 'Descubra seu',
     subtitle: 'arquetipo.',
-    description: '15 perfis possiveis. O seu muda conforme voce joga.',
+    description: '15 perfis possiveis. O seu muda conforme você joga.',
     gradient: 'from-amber-500/20 via-transparent to-transparent',
     accent: 'text-amber-400',
     isFinal: true,

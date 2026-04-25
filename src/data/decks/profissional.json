@@ -24,7 +24,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Reuniao de equipe. Voce preparou uma apresentacao importante com dados novos."
+          "texto": "Reuniao de equipe. Você preparou uma apresentacao importante com dados novos."
         },
         {
           "tipo": "evento",
@@ -56,7 +56,7 @@
           "text": "Termino rapido e mando os slides por email.",
           "subtext": "Eficiencia fria",
           "tone": "evasivo",
-          "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de voce.",
+          "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de você.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -93,7 +93,7 @@
           }
         },
         {
-          "text": "Sigo falando normalmente, fingindo que nao notei.",
+          "text": "Sigo falando normalmente, fingindo que não notei.",
           "subtext": "Persistencia silenciosa",
           "tone": "evasivo",
           "feedback": "Manteve compostura, mas ninguem notou o esforco.",
@@ -128,7 +128,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Sexta, 18h. Voce ja esta de mochila pronta pra ir embora."
+          "texto": "Sexta, 18h. Você já esta de mochila pronta pra ir embora."
         },
         {
           "tipo": "evento",
@@ -137,10 +137,10 @@
       ],
       "options": [
         {
-          "text": "'Nao vai dar. Tenho compromisso. Resolvo segunda cedo.'",
+          "text": "'Não vai dar. Tenho compromisso. Resolvo segunda cedo.'",
           "subtext": "Limite claro",
           "tone": "pragmatico",
-          "feedback": "Colocou limite. Chefe nao curtiu, mas voce priorizou.",
+          "feedback": "Colocou limite. Chefe não curtiu, mas você priorizou.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -157,7 +157,7 @@
           }
         },
         {
-          "text": "Suspiro, tiro a mochila e fico. Nao vale a briga.",
+          "text": "Suspiro, tiro a mochila e fico. Não vale a briga.",
           "subtext": "Submissao",
           "tone": "evasivo",
           "feedback": "Cedeu pra evitar conflito. Quantas sextas mais aguenta?",
@@ -200,7 +200,7 @@
           "text": "Digo 'claro' sorrindo, mas por dentro to furioso.",
           "subtext": "Raiva contida",
           "tone": "evasivo",
-          "feedback": "Mascara perfeita, mas a raiva cobra depois.",
+          "feedback": "Máscara perfeita, mas a raiva cobra depois.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -241,7 +241,7 @@
       ],
       "options": [
         {
-          "text": "'Essa piada nao tem graca. Voce sabe disso, ne?'",
+          "text": "'Essa piada não tem graca. Você sabe disso, ne?'",
           "subtext": "Confronto direto",
           "tone": "pragmatico",
           "feedback": "Cortou o momento. Necessario pra quem tava mal.",
@@ -261,10 +261,10 @@
           }
         },
         {
-          "text": "Nao rio e mudo de assunto. Meu silencio fala.",
+          "text": "Não rio e mudo de assunto. Meu silencio fala.",
           "subtext": "Silencio posicionado",
           "tone": "evasivo",
-          "feedback": "Nao compactuou, mas nao enfrentou. Mensagem ambigua.",
+          "feedback": "Não compactuou, mas não enfrentou. Mensagem ambigua.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -301,7 +301,7 @@
           }
         },
         {
-          "text": "Fico calado. Nao e problema meu.",
+          "text": "Fico calado. Não e problema meu.",
           "subtext": "Indiferenca",
           "tone": "evasivo",
           "feedback": "Se distanciou. Protegeu a si, ignorou os outros.",
@@ -325,7 +325,7 @@
     {
       "id": "p5",
       "type": "NORMAL",
-      "sceneHook": "Voce descobre o salario do colega",
+      "sceneHook": "Você descobre o salario do colega",
       "metadata": {
         "tensao": 4,
         "ambiente": "Profissional",
@@ -336,7 +336,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce descobre por acaso o salario de um colega da mesma funcao."
+          "texto": "Você descobre por acaso o salario de um colega da mesma funcao."
         },
         {
           "tipo": "evento",
@@ -368,7 +368,7 @@
           "text": "Guardo a info e comeco a procurar outro emprego.",
           "subtext": "Estrategia de saida",
           "tone": "pragmatico",
-          "feedback": "Nao brigou, planejou. Vinganca pode vir como proposta.",
+          "feedback": "Não brigou, planejou. Vinganca pode vir como proposta.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -405,7 +405,7 @@
           }
         },
         {
-          "text": "Engulo seco e sigo trabalhando. Reclamar nao muda nada.",
+          "text": "Engulo seco e sigo trabalhando. Reclamar não muda nada.",
           "subtext": "Resignacao",
           "tone": "evasivo",
           "feedback": "Aceitou, mas resignacao pode virar amargura.",
@@ -449,7 +449,7 @@
       ],
       "options": [
         {
-          "text": "'Vou parar aqui. Essas acusacoes nao procedem.'",
+          "text": "'Vou parar aqui. Essas acusacoes não procedem.'",
           "subtext": "Defesa firme",
           "tone": "provocativo",
           "feedback": "Enfrentou o cliente. Equipe te respeita, contrato treme.",
@@ -509,7 +509,7 @@
           }
         },
         {
-          "text": "Fico em silencio total ate ele parar. Sem combustivel.",
+          "text": "Fico em silencio total até ele parar. Sem combustivel.",
           "subtext": "Muro",
           "tone": "evasivo",
           "feedback": "Virou um muro. Ele cansou, equipe ficou tensa.",

@@ -269,7 +269,7 @@ export default function Home() {
                   Novo arquetipo
                 </span>
                 <span className="text-sm font-bold text-white/90">
-                  Voce agora e {archetype.name}
+                  Você agora e {archetype.name}
                 </span>
                 <span className="text-[11px] text-white/55">{archetype.tagline}</span>
               </div>

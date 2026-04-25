@@ -1,7 +1,7 @@
 {
   "deckId": "limite",
   "name": "O Limite",
-  "description": "Hora de descobrir ate onde voce vai antes de reagir.",
+  "description": "Hora de descobrir até onde você vai antes de reagir.",
   "tema": "Confrontos",
   "category": "calibragem",
   "tier": 1,
@@ -25,7 +25,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Terceira noite de som alto do vizinho. Voce..."
+          "texto": "Terceira noite de som alto do vizinho. Você..."
         }
       ],
       "options": [
@@ -33,7 +33,7 @@
           "text": "Subo e bato na porta agora.",
           "subtext": "Confronto direto",
           "tone": "pragmatico",
-          "feedback": "Voce nao enrola ate o quarto dia.",
+          "feedback": "Você não enrola até o quarto dia.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -49,7 +49,7 @@
           "text": "Coloco abafador e durmo.",
           "subtext": "Resolve sozinho",
           "tone": "evasivo",
-          "feedback": "Voce cuida do seu sono sem guerra.",
+          "feedback": "Você cuida do seu sono sem guerra.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -65,7 +65,7 @@
           "text": "Mando mensagem educada pelo zap.",
           "subtext": "Aviso por texto",
           "tone": "neutro",
-          "feedback": "Voce avisa sem subir escada.",
+          "feedback": "Você avisa sem subir escada.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -101,7 +101,7 @@
           "text": "Chamo o garcom e marco: 'Eu tava antes.'",
           "subtext": "Reivindica",
           "tone": "pragmatico",
-          "feedback": "Voce nao abre mao do seu lugar.",
+          "feedback": "Você não abre mao do seu lugar.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -114,10 +114,10 @@
           }
         },
         {
-          "text": "Deixo. Cinco minutos nao matam.",
+          "text": "Deixo. Cinco minutos não matam.",
           "subtext": "Solta",
           "tone": "evasivo",
-          "feedback": "Voce escolhe onde plantar raiz.",
+          "feedback": "Você escolhe onde plantar raiz.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -133,7 +133,7 @@
           "text": "Comento alto pra eles ouvirem.",
           "subtext": "Passivo-agressivo",
           "tone": "provocativo",
-          "feedback": "Voce sinaliza sem encarar direto.",
+          "feedback": "Você sinaliza sem encarar direto.",
           "evidence": {
             "vigor": {
               "min": 0.55,
@@ -162,15 +162,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Pede emprestado o que voce nao quer emprestar."
+          "texto": "Pede emprestado o que você não quer emprestar."
         }
       ],
       "options": [
         {
-          "text": "Falo nao, direto.",
+          "text": "Falo não, direto.",
           "subtext": "Corta seco",
           "tone": "pragmatico",
-          "feedback": "Voce nao enrola o nao.",
+          "feedback": "Você não enrola o não.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -184,9 +184,9 @@
         },
         {
           "text": "Digo sim e depois me remoo.",
-          "subtext": "Nao sabe negar",
+          "subtext": "Não sabe negar",
           "tone": "evasivo",
-          "feedback": "Voce ganha paz — perde em outra moeda.",
+          "feedback": "Você ganha paz — perde em outra moeda.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -199,10 +199,10 @@
           }
         },
         {
-          "text": "Invento uma razao pra nao poder.",
-          "subtext": "Nao desaponta",
+          "text": "Invento uma razao pra não poder.",
+          "subtext": "Não desaponta",
           "tone": "evasivo",
-          "feedback": "Voce evita a cena mas paga em verdade.",
+          "feedback": "Você evita a cena mas paga em verdade.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -230,7 +230,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Conhecido pergunta algo que voce considera intimo demais."
+          "texto": "Conhecido pergunta algo que você considera intimo demais."
         }
       ],
       "options": [
@@ -238,7 +238,7 @@
           "text": "Respondo: 'Isso fica comigo.'",
           "subtext": "Fecha o assunto",
           "tone": "pragmatico",
-          "feedback": "Voce protege o que e seu com uma frase.",
+          "feedback": "Você protege o que e seu com uma frase.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -254,7 +254,7 @@
           "text": "Respondo pouco e mudo de assunto.",
           "subtext": "Desvia sutil",
           "tone": "evasivo",
-          "feedback": "Voce sai da cena sem bater porta.",
+          "feedback": "Você sai da cena sem bater porta.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -270,7 +270,7 @@
           "text": "Respondo com outra pergunta.",
           "subtext": "Devolve",
           "tone": "provocativo",
-          "feedback": "Voce mantem o controle do campo.",
+          "feedback": "Você mantem o controle do campo.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -287,7 +287,7 @@
     {
       "id": "q5",
       "type": "NORMAL",
-      "sceneHook": "Colega passa trabalho extra pra voce",
+      "sceneHook": "Colega passa trabalho extra pra você",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -298,7 +298,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Terceira vez essa semana. Nao e sua funcao."
+          "texto": "Terceira vez essa semana. Não e sua funcao."
         }
       ],
       "options": [
@@ -306,7 +306,7 @@
           "text": "Falo: 'Isso aqui e seu.'",
           "subtext": "Devolve",
           "tone": "pragmatico",
-          "feedback": "Voce nao e pallet de carga dos outros.",
+          "feedback": "Você não e pallet de carga dos outros.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -322,7 +322,7 @@
           "text": "Faco e engulo.",
           "subtext": "Aceita a tarefa",
           "tone": "evasivo",
-          "feedback": "Voce evita briga — mas soma ressentimento.",
+          "feedback": "Você evita briga — mas soma ressentimento.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -338,7 +338,7 @@
           "text": "Passo pro meu gestor: 'Ta rolando isso.'",
           "subtext": "Escala",
           "tone": "neutro",
-          "feedback": "Voce aciona o sistema certo.",
+          "feedback": "Você aciona o sistema certo.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -366,15 +366,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Tio(a) solta uma piada das piores. Voce nao ri."
+          "texto": "Tio(a) solta uma piada das piores. Você não ri."
         }
       ],
       "options": [
         {
-          "text": "Falo na mesa: 'Nao deu graca.'",
+          "text": "Falo na mesa: 'Não deu graca.'",
           "subtext": "Corta",
           "tone": "pragmatico",
-          "feedback": "Voce nao engole pra manter mesa.",
+          "feedback": "Você não engole pra manter mesa.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -390,7 +390,7 @@
           "text": "Saio da mesa. Vou no banheiro.",
           "subtext": "Se retira",
           "tone": "evasivo",
-          "feedback": "Voce nao participa do que nao te serve.",
+          "feedback": "Você não participa do que não te serve.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -403,10 +403,10 @@
           }
         },
         {
-          "text": "Silencio frio. Nao rio nem respondo.",
+          "text": "Silencio frio. Não rio nem respondo.",
           "subtext": "Gela",
           "tone": "neutro",
-          "feedback": "Voce nao alimenta — e eles sentem.",
+          "feedback": "Você não alimenta — e eles sentem.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -442,7 +442,7 @@
           "text": "Respondo la, a altura.",
           "subtext": "Devolve no lugar",
           "tone": "pragmatico",
-          "feedback": "Voce nao foge de campo aberto.",
+          "feedback": "Você não foge de campo aberto.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -458,7 +458,7 @@
           "text": "Bloqueio e sigo.",
           "subtext": "Sai do campo",
           "tone": "pragmatico",
-          "feedback": "Voce nao da holofote.",
+          "feedback": "Você não da holofote.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -472,9 +472,9 @@
         },
         {
           "text": "Deixo o comentario la. Plateia decide.",
-          "subtext": "Nao moderar",
+          "subtext": "Não moderar",
           "tone": "neutro",
-          "feedback": "Voce deixa a cena falar por si.",
+          "feedback": "Você deixa a cena falar por si.",
           "evidence": {
             "filtro": {
               "min": 0.55,

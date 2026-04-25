@@ -3,7 +3,10 @@
  * UTF-8 lint — falha se encontrar substituições ASCII conhecidas
  * em strings de UI. Roda em `*.tsx` de src/ e `*.json` em src/data/decks/.
  */
-import { readFileSync, globSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
+// globSync exists in Node 22+ runtime mas @types/node 20 nao tipa.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { globSync } = require('node:fs') as { globSync: (pattern: string) => string[] };
 
 interface Rule {
   bad: RegExp;       // padrão ASCII a procurar

@@ -576,7 +576,7 @@ export default function PerfilPage() {
               </div>
               <h3 className="text-base font-bold text-white/90">Resetar tudo?</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-white/50">
-                Todo seu progresso sera apagado: eixos, rankings, historico de runs e fichas. Essa acao nao pode ser desfeita.
+                Todo seu progresso sera apagado: eixos, rankings, historico de runs e fichas. Essa acao não pode ser desfeita.
               </p>
               <div className="mt-5 flex gap-2.5">
                 <button

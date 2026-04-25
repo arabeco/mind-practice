@@ -102,7 +102,7 @@ export default function DeckTransitionCard({
           {/* Arquétipo */}
           <div className="rounded-xl border border-white/10 bg-white/[0.04] px-2.5 py-2 text-center">
             <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">
-              Arquetipo
+              Arquétipo
             </p>
             <p
               className={`mt-1 text-base font-bold ${

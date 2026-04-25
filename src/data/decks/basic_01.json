@@ -25,7 +25,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Alguem furra a fila na sua frente sem olhar pra tras. Voce..."
+          "texto": "Alguem furra a fila na sua frente sem olhar pra tras. Você..."
         }
       ],
       "options": [
@@ -33,7 +33,7 @@
           "text": "Falo na hora: 'Amigo, a fila e ali atras.'",
           "subtext": "Marca territorio",
           "tone": "pragmatico",
-          "feedback": "Direto. Voce nao deixa passar.",
+          "feedback": "Direto. Você não deixa passar.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -46,7 +46,7 @@
           }
         },
         {
-          "text": "Deixo quieto. Nao vale minha energia.",
+          "text": "Deixo quieto. Não vale minha energia.",
           "subtext": "Vira a pagina",
           "tone": "evasivo",
           "feedback": "Escolheu a paz. Nem todo combate interessa.",
@@ -65,7 +65,7 @@
           "text": "Depende do dia — as vezes falo, as vezes passo.",
           "subtext": "Leitura do momento",
           "tone": "neutro",
-          "feedback": "Voce le o momento antes de reagir.",
+          "feedback": "Você le o momento antes de reagir.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -99,10 +99,10 @@
       ],
       "options": [
         {
-          "text": "Corto seco: 'Nao curti essa.'",
+          "text": "Corto seco: 'Não curti essa.'",
           "subtext": "Marca o limite",
           "tone": "pragmatico",
-          "feedback": "Amigo ou nao, voce tem limite claro.",
+          "feedback": "Amigo ou não, você tem limite claro.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -118,7 +118,7 @@
           "text": "Devolvo com outra piada. Jogo junto.",
           "subtext": "Joga o jogo",
           "tone": "pragmatico",
-          "feedback": "Voce nao leva pro pessoal.",
+          "feedback": "Você não leva pro pessoal.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -138,7 +138,7 @@
           "text": "Falo com ele depois, em privado.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "feedback": "Voce separa briga publica de resolucao.",
+          "feedback": "Você separa briga publica de resolucao.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -155,7 +155,7 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Transito pesado. Voce ja cansado",
+      "sceneHook": "Transito pesado. Você já cansado",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -166,7 +166,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Um carro fecha voce feio e o motorista ainda te xinga pela janela."
+          "texto": "Um carro fecha você feio e o motorista ainda te xinga pela janela."
         }
       ],
       "options": [
@@ -174,7 +174,7 @@
           "text": "Buzino longo e devolvo o dedo.",
           "subtext": "Reage na hora",
           "tone": "pragmatico",
-          "feedback": "Sangue quente. Voce nao engole.",
+          "feedback": "Sangue quente. Você não engole.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -187,10 +187,10 @@
           }
         },
         {
-          "text": "Nem ligo. Gente assim nao merece meu minuto.",
+          "text": "Nem ligo. Gente assim não merece meu minuto.",
           "subtext": "Segue a vida",
           "tone": "evasivo",
-          "feedback": "Voce nao alimenta briga de estranho.",
+          "feedback": "Você não alimenta briga de estranho.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -223,7 +223,7 @@
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Grupo de amigos que voce confia",
+      "sceneHook": "Grupo de amigos que você confia",
       "metadata": {
         "tensao": 2,
         "ambiente": "Social",
@@ -234,7 +234,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Todo mundo concorda com algo que voce acha uma besteira. E agora?"
+          "texto": "Todo mundo concorda com algo que você acha uma besteira. E agora?"
         }
       ],
       "options": [
@@ -242,7 +242,7 @@
           "text": "Falo. Prefiro discordar do que fingir.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "feedback": "Voce nao finge so pra caber.",
+          "feedback": "Você não finge so pra caber.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -258,7 +258,7 @@
           "text": "Concordo pra manter o clima, penso depois.",
           "subtext": "Mantem a paz",
           "tone": "evasivo",
-          "feedback": "Voce protege o clima antes da razao.",
+          "feedback": "Você protege o clima antes da razao.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -274,7 +274,7 @@
           "text": "Faco uma pergunta esperta pra eles repensarem.",
           "subtext": "Discorda no esguelho",
           "tone": "neutro",
-          "feedback": "Voce desmonta sem brigar.",
+          "feedback": "Você desmonta sem brigar.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -291,7 +291,7 @@
     {
       "id": "q5",
       "type": "NORMAL",
-      "sceneHook": "Dia ruim. Voce ta no limite",
+      "sceneHook": "Dia ruim. Você ta no limite",
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",
@@ -303,15 +303,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Parceiro(a) reclama de algo bobo justo agora. Voce..."
+          "texto": "Parceiro(a) reclama de algo bobo justo agora. Você..."
         }
       ],
       "options": [
         {
-          "text": "Aviso: 'Hoje nao, tô exausto(a).'",
+          "text": "Aviso: 'Hoje não, tô exausto(a).'",
           "subtext": "Nomeia o limite",
           "tone": "pragmatico",
-          "feedback": "Voce nomeia o que sente antes de errar.",
+          "feedback": "Você nomeia o que sente antes de errar.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -325,9 +325,9 @@
         },
         {
           "text": "Engulo e respondo como se nada fosse.",
-          "subtext": "Nao mostra",
+          "subtext": "Não mostra",
           "tone": "evasivo",
-          "feedback": "Voce segura — mas acumula.",
+          "feedback": "Você segura — mas acumula.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -372,7 +372,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Ela apresenta como ideia dela algo que voce disse no cafezinho."
+          "texto": "Ela apresenta como ideia dela algo que você disse no cafezinho."
         }
       ],
       "options": [
@@ -380,7 +380,7 @@
           "text": "Corrijo na hora: 'Legal, foi o que falei outro dia ne.'",
           "subtext": "Reclama credito",
           "tone": "pragmatico",
-          "feedback": "Voce nao abre mao do que e seu.",
+          "feedback": "Você não abre mao do que e seu.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -393,10 +393,10 @@
           }
         },
         {
-          "text": "Deixo passar. Nao vale brigar por isso aqui.",
-          "subtext": "Nao vale a briga",
+          "text": "Deixo passar. Não vale brigar por isso aqui.",
+          "subtext": "Não vale a briga",
           "tone": "evasivo",
-          "feedback": "Voce escolhe as batalhas com cuidado.",
+          "feedback": "Você escolhe as batalhas com cuidado.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -412,7 +412,7 @@
           "text": "Depois, em privado, pergunto direto pra ela.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "feedback": "Voce enfrenta — mas sem plateia.",
+          "feedback": "Você enfrenta — mas sem plateia.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -440,15 +440,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Algo bobo ficou te remoendo desde cedo. Voce..."
+          "texto": "Algo bobo ficou te remoendo desde cedo. Você..."
         }
       ],
       "options": [
         {
-          "text": "Penso ate resolver na cabeca, nem que demore.",
+          "text": "Penso até resolver na cabeca, nem que demore.",
           "subtext": "Mastiga tudo",
           "tone": "neutro",
-          "feedback": "Voce nao solta enquanto nao entende.",
+          "feedback": "Você não solta enquanto não entende.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -464,7 +464,7 @@
           "text": "Largo. Coloco outra coisa na cabeca.",
           "subtext": "Vira a pagina",
           "tone": "pragmatico",
-          "feedback": "Voce sabe quando parar de mastigar.",
+          "feedback": "Você sabe quando parar de mastigar.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -480,7 +480,7 @@
           "text": "Falo com alguem — jogo pra fora.",
           "subtext": "Processa junto",
           "tone": "neutro",
-          "feedback": "Voce pensa alto, junto.",
+          "feedback": "Você pensa alto, junto.",
           "evidence": {
             "presenca": {
               "min": 0.6,

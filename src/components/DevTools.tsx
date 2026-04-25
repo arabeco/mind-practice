@@ -35,7 +35,7 @@ export default function DevTools() {
 
   async function handleTestLocalNotification() {
     if (permission === 'unsupported') {
-      setLastMsg('Notification API nao suportada');
+      setLastMsg('Notification API não suportada');
       return;
     }
     let current = Notification.permission;
@@ -62,7 +62,7 @@ export default function DevTools() {
     try {
       const sup = getPushSupport();
       if (!sup.supported) {
-        setLastMsg(`Nao suportado: ${sup.reason}`);
+        setLastMsg(`Não suportado: ${sup.reason}`);
         return;
       }
       const r = await enablePush();
@@ -79,7 +79,7 @@ export default function DevTools() {
     setLastMsg(null);
     try {
       const sb = getSupabase();
-      if (!sb) { setLastMsg('Supabase nao configurado'); return; }
+      if (!sb) { setLastMsg('Supabase não configurado'); return; }
       const { data: { session } } = await sb.auth.getSession();
       if (!session) { setLastMsg('Precisa estar logado'); return; }
 
@@ -93,7 +93,7 @@ export default function DevTools() {
         },
         body: JSON.stringify({
           title: 'Teste do servidor',
-          body: 'Se voce ta lendo isso, o pipeline web-push ta funcionando.',
+          body: 'Se você ta lendo isso, o pipeline web-push ta funcionando.',
           url: '/',
         }),
       });

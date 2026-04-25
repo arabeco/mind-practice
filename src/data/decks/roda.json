@@ -1,7 +1,7 @@
 {
   "deckId": "roda",
   "name": "A Roda",
-  "description": "Amizades testam lealdade, ego e o que voce aceita engolir.",
+  "description": "Amizades testam lealdade, ego e o que você aceita engolir.",
   "tema": "Amizades",
   "category": "calibragem",
   "tier": 1,
@@ -26,7 +26,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce descobre pelas stories que teve role e nao foi chamado."
+          "texto": "Você descobre pelas stories que teve role e não foi chamado."
         }
       ],
       "options": [
@@ -34,7 +34,7 @@
           "text": "Pergunto no grupo: 'Qual foi?'",
           "subtext": "Confronta",
           "tone": "pragmatico",
-          "feedback": "Voce nao finge que nao viu.",
+          "feedback": "Você não finge que não viu.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -47,10 +47,10 @@
           }
         },
         {
-          "text": "Nem ligo. Nao sou obrigado a ir em tudo.",
+          "text": "Nem ligo. Não sou obrigado a ir em tudo.",
           "subtext": "Segue a vida",
           "tone": "evasivo",
-          "feedback": "Voce nao mede amizade por convite.",
+          "feedback": "Você não mede amizade por convite.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -66,7 +66,7 @@
           "text": "Observo. Se virar padrao, falo.",
           "subtext": "Espera um padrao",
           "tone": "neutro",
-          "feedback": "Voce precisa de mais de um ponto pra tracar linha.",
+          "feedback": "Você precisa de mais de um ponto pra tracar linha.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -83,7 +83,7 @@
     {
       "id": "q2",
       "type": "NORMAL",
-      "sceneHook": "Amigo(a) usa voce de escada",
+      "sceneHook": "Amigo(a) usa você de escada",
       "metadata": {
         "tensao": 3,
         "ambiente": "Social",
@@ -95,7 +95,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce percebeu: ele(a) so te procura quando precisa."
+          "texto": "Você percebeu: ele(a) so te procura quando precisa."
         }
       ],
       "options": [
@@ -103,7 +103,7 @@
           "text": "Falo direto: 'Ta meio interesseiro(a), ne?'",
           "subtext": "Coloca na mesa",
           "tone": "pragmatico",
-          "feedback": "Voce nao vira escada em silencio.",
+          "feedback": "Você não vira escada em silencio.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -119,7 +119,7 @@
           "text": "Diminuo o contato aos poucos.",
           "subtext": "Afasta sem briga",
           "tone": "evasivo",
-          "feedback": "Voce sabe sair sem fechar porta.",
+          "feedback": "Você sabe sair sem fechar porta.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -132,10 +132,10 @@
           }
         },
         {
-          "text": "Testo: se eu nao procurar, ele(a) procura?",
+          "text": "Testo: se eu não procurar, ele(a) procura?",
           "subtext": "Faz o teste",
           "tone": "neutro",
-          "feedback": "Voce mede a amizade pelos dois lados.",
+          "feedback": "Você mede a amizade pelos dois lados.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -152,7 +152,7 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Amigo(a) falou mal de voce pelas costas",
+      "sceneHook": "Amigo(a) falou mal de você pelas costas",
       "metadata": {
         "tensao": 4,
         "ambiente": "Social",
@@ -172,7 +172,7 @@
           "text": "Chamo pra falar frente a frente.",
           "subtext": "Resolve olho no olho",
           "tone": "pragmatico",
-          "feedback": "Voce nao deixa isso apodrecer.",
+          "feedback": "Você não deixa isso apodrecer.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -185,10 +185,10 @@
           }
         },
         {
-          "text": "Corto. Nao tem volta disso.",
+          "text": "Corto. Não tem volta disso.",
           "subtext": "Encerra",
           "tone": "pragmatico",
-          "feedback": "Voce sabe quando acabou.",
+          "feedback": "Você sabe quando acabou.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -202,9 +202,9 @@
         },
         {
           "text": "Penso por dias antes de decidir.",
-          "subtext": "Nao reage na hora",
+          "subtext": "Não reage na hora",
           "tone": "neutro",
-          "feedback": "Voce nao reage a quente.",
+          "feedback": "Você não reage a quente.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -221,7 +221,7 @@
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Todo mundo concorda, voce nao",
+      "sceneHook": "Todo mundo concorda, você não",
       "metadata": {
         "tensao": 2,
         "ambiente": "Social",
@@ -232,7 +232,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Roda ta fechada num consenso que voce acha errado."
+          "texto": "Roda ta fechada num consenso que você acha errado."
         }
       ],
       "options": [
@@ -240,7 +240,7 @@
           "text": "Falo. Discordo.",
           "subtext": "Voz clara",
           "tone": "pragmatico",
-          "feedback": "Voce nao cabe so pra caber.",
+          "feedback": "Você não cabe so pra caber.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -254,9 +254,9 @@
         },
         {
           "text": "Fico quieto(a) e penso sozinho(a).",
-          "subtext": "Nao discute",
+          "subtext": "Não discute",
           "tone": "evasivo",
-          "feedback": "Voce nao precisa convencer ninguem.",
+          "feedback": "Você não precisa convencer ninguem.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -272,7 +272,7 @@
           "text": "Faco uma pergunta que abala o consenso.",
           "subtext": "Provoca pergunta",
           "tone": "provocativo",
-          "feedback": "Voce sabe discordar sem chocar.",
+          "feedback": "Você sabe discordar sem chocar.",
           "evidence": {
             "presenca": {
               "min": 0.55,
@@ -301,15 +301,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "A terceira vez esse semestre. Voce..."
+          "texto": "A terceira vez esse semestre. Você..."
         }
       ],
       "options": [
         {
-          "text": "Falo nao. 'Ja emprestei, ta na hora de voce resolver.'",
+          "text": "Falo não. 'Ja emprestei, ta na hora de você resolver.'",
           "subtext": "Limite claro",
           "tone": "pragmatico",
-          "feedback": "Voce cuida da amizade marcando limite.",
+          "feedback": "Você cuida da amizade marcando limite.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -325,7 +325,7 @@
           "text": "Empresto mas menos, e aviso que e o ultimo.",
           "subtext": "Meio-termo com aviso",
           "tone": "neutro",
-          "feedback": "Voce cede com contrato.",
+          "feedback": "Você cede com contrato.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -339,9 +339,9 @@
         },
         {
           "text": "Empresto. Amigos se ajudam.",
-          "subtext": "Nao conta",
+          "subtext": "Não conta",
           "tone": "protetor",
-          "feedback": "Voce aposta na amizade antes da conta.",
+          "feedback": "Você aposta na amizade antes da conta.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -370,15 +370,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce ouve e o grupo ri. Voce..."
+          "texto": "Você ouve e o grupo ri. Você..."
         }
       ],
       "options": [
         {
-          "text": "Paro na hora: 'Nao curti essa.'",
+          "text": "Paro na hora: 'Não curti essa.'",
           "subtext": "Freia o grupo",
           "tone": "pragmatico",
-          "feedback": "Voce nao deixa o grupo passar por cima.",
+          "feedback": "Você não deixa o grupo passar por cima.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -394,7 +394,7 @@
           "text": "Falo em particular depois.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "feedback": "Voce resolve sem virar cena.",
+          "feedback": "Você resolve sem virar cena.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -407,10 +407,10 @@
           }
         },
         {
-          "text": "Nao rio. Deixo o silencio falar.",
+          "text": "Não rio. Deixo o silencio falar.",
           "subtext": "Sem risada",
           "tone": "evasivo",
-          "feedback": "Voce nao alimenta — mas tambem nao embate.",
+          "feedback": "Você não alimenta — mas tambem não embate.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -427,7 +427,7 @@
     {
       "id": "q7",
       "type": "NORMAL",
-      "sceneHook": "Voce ta mal, o grupo pergunta",
+      "sceneHook": "Você ta mal, o grupo pergunta",
       "metadata": {
         "tensao": 2,
         "ambiente": "Social",
@@ -439,15 +439,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "'Voce ta bem?' No grupo, todo mundo esperando."
+          "texto": "'Você ta bem?' No grupo, todo mundo esperando."
         }
       ],
       "options": [
         {
-          "text": "Falo a verdade. 'Nao, to meio mal.'",
+          "text": "Falo a verdade. 'Não, to meio mal.'",
           "subtext": "Abre sem filtro",
           "tone": "pragmatico",
-          "feedback": "Voce nao esconde quando nao da.",
+          "feedback": "Você não esconde quando não da.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -463,7 +463,7 @@
           "text": "Minto bonito: 'To otimo.'",
           "subtext": "Protege o clima",
           "tone": "evasivo",
-          "feedback": "Voce protege o clima antes de abrir.",
+          "feedback": "Você protege o clima antes de abrir.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -479,7 +479,7 @@
           "text": "Mudo de assunto.",
           "subtext": "Desvia",
           "tone": "evasivo",
-          "feedback": "Voce escolhe quando abrir.",
+          "feedback": "Você escolhe quando abrir.",
           "evidence": {
             "filtro": {
               "min": 0.55,

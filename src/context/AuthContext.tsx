@@ -19,8 +19,8 @@ const AuthContext = createContext<AuthState>({
   user: null,
   loading: true,
   signInWithGoogle: async () => {},
-  signInWithPassword: async () => ({ error: 'Supabase nao configurado' }),
-  signUpWithPassword: async () => ({ error: 'Supabase nao configurado' }),
+  signInWithPassword: async () => ({ error: 'Supabase não configurado' }),
+  signUpWithPassword: async () => ({ error: 'Supabase não configurado' }),
   signOut: async () => {},
   enabled: false,
 });
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [sb]);
 
   const signInWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
-    if (!sb) return { error: 'Login indisponivel — Supabase nao configurado.' };
+    if (!sb) return { error: 'Login indisponivel — Supabase não configurado.' };
     const { error } = await sb.auth.signInWithPassword({ email, password });
     if (error) {
       // Normalize common Supabase errors to PT-BR
@@ -73,7 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [sb]);
 
   const signUpWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
-    if (!sb) return { error: 'Login indisponivel — Supabase nao configurado.' };
+    if (!sb) return { error: 'Login indisponivel — Supabase não configurado.' };
     const { error } = await sb.auth.signUp({ email, password });
     if (error) {
       const msg = error.message.toLowerCase();

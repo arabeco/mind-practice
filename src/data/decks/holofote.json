@@ -1,7 +1,7 @@
 {
   "deckId": "holofote",
   "name": "Holofote",
-  "description": "Treino de Presenca. Cenas para ocupar espaco, sustentar olhar e nao sumir de si mesmo.",
+  "description": "Treino de Presenca. Cenas para ocupar espaco, sustentar olhar e não sumir de si mesmo.",
   "tema": "Presenca",
   "category": "eixo",
   "focusAxis": "presenca",
@@ -25,7 +25,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Reuniao com cliente. Voce apresenta sua proposta e a sala escuta."
+          "texto": "Reuniao com cliente. Você apresenta sua proposta e a sala escuta."
         },
         {
           "tipo": "evento",
@@ -158,7 +158,7 @@
           }
         },
         {
-          "text": "Anoto e fico quieto. Nao preciso me vender toda hora.",
+          "text": "Anoto e fico quieto. Não preciso me vender toda hora.",
           "subtext": "Recuo estrategico",
           "tone": "evasivo",
           "feedback": "Segurou a disputa, mas abriu mao de aparecer.",
@@ -333,11 +333,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Elevador cheio de executivos. Voce quieto esperando seu andar."
+          "texto": "Elevador cheio de executivos. Você quieto esperando seu andar."
         },
         {
           "tipo": "evento",
-          "texto": "A CEO olha seu cracha e pergunta: 'Em uma frase, quem e voce?'"
+          "texto": "A CEO olha seu cracha e pergunta: 'Em uma frase, quem e você?'"
         }
       ],
       "options": [
@@ -433,7 +433,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Painel aberto com plateia. Voce na primeira fila, mediador abre perguntas."
+          "texto": "Painel aberto com plateia. Você na primeira fila, mediador abre perguntas."
         },
         {
           "tipo": "evento",
@@ -482,7 +482,7 @@
           }
         },
         {
-          "text": "Recuso o microfone. Nao vou transformar isso em show.",
+          "text": "Recuso o microfone. Não vou transformar isso em show.",
           "subtext": "Retirada estrategica",
           "tone": "evasivo",
           "feedback": "Protegeu sua paz, mas sua versao ficou fora do palco.",

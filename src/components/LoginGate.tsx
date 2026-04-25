@@ -168,7 +168,7 @@ export default function LoginGate({ children }: { children: React.ReactNode }) {
                   setEmail(e.target.value);
                   if (stage === 'error') setStage('idle');
                 }}
-                placeholder="voce@email.com"
+                placeholder="você@email.com"
                 className="mt-1.5 w-full rounded-full border border-white/15 bg-black/30 px-4 py-2.5 text-sm text-white placeholder:text-white/28 focus:border-accent-gold/55 focus:outline-none"
               />
             </label>

@@ -34,7 +34,7 @@ export default function RunReportCard({
   const profileShiftLabel = getProfileShiftLabel(snapshot.profileShift);
   const dominantAxisLabel = snapshot.dominantAxis
     ? STAT_LABELS[snapshot.dominantAxis]
-    : 'Nao definido';
+    : 'Não definido';
   const axisDeltaEntries = STAT_KEYS
     .map(key => ({ key, value: snapshot.axisDelta[key] }))
     .filter(entry => Math.abs(entry.value) >= 0.05)
@@ -122,14 +122,14 @@ export default function RunReportCard({
               </div>
             ) : (
               <p className="mt-4 text-sm leading-relaxed text-white/48">
-                Snapshot antigo. Esta run foi preservada, mas ainda nao tinha leitura detalhada.
+                Snapshot antigo. Esta run foi preservada, mas ainda não tinha leitura detalhada.
               </p>
             )}
           </div>
 
           <div className="space-y-3">
             <div className="grid gap-3 sm:grid-cols-2">
-              <MetricTile label="Arquetipo" value={snapshot.archetypeAtCompletion} />
+              <MetricTile label="Arquétipo" value={snapshot.archetypeAtCompletion} />
               <MetricTile label="Eixo dominante" value={dominantAxisLabel} />
               <MetricTile label="Respondidas" value={String(snapshot.answeredCount)} />
               <MetricTile label="Timeouts" value={String(snapshot.timeoutCount)} />
@@ -170,7 +170,7 @@ export default function RunReportCard({
                       : 'text-white/55'
                   }`}
                 >
-                  {snapshot.archetypeChanged ? 'Mudou de arquetipo' : 'Arquetipo mantido'}
+                  {snapshot.archetypeChanged ? 'Mudou de arquetipo' : 'Arquétipo mantido'}
                 </span>
               </div>
             </div>

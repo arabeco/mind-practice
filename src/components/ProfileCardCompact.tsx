@@ -50,7 +50,7 @@ export default function ProfileCardCompact({ compact = false }: { compact?: bool
             }}
           />
 
-          {/* Avatar circundado pelo Ring de XP (gold) — anel mostra progresso ate o proximo nivel */}
+          {/* Avatar circundado pelo Ring de XP (gold) — anel mostra progresso até o proximo nivel */}
           <Ring value={xpPct / 100} size={56} thickness={3} color="gold">
             <div
               className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border"

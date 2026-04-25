@@ -200,7 +200,7 @@ const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
               fontWeight: 500,
             }}
           >
-            Eu sou <span style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 700 }}>{archetype.name}</span>. E voce?
+            Eu sou <span style={{ color: 'rgba(255,255,255,0.9)', fontWeight: 700 }}>{archetype.name}</span>. E você?
           </div>
         </div>
 

@@ -8,7 +8,7 @@
  *  - Autoplay muted + playsInline (politicas mobile/iOS).
  *  - Tap em qualquer lugar pula (chama onComplete).
  *  - onEnded → onComplete automatico.
- *  - Fallback: se o arquivo nao existir ou der erro de load, pula
+ *  - Fallback: se o arquivo não existir ou der erro de load, pula
  *    direto pro modal sem travar a UX.
  *
  * Para trocar/atualizar: substitua `public/mind.mp4`.
@@ -34,7 +34,7 @@ export default function LevelUpVideo({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [errored, setErrored] = useState(false);
 
-  // Se errou ou nao carregou em 6s, pula sozinho.
+  // Se errou ou não carregou em 6s, pula sozinho.
   useEffect(() => {
     if (!open) return;
     const timer = window.setTimeout(() => {

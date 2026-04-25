@@ -122,7 +122,7 @@ export default function LevelUpCeremony({
                 {info.tagline}
               </motion.p>
 
-              {/* Arquetipo atual */}
+              {/* Arquétipo atual */}
               {primary && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -131,7 +131,7 @@ export default function LevelUpCeremony({
                   className="glass-surface mt-5 rounded-[1.1rem] px-4 py-3.5"
                 >
                   <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/35">
-                    Arquetipo atual
+                    Arquétipo atual
                   </p>
                   <div className="mt-1.5 flex items-baseline justify-between gap-2">
                     <span className="text-base font-semibold text-white/92">
@@ -239,7 +239,7 @@ export default function LevelUpCeremony({
                         Recompensa
                       </p>
                       <p className="mt-0.5 text-[11px] leading-snug text-white/65">
-                        Sua identidade ficou mais clara — voce ganhou fichas.
+                        Sua identidade ficou mais clara — você ganhou fichas.
                       </p>
                     </div>
                     <motion.div

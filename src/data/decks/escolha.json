@@ -25,7 +25,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Novo emprego paga mais. Mas voce curte o atual."
+          "texto": "Novo emprego paga mais. Mas você curte o atual."
         }
       ],
       "options": [
@@ -33,7 +33,7 @@
           "text": "Vou. Dinheiro importa, ponto.",
           "subtext": "Segue o numero",
           "tone": "pragmatico",
-          "feedback": "Voce nao confunde carinho com contrato.",
+          "feedback": "Você não confunde carinho com contrato.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -49,7 +49,7 @@
           "text": "Fico. Nem tudo se mede em salario.",
           "subtext": "Prioriza o hoje",
           "tone": "neutro",
-          "feedback": "Voce valoriza o que ja tem.",
+          "feedback": "Você valoriza o que já tem.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -65,7 +65,7 @@
           "text": "Uso a oferta pra negociar aumento aqui.",
           "subtext": "Joga as duas cartas",
           "tone": "provocativo",
-          "feedback": "Voce nao escolhe — negocia.",
+          "feedback": "Você não escolhe — negocia.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -94,15 +94,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Pedem que voce conte algo que te contaram em confianca."
+          "texto": "Pedem que você conte algo que te contaram em confianca."
         }
       ],
       "options": [
         {
-          "text": "Falo: 'Nao e meu pra contar.'",
+          "text": "Falo: 'Não e meu pra contar.'",
           "subtext": "Segura o segredo",
           "tone": "pragmatico",
-          "feedback": "Voce nao vira ponte de fofoca.",
+          "feedback": "Você não vira ponte de fofoca.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -118,7 +118,7 @@
           "text": "Conto. Nos tres somos amigos.",
           "subtext": "Abre",
           "tone": "provocativo",
-          "feedback": "Voce dissolve fronteira — e as vezes paga.",
+          "feedback": "Você dissolve fronteira — e as vezes paga.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -134,7 +134,7 @@
           "text": "Deixo escapar metade, sem nomes.",
           "subtext": "Meio conta",
           "tone": "evasivo",
-          "feedback": "Voce entrega sem entregar — mas entregou.",
+          "feedback": "Você entrega sem entregar — mas entregou.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -162,15 +162,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce ja comprou tudo. Chefe quer que voce fique."
+          "texto": "Você já comprou tudo. Chefe quer que você fique."
         }
       ],
       "options": [
         {
-          "text": "Vou viajar. Ta comprado, ja combinei.",
+          "text": "Vou viajar. Ta comprado, já combinei.",
           "subtext": "Prioriza o plano",
           "tone": "pragmatico",
-          "feedback": "Voce honra o combinado com voce mesmo.",
+          "feedback": "Você honra o combinado com você mesmo.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -186,7 +186,7 @@
           "text": "Fico. O trampo importa tambem.",
           "subtext": "Aceita o chamado",
           "tone": "protetor",
-          "feedback": "Voce escolhe o time — a um custo.",
+          "feedback": "Você escolhe o time — a um custo.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -202,7 +202,7 @@
           "text": "Negocio: vou e trabalho meio remoto.",
           "subtext": "Propoe meio-termo",
           "tone": "neutro",
-          "feedback": "Voce inventa a terceira via.",
+          "feedback": "Você inventa a terceira via.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -219,7 +219,7 @@
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Voce gosta de alguem comprometido(a)",
+      "sceneHook": "Você gosta de alguem comprometido(a)",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -235,10 +235,10 @@
       ],
       "options": [
         {
-          "text": "Me afasto. Nao quero ser a outra carta.",
+          "text": "Me afasto. Não quero ser a outra carta.",
           "subtext": "Corta o link",
           "tone": "pragmatico",
-          "feedback": "Voce nao entra em campo minado.",
+          "feedback": "Você não entra em campo minado.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -252,9 +252,9 @@
         },
         {
           "text": "Deixo rolar. Ela(e) decide.",
-          "subtext": "Nao toma o leme",
+          "subtext": "Não toma o leme",
           "tone": "evasivo",
-          "feedback": "Voce passa a bola — mas ta em campo.",
+          "feedback": "Você passa a bola — mas ta em campo.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -270,7 +270,7 @@
           "text": "Falo claro: 'Resolva ai antes.'",
           "subtext": "Poe no colo certo",
           "tone": "pragmatico",
-          "feedback": "Voce nao arrebenta — mas nao faz de conta.",
+          "feedback": "Você não arrebenta — mas não faz de conta.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -287,7 +287,7 @@
     {
       "id": "q5",
       "type": "NORMAL",
-      "sceneHook": "Alguem pede pra voce mentir por ele(a)",
+      "sceneHook": "Alguem pede pra você mentir por ele(a)",
       "metadata": {
         "tensao": 3,
         "ambiente": "Social",
@@ -299,15 +299,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Pede pra voce cobrir. 'Se alguem perguntar, eu tava com voce.'"
+          "texto": "Pede pra você cobrir. 'Se alguem perguntar, eu tava com você.'"
         }
       ],
       "options": [
         {
-          "text": "Nao. Eu nao cubro.",
+          "text": "Não. Eu não cubro.",
           "subtext": "Recusa a pedir",
           "tone": "pragmatico",
-          "feedback": "Voce nao carrega a mentira do outro.",
+          "feedback": "Você não carrega a mentira do outro.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -323,7 +323,7 @@
           "text": "Cubro. Amigo e amigo.",
           "subtext": "Assume o risco",
           "tone": "protetor",
-          "feedback": "Voce paga o preco pela lealdade.",
+          "feedback": "Você paga o preco pela lealdade.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -339,7 +339,7 @@
           "text": "Cubro mas aviso: 'E a ultima.'",
           "subtext": "Cobra preco",
           "tone": "neutro",
-          "feedback": "Voce cobre — mas com contrato.",
+          "feedback": "Você cobre — mas com contrato.",
           "evidence": {
             "desapego": {
               "min": 0.55,
@@ -367,15 +367,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce tem que escolher entre tres coisas legais. Todas a mesma hora."
+          "texto": "Você tem que escolher entre tres coisas legais. Todas a mesma hora."
         }
       ],
       "options": [
         {
-          "text": "Decido rapido e nao olho pra tras.",
+          "text": "Decido rapido e não olho pra tras.",
           "subtext": "Corta",
           "tone": "pragmatico",
-          "feedback": "Voce nao fica refem da duvida.",
+          "feedback": "Você não fica refem da duvida.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -388,10 +388,10 @@
           }
         },
         {
-          "text": "Fico horas pesando. Nao quero perder nenhuma.",
+          "text": "Fico horas pesando. Não quero perder nenhuma.",
           "subtext": "Mastiga",
           "tone": "neutro",
-          "feedback": "Voce nao decide sem sentar com o problema.",
+          "feedback": "Você não decide sem sentar com o problema.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -407,7 +407,7 @@
           "text": "Invento jeito de fazer duas.",
           "subtext": "Tenta tudo",
           "tone": "provocativo",
-          "feedback": "Voce nao aceita escolha binaria.",
+          "feedback": "Você não aceita escolha binaria.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -435,15 +435,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Cagada coletiva. Se voce entrega quem foi, voce sai limpo."
+          "texto": "Cagada coletiva. Se você entrega quem foi, você sai limpo."
         }
       ],
       "options": [
         {
           "text": "Calo. Isso e entre nos.",
-          "subtext": "Nao delata",
+          "subtext": "Não delata",
           "tone": "protetor",
-          "feedback": "Voce paga o preco da lealdade.",
+          "feedback": "Você paga o preco da lealdade.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -459,7 +459,7 @@
           "text": "Entrego. Cada um cuida do seu.",
           "subtext": "Prioriza si",
           "tone": "pragmatico",
-          "feedback": "Voce nao afunda com time que nao seguraria voce.",
+          "feedback": "Você não afunda com time que não seguraria você.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -475,7 +475,7 @@
           "text": "Falo so o necessario, sem nomes.",
           "subtext": "Triagem honesta",
           "tone": "neutro",
-          "feedback": "Voce caminha na beira sem cair dos dois lados.",
+          "feedback": "Você caminha na beira sem cair dos dois lados.",
           "evidence": {
             "filtro": {
               "min": 0.55,

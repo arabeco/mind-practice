@@ -132,7 +132,7 @@
         },
         {
           "tipo": "evento",
-          "texto": "Entrevistador diz: 'Olhando seu curriculo, nao sei o que faz aqui.'"
+          "texto": "Entrevistador diz: 'Olhando seu curriculo, não sei o que faz aqui.'"
         }
       ],
       "options": [
@@ -140,7 +140,7 @@
           "text": "'Sei que posso entregar. Me da 5 minutos.'",
           "subtext": "Autoafirmacao",
           "tone": "pragmatico",
-          "feedback": "Nao deixou a provocacao te diminuir.",
+          "feedback": "Não deixou a provocacao te diminuir.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -197,7 +197,7 @@
           }
         },
         {
-          "text": "Levanto e saio: 'Nao provo nada pra quem ja decidiu.'",
+          "text": "Levanto e saio: 'Não provo nada pra quem já decidiu.'",
           "subtext": "Orgulho",
           "tone": "provocativo",
           "feedback": "Cabeca erguida, mas perdeu a chance.",
@@ -282,7 +282,7 @@
           }
         },
         {
-          "text": "Espero ate amanha e puxo conversa com calma.",
+          "text": "Espero até amanha e puxo conversa com calma.",
           "subtext": "Maturidade",
           "tone": "neutro",
           "feedback": "Deu tempo pro emocional acalmar.",
@@ -302,7 +302,7 @@
           }
         },
         {
-          "text": "Decido que acabou. Nao preciso de explicacao.",
+          "text": "Decido que acabou. Não preciso de explicacao.",
           "subtext": "Corte radical",
           "tone": "pragmatico",
           "feedback": "Cortou limpo. Sem drama, sem escuta.",
@@ -346,7 +346,7 @@
       ],
       "options": [
         {
-          "text": "'Isso nao tem graca.' Peco a conta na hora.",
+          "text": "'Isso não tem graca.' Peco a conta na hora.",
           "subtext": "Limite duro",
           "tone": "pragmatico",
           "feedback": "Cortou na hora. Respeito proprio acima de tudo.",
@@ -366,7 +366,7 @@
           }
         },
         {
-          "text": "'Esse tipo de piada nao rola comigo.' Mudo de assunto.",
+          "text": "'Esse tipo de piada não rola comigo.' Mudo de assunto.",
           "subtext": "Firmeza calibrada",
           "tone": "neutro",
           "feedback": "Limite marcado sem destruir o momento.",
@@ -386,10 +386,10 @@
           }
         },
         {
-          "text": "Finjo que nao ouvi e planejo minha saida discreta.",
+          "text": "Finjo que não ouvi e planejo minha saida discreta.",
           "subtext": "Saida silenciosa",
           "tone": "evasivo",
-          "feedback": "Nao deu palco, mas engoliu o desconforto.",
+          "feedback": "Não deu palco, mas engoliu o desconforto.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -407,7 +407,7 @@
         },
         {
           "text": "Rio junto pra disfarcar, mas por dentro doi.",
-          "subtext": "Mascara",
+          "subtext": "Máscara",
           "tone": "evasivo",
           "feedback": "Protegeu o clima, traiu a si mesmo.",
           "evidence": {

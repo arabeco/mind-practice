@@ -29,7 +29,7 @@
         },
         {
           "tipo": "evento",
-          "texto": "O parceiro dele manipula, isola e controla. Seu amigo nao enxerga."
+          "texto": "O parceiro dele manipula, isola e controla. Seu amigo não enxerga."
         }
       ],
       "options": [
@@ -37,7 +37,7 @@
           "text": "Sento e digo na cara: 'Essa pessoa ta te destruindo.'",
           "subtext": "Verdade crua",
           "tone": "pragmatico",
-          "feedback": "A verdade doeu. Ele pode se afastar, mas voce falou.",
+          "feedback": "A verdade doeu. Ele pode se afastar, mas você falou.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -118,7 +118,7 @@
     {
       "id": "s3",
       "type": "NORMAL",
-      "sceneHook": "Voce virou meme. Post inocente",
+      "sceneHook": "Você virou meme. Post inocente",
       "metadata": {
         "tensao": 4,
         "ambiente": "Digital",
@@ -129,7 +129,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce postou uma foto normal nas redes. So seu dia a dia."
+          "texto": "Você postou uma foto normal nas redes. So seu dia a dia."
         },
         {
           "tipo": "evento",
@@ -161,7 +161,7 @@
           "text": "Deleto o post, bloqueio a conta e sigo minha vida.",
           "subtext": "Reset",
           "tone": "evasivo",
-          "feedback": "Cortou o oxigenio do fogo. Nao alimentou nada.",
+          "feedback": "Cortou o oxigenio do fogo. Não alimentou nada.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -201,7 +201,7 @@
           "text": "Ignoro em publico, mas investigo quem e o fake.",
           "subtext": "Investigacao fria",
           "tone": "pragmatico",
-          "feedback": "Nao reagiu no calor, mas nao largou. Estrategico.",
+          "feedback": "Não reagiu no calor, mas não largou. Estrategico.",
           "evidence": {
             "filtro": {
               "min": 0.6,
@@ -222,7 +222,7 @@
     {
       "id": "s5",
       "type": "NORMAL",
-      "sceneHook": "Festa animada. Voce flagra algo",
+      "sceneHook": "Festa animada. Você flagra algo",
       "metadata": {
         "tensao": 5,
         "ambiente": "Publico",
@@ -234,11 +234,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Festa animada. Voce encontra um amigo que confia muito em voce."
+          "texto": "Festa animada. Você encontra um amigo que confia muito em você."
         },
         {
           "tipo": "evento",
-          "texto": "Voce flagra o parceiro dele ficando com outra num canto escondido."
+          "texto": "Você flagra o parceiro dele ficando com outra num canto escondido."
         }
       ],
       "options": [
@@ -246,7 +246,7 @@
           "text": "Vou direto no amigo e conto tudo ali mesmo.",
           "subtext": "Verdade imediata",
           "tone": "provocativo",
-          "feedback": "Bomba na festa. Caos total, mas nao segurou.",
+          "feedback": "Bomba na festa. Caos total, mas não segurou.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -263,8 +263,8 @@
           }
         },
         {
-          "text": "Finjo que nao vi. Nao e meu relacionamento.",
-          "subtext": "Nao interferencia",
+          "text": "Finjo que não vi. Não e meu relacionamento.",
+          "subtext": "Não interferencia",
           "tone": "evasivo",
           "feedback": "Se protegeu. O peso de saber vai ficar.",
           "evidence": {
@@ -327,7 +327,7 @@
     {
       "id": "s9",
       "type": "NORMAL",
-      "sceneHook": "Formatura do amigo. Voce no publico",
+      "sceneHook": "Formatura do amigo. Você no publico",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -339,7 +339,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Formatura de um amigo proximo. Voce ta orgulhoso e feliz por ele."
+          "texto": "Formatura de um amigo proximo. Você ta orgulhoso e feliz por ele."
         },
         {
           "tipo": "evento",
@@ -368,8 +368,8 @@
           }
         },
         {
-          "text": "Rio junto como se nao me afetasse. Processo depois.",
-          "subtext": "Mascara social",
+          "text": "Rio junto como se não me afetasse. Processo depois.",
+          "subtext": "Máscara social",
           "tone": "evasivo",
           "feedback": "Absorveu o golpe em publico. Ninguem viu a ferida.",
           "evidence": {
@@ -408,7 +408,7 @@
           }
         },
         {
-          "text": "Fico quieto, depois puxo quem contou: 'Nao era pra sair.'",
+          "text": "Fico quieto, depois puxo quem contou: 'Não era pra sair.'",
           "subtext": "Confronto privado",
           "tone": "pragmatico",
           "feedback": "Segurou na hora certa. Cobrou no lugar certo.",
@@ -444,7 +444,7 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Voce descobre algo grave sobre quem considerava seu melhor amigo."
+          "texto": "Você descobre algo grave sobre quem considerava seu melhor amigo."
         },
         {
           "tipo": "evento",
@@ -473,7 +473,7 @@
           }
         },
         {
-          "text": "Sumo sem explicacao. Ele nao merece nem o confronto.",
+          "text": "Sumo sem explicacao. Ele não merece nem o confronto.",
           "subtext": "Desaparecimento",
           "tone": "evasivo",
           "feedback": "O silencio e a pior resposta pra quem quer atencao.",

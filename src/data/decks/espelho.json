@@ -1,7 +1,7 @@
 {
   "deckId": "espelho",
   "name": "O Espelho",
-  "description": "Relacionamentos intimos que revelam quem voce e de verdade.",
+  "description": "Relacionamentos intimos que revelam quem você e de verdade.",
   "tema": "Relacionamentos",
   "category": "calibragem",
   "tier": 1,
@@ -26,7 +26,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "No meio da fala, voce percebe que discorda fortemente. Voce..."
+          "texto": "No meio da fala, você percebe que discorda fortemente. Você..."
         }
       ],
       "options": [
@@ -34,7 +34,7 @@
           "text": "Interrompo e coloco meu ponto.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "feedback": "Voce nao segura o que pensa.",
+          "feedback": "Você não segura o que pensa.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -47,10 +47,10 @@
           }
         },
         {
-          "text": "Escuto ate o fim. Meu turno vem depois.",
+          "text": "Escuto até o fim. Meu turno vem depois.",
           "subtext": "Mantem o espaco",
           "tone": "neutro",
-          "feedback": "Voce respeita o tempo da fala do outro.",
+          "feedback": "Você respeita o tempo da fala do outro.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -66,7 +66,7 @@
           "text": "Acho uma brecha gentil pra discordar.",
           "subtext": "Entra pelo lado",
           "tone": "neutro",
-          "feedback": "Voce fala, mas sem atropelar.",
+          "feedback": "Você fala, mas sem atropelar.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -95,15 +95,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Alguem da familia solta um comentario preconceituoso. Voce..."
+          "texto": "Alguem da familia solta um comentario preconceituoso. Você..."
         }
       ],
       "options": [
         {
-          "text": "Rebato na mesa: 'Isso nao tem cabimento.'",
+          "text": "Rebato na mesa: 'Isso não tem cabimento.'",
           "subtext": "Encara a mesa",
           "tone": "pragmatico",
-          "feedback": "Voce nao deixa passar, mesmo em casa.",
+          "feedback": "Você não deixa passar, mesmo em casa.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -116,10 +116,10 @@
           }
         },
         {
-          "text": "Mudo de assunto. Nao e hora.",
+          "text": "Mudo de assunto. Não e hora.",
           "subtext": "Preserva o almoco",
           "tone": "evasivo",
-          "feedback": "Voce protege o clima — a um custo.",
+          "feedback": "Você protege o clima — a um custo.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -135,7 +135,7 @@
           "text": "Respondo curto e sigo comendo.",
           "subtext": "Marca sem brigar",
           "tone": "neutro",
-          "feedback": "Voce sinaliza sem rachar a mesa.",
+          "feedback": "Você sinaliza sem rachar a mesa.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -152,7 +152,7 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Voce quer falar de algo que te incomoda",
+      "sceneHook": "Você quer falar de algo que te incomoda",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -164,7 +164,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Ha dias algo do(a) parceiro(a) te incomoda. Hoje voce..."
+          "texto": "Ha dias algo do(a) parceiro(a) te incomoda. Hoje você..."
         }
       ],
       "options": [
@@ -172,7 +172,7 @@
           "text": "Chamo pra conversar agora, sem rodeio.",
           "subtext": "Direto",
           "tone": "pragmatico",
-          "feedback": "Voce poe na mesa antes de azedar.",
+          "feedback": "Você poe na mesa antes de azedar.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -188,7 +188,7 @@
           "text": "Espero passar — quase sempre passa.",
           "subtext": "Deixa decantar",
           "tone": "evasivo",
-          "feedback": "Voce filtra o que e pedra e o que e poeira.",
+          "feedback": "Você filtra o que e pedra e o que e poeira.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -204,7 +204,7 @@
           "text": "Penso em como falar antes de falar.",
           "subtext": "Prepara o terreno",
           "tone": "neutro",
-          "feedback": "Voce monta a frase antes de disparar.",
+          "feedback": "Você monta a frase antes de disparar.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -232,7 +232,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Ex aparece no whats com 'oi, tudo bem?'. Voce..."
+          "texto": "Ex aparece no whats com 'oi, tudo bem?'. Você..."
         }
       ],
       "options": [
@@ -240,7 +240,7 @@
           "text": "Respondo curto e encerro rapido.",
           "subtext": "Cordial, firme",
           "tone": "pragmatico",
-          "feedback": "Voce nao abre porta que ja fechou.",
+          "feedback": "Você não abre porta que já fechou.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -254,9 +254,9 @@
         },
         {
           "text": "Nem vejo. Arquivei faz tempo.",
-          "subtext": "Nao existe",
+          "subtext": "Não existe",
           "tone": "evasivo",
-          "feedback": "Voce ja virou a pagina faz tempo.",
+          "feedback": "Você já virou a pagina faz tempo.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -272,7 +272,7 @@
           "text": "Respondo e puxo conversa. Curioso(a).",
           "subtext": "Deixa rolar",
           "tone": "neutro",
-          "feedback": "Voce nao fecha a porta por fechar.",
+          "feedback": "Você não fecha a porta por fechar.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -301,7 +301,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce ja ia dormir. A ligacao entra. Voce..."
+          "texto": "Você já ia dormir. A ligacao entra. Você..."
         }
       ],
       "options": [
@@ -309,7 +309,7 @@
           "text": "Atendo. Amigo precisa, eu to.",
           "subtext": "Presente",
           "tone": "protetor",
-          "feedback": "Voce aparece quando precisa.",
+          "feedback": "Você aparece quando precisa.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -325,7 +325,7 @@
           "text": "Respondo: 'Amanha cedo, ta?'",
           "subtext": "Preserva sua noite",
           "tone": "pragmatico",
-          "feedback": "Voce sabe que sem voce dormindo ninguem ganha.",
+          "feedback": "Você sabe que sem você dormindo ninguem ganha.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -341,7 +341,7 @@
           "text": "Leio a cara do audio e decido.",
           "subtext": "Caso a caso",
           "tone": "neutro",
-          "feedback": "Voce triagem antes de acionar.",
+          "feedback": "Você triagem antes de acionar.",
           "evidence": {
             "filtro": {
               "min": 0.55,
@@ -358,7 +358,7 @@
     {
       "id": "q6",
       "type": "NORMAL",
-      "sceneHook": "Voce errou. Errou mesmo",
+      "sceneHook": "Você errou. Errou mesmo",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -370,7 +370,7 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Voce pisou na bola com alguem proximo. Voce..."
+          "texto": "Você pisou na bola com alguem proximo. Você..."
         }
       ],
       "options": [
@@ -378,7 +378,7 @@
           "text": "Peco desculpa na hora, sem defesa.",
           "subtext": "Assume",
           "tone": "pragmatico",
-          "feedback": "Voce nao foge do que e seu.",
+          "feedback": "Você não foge do que e seu.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -394,7 +394,7 @@
           "text": "Explico meu lado. Tem contexto.",
           "subtext": "Justifica",
           "tone": "pragmatico",
-          "feedback": "Voce defende o seu — as vezes cedo demais.",
+          "feedback": "Você defende o seu — as vezes cedo demais.",
           "evidence": {
             "vigor": {
               "min": 0.6,
@@ -410,7 +410,7 @@
           "text": "Deixo o tempo resolver.",
           "subtext": "Espera decantar",
           "tone": "evasivo",
-          "feedback": "Voce aposta que o tempo limpa.",
+          "feedback": "Você aposta que o tempo limpa.",
           "evidence": {
             "desapego": {
               "min": 0.6,
@@ -427,7 +427,7 @@
     {
       "id": "q7",
       "type": "NORMAL",
-      "sceneHook": "Sabado a noite, voce cansado(a)",
+      "sceneHook": "Sabado a noite, você cansado(a)",
       "metadata": {
         "tensao": 2,
         "ambiente": "Social",
@@ -438,15 +438,15 @@
       "slides": [
         {
           "tipo": "evento",
-          "texto": "Grupo te chama pra sair. Voce nao tava a fim."
+          "texto": "Grupo te chama pra sair. Você não tava a fim."
         }
       ],
       "options": [
         {
-          "text": "Falo a verdade: 'Hoje nao, to cansado(a).'",
+          "text": "Falo a verdade: 'Hoje não, to cansado(a).'",
           "subtext": "Verdade crua",
           "tone": "pragmatico",
-          "feedback": "Voce nao inventa desculpa.",
+          "feedback": "Você não inventa desculpa.",
           "evidence": {
             "presenca": {
               "min": 0.6,
@@ -460,9 +460,9 @@
         },
         {
           "text": "Dou uma desculpa qualquer.",
-          "subtext": "Nao quer explicar",
+          "subtext": "Não quer explicar",
           "tone": "evasivo",
-          "feedback": "Voce prioriza o clima antes da verdade.",
+          "feedback": "Você prioriza o clima antes da verdade.",
           "evidence": {
             "harmonia": {
               "min": 0.6,
@@ -478,7 +478,7 @@
           "text": "Vou, mesmo cansado(a). Amigos importam.",
           "subtext": "Forca a barra",
           "tone": "protetor",
-          "feedback": "Voce paga o preco pra estar junto.",
+          "feedback": "Você paga o preco pra estar junto.",
           "evidence": {
             "vigor": {
               "min": 0.6,

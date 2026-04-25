@@ -217,7 +217,7 @@ export default function PlayPage({ params }: { params: Promise<{ deckId: string 
                 className="mx-5 w-full max-w-xs rounded-2xl border border-white/15 bg-[#0b0a14] p-5 text-center"
               >
                 <p className="text-sm font-semibold text-white/90">Sair da calibragem?</p>
-                <p className="mt-1 text-[11px] text-white/55">Suas respostas ate aqui ficam salvas.</p>
+                <p className="mt-1 text-[11px] text-white/55">Suas respostas até aqui ficam salvas.</p>
                 <div className="mt-4 flex gap-2">
                   <button
                     type="button"
