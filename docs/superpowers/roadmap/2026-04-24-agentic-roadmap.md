@@ -50,7 +50,7 @@ Fazer o estado do app sobreviver a qualquer mudança de schema, crash, limpeza d
 
 ---
 
-## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO  🟡 EM ANDAMENTO (19/23)
+## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO  🟡 EM ANDAMENTO (20/23)
 **Mantém Nível 6. Plan:** `docs/superpowers/plans/2026-04-21-motor-bayesiano.md`.
 
 ### Objetivo
@@ -65,21 +65,21 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 - ✅ **Task 18** — `MiniRadar` aceita `beliefs?: PlayerBeliefs` (playerMean recentered).
 - ✅ **Task 19** — `ProfileCardCompact` + `/perfil` mostram `archetypeDisplayState` (discovering/tendency/firm) e label de confiança global.
 - ⏳ **Task 20** — `RunReportCard` mostra evidence per-answer (precisa adicionar `answers[].evidence` ao snapshot). [follow-up]
-- ⏳ **Task 21** — Cleanup legacy: deletar `resolveWeights`, `applyDampenedWeights`, `weights`/`intent`/`baseWeights` em decks. [follow-up — risco de breakage, fazer com calma]
+- 🟡 **Task 21 (parcial)** — Removidos `resolveWeights`/`CONTEXT_MODIFIERS`/`metadataMatches`, `intent`+`baseWeights` em types e nos 12 decks (502 campos). Reducer ANSWER consome `option.weights` direto. **Pendente:** remover `weights` field + `axes`/`recentWeights` em CalibrationState (mexe em /perfil radar, ShareButton, getConsistency — fazer junto).
 - ⏳ **Task 22-23** — Docs autores + golden test final. [follow-up]
 
 ### GATE ✅
 - ✅ Radar/perfil renderizam belief + confidence.
 - ✅ `archetypeDisplayState` gate: descobrindo < 0.3, tendência < 0.6, firme ≥ 0.6.
 - ✅ Training decks bypassam persistência.
-- ⏳ `weights` legacy e `intent`/`baseWeights` **removidos** do código e dos JSON. (Task 21 pendente)
+- 🟡 `intent`/`baseWeights` **removidos** do código e dos JSON. `weights` ainda sobrevive até /perfil radar migrar pra beliefs.
 - ⏳ Golden test: pelo menos 10 runs sintéticas convergem pra arquétipo esperado. (Task 23 pendente)
 
 ### Sanity (tip do main)
 - `npx tsc --noEmit` — 0 erros
-- `npm test` — 87/87 passando
+- `npm test` — 72/72 passando (15 testes do pipeline legado removidos junto)
 - `npm run build` — 10 rotas geradas
-- `npm run deck:validate` — 0 erros, 10 warnings (pré-existentes)
+- `npm run deck:validate` — 0 erros, 6 warnings (pré-existentes)
 
 ---
 
