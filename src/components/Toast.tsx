@@ -90,7 +90,7 @@ function ToastHost({ items }: { items: ToastItem[] }) {
 }
 
 const KIND_STYLES: Record<ToastKind, string> = {
-  info:    'border-white/18 bg-black/72 text-white/88',
-  success: 'border-emerald-400/35 bg-emerald-500/18 text-emerald-100',
-  error:   'border-red-400/35 bg-red-500/18 text-red-100',
+  info:    'border-border-default bg-bg-glass-strong text-text-primary',
+  success: 'border-state-success-border bg-state-success-bg text-state-success',
+  error:   'border-state-error-border bg-state-error-bg text-state-error',
 };
