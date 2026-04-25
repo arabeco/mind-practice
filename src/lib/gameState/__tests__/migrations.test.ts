@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { runMigrations } from '../migrations';
 import { v1ToV2 } from '../migrations/v1-to-v2';
 import { v2ToV3 } from '../migrations/v2-to-v3';
+import { v3ToV4 } from '../migrations/v3-to-v4';
 import { CURRENT_SCHEMA_VERSION } from '../schema';
 
 test('v1 → v2: userStats vira calibration', () => {
@@ -26,19 +27,35 @@ test('v1 → v2: sem userStats retorna input inalterado', () => {
 
 test('v2 → v3: adiciona schemaVersion=3, updatedAt, devicePersistedAt', () => {
   const v2 = { calibration: { axes: {}, totalResponses: 5 }, wallet: { fichas: 100 } };
-  const v3 = v2ToV3(v2) as any;
-  assert.equal(v3.schemaVersion, 3);
-  assert.ok(typeof v3.updatedAt === 'string');
-  assert.equal(v3.devicePersistedAt, null);
-  assert.equal(v3.wallet.fichas, 100); // preservado
+  const out = v2ToV3(v2) as any;
+  assert.equal(out.schemaVersion, 3);
+  assert.ok(typeof out.updatedAt === 'string');
+  assert.equal(out.devicePersistedAt, null);
+  assert.equal(out.wallet.fichas, 100); // preservado
 });
 
-test('runMigrations encadeia v1 → v3', () => {
+test('runMigrations encadeia v1 → v4 (calibration descartada na bayes step)', () => {
   const v1 = { userStats: { vigor: 1, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 }, completedDecks: {} };
   const result = runMigrations(v1, 1) as any;
-  assert.equal(result.schemaVersion, 3);
-  assert.ok(result.calibration);
-  assert.deepEqual(result.calibration.axes, v1.userStats);
+  assert.equal(result.schemaVersion, 4);
+  // v3→v4 wipes calibration — defaults reapply on normalize.
+  assert.equal(result.calibration, undefined);
+});
+
+test('v3 → v4: wipe calibration, preserva wallet/streak/decks', () => {
+  const v3 = {
+    schemaVersion: 3,
+    calibration: { axes: { vigor: 5, harmonia: -3, filtro: 0, presenca: 1, desapego: 0 }, totalResponses: 50 },
+    wallet: { fichas: 200 },
+    streak: 7,
+    completedDecks: { basic_01: '2026-01-01T00:00:00Z' },
+  };
+  const v4 = v3ToV4(v3) as any;
+  assert.equal(v4.schemaVersion, 4);
+  assert.equal(v4.calibration, undefined);
+  assert.equal(v4.wallet.fichas, 200);
+  assert.equal(v4.streak, 7);
+  assert.equal(v4.completedDecks.basic_01, '2026-01-01T00:00:00Z');
 });
 
 test('runMigrations throw quando versão > atual', () => {
@@ -49,7 +66,7 @@ test('runMigrations throw quando versão > atual', () => {
 });
 
 test('runMigrations no-op quando já na versão atual', () => {
-  const v3 = { schemaVersion: 3, wallet: { fichas: 50 } };
-  const result = runMigrations(v3, 3) as any;
-  assert.deepEqual(result, v3);
+  const v4 = { schemaVersion: 4, wallet: { fichas: 50 } };
+  const result = runMigrations(v4, 4) as any;
+  assert.deepEqual(result, v4);
 });
