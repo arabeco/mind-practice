@@ -26,6 +26,7 @@ import {
   PLUS_DAILY_BONUS,
 } from '@/types/game';
 import { ARCHETYPES, matchArchetype } from '@/data/archetypes';
+import { matchArchetypes } from '@/lib/bayesEngine';
 import { resolveWeights } from '@/lib/narrativeEngine';
 import {
   appendRunAnswer,
@@ -105,11 +106,8 @@ export const initialState: GameState = {
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case 'START_DECK':
-      const startArchetype = matchArchetype(
-        state.calibration.axes,
-        state.calibration.recentWeights,
-        state.calibration.totalResponses,
-      );
+      const startBeliefs = state.calibration.beliefs ?? createPriorProfile();
+      const startArchetype = matchArchetypes(startBeliefs).primary.archetype;
       return {
         ...state,
         activeDeck: action.deck,
@@ -235,13 +233,11 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const isFirstTimeDeck = deckId ? !state.completedDecks[deckId] : false;
       if (isFirstTimeDeck) bonusFichas += DECK_FIRST_TIME_BONUS;
 
-      const prevArchId = ARCHETYPES.find(a => a.name === state.activeRun?.startArchetype)?.id;
-      const archetype = matchArchetype(
-        state.calibration.axes,
-        state.calibration.recentWeights,
-        state.calibration.totalResponses,
-        prevArchId,
-      );
+      const finishBeliefs = state.calibration.beliefs ?? createPriorProfile();
+      const archetype = matchArchetypes(finishBeliefs).primary.archetype;
+      // prevArchId/ARCHETYPES retained for hysteresis logic — re-introduced in Task 21 cleanup.
+      void ARCHETYPES;
+      void matchArchetype;
       const snapshot = state.activeRun
         ? createDeckSnapshot({
             session: state.activeRun,

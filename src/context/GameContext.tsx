@@ -9,6 +9,7 @@ import {
 } from 'react';
 import { type GameState, type Deck, type Archetype } from '@/types/game';
 import { matchArchetype } from '@/data/archetypes';
+import { matchArchetypes, createPriorProfile } from '@/lib/bayesEngine';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
 import {
   isDeckPlayable,
@@ -80,13 +81,15 @@ export function GameProvider({ children }: { children: ReactNode }) {
   );
 
   const getArchetype = useCallback(
-    () => matchArchetype(
-      state.calibration.axes,
-      state.calibration.recentWeights,
-      state.calibration.totalResponses,
-    ),
-    [state.calibration.axes, state.calibration.recentWeights, state.calibration.totalResponses],
+    () => {
+      const beliefs = state.calibration.beliefs ?? createPriorProfile();
+      return matchArchetypes(beliefs).primary.archetype;
+    },
+    [state.calibration.beliefs],
   );
+
+  // Keep legacy reference compiled until Task 21 deletes matchArchetype.
+  void matchArchetype;
 
   const precision = getPrecision(state.calibration.totalResponses);
   const consistency = getConsistency(state.calibration.recentWeights);
