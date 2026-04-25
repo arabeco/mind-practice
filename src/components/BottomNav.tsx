@@ -65,16 +65,16 @@ export default function BottomNav() {
                   <div
                     className={`flex h-14 w-14 items-center justify-center rounded-2xl border shadow-lg transition-colors ${
                       isActive
-                        ? 'border-cyan-400/60 bg-cyan-500/20 shadow-cyan-500/25'
-                        : 'border-white/16 bg-white/[0.08] shadow-black/20'
+                        ? 'border-accent-cyan-border bg-accent-cyan-bg shadow-cyan-500/25'
+                        : 'border-border-default bg-bg-surfaceStrong shadow-black/20'
                     }`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className={`h-6 w-6 ${
                         isActive
-                          ? 'text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
-                          : 'text-white/55'
+                          ? 'text-accent-cyan drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
+                          : 'text-text-tertiary'
                       }`}
                       fill="none"
                       viewBox="0 0 24 24"
@@ -90,7 +90,7 @@ export default function BottomNav() {
                   </div>
                   <span
                     className={`text-[11px] font-medium tracking-[0.08em] ${
-                      isActive ? 'text-white' : 'text-white/48'
+                      isActive ? 'text-text-primary' : 'text-text-tertiary'
                     }`}
                   >
                     {tab.label}
@@ -109,7 +109,7 @@ export default function BottomNav() {
                   <>
                     <motion.div
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-[1.12rem] border border-white/16 bg-white/[0.08]"
+                      className="absolute inset-0 rounded-[1.12rem] border border-border-default bg-bg-surfaceStrong"
                       transition={{
                         type: 'spring',
                         stiffness: 420,
@@ -118,7 +118,7 @@ export default function BottomNav() {
                     />
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute left-1/2 top-1 h-1 w-7 -translate-x-1/2 rounded-full bg-cyan-300/90 shadow-[0_0_18px_rgba(103,232,249,0.85)]"
+                      className="absolute left-1/2 top-1 h-1 w-7 -translate-x-1/2 rounded-full bg-accent-cyan shadow-[0_0_18px_rgba(103,232,249,0.85)]"
                       transition={{
                         type: 'spring',
                         stiffness: 500,
@@ -131,8 +131,8 @@ export default function BottomNav() {
                   xmlns="http://www.w3.org/2000/svg"
                   className={`relative z-10 h-5 w-5 ${
                     isActive
-                      ? 'text-cyan-300 drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
-                      : 'text-white/55'
+                      ? 'text-accent-cyan drop-shadow-[0_0_12px_rgba(103,232,249,0.65)]'
+                      : 'text-text-tertiary'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -147,7 +147,7 @@ export default function BottomNav() {
                 </svg>
                 <span
                   className={`relative z-10 text-[11px] font-medium tracking-[0.08em] ${
-                    isActive ? 'text-white' : 'text-white/48'
+                    isActive ? 'text-text-primary' : 'text-text-tertiary'
                   }`}
                 >
                   {tab.label}
