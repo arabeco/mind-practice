@@ -76,7 +76,8 @@ export type GameAction =
   | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string }
   | { type: 'UNLOCK_DECK'; deckId: string; cost: number }
   | { type: 'SET_PLUS_STATUS'; active: boolean; expiresAt: string | null; startedAt?: string }
-  | { type: 'CLAIM_DAILY_PLUS_BONUS' };
+  | { type: 'CLAIM_DAILY_PLUS_BONUS' }
+  | { type: 'MARK_LEVEL_SEEN'; level: number };
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -96,6 +97,7 @@ export const initialState: GameState = {
   campaigns: {},
   ownedDeckIds: [],
   plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
+  lastSeenLevel: 1,
 };
 
 // ---------------------------------------------------------------------------
@@ -491,6 +493,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         },
         ownedDeckIds: [...state.ownedDeckIds, action.deckId],
       };
+    }
+
+    case 'MARK_LEVEL_SEEN': {
+      // Idempotente: so sobe (nunca rebaixa). Garante que ceremony nao reabre.
+      if (action.level <= state.lastSeenLevel) return state;
+      return { ...state, lastSeenLevel: action.level };
     }
 
     default:

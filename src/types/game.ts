@@ -345,6 +345,8 @@ export interface GameState {
   ownedDeckIds: string[];
   /** Estado da assinatura Plus do usuário. */
   plusSubscription: PlusSubscription;
+  /** Maior nivel de perfil ja visto pelo jogador. Usado pra disparar a tela cerimonial em level-up. */
+  lastSeenLevel: number;
 }
 
 // ============================================================

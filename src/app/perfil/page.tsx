@@ -12,6 +12,8 @@ import {
 } from '@/lib/archetypeAvatar';
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
+import LevelBadge from '@/components/LevelBadge';
+import { getPlayerLevel } from '@/lib/playerLevel';
 import { useToast } from '@/components/Toast';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
 import type { DeckSnapshot, StatKey } from '@/types/game';
@@ -104,6 +106,10 @@ export default function PerfilPage() {
   const consistencyPct = Math.min(consistency * 100, 100);
   const precisionLabel = getPrecisionLabel(precision);
   const consistencyLabel = getConsistencyLabel(consistency);
+  const levelInfo = useMemo(
+    () => getPlayerLevel(beliefsProfile, state.calibration.totalResponses),
+    [beliefsProfile, state.calibration.totalResponses],
+  );
 
   function handleSaveNickname() {
     const trimmed = nicknameInput.trim();
@@ -273,6 +279,13 @@ export default function PerfilPage() {
             </p>
           </div>
         </div>
+      </motion.section>
+
+      {/* ================================================================ */}
+      {/* Level badge — summary do perfil                                  */}
+      {/* ================================================================ */}
+      <motion.section variants={fadeUp} className="mt-3">
+        <LevelBadge info={levelInfo} />
       </motion.section>
 
       {/* ================================================================ */}

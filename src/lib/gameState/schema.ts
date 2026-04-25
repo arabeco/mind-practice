@@ -64,6 +64,7 @@ export const GameStateSchema = z.object({
   campaigns: z.record(z.string(), z.any()).default({}),
   ownedDeckIds: z.array(z.string()).default([]),
   plusSubscription: PlusSubscriptionSchema,
+  lastSeenLevel: z.number().int().min(1).max(10).default(1),
 }).strip();
 
 /** Tipo persistido — inclui schemaVersion + updatedAt + devicePersistedAt. */

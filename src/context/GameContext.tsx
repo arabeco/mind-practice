@@ -20,8 +20,10 @@ import {
 import { gameReducer, type GameAction } from './gameReducer';
 import { INITIAL_STATE } from '@/lib/gameState/defaults';
 import SyncConflictModal from '@/components/SyncConflictModal';
+import LevelUpCeremony from '@/components/LevelUpCeremony';
 import { useSocialFeed } from './useSocialFeed';
 import { useGameStatePersistence } from './useGameStatePersistence';
+import { useLevelCeremony } from './useLevelCeremony';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
@@ -55,6 +57,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_STATE);
   const { hydrated, conflict, resolveConflict } = useGameStatePersistence(state, dispatch);
   useSocialFeed(state, hydrated);
+  const { pending: levelUp, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),
@@ -133,6 +136,15 @@ export function GameProvider({ children }: { children: ReactNode }) {
         cloud={conflict?.cloud ?? null}
         onResolve={resolveConflict}
       />
+      {levelUp && (
+        <LevelUpCeremony
+          open={true}
+          info={levelUp.info}
+          beliefs={state.calibration.beliefs ?? createPriorProfile()}
+          archetypeMatch={levelUp.archetypeMatch}
+          onClose={dismissLevelUp}
+        />
+      )}
     </GameContext.Provider>
   );
 }
