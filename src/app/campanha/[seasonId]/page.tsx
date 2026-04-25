@@ -90,6 +90,7 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
         weights: option.weights ?? {},
         tone: option.tone,
         tensao,
+        evidence: option.evidence,
       });
 
       // Short delay to show feedback, then reveal countdown or ending

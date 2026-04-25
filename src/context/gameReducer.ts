@@ -39,6 +39,11 @@ import {
   CALIBRAGEM_IDS,
   CALIBRAGEM_COMPLETION_FICHAS,
 } from '@/lib/gameStats';
+import {
+  DEFAULT_CONFIG,
+  createPriorProfile,
+  updateProfile,
+} from '@/lib/bayesEngine';
 
 // ---------------------------------------------------------------------------
 // Actions
@@ -65,6 +70,7 @@ export type GameAction =
       weights: Partial<Record<StatKey, number>>;
       tone: Tone;
       tensao: number;
+      evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
     }
   | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number }
   | { type: 'SKIP_CAMPAIGN_COOLDOWN'; seasonId: string }
@@ -122,16 +128,33 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const resolved = resolveWeights(action.option, question.metadata, action.responseTimeMs);
       const tensao = question.metadata.tensao;
 
+      const baseCalibration = applyDampenedWeights(
+        state.calibration,
+        resolved.finalWeights,
+        action.option.tone,
+        tensao,
+        action.responseTimeMs,
+        action.intensity,
+      );
+
+      // Bayesian beliefs run in parallel to the legacy axes so both motors stay in sync
+      // until Task 21 deletes the legacy pipeline.
+      const evidence = action.option.evidence;
+      const nextBeliefs = evidence
+        ? updateProfile(
+            baseCalibration.beliefs ?? createPriorProfile(),
+            evidence,
+            DEFAULT_CONFIG,
+            new Date(),
+          )
+        : (baseCalibration.beliefs ?? createPriorProfile());
+
       return {
         ...state,
-        calibration: applyDampenedWeights(
-          state.calibration,
-          resolved.finalWeights,
-          action.option.tone,
-          tensao,
-          action.responseTimeMs,
-          action.intensity,
-        ),
+        calibration: {
+          ...baseCalibration,
+          beliefs: nextBeliefs,
+        },
         activeRun: state.activeRun
           ? appendRunAnswer(
               state.activeRun,
@@ -346,12 +369,26 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       // Apply calibration like a normal ANSWER so campaign responses still
       // shape the player's profile.
-      const newCalibration = applyDampenedWeights(
+      const baseCalibration = applyDampenedWeights(
         state.calibration,
         action.weights,
         action.tone,
         action.tensao,
       );
+
+      const campaignNextBeliefs = action.evidence
+        ? updateProfile(
+            baseCalibration.beliefs ?? createPriorProfile(),
+            action.evidence,
+            DEFAULT_CONFIG,
+            new Date(),
+          )
+        : (baseCalibration.beliefs ?? createPriorProfile());
+
+      const newCalibration = {
+        ...baseCalibration,
+        beliefs: campaignNextBeliefs,
+      };
 
       // +30 fichas when an ending is reached.
       const reachedEnding = !!action.endingId;
