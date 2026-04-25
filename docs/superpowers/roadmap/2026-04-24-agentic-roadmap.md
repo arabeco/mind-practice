@@ -84,24 +84,35 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 
 ---
 
-## 🎨 FASE 5 — DESIGN SYSTEM + TELAS RITUAIS
+## 🎨 FASE 5 — DESIGN SYSTEM + TELAS RITUAIS  🟡 EM ANDAMENTO (F5a ✅, F5b pendente)
 **Sobe ID visual de 7.5 → 9.**
 
-### Objetivo
-Formalizar tokens + variants, construir 3 telas "cerimoniais" que viram o seu momento viral.
+### F5a — Tokens + Primitivos ✅
+- ✅ `src/design/tokens.ts` — primitives + semantics tipados
+- ✅ `globals.css` `@theme inline` sincronizado, com test de sync
+- ✅ 6 componentes UI (`Button`, `Card`, `Dialog`, `Badge`, `Pill`, `Ring`) com cva variants
+- ✅ `/dev/ui` showcase
+- ✅ Migração de prova: `Toast`, `BottomNav`, `ProfileCardCompact` (zero hex literal)
+- ✅ `scripts/check-utf8.ts` lint + sweep aplicado (568 substituições em 27 arquivos)
+- ✅ `docs/design/tokens.md` + `components.md`
 
-### Tarefas
-1. **Tokens em `src/design/tokens.ts`:** cores, spacing, typography, motion curves. Tailwind config consome. Troca de tema em 1 arquivo.
-2. **Componentes base** em `src/components/ui/`: Button (3 variants), Card, Dialog, Badge, Pill, Ring (progress). Cada um com Storybook-like page `/dev/ui`.
-3. **Tela "primeiro arquétipo desbloqueado":** cinematográfica, full-screen takeover, haptic + som + share prompt. Dispara **1 vez** no primeiro lock.
-4. **Tela "evolução de arquétipo":** quando migra de um pra outro após N runs — mostra "você era X, virou Y, por causa disso" com micro-timeline.
-5. **Tela "season finale":** quando acaba uma season, um resumo tipo Spotify Wrapped com o arquétipo-da-season + stats + share.
-6. **Refactor ASCII→UTF-8** dos copys (acentuar "Arquétipo", "Retirada" etc). Uma passagem única.
+### F5b — Telas Rituais ⏳ (próximo brainstorm)
+- ⏳ "Primeiro arquétipo" — full-screen takeover, dispara 1 vez
+- ⏳ "Evolução" — quando arquétipo migra de A pra B
+- ⏳ "Season finale" — Wrapped-style ao terminar season
 
-### GATE ✅
-- Zero estilos inline fora de tokens.
-- 3 telas cerimoniais funcionando em devices reais.
-- Design system documentado em `docs/design/`.
+### GATE F5a ✅
+- 0 estilos inline (hex/raw) em `Toast`, `BottomNav`, `ProfileCardCompact`
+- `tokens-sync.test.ts` verde
+- `npm run check:utf8` zero violações
+- `/dev/ui` mostra todos primitivos × variants
+
+### Sanity (tip do main após F5a)
+- `npx tsc --noEmit` — 0 erros
+- `npm test` — 113/113 passando (testes existentes + UI/sync/utf8)
+- `npm run build` — 12 rotas (11 + /dev/ui)
+- `npm run check:utf8` — ✅
+- `npm run deck:validate` — 0 erros, 10 warnings (content-side)
 
 ---
 
