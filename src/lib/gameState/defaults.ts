@@ -5,12 +5,10 @@ import {
 } from '@/types/game';
 import { createPriorProfile } from '@/lib/bayesEngine';
 
-/** Calibração zerada — contrato: todos os eixos em 0, sem histórico. */
+/** Calibração zerada — contrato: prior bayesiano uniforme, sem histórico. */
 const INITIAL_CALIBRATION: GameState['calibration'] = {
-  axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
   beliefs: createPriorProfile(),
   totalResponses: 0,
-  recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
   toneHistory: [],
   snapshots: [],
 };

@@ -7,7 +7,7 @@ const stateAt = (updatedAt: string, devicePersistedAt: string | null = null): Pe
   schemaVersion: 3,
   updatedAt,
   devicePersistedAt,
-  calibration: { axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 }, totalResponses: 0, recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] }, toneHistory: [], snapshots: [] },
+  calibration: { totalResponses: 0, toneHistory: [], snapshots: [] },
   wallet: { fichas: 20, lastDailyClaim: null, totalEarned: 20, totalSpent: 0, runsPaidToday: 0, runsPaidDate: null },
   currentQuestion: 0,
   unlockedDecks: [],

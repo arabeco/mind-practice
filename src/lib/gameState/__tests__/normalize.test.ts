@@ -19,8 +19,7 @@ test('v1 → v4: preserva wallet/decks/streak, calibration wipe (Bayes reset)', 
   assert.equal(s.wallet.totalEarned, 120);
   assert.equal(Object.keys(s.completedDecks).length, 2);
   assert.equal(s.lastTrainingDate, '2026-01-08');
-  // Calibration reaplicada do INITIAL — beliefs uniformes, axes zerados.
-  assert.equal(s.calibration.axes.vigor, 0);
+  // Calibration reaplicada do INITIAL — beliefs uniformes (axes/recentWeights stripados em v5).
   assert.equal(s.calibration.totalResponses, 0);
 });
 

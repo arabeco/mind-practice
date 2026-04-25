@@ -36,7 +36,10 @@ function testDecksLoad(): TestResult {
         assert(q.options.length >= 2, `${d.deckId}/${q.id} has <2 options`);
         for (const o of q.options) {
           assert(typeof o.tone === 'string', `${d.deckId}/${q.id} option missing tone`);
-          assert(typeof o.weights === 'object', `${d.deckId}/${q.id} option missing weights`);
+          assert(
+            o.evidence !== undefined && Object.keys(o.evidence).length > 0,
+            `${d.deckId}/${q.id} option missing evidence`,
+          );
         }
       }
     }
@@ -93,20 +96,13 @@ function testCalibrationMath(): TestResult {
     const half = CALIBRATION_WINDOW / 2;
     assert(getPrecision(half) === 50, `precision(${half}) should be 50`);
 
-    // Consistency with no data → 0
-    const empty: Record<StatKey, number[]> = { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] };
-    assert(getConsistency(empty) === 0, 'consistency(empty) should be 0');
+    // Consistency com beliefs undefined → 0
+    assert(getConsistency(undefined) === 0, 'consistency(undefined) should be 0');
 
-    // Consistency with identical responses → high
-    const steady: Record<StatKey, number[]> = {
-      vigor: [5, 5, 5, 5, 5],
-      harmonia: [3, 3, 3, 3, 3],
-      filtro: [-2, -2, -2, -2, -2],
-      presenca: [1, 1, 1, 1, 1],
-      desapego: [0, 0, 0, 0, 0],
-    };
-    const c = getConsistency(steady);
-    assert(c >= 0.9, `consistency(steady) should be ≥0.9, got ${c.toFixed(2)}`);
+    // Consistency com prior uniforme → baixo (perto de 0).
+    const prior = INITIAL_CALIBRATION.beliefs;
+    const cPrior = getConsistency(prior);
+    assert(cPrior < 0.2, `consistency(prior) should be ≪ 0.2, got ${cPrior.toFixed(2)}`);
 
     return { name: 'calibration-math', pass: true };
   } catch (e: unknown) {
@@ -125,7 +121,7 @@ function testRunScoring(): TestResult {
     // Simulate answering first question
     const q = deck.questions[0];
     const opt = q.options[0];
-    const updated = appendRunAnswer(session, q.id, opt.tone, opt.weights ?? {}, opt.evidence, 3000);
+    const updated = appendRunAnswer(session, q.id, opt.tone, opt.evidence, 3000);
     assert(updated.answers.length === 1, 'should have 1 answer after append');
 
     // Create snapshot
@@ -177,28 +173,29 @@ function testAllDecksHaveMetadata(): TestResult {
   }
 }
 
-function testOptionWeightsAreValid(): TestResult {
+function testOptionEvidenceIsValid(): TestResult {
   try {
     const issues: string[] = [];
     for (const d of ALL_DECKS) {
       for (const q of d.questions) {
         for (let i = 0; i < q.options.length; i++) {
           const o = q.options[i];
-          const keys = Object.keys(o.weights ?? {});
+          const ev = o.evidence ?? {};
+          const keys = Object.keys(ev);
           for (const k of keys) {
             if (!STAT_KEYS.includes(k as StatKey)) {
-              issues.push(`${d.deckId}/${q.id} opt${i}: invalid stat key "${k}"`);
+              issues.push(`${d.deckId}/${q.id} opt${i}: invalid axis "${k}"`);
             }
           }
         }
       }
     }
     if (issues.length > 0) {
-      return { name: 'option-weights-valid', pass: false, detail: issues.slice(0, 5).join('; ') };
+      return { name: 'option-evidence-valid', pass: false, detail: issues.slice(0, 5).join('; ') };
     }
-    return { name: 'option-weights-valid', pass: true };
+    return { name: 'option-evidence-valid', pass: true };
   } catch (e: unknown) {
-    return { name: 'option-weights-valid', pass: false, detail: (e as Error).message };
+    return { name: 'option-evidence-valid', pass: false, detail: (e as Error).message };
   }
 }
 
@@ -215,7 +212,7 @@ export function runSmokeTest() {
     testRunScoring,
     testNormalizeGameState,
     testAllDecksHaveMetadata,
-    testOptionWeightsAreValid,
+    testOptionEvidenceIsValid,
   ];
 
   const results: TestResult[] = tests.map(fn => fn());

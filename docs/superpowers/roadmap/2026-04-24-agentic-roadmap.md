@@ -12,7 +12,7 @@
 | Fase | Nome | Nível | Duração | SQL? |
 |------|------|-------|---------|------|
 | **F3** | Persistência indestrutível ✅ | 5→6 | 3-5 dias | ❌ |
-| **F4** | Motor bayesiano em produção | 6 | 5-7 dias | ❌ |
+| **F4** | Motor bayesiano em produção ✅ | 6 | 5-7 dias | ❌ |
 | **F5** | Design System + telas rituais | 6 | 5-7 dias | ❌ |
 | **F6** | Social real-time + leaderboard | 6→7 | 7-10 dias | 🗄️ sim |
 | **F7** | Paywall + Stripe + economia | 7→8 | 7-10 dias | 🗄️ sim |
@@ -50,36 +50,37 @@ Fazer o estado do app sobreviver a qualquer mudança de schema, crash, limpeza d
 
 ---
 
-## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO  🟡 EM ANDAMENTO (20/23)
+## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO  ✅ FECHADA (23/23) — 2026-04-24
 **Mantém Nível 6. Plan:** `docs/superpowers/plans/2026-04-21-motor-bayesiano.md`.
 
 ### Objetivo
 Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença + confiança; arquétipo tem estados "descobrindo / tendência / firme".
 
 ### Status
-- ✅ **Tasks 1-12** — Engine puro (priors, likelihood, drift, update, archetype matching), tipos, validator, migração automática dos 22 decks, runScoring com evidence (87 testes passando).
-- ✅ **Tasks 13-14** — `CalibrationState.beliefs` integrado; reducer ANSWER + CAMPAIGN_ANSWER rodam `updateProfile` em paralelo ao motor legado.
+- ✅ **Tasks 1-12** — Engine puro (priors, likelihood, drift, update, archetype matching), tipos, validator, migração automática dos 22 decks, runScoring com evidence.
+- ✅ **Tasks 13-14** — `CalibrationState.beliefs` integrado; reducer ANSWER + CAMPAIGN_ANSWER rodam `updateProfile`.
 - ✅ **Task 15** — `getCurrentArchetype` + reducer START_DECK/FINISH_DECK usam `matchArchetypes(beliefs)`.
 - ✅ **Task 16** — Schema v3→v4 wipe migration: pre-Bayes profiles resetam pra prior uniforme; wallet/streak/decks preservados.
-- ✅ **Task 17** — `isTraining: true` decks bypassam mutação de perfil (axes + beliefs intactos).
+- ✅ **Task 17** — `isTraining: true` decks bypassam mutação de perfil (beliefs intactos).
 - ✅ **Task 18** — `MiniRadar` aceita `beliefs?: PlayerBeliefs` (playerMean recentered).
 - ✅ **Task 19** — `ProfileCardCompact` + `/perfil` mostram `archetypeDisplayState` (discovering/tendency/firm) e label de confiança global.
-- ⏳ **Task 20** — `RunReportCard` mostra evidence per-answer (precisa adicionar `answers[].evidence` ao snapshot). [follow-up]
-- 🟡 **Task 21 (parcial)** — Removidos `resolveWeights`/`CONTEXT_MODIFIERS`/`metadataMatches`, `intent`+`baseWeights` em types e nos 12 decks (502 campos). Reducer ANSWER consome `option.weights` direto. **Pendente:** remover `weights` field + `axes`/`recentWeights` em CalibrationState (mexe em /perfil radar, ShareButton, getConsistency — fazer junto).
-- ⏳ **Task 22-23** — Docs autores + golden test final. [follow-up]
+- ✅ **Task 20** — `RunReportCard` mostra evidência per-answer ("O que isso revelou"); `DeckSnapshot.answers[]` carrega evidence.
+- ✅ **Task 21** — `resolveWeights`/`CONTEXT_MODIFIERS`/`metadataMatches`, `intent`/`baseWeights` (502 campos), `weights` (256 campos), `axes`/`recentWeights`, `applyDampenedWeights`, `getDominantAxisFromWeights` removidos. Schema CalibrationSchema enxuto pra `{ beliefs, totalResponses, toneHistory, snapshots }`. UI hold-color deriva de `evidence`.
+- ✅ **Task 22** — `docs/authoring/evidence-guide.md` (schema, thresholds, regras, anti-padrões).
+- ✅ **Task 23** — Sanity verde + 30 testes bayes (3 edge cases novos: monotonicidade, simetria, isolamento de createPriorProfile).
 
 ### GATE ✅
 - ✅ Radar/perfil renderizam belief + confidence.
 - ✅ `archetypeDisplayState` gate: descobrindo < 0.3, tendência < 0.6, firme ≥ 0.6.
 - ✅ Training decks bypassam persistência.
-- 🟡 `intent`/`baseWeights` **removidos** do código e dos JSON. `weights` ainda sobrevive até /perfil radar migrar pra beliefs.
-- ⏳ Golden test: pelo menos 10 runs sintéticas convergem pra arquétipo esperado. (Task 23 pendente)
+- ✅ Pipeline legado completamente removido. `Option.evidence` é o único formato. Validator exige `evidence`.
+- ✅ RunReportCard surface evidence per-answer.
 
 ### Sanity (tip do main)
 - `npx tsc --noEmit` — 0 erros
-- `npm test` — 72/72 passando (15 testes do pipeline legado removidos junto)
+- `npm test` — 75/75 passando (30 testes bayesEngine + 45 outros)
 - `npm run build` — 10 rotas geradas
-- `npm run deck:validate` — 0 erros, 6 warnings (pré-existentes)
+- `npm run deck:validate` — 0 erros, 10 warnings (axis coverage de calibragem, content-side)
 
 ---
 
@@ -375,7 +376,7 @@ R$ 10k MRR. Depois R$ 50k. Depois você decide.
 
 ## ✅ PRÓXIMA AÇÃO IMEDIATA
 
-Fale **"rodar Fase 4"** que eu começo a execução agêntica de Motor Bayesiano (plan já pronto).
+Fale **"rodar Fase 5"** que eu começo a execução agêntica de Design System + Telas Rituais.
 Se quiser alterar qualquer fase, me fala antes — esse doc é vivo.
 
 ---
@@ -389,3 +390,14 @@ Se quiser alterar qualquer fase, me fala antes — esse doc é vivo.
   - Schema Zod v3 com migrations v1→v2→v3; conflict matrix de 8 casos; debounce 500ms local + 2000ms cloud.
   - Commit final SHA: `af95ff6`.
   - **Nível 6 batido.**
+
+- **Fase 4 (Motor Bayesiano):** ✅ **FECHADA em 2026-04-24**
+  - 23 tasks executadas. Engine bayesiano em produção, pipeline legado completamente extirpado.
+  - `Option.evidence` é o único formato; `weights/intent/baseWeights/applyDampenedWeights/CONTEXT_MODIFIERS/resolveWeights` removidos do código, dos JSON (502+256 campos) e dos types.
+  - `CalibrationState` enxuto: `{ beliefs, totalResponses, toneHistory, snapshots }`. Schema Zod cleanup junto.
+  - `RunReportCard` surfaces evidence per-answer; `DeckSnapshot.answers[]` carrega evidence persistente.
+  - Hold-color das opções deriva de `getDominantAxisFromEvidence(option.evidence)`.
+  - `archetypeDisplayState`: discovering/tendency/firm gating no `/perfil`.
+  - Docs: `docs/authoring/evidence-guide.md` pra autores de deck.
+  - Sanity tip do main: `tsc 0 erros`, `npm test 75/75`, `build 10 rotas`, `deck:validate 0 errors / 10 warnings (content-side)`.
+  - **Nível 6 mantido.**

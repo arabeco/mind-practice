@@ -137,7 +137,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <MiniRadar beliefs={state.calibration.beliefs} axes={state.calibration.axes} size={120} />
+        <MiniRadar beliefs={state.calibration.beliefs} size={120} />
       </motion.div>
 
       {/* Campaign hero — centered, highlighted */}

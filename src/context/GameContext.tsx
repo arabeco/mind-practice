@@ -25,7 +25,6 @@ import { useGameStatePersistence } from './useGameStatePersistence';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
-  applyDampenedWeights,
   getUnlockedDecks,
   isDeckPlayable,
   getPrecision,
@@ -92,7 +91,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   void matchArchetype;
 
   const precision = getPrecision(state.calibration.totalResponses);
-  const consistency = getConsistency(state.calibration.recentWeights);
+  const consistency = getConsistency(state.calibration.beliefs);
   const isIdentityValidated = precision >= 80 && consistency >= 0.6;
   const canClaimDaily = state.wallet.lastDailyClaim !== new Date().toISOString().split('T')[0];
 

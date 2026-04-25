@@ -33,11 +33,6 @@
           "text": "Asumo o controle e conserto.",
           "subtext": "Voce resolve",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce vira o barco antes de afundar.",
           "evidence": {
             "presenca": {
@@ -54,11 +49,6 @@
           "text": "Aceito e respondo no automatico.",
           "subtext": "Engole e faz",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce entrega — mas acumula por dentro.",
           "evidence": {
             "harmonia": {
@@ -75,12 +65,6 @@
           "text": "Chamo o time. Isso e coisa nossa.",
           "subtext": "Distribui",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "vigor": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce divide o peso na pressao.",
           "evidence": {
             "filtro": {
@@ -117,11 +101,6 @@
           "text": "Respondo firme, la mesmo.",
           "subtext": "Defende o seu",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao abaixa a cabeca na plateia.",
           "evidence": {
             "presenca": {
@@ -138,11 +117,6 @@
           "text": "Aceito calado. Falo em privado depois.",
           "subtext": "Nao vira cena",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce separa cena de resolucao.",
           "evidence": {
             "harmonia": {
@@ -159,12 +133,6 @@
           "text": "Redireciono: 'Podemos falar disso depois?'",
           "subtext": "Pausa tecnica",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce compra tempo sem ceder.",
           "evidence": {
             "filtro": {
@@ -201,11 +169,6 @@
           "text": "Subo mesmo assim. Medo passa depois.",
           "subtext": "Encara",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Voce nao espera o medo sair.",
           "evidence": {
             "presenca": {
@@ -222,12 +185,6 @@
           "text": "Peco 5 minutos pra recompor.",
           "subtext": "Nomeia o bloqueio",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "harmonia": -1,
-            "vigor": -1
-          },
           "feedback": "Voce cuida do seu estado antes de entregar.",
           "evidence": {
             "filtro": {
@@ -244,11 +201,6 @@
           "text": "Respiro, esqueco todo mundo, so leio.",
           "subtext": "Modo automatico",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce entrega no minimo, sem travar.",
           "evidence": {
             "harmonia": {
@@ -285,11 +237,6 @@
           "text": "Levanto e coloco minha discordancia.",
           "subtext": "Voz contraria",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao deixa isso passar.",
           "evidence": {
             "presenca": {
@@ -306,11 +253,6 @@
           "text": "Deixo passar. Era voto vencido mesmo.",
           "subtext": "Aceita derrota",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce escolhe onde plantar bandeira.",
           "evidence": {
             "harmonia": {
@@ -327,12 +269,6 @@
           "text": "Mando email depois com a pergunta chave.",
           "subtext": "Semeia duvida depois",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce faz o questionamento sem plateia.",
           "evidence": {
             "filtro": {
@@ -369,11 +305,6 @@
           "text": "Assumo: 'Foi meu. Ja to resolvendo.'",
           "subtext": "Cara e coragem",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "vigor": -1,
-            "harmonia": -2
-          },
           "feedback": "Voce paga a conta na hora.",
           "evidence": {
             "presenca": {
@@ -390,11 +321,6 @@
           "text": "Minimizo. 'Nao e grande coisa.'",
           "subtext": "Defende imagem",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce protege o rosto antes da verdade.",
           "evidence": {
             "harmonia": {
@@ -411,12 +337,6 @@
           "text": "Explico o contexto sem fugir da culpa.",
           "subtext": "Contextualiza",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce assume — mas enquadra.",
           "evidence": {
             "filtro": {
@@ -453,11 +373,6 @@
           "text": "Paro tudo. Domingo resolvo.",
           "subtext": "Corta o dia",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "vigor": -1
-          },
           "feedback": "Voce sabe que nada sai bem cansado.",
           "evidence": {
             "presenca": {
@@ -474,11 +389,6 @@
           "text": "Forco mais uma hora. Ja tava em ritmo.",
           "subtext": "Insiste",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Voce aposta na inercia — as vezes cedo demais.",
           "evidence": {
             "vigor": {
@@ -495,12 +405,6 @@
           "text": "Faco o minimo urgente e desligo.",
           "subtext": "Triagem curta",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "desapego": -1
-          },
           "feedback": "Voce separa fogo de fumaca.",
           "evidence": {
             "filtro": {
@@ -537,11 +441,6 @@
           "text": "Chego junto. Pergunto o que fazer.",
           "subtext": "Entra em cena",
           "tone": "protetor",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -1,
-            "filtro": -2
-          },
           "feedback": "Voce aparece quando precisa.",
           "evidence": {
             "presenca": {
@@ -558,12 +457,6 @@
           "text": "Ligo 192 e observo de perto.",
           "subtext": "Aciona quem sabe",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce aciona o sistema que resolve.",
           "evidence": {
             "filtro": {
@@ -580,11 +473,6 @@
           "text": "Paro, confiro se alguem ja ta junto.",
           "subtext": "Observa",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Voce nao atropela quem ja ta ajudando.",
           "evidence": {
             "harmonia": {

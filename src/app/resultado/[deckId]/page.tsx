@@ -10,6 +10,8 @@ import ShareButton from '@/components/ShareButton';
 import { useGame } from '@/context/GameContext';
 import { getDeckById } from '@/data/decks';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
+import type { StatKey } from '@/types/game';
+import { playerMean, createPriorProfile } from '@/lib/bayesEngine';
 import {
   getArchetypeAvatarPaths,
   getArchetypeAvatarVisual,
@@ -38,7 +40,12 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
   const profileShift = featuredSnapshot?.profileShift ?? 0;
   const calibrated = !archetypeChanged && profileShift >= CALIBRATION_THRESHOLD;
   const maintained = !archetypeChanged && !calibrated;
-  const maxAbs = Math.max(1, ...STAT_KEYS.map(k => Math.abs(state.calibration.axes[k])));
+  const beliefsProfile = state.calibration.beliefs ?? createPriorProfile();
+  const derivedAxes: Record<StatKey, number> = STAT_KEYS.reduce((acc, k) => {
+    acc[k] = (playerMean(beliefsProfile[k]) - 0.5) * 2;
+    return acc;
+  }, {} as Record<StatKey, number>);
+  const maxAbs = Math.max(1, ...STAT_KEYS.map(k => Math.abs(derivedAxes[k])));
 
   const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
 
@@ -274,7 +281,7 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
         >
           <ShareButton
             archetype={archetype}
-            axes={state.calibration.axes}
+            axes={derivedAxes}
             nickname={nickname}
           />
         </motion.div>
@@ -321,7 +328,7 @@ export default function ResultadoPage({ params }: { params: Promise<{ deckId: st
                     </p>
                     <div className="space-y-2">
                       {STAT_KEYS.map((key) => {
-                        const value = state.calibration.axes[key];
+                        const value = derivedAxes[key as StatKey];
                         const width = `${(Math.abs(value) / maxAbs) * 100}%`;
                         const color = value >= 0 ? STAT_COLORS[key] : '#ef4444';
                         return (

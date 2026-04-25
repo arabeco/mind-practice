@@ -3,8 +3,9 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import HoldButton from '@/components/HoldButton';
-import { INTENSITY_LABELS, STAT_COLORS, STAT_KEYS } from '@/types/game';
-import type { AnswerIntensity, Option, Question, StatKey } from '@/types/game';
+import { INTENSITY_LABELS, STAT_COLORS } from '@/types/game';
+import type { AnswerIntensity, Option, Question } from '@/types/game';
+import { getDominantAxisFromEvidence } from '@/lib/runScoring';
 
 interface QuickSceneProps {
   question: Question;
@@ -13,19 +14,6 @@ interface QuickSceneProps {
   deckName: string;
   onAnswer: (option: Option, responseTimeMs: number, intensity: AnswerIntensity) => void;
   enableHaptics: boolean;
-}
-
-function getDominantAxis(weights: Partial<Record<StatKey, number>>): StatKey {
-  let max: StatKey = 'vigor';
-  let maxVal = -Infinity;
-  for (const key of STAT_KEYS) {
-    const v = weights[key];
-    if (v !== undefined && v > maxVal) {
-      maxVal = v;
-      max = key;
-    }
-  }
-  return max;
 }
 
 /** Deterministic shuffle (stable per question) */
@@ -144,8 +132,8 @@ export default function QuickScene({
       {/* Options */}
       <div className="flex flex-col gap-2">
         {shuffled.map((option, i) => {
-          const dominantAxis = getDominantAxis(option.weights ?? {});
-          const holdColor = STAT_COLORS[dominantAxis];
+          const dominantAxis = getDominantAxisFromEvidence(option.evidence);
+          const holdColor = dominantAxis ? STAT_COLORS[dominantAxis] : '#94a3b8';
           const isFocused = picking === i;
           const isHidden = picking !== null && picking !== i;
           const isDimmed = holdingIdx !== null && holdingIdx !== i;

@@ -1,11 +1,10 @@
 import { getDeckById } from '@/data/decks';
 import {
   EMPTY_STAT_RECORD,
-  INITIAL_PLUS_SUBSCRIPTION,
   STAT_KEYS,
   type Deck,
   type DeckSnapshot,
-  type GameState,
+  type OptionEvidence,
   type RunAnswerEvent,
   type RunScoreBreakdown,
   type RunSession,
@@ -16,7 +15,6 @@ import {
 const MAX_COMPLETION_SCORE = 30;
 const MAX_DECISIVENESS_SCORE = 35;
 const MAX_COHERENCE_SCORE = 35;
-const MAX_OPTION_WEIGHT = 15;
 
 export function createRunSession(
   deck: Deck,
@@ -35,22 +33,25 @@ export function createRunSession(
   };
 }
 
-export function getDominantAxisFromWeights(
-  weights: Partial<Record<StatKey, number>>,
+/**
+ * Eixo dominante de uma evidência: aquele com maior `confidence`. Empate →
+ * primeiro do STAT_KEYS. Útil pra hold-color das opções e snapshot.dominantAxis.
+ */
+export function getDominantAxisFromEvidence(
+  evidence: OptionEvidence | undefined,
 ): StatKey | null {
+  if (!evidence) return null;
   let bestKey: StatKey | null = null;
-  let bestValue = Number.NEGATIVE_INFINITY;
-
+  let bestScore = -Infinity;
   for (const key of STAT_KEYS) {
-    const raw = weights[key];
-    if (raw === undefined) continue;
-    const priority = raw > 0 ? raw : raw / 100;
-    if (priority > bestValue) {
+    const ev = evidence[key];
+    if (!ev) continue;
+    const score = ev.confidence ?? 0.75;
+    if (score > bestScore) {
+      bestScore = score;
       bestKey = key;
-      bestValue = priority;
     }
   }
-
   return bestKey;
 }
 
@@ -58,16 +59,14 @@ export function appendRunAnswer(
   session: RunSession,
   questionId: string,
   tone: Tone,
-  weights: Partial<Record<StatKey, number>>,
-  evidence: import('@/lib/bayesEngine/types').OptionEvidence | undefined,
+  evidence: OptionEvidence | undefined,
   responseTimeMs?: number,
 ): RunSession {
   const event: RunAnswerEvent = {
     questionId,
     tone,
-    weights,
     evidence,
-    dominantAxis: getDominantAxisFromWeights(weights),
+    dominantAxis: getDominantAxisFromEvidence(evidence),
     timedOut: false,
     responseTimeMs,
   };
@@ -116,51 +115,21 @@ export function createDeckSnapshot({
     axisDelta,
     profileShift,
     focusAlignment,
+    answers: session.answers.map(a => ({
+      questionId: a.questionId,
+      tone: a.tone,
+      evidence: a.evidence,
+      dominantAxis: a.dominantAxis,
+      responseTimeMs: a.responseTimeMs,
+      timedOut: a.timedOut,
+    })),
     legacy: false,
   };
 }
 
-export function normalizeGameState(raw: Partial<GameState>): GameState {
-  const calibration: Partial<GameState['calibration']> = raw.calibration ?? {};
-  const completedDecks = raw.completedDecks ?? {};
-
-  return {
-    calibration: {
-      axes: { ...EMPTY_STAT_RECORD, ...(calibration.axes ?? {}) },
-      totalResponses: calibration.totalResponses ?? 0,
-      recentWeights: {
-        vigor: calibration.recentWeights?.vigor ?? [],
-        harmonia: calibration.recentWeights?.harmonia ?? [],
-        filtro: calibration.recentWeights?.filtro ?? [],
-        presenca: calibration.recentWeights?.presenca ?? [],
-        desapego: calibration.recentWeights?.desapego ?? [],
-      },
-      toneHistory: Array.isArray(calibration.toneHistory) ? calibration.toneHistory : [],
-      snapshots: Array.isArray(calibration.snapshots)
-        ? calibration.snapshots.map(normalizeDeckSnapshot)
-        : [],
-    },
-    wallet: {
-      fichas: typeof (raw as any).wallet?.fichas === 'number' ? (raw as any).wallet.fichas : 20,
-      lastDailyClaim: (raw as any).wallet?.lastDailyClaim ?? null,
-      totalEarned: typeof (raw as any).wallet?.totalEarned === 'number' ? (raw as any).wallet.totalEarned : 20,
-      totalSpent: typeof (raw as any).wallet?.totalSpent === 'number' ? (raw as any).wallet.totalSpent : 0,
-      runsPaidToday: typeof (raw as any).wallet?.runsPaidToday === 'number' ? (raw as any).wallet.runsPaidToday : 0,
-      runsPaidDate: (raw as any).wallet?.runsPaidDate ?? null,
-    },
-    activeDeck: null,
-    activeRun: null,
-    currentQuestion: typeof raw.currentQuestion === 'number' ? raw.currentQuestion : 0,
-    unlockedDecks: Array.isArray(raw.unlockedDecks) ? raw.unlockedDecks : [],
-    completedDecks,
-    lastTrainingDate: raw.lastTrainingDate ?? null,
-    streak: raw.streak ?? 0,
-    lastPlayDate: raw.lastPlayDate ?? null,
-    campaigns: (raw as any).campaigns ?? {},
-    ownedDeckIds: Array.isArray((raw as any).ownedDeckIds) ? (raw as any).ownedDeckIds : [],
-    plusSubscription: (raw as any).plusSubscription ?? { ...INITIAL_PLUS_SUBSCRIPTION },
-  };
-}
+// Re-export do boundary unico de persistencia. Mantido aqui por compat com
+// callers externos (ex: smokeTest.ts) que importam deste caminho.
+export { normalizeGameState } from '@/lib/gameState/normalize';
 
 export function normalizeDeckSnapshot(raw: Partial<DeckSnapshot>): DeckSnapshot {
   const runScore = typeof raw.runScore === 'number' ? raw.runScore : null;
@@ -188,6 +157,7 @@ export function normalizeDeckSnapshot(raw: Partial<DeckSnapshot>): DeckSnapshot 
     profileShift: raw.profileShift ?? 0,
     focusAlignment:
       typeof raw.focusAlignment === 'number' ? raw.focusAlignment : null,
+    answers: Array.isArray(raw.answers) ? raw.answers : [],
     legacy: raw.legacy ?? runScore === null,
   };
 }
@@ -220,10 +190,13 @@ function getRunScoreBreakdown(session: RunSession): RunScoreBreakdown {
     ? session.answeredCount / session.totalQuestions
     : 0;
   const decisiveAnswers = session.answers.filter(answer => !answer.timedOut);
+  // Decisiveness: média da maior confidence declarada por cada answer.
+  // Sem evidence → 0 (resposta não declarou pra onde aponta).
   const decisivenessRatio = decisiveAnswers.length > 0
-    ? decisiveAnswers.reduce((sum, answer) => sum + getStrongestPositiveWeight(answer.weights), 0)
-      / decisiveAnswers.length
-      / MAX_OPTION_WEIGHT
+    ? decisiveAnswers.reduce(
+        (sum, answer) => sum + getStrongestEvidenceConfidence(answer.evidence),
+        0,
+      ) / decisiveAnswers.length
     : 0;
   const coherenceRatio = getCoherenceRatio(session);
 
@@ -292,11 +265,12 @@ function getCoherenceRatio(session: RunSession): number {
   return maxCount / answered.length;
 }
 
-function getStrongestPositiveWeight(weights: Partial<Record<StatKey, number>>): number {
+function getStrongestEvidenceConfidence(evidence: OptionEvidence | undefined): number {
+  if (!evidence) return 0;
   let strongest = 0;
-
   for (const key of STAT_KEYS) {
-    const value = weights[key] ?? 0;
+    const ev = evidence[key];
+    const value = ev?.confidence ?? 0;
     if (value > strongest) {
       strongest = value;
     }

@@ -8,8 +8,6 @@ const freshState = (): GameState => ({
   ...INITIAL_STATE,
   calibration: {
     ...INITIAL_STATE.calibration,
-    axes: { ...INITIAL_STATE.calibration.axes },
-    recentWeights: { ...INITIAL_STATE.calibration.recentWeights },
     toneHistory: [...INITIAL_STATE.calibration.toneHistory],
     snapshots: [...INITIAL_STATE.calibration.snapshots],
   },

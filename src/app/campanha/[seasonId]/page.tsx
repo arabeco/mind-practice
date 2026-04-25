@@ -17,21 +17,9 @@ import {
 import HoldButton from '@/components/HoldButton';
 import EndingShareButton from '@/components/EndingShareButton';
 import { useLocalProfile } from '@/hooks/useLocalProfile';
-import { STAT_COLORS, STAT_KEYS, SKIP_COOLDOWN_COST } from '@/types/game';
-import type { CampaignEnding, CampaignProgress, Option, Question, StatKey } from '@/types/game';
-
-function getDominantAxis(weights: Partial<Record<StatKey, number>>): StatKey {
-  let max: StatKey = 'vigor';
-  let maxVal = -Infinity;
-  for (const key of STAT_KEYS) {
-    const v = weights[key];
-    if (v !== undefined && v > maxVal) {
-      maxVal = v;
-      max = key;
-    }
-  }
-  return max;
-}
+import { STAT_COLORS, SKIP_COOLDOWN_COST } from '@/types/game';
+import type { CampaignEnding, CampaignProgress, Option, Question } from '@/types/game';
+import { getDominantAxisFromEvidence } from '@/lib/runScoring';
 
 export default function CampaignPage({ params }: { params: Promise<{ seasonId: string }> }) {
   const { seasonId } = use(params);
@@ -77,7 +65,6 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
     (optionIndex: number) => {
       if (!currentScene || !progress) return;
       const option: Option = currentScene.options[optionIndex];
-      const tensao = currentScene.metadata?.tensao ?? 3;
       setSelectedIdx(optionIndex);
 
       dispatch({
@@ -87,9 +74,7 @@ export default function CampaignPage({ params }: { params: Promise<{ seasonId: s
         optionIndex,
         nextSceneId: option.nextSceneId ?? null,
         endingId: option.endingId ?? null,
-        weights: option.weights ?? {},
         tone: option.tone,
-        tensao,
         evidence: option.evidence,
       });
 
@@ -763,7 +748,8 @@ function SceneView({
                 {scene.options.map((opt, i) => {
                   const isSelected = selectedIdx === i;
                   const isHidden = selectedIdx != null && !isSelected;
-                  const holdColor = STAT_COLORS[getDominantAxis(opt.weights ?? {})];
+                  const dom = getDominantAxisFromEvidence(opt.evidence);
+                  const holdColor = dom ? STAT_COLORS[dom] : '#94a3b8';
                   return (
                     <motion.div
                       key={i}

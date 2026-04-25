@@ -30,33 +30,13 @@ const PlusSubscriptionSchema = z.object({
   lastPlusDailyClaim: null,
 });
 
-const StatRecordSchema = z.object({
-  vigor: z.number().default(0),
-  harmonia: z.number().default(0),
-  filtro: z.number().default(0),
-  presenca: z.number().default(0),
-  desapego: z.number().default(0),
-}).default({ vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 });
-
-const StatArrayRecordSchema = z.object({
-  vigor: z.array(z.number()).default([]),
-  harmonia: z.array(z.number()).default([]),
-  filtro: z.array(z.number()).default([]),
-  presenca: z.array(z.number()).default([]),
-  desapego: z.array(z.number()).default([]),
-}).default({ vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] });
-
 const CalibrationSchema = z.object({
-  axes: StatRecordSchema,
   beliefs: z.any().optional(),
   totalResponses: z.number().int().min(0).default(0),
-  recentWeights: StatArrayRecordSchema,
   toneHistory: z.array(z.string()).default([]),
   snapshots: z.array(z.any()).default([]),
 }).default({
-  axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
   totalResponses: 0,
-  recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
   toneHistory: [],
   snapshots: [],
 });

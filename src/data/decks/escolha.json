@@ -33,11 +33,6 @@
           "text": "Vou. Dinheiro importa, ponto.",
           "subtext": "Segue o numero",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": -1,
-            "harmonia": -2
-          },
           "feedback": "Voce nao confunde carinho com contrato.",
           "evidence": {
             "filtro": {
@@ -54,11 +49,6 @@
           "text": "Fico. Nem tudo se mede em salario.",
           "subtext": "Prioriza o hoje",
           "tone": "neutro",
-          "weights": {
-            "desapego": 3,
-            "filtro": -2,
-            "presenca": -1
-          },
           "feedback": "Voce valoriza o que ja tem.",
           "evidence": {
             "desapego": {
@@ -75,11 +65,6 @@
           "text": "Uso a oferta pra negociar aumento aqui.",
           "subtext": "Joga as duas cartas",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao escolhe — negocia.",
           "evidence": {
             "vigor": {
@@ -117,11 +102,6 @@
           "text": "Falo: 'Nao e meu pra contar.'",
           "subtext": "Segura o segredo",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "harmonia": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao vira ponte de fofoca.",
           "evidence": {
             "filtro": {
@@ -138,11 +118,6 @@
           "text": "Conto. Nos tres somos amigos.",
           "subtext": "Abre",
           "tone": "provocativo",
-          "weights": {
-            "harmonia": 3,
-            "filtro": -2,
-            "desapego": -1
-          },
           "feedback": "Voce dissolve fronteira — e as vezes paga.",
           "evidence": {
             "harmonia": {
@@ -159,11 +134,6 @@
           "text": "Deixo escapar metade, sem nomes.",
           "subtext": "Meio conta",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": -2,
-            "presenca": -1
-          },
           "feedback": "Voce entrega sem entregar — mas entregou.",
           "evidence": {
             "desapego": {
@@ -200,11 +170,6 @@
           "text": "Vou viajar. Ta comprado, ja combinei.",
           "subtext": "Prioriza o plano",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "harmonia": -2,
-            "vigor": -1
-          },
           "feedback": "Voce honra o combinado com voce mesmo.",
           "evidence": {
             "desapego": {
@@ -221,11 +186,6 @@
           "text": "Fico. O trampo importa tambem.",
           "subtext": "Aceita o chamado",
           "tone": "protetor",
-          "weights": {
-            "harmonia": 3,
-            "desapego": -2,
-            "presenca": -1
-          },
           "feedback": "Voce escolhe o time — a um custo.",
           "evidence": {
             "harmonia": {
@@ -242,12 +202,6 @@
           "text": "Negocio: vou e trabalho meio remoto.",
           "subtext": "Propoe meio-termo",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce inventa a terceira via.",
           "evidence": {
             "filtro": {
@@ -284,11 +238,6 @@
           "text": "Me afasto. Nao quero ser a outra carta.",
           "subtext": "Corta o link",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "harmonia": -2,
-            "presenca": -1
-          },
           "feedback": "Voce nao entra em campo minado.",
           "evidence": {
             "desapego": {
@@ -305,11 +254,6 @@
           "text": "Deixo rolar. Ela(e) decide.",
           "subtext": "Nao toma o leme",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "filtro": -2,
-            "vigor": -1
-          },
           "feedback": "Voce passa a bola — mas ta em campo.",
           "evidence": {
             "harmonia": {
@@ -326,12 +270,6 @@
           "text": "Falo claro: 'Resolva ai antes.'",
           "subtext": "Poe no colo certo",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce nao arrebenta — mas nao faz de conta.",
           "evidence": {
             "filtro": {
@@ -369,11 +307,6 @@
           "text": "Nao. Eu nao cubro.",
           "subtext": "Recusa a pedir",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "harmonia": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao carrega a mentira do outro.",
           "evidence": {
             "filtro": {
@@ -390,11 +323,6 @@
           "text": "Cubro. Amigo e amigo.",
           "subtext": "Assume o risco",
           "tone": "protetor",
-          "weights": {
-            "harmonia": 3,
-            "filtro": -2,
-            "desapego": -1
-          },
           "feedback": "Voce paga o preco pela lealdade.",
           "evidence": {
             "harmonia": {
@@ -411,12 +339,6 @@
           "text": "Cubro mas aviso: 'E a ultima.'",
           "subtext": "Cobra preco",
           "tone": "neutro",
-          "weights": {
-            "desapego": 3,
-            "filtro": -1,
-            "harmonia": -1,
-            "presenca": -1
-          },
           "feedback": "Voce cobre — mas com contrato.",
           "evidence": {
             "desapego": {
@@ -453,11 +375,6 @@
           "text": "Decido rapido e nao olho pra tras.",
           "subtext": "Corta",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "filtro": -2,
-            "presenca": -1
-          },
           "feedback": "Voce nao fica refem da duvida.",
           "evidence": {
             "desapego": {
@@ -474,11 +391,6 @@
           "text": "Fico horas pesando. Nao quero perder nenhuma.",
           "subtext": "Mastiga",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "desapego": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao decide sem sentar com o problema.",
           "evidence": {
             "filtro": {
@@ -495,11 +407,6 @@
           "text": "Invento jeito de fazer duas.",
           "subtext": "Tenta tudo",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "desapego": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce nao aceita escolha binaria.",
           "evidence": {
             "vigor": {
@@ -536,11 +443,6 @@
           "text": "Calo. Isso e entre nos.",
           "subtext": "Nao delata",
           "tone": "protetor",
-          "weights": {
-            "harmonia": 3,
-            "filtro": -2,
-            "vigor": -1
-          },
           "feedback": "Voce paga o preco da lealdade.",
           "evidence": {
             "harmonia": {
@@ -557,11 +459,6 @@
           "text": "Entrego. Cada um cuida do seu.",
           "subtext": "Prioriza si",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "harmonia": -2,
-            "presenca": -1
-          },
           "feedback": "Voce nao afunda com time que nao seguraria voce.",
           "evidence": {
             "desapego": {
@@ -578,12 +475,6 @@
           "text": "Falo so o necessario, sem nomes.",
           "subtext": "Triagem honesta",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce caminha na beira sem cair dos dois lados.",
           "evidence": {
             "filtro": {

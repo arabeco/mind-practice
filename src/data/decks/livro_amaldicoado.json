@@ -67,12 +67,6 @@
           "text": "Tomo o celular: 'Nao usa meu nome pra tua plateia.'",
           "subtext": "Vigor/Ruptura",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Quebrou o feitico na forca. O clima morreu ali.",
           "aftermath": "A mao dele ainda no ar onde o celular estava. Voce saiu antes do silencio engrossar — a amizade virou passado numa frase. O livro pesa diferente na bolsa agora, e a proxima pagina ja ta aberta. Voce evita olhar.",
           "nextSceneId": "la3",
@@ -95,12 +89,6 @@
           "text": "Seguro o celular com calma: 'Isso nao e teu pra contar.'",
           "subtext": "Vigor/Limite firme",
           "tone": "protetor",
-          "weights": {
-            "vigor": 2,
-            "filtro": 2,
-            "harmonia": -1,
-            "desapego": -2
-          },
           "feedback": "Acao firme sem explosao. Ele parou, mas ficou ressentido.",
           "aftermath": "Ele pousou o celular na mesa e nao te olhou mais. A amizade ficou funcional, esvaziada — uma sala depois da festa. A noite, o livro abriu sozinho numa pagina nova. Voce fechou antes de ler — mas ja viu que a letra nao era a sua.",
           "nextSceneId": "la3",
@@ -123,12 +111,6 @@
           "text": "Deixo postar. Nao vou entrar no show do livro.",
           "subtext": "Desapego/Nao alimenta",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Recusou o palco, mas entregou a narrativa ao outro.",
           "aftermath": "O post subiu. Voce sentiu o ar mudar mas nao olhou o celular uma vez sequer. Agora a versao que circula sobre voce nao e sua — e o livro, calado na bolsa, parece estar esperando alguem te encontrar por causa dela.",
           "nextSceneId": "la5",
@@ -151,12 +133,6 @@
           "text": "Encaro ele: 'Se for contar, conta comigo junto.'",
           "subtext": "Presenca/Reescrita",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "harmonia": 2,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Entrou na historia antes de virar objeto dela.",
           "aftermath": "Ele riu sem entender, e depois parou de rir. A historia virou uma coisa que voces dois carregam agora — nao mais so dele. O livro, no bolso, ficou estranhamente leve. Voce sabe que isso nao dura.",
           "nextSceneId": "la3",
@@ -179,12 +155,6 @@
           "text": "Deixo postar e comento algo que muda todo o tom.",
           "subtext": "Filtro/Contrajogo",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "presenca": 1,
-            "harmonia": -1,
-            "desapego": -2
-          },
           "feedback": "Jogou por cima sem confronto. Estrategia fria e eficaz.",
           "aftermath": "Seu comentario pegou. A historia dele virou outra sem ninguem perceber que voce mexeu o leme. Voce saiu ileso — mas algo em voce gostou demais do sabor. O livro registrou. Quem le, tambem.",
           "nextSceneId": "la5",
@@ -231,12 +201,6 @@
           "text": "Corto: 'Nao. Eu antecipei e tenho registro.'",
           "subtext": "Vigor/Defesa frontal",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Rasgou a narrativa dele em publico. Sem volta.",
           "aftermath": "O chefe congelou. Alguem tossiu pra disfarcar. A reuniao continuou mas voce nao falou mais nada — e nem precisou. Saiu cansado, e na bolsa o livro pesa como se ja soubesse o proximo endereco antes de voce.",
           "nextSceneId": "la5",
@@ -259,12 +223,6 @@
           "text": "Jogo de volta: 'Quem assinou a decisao foi voce.'",
           "subtext": "Vigor/Contra-ataque",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "filtro": -2,
-            "harmonia": -1
-          },
           "feedback": "Virou o jogo, mas declarou guerra aberta.",
           "aftermath": "A sala parou de respirar. Ele perdeu a plateia, voce perdeu o chefe — e ganhou um inimigo permanente no lugar. Na volta pra casa o vagao ta vazio demais pra essa hora. Voce sente que nao ta sozinho, e nao quer olhar pra confirmar.",
           "nextSceneId": "la5",
@@ -287,12 +245,6 @@
           "text": "Anoto tudo e deixo a resposta pra depois, por escrito.",
           "subtext": "Filtro/Xadrez",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 2,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Nao comprou a guerra na hora. Silencio calculado.",
           "aftermath": "A reuniao acabou sem climax. Voce saiu sem reagir — todo mundo ficou em duvida sobre o que voce realmente pensou. Em casa, o livro ta mais pesado do que deveria. A resposta vai ser cobrada, so nao sabe quando nem por quem.",
           "nextSceneId": "la8",
@@ -315,12 +267,6 @@
           "text": "Calmo: 'Posso contextualizar pra sala nao sair confusa.'",
           "subtext": "Presenca/Reposicionamento",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "harmonia": 2,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Corrigiu a historia sem incendiar a sala.",
           "aftermath": "A sala respirou. O chefe assentiu sem te olhar de novo, e voce saiu inteiro. A noite, porem, o livro abre numa pagina que voce nao reconhece. A letra e sua. O que ta escrito, nao.",
           "nextSceneId": "la8",
@@ -367,12 +313,6 @@
           "text": "Levanto e encaro: 'Chega perto de novo e a conversa muda.'",
           "subtext": "Vigor/Defesa de posse",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Marcou territorio na forca. Ele recuou, mas te marcou.",
           "aftermath": "Ele desceu na proxima estacao sem olhar pra tras, mas tirou uma foto do vagao antes de sair. Voce viu — e soube que o teu caminho virou endereco publico. O livro ficou quieto por dias depois disso. Quieto demais.",
           "nextSceneId": "la7",
@@ -395,12 +335,6 @@
           "text": "Saio no proximo vagao sem responder. Sem negocio.",
           "subtext": "Filtro/Saida limpa",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 2,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Saiu inteiro. Sobrevivencia tambem e maestria.",
           "aftermath": "Voce sumiu dele antes da porta fechar. Por um dia inteiro o livro parece ter perdido o fio — calado, morno, como se tivesse errado o alvo. Em casa, de madrugada, uma pagina aparece sozinha. A letra e sua. A acusacao tambem.",
           "nextSceneId": "la8",
@@ -423,12 +357,6 @@
           "text": "Seguro o livro: 'Se sabe o que e, sabe que me ameacar e erro.'",
           "subtext": "Presenca/Aviso",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "filtro": 1,
-            "vigor": -1,
-            "desapego": -2
-          },
           "feedback": "Ficou ali, inteiro. Bastou pra quebrar o apetite dele.",
           "aftermath": "Ele desceu sem insistir, mas pegou algo do bolso antes — nao um celular, uma foto impressa. Voce nao conseguiu ver de quem era. O livro vai deixar claro em breve: a cena dele nao acabou quando ele saiu do vagao.",
           "nextSceneId": "la7",
@@ -451,12 +379,6 @@
           "text": "Ignoro e continuo lendo como se ele nao existisse.",
           "subtext": "Desapego/Apagamento",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Virou invisivel. Ele ficou confuso, mas nao desistiu.",
           "aftermath": "Ele ficou sentado do teu lado por mais tres estacoes, depois sumiu sem dizer nada. Voce nunca vai saber se ele era real ou um teste do livro. Em casa, outra pagina apareceu sozinha — e essa, infelizmente, e inconfundivelmente sua.",
           "nextSceneId": "la8",
@@ -503,12 +425,6 @@
           "text": "Vou ate ele e exijo apagar ali na frente.",
           "subtext": "Vigor/Confronto direto",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 2,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Imps a lei com o corpo. Saiu dali marcado, mas dono da cena.",
           "aftermath": "Ele apagou a foto na sua frente, mas voce viu o backup subir pra nuvem antes do dedo chegar no botao. Saiu da rua marcado, e sabendo disso. Em casa, o livro pede outro tipo de coragem — dessa vez contra alguem que voce ama.",
           "nextSceneId": "la8",
@@ -531,12 +447,6 @@
           "text": "Finjo nao ver e sigo andando num ritmo firme.",
           "subtext": "Desapego/Despriorizar",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "vigor": -1,
-            "presenca": -2
-          },
           "feedback": "Negou a interacao. O livro nao conseguiu escrever a cena.",
           "aftermath": "Voce nao sabe se ele conseguiu a foto. E pior — se era pra isso mesmo. O livro ficou em silencio o resto do dia, como se a cena tivesse fugido dele. Mas a noite voltou. Dessa vez escrevendo na sua letra.",
           "nextSceneId": "la8",
@@ -559,12 +469,6 @@
           "text": "Tiro foto dele tirando foto de mim.",
           "subtext": "Filtro/Inverte o jogo",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "presenca": 2,
-            "desapego": -1,
-            "harmonia": -2
-          },
           "feedback": "Converteu ameaca em prova. Frio e eficaz.",
           "aftermath": "Ele desviou o olhar, fingiu mexer no celular, foi embora rapido demais. Voce tem agora o rosto dele guardado — prova de alguma coisa que ainda nao sabe o que e. Em casa, o livro virou sozinho pra uma ameaca mais intima, e infinitamente pior.",
           "nextSceneId": "la8",
@@ -611,12 +515,6 @@
           "text": "Mostro a carta na cara dela e exijo resposta.",
           "subtext": "Vigor/Interrogatorio",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Forcou a verdade a se defender. Quarto ficou pequeno.",
           "aftermath": "Ela chorou, negou, confessou coisas que voce nao queria ouvir. No fim, os dois sairam daquele comodo menores do que entraram. Sem consolo possivel. Dias depois, um bilhete novo aparece no livro. Um endereco. Um horario. Uma instrucao.",
           "nextSceneId": "la9",
@@ -639,12 +537,6 @@
           "text": "Guardo a carta e observo cada gesto antes de agir.",
           "subtext": "Filtro/Observacao fria",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 2,
-            "presenca": -2,
-            "harmonia": -1
-          },
           "feedback": "Nao entregou o jogo. O livro nao soube se venceu.",
           "aftermath": "Voce deixou a conversa fluir. Ela nao soube de nada, e voce tambem nao sabe se ela e culpada. O livro ficou morno, sem resposta pra te dar — e isso te incomoda mais do que qualquer acusacao. Na proxima pagina, uma isca nova. Mais cara que a anterior.",
           "nextSceneId": "la9",
@@ -667,12 +559,6 @@
           "text": "Pergunto sobre aquele periodo sem revelar a carta.",
           "subtext": "Harmonia/Teste de verdade",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 2,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Abriu fresta em vez de explodir. Paciente e inteligente.",
           "aftermath": "Ela respondeu com naturalidade demais, ou normal demais — impossivel saber qual. A duvida ficou como companhia nova. A relacao continua, mas com sombra atras. O livro percebe, e ja ta te chamando pra um lugar onde voce vai precisar ir sozinho.",
           "nextSceneId": "la9",
@@ -695,12 +581,6 @@
           "text": "Queimo a carta ali mesmo. O livro nao vai vencer.",
           "subtext": "Desapego/Recusa do jogo",
           "tone": "protetor",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "vigor": -1,
-            "presenca": -2
-          },
           "feedback": "Destruiu a isca. Livre do veneno, sem a resposta.",
           "aftermath": "O papel virou cinza na pia. Ela nunca soube do que foi acusada. Voce tambem nunca vai saber se merecia. Talvez esteja tudo bem assim. Mas o livro nao parou — e a proxima isca ja ta aberta. Essa e mais dificil de queimar.",
           "nextSceneId": "la9",
@@ -747,12 +627,6 @@
           "text": "Pego o que esta no cofre e saio com o livro debaixo do braco.",
           "subtext": "Vigor/Tomada",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "desapego": 1,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Rompeu o contrato. Fez inimiga nova e levou o premio.",
           "aftermath": "Ela nao correu atras. So disse o seu nome baixo, como quem anota pra depois. Voce voltou rico e marcado — as duas coisas ao mesmo tempo. No dia seguinte, o telefone toca. E alguem da sua vida. Alguem com peso real. Precisa te ver hoje.",
           "nextSceneId": "la10",
@@ -775,12 +649,6 @@
           "text": "Rejeito a troca sem olhar pro cofre. Saio.",
           "subtext": "Presenca/Integridade",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "desapego": 2,
-            "vigor": -1,
-            "harmonia": -1
-          },
           "feedback": "Nao comprou a cena. O livro ficou quieto no caminho de casa.",
           "aftermath": "Ela te olhou por um segundo longo, fechou o cofre sem pressa, desapareceu no corredor. Voce voltou inteiro de um jeito que dinheiro nao compraria. Na manha seguinte, alguem que voce ja conhece pede pra te ver a sos. O livro ja deixou a ultima pagina aberta.",
           "nextSceneId": "la10",
@@ -803,12 +671,6 @@
           "text": "Negocio outros termos ali mesmo, sem ceder o livro.",
           "subtext": "Filtro/Ponte fria",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "presenca": 1,
-            "harmonia": -1,
-            "desapego": -2
-          },
           "feedback": "Virou o jogo sem bater de frente. Saiu com mais informacao.",
           "aftermath": "Ela sorriu no meio da conversa, o que te deixou com mais medo do que se tivesse recusado de cara. Voce saiu com o livro e com um nome novo — o de quem te procurava desde o primeiro dia. Amanha essa pessoa vai aparecer na sua frente. E nao sabe que voce sabe.",
           "nextSceneId": "la10",
@@ -831,12 +693,6 @@
           "text": "Jogo o livro no cofre e ela desaparece junto.",
           "subtext": "Desapego/Cortar raiz",
           "tone": "protetor",
-          "weights": {
-            "desapego": 3,
-            "harmonia": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Entregou o problema ao proprio problema. Livre — mas sem a prova.",
           "aftermath": "Ela pegou o livro, fechou o cofre, sumiu no escuro. Voce saiu mais leve do que esperava — e mais vazio tambem, como se parte da sua historia tivesse ido junto. Mas o livro nao te soltou. Uma ultima pagina apareceu na sua mesa em casa. E quem a escreveu ta a caminho.",
           "nextSceneId": "la10",
@@ -883,12 +739,6 @@
           "text": "Recuso e exponho tudo: 'Nao compra meu silencio.'",
           "subtext": "Vigor/Ruptura final",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Escolheu guerra aberta. O livro vibrou aprovando.",
           "aftermath": "Ela empalideceu. Voce falou sem gritar — mas com fogo atras das palavras. Nao tem mais recuo possivel pra nenhum dos dois. O livro vibrou uma ultima vez nas suas maos e ficou em silencio absoluto. Como se finalmente tivesse encontrado o dono real.",
           "endingId": "selo_quebrado",
@@ -911,12 +761,6 @@
           "text": "Recuso e jogo o livro no chao na frente dela.",
           "subtext": "Vigor/Desprezo total",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 2,
-            "desapego": 2,
-            "filtro": -2,
-            "harmonia": -1
-          },
           "feedback": "Destruiu o pacto e a ponte. Livre, mas so.",
           "aftermath": "As paginas se espalharam aos pes dela num ruido seco. Voce saiu sem olhar pra tras e sem dizer mais uma palavra. A autoridade e o livro ficaram juntos, numa sala que ja nao importa. A historia acabou ali — antes de virar sua de verdade.",
           "endingId": "cinzas",
@@ -939,12 +783,6 @@
           "text": "Aceito por agora e escondo a jogada real pra depois.",
           "subtext": "Filtro/Pacto frio",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "presenca": -2,
-            "harmonia": -1
-          },
           "feedback": "Entrou no pacto sem entregar a alma. Perigoso.",
           "aftermath": "Ela sorriu aliviada, do jeito de quem acha que ganhou. Voce sorriu calculando, do jeito de quem sabe que o jogo mal comecou. O livro ficou na mao dela — mas as paginas que importam voce ja leu. O pacto existe. O dono e outro. Ela ainda nao sabe disso.",
           "endingId": "pacto_frio",
@@ -967,12 +805,6 @@
           "text": "Digo: 'Negocio em termos claros ou nao negocio nada.'",
           "subtext": "Presenca/Ultima mesa",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "harmonia": 2,
-            "vigor": -2,
-            "filtro": -1
-          },
           "feedback": "Recusou ser engolido. Se houver acordo, sera seu.",
           "aftermath": "Ela parou de falar por um segundo longo. Pela primeira vez em muito tempo, alguem falou com ela como igual — nao como sudito. A mesa mudou de dono sem ninguem gritar. O livro ficou aberto entre voces, esperando uma historia nova. Escrita em dois, dessa vez.",
           "endingId": "reescrita",
@@ -995,12 +827,6 @@
           "text": "Devolvo: 'Nao preciso disso pra saber quem voce e.'",
           "subtext": "Desapego/Libertacao",
           "tone": "protetor",
-          "weights": {
-            "desapego": 3,
-            "presenca": 2,
-            "vigor": -2,
-            "filtro": -1
-          },
           "feedback": "Largou a arma e saiu inteiro. Sem poder, sem corrente.",
           "aftermath": "Voce saiu antes dela terminar a proposta. Deixou o livro na mesa, a oferta no ar, e a versao de voce que teria aceitado pra tras. Do lado de fora, o ar ta mais fino. Limpo. Vazio. Voce nunca se sentiu menos a venda.",
           "endingId": "cinzas",

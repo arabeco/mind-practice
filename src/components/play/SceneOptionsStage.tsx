@@ -3,9 +3,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import HoldButton from '@/components/HoldButton';
-import { STAT_COLORS, STAT_KEYS } from '@/types/game';
-import type { Option, StatKey, Question } from '@/types/game';
+import { STAT_COLORS } from '@/types/game';
+import type { Option, Question } from '@/types/game';
 import { OPTIONS_TIME_LIMIT_MS, type ScenePresentationProfile } from '@/lib/scenePresentation';
+import { getDominantAxisFromEvidence } from '@/lib/runScoring';
 
 /** Deterministic shuffle seeded by question id so order is stable per question */
 function seededShuffle<T>(arr: T[], seed: string): T[] {
@@ -31,19 +32,6 @@ interface SceneOptionsStageProps {
 }
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
-
-function getDominantAxis(weights: Partial<Record<StatKey, number>>): StatKey {
-  let max: StatKey = 'vigor';
-  let maxVal = -Infinity;
-  for (const key of STAT_KEYS) {
-    const value = weights[key];
-    if (value !== undefined && value > maxVal) {
-      maxVal = value;
-      max = key;
-    }
-  }
-  return max;
-}
 
 export default function SceneOptionsStage({
   question,
@@ -122,8 +110,8 @@ export default function SceneOptionsStage({
 
         <div className={`grid gap-1.5 ${shuffledOptions.length >= 4 ? 'sm:grid-cols-2' : ''}`}>
           {shuffledOptions.map((option, index) => {
-            const dominantAxis = getDominantAxis(option.weights ?? {});
-            const holdColor = STAT_COLORS[dominantAxis];
+            const dominantAxis = getDominantAxisFromEvidence(option.evidence);
+            const holdColor = dominantAxis ? STAT_COLORS[dominantAxis] : '#94a3b8';
 
             return (
               <motion.div

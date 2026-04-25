@@ -13,6 +13,7 @@ import {
   STAT_LABELS,
   TIER_CONFIG,
   type DeckSnapshot,
+  type RunAnswerEvent,
   type StatKey,
 } from '@/types/game';
 
@@ -214,10 +215,74 @@ export default function RunReportCard({
                 )}
               </div>
             </div>
+
+            {snapshot.answers && snapshot.answers.length > 0 && (
+              <EvidenceTimeline answers={snapshot.answers} />
+            )}
           </div>
         </div>
       </div>
     </motion.article>
+  );
+}
+
+function EvidenceTimeline({ answers }: { answers: RunAnswerEvent[] }) {
+  const withEvidence = answers.filter(a => !a.timedOut && a.evidence);
+  if (withEvidence.length === 0) return null;
+
+  return (
+    <div className="glass-surface rounded-[1.2rem] px-4 py-4">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/42">
+        O que isso revelou
+      </p>
+      <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-white/26">
+        evidencia declarada por resposta
+      </p>
+      <div className="mt-3 space-y-2">
+        {withEvidence.map((answer, idx) => (
+          <EvidenceRow key={`${answer.questionId}-${idx}`} index={idx + 1} answer={answer} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EvidenceRow({ index, answer }: { index: number; answer: RunAnswerEvent }) {
+  const evidence = answer.evidence;
+  if (!evidence) return null;
+  const entries = STAT_KEYS
+    .map(axis => ({ axis, ev: evidence[axis] }))
+    .filter((e): e is { axis: StatKey; ev: NonNullable<typeof e.ev> } => !!e.ev);
+
+  return (
+    <div className="flex items-start gap-2">
+      <span className="mt-0.5 inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] font-mono text-white/55">
+        {index}
+      </span>
+      <div className="flex flex-wrap gap-1.5">
+        {entries.map(({ axis, ev }) => {
+          const tint = STAT_COLORS[axis];
+          const direction = ev.min !== undefined ? '↑' : '↓';
+          const threshold = ev.min !== undefined ? ev.min : ev.max ?? 0;
+          return (
+            <span
+              key={axis}
+              className="inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium"
+              style={{
+                borderColor: `${tint}40`,
+                color: tint,
+                backgroundColor: `${tint}10`,
+              }}
+              title={`confidence ${ev.confidence.toFixed(2)}`}
+            >
+              <span className="font-mono">{direction}</span>
+              {STAT_LABELS[axis]}
+              <span className="text-white/45">{threshold.toFixed(2)}</span>
+            </span>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 

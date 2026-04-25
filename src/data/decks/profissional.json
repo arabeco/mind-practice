@@ -36,12 +36,6 @@
           "text": "Paro e digo: 'Quando quiserem ouvir, continuo.'",
           "subtext": "Imposicao direta",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Exigiu atencao. Silencio pesou, mas agora te olham.",
           "evidence": {
             "vigor": {
@@ -62,12 +56,6 @@
           "text": "Termino rapido e mando os slides por email.",
           "subtext": "Eficiencia fria",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Pratico, mas ficou invisivel. Ninguem lembrou de voce.",
           "evidence": {
             "desapego": {
@@ -88,12 +76,6 @@
           "text": "'Tenho um dado que vai mudar a visao de voces.'",
           "subtext": "Reconquista da sala",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "harmonia": 1,
-            "filtro": -2,
-            "vigor": -1
-          },
           "feedback": "Recapturou a sala sem criar clima. Lideranca sutil.",
           "evidence": {
             "presenca": {
@@ -114,12 +96,6 @@
           "text": "Sigo falando normalmente, fingindo que nao notei.",
           "subtext": "Persistencia silenciosa",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Manteve compostura, mas ninguem notou o esforco.",
           "evidence": {
             "filtro": {
@@ -164,12 +140,6 @@
           "text": "'Nao vai dar. Tenho compromisso. Resolvo segunda cedo.'",
           "subtext": "Limite claro",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Colocou limite. Chefe nao curtiu, mas voce priorizou.",
           "evidence": {
             "vigor": {
@@ -190,12 +160,6 @@
           "text": "Suspiro, tiro a mochila e fico. Nao vale a briga.",
           "subtext": "Submissao",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Cedeu pra evitar conflito. Quantas sextas mais aguenta?",
           "evidence": {
             "harmonia": {
@@ -216,12 +180,6 @@
           "text": "'Faco a parte critica agora, finalizo remoto amanha.'",
           "subtext": "Negociacao",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Achou meio termo. Entregou sem perder a noite.",
           "evidence": {
             "harmonia": {
@@ -242,12 +200,6 @@
           "text": "Digo 'claro' sorrindo, mas por dentro to furioso.",
           "subtext": "Raiva contida",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "harmonia": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Mascara perfeita, mas a raiva cobra depois.",
           "evidence": {
             "filtro": {
@@ -292,12 +244,6 @@
           "text": "'Essa piada nao tem graca. Voce sabe disso, ne?'",
           "subtext": "Confronto direto",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Cortou o momento. Necessario pra quem tava mal.",
           "evidence": {
             "vigor": {
@@ -318,12 +264,6 @@
           "text": "Nao rio e mudo de assunto. Meu silencio fala.",
           "subtext": "Silencio posicionado",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "presenca": -1,
-            "vigor": -2
-          },
           "feedback": "Nao compactuou, mas nao enfrentou. Mensagem ambigua.",
           "evidence": {
             "filtro": {
@@ -344,12 +284,6 @@
           "text": "Tom firme: 'Pega leve, tem gente desconfortavel aqui.'",
           "subtext": "Mediacao",
           "tone": "protetor",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Apontou sem criar tribunal. Equilibrio raro.",
           "evidence": {
             "harmonia": {
@@ -370,12 +304,6 @@
           "text": "Fico calado. Nao e problema meu.",
           "subtext": "Indiferenca",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "harmonia": -2,
-            "presenca": -1
-          },
           "feedback": "Se distanciou. Protegeu a si, ignorou os outros.",
           "evidence": {
             "desapego": {
@@ -420,12 +348,6 @@
           "text": "Vou no RH: 'Preciso entender os criterios salariais.'",
           "subtext": "Acao direta",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "filtro": -2,
-            "harmonia": -1
-          },
           "feedback": "Foi buscar respostas. Direto, lutando pelo seu.",
           "evidence": {
             "vigor": {
@@ -446,12 +368,6 @@
           "text": "Guardo a info e comeco a procurar outro emprego.",
           "subtext": "Estrategia de saida",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Nao brigou, planejou. Vinganca pode vir como proposta.",
           "evidence": {
             "filtro": {
@@ -472,12 +388,6 @@
           "text": "Marco reuniao com meu gestor pra discutir salario.",
           "subtext": "Negociacao interna",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Canalizou raiva em estrategia. Calculado e profissional.",
           "evidence": {
             "harmonia": {
@@ -498,12 +408,6 @@
           "text": "Engulo seco e sigo trabalhando. Reclamar nao muda nada.",
           "subtext": "Resignacao",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "harmonia": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Aceitou, mas resignacao pode virar amargura.",
           "evidence": {
             "desapego": {
@@ -548,12 +452,6 @@
           "text": "'Vou parar aqui. Essas acusacoes nao procedem.'",
           "subtext": "Defesa firme",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Enfrentou o cliente. Equipe te respeita, contrato treme.",
           "evidence": {
             "vigor": {
@@ -574,12 +472,6 @@
           "text": "Deixo falar e digo: 'Respondo por email com os dados.'",
           "subtext": "Absorcao tatica",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Absorveu sem reagir. Resposta documentada vai falar.",
           "evidence": {
             "filtro": {
@@ -600,12 +492,6 @@
           "text": "'Entendo a frustracao. Vamos marcar pra resolver com calma.'",
           "subtext": "Desescalada",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Transformou grito em agenda. Cliente acalmou.",
           "evidence": {
             "harmonia": {
@@ -626,12 +512,6 @@
           "text": "Fico em silencio total ate ele parar. Sem combustivel.",
           "subtext": "Muro",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "harmonia": -1
-          },
           "feedback": "Virou um muro. Ele cansou, equipe ficou tensa.",
           "evidence": {
             "desapego": {

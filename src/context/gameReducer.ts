@@ -11,6 +11,7 @@ import {
   type Deck,
   type AnswerIntensity,
   type Option,
+  STAT_KEYS,
   INITIAL_CALIBRATION,
   INITIAL_WALLET,
   INITIAL_PLUS_SUBSCRIPTION,
@@ -34,11 +35,12 @@ import {
   normalizeGameState,
 } from '@/lib/runScoring';
 import {
-  applyDampenedWeights,
+  recordAnswer,
   getUnlockedDecks,
   CALIBRAGEM_IDS,
   CALIBRAGEM_COMPLETION_FICHAS,
 } from '@/lib/gameStats';
+import { playerMean } from '@/lib/bayesEngine';
 import {
   DEFAULT_CONFIG,
   createPriorProfile,
@@ -67,9 +69,7 @@ export type GameAction =
       optionIndex: number;
       nextSceneId: string | null;
       endingId: string | null;
-      weights: Partial<Record<StatKey, number>>;
       tone: Tone;
-      tensao: number;
       evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
     }
   | { type: 'CAMPAIGN_RATE'; seasonId: string; rating: number }
@@ -104,43 +104,34 @@ export const initialState: GameState = {
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
-    case 'START_DECK':
+    case 'START_DECK': {
       const startBeliefs = state.calibration.beliefs ?? createPriorProfile();
       const startArchetype = matchArchetypes(startBeliefs).primary.archetype;
+      // Snapshot legado pra runScoring delta tracking — derivado do mean recentered.
+      const startStats = STAT_KEYS.reduce<Record<StatKey, number>>((acc, k) => {
+        acc[k] = (playerMean(startBeliefs[k]) - 0.5) * 2;
+        return acc;
+      }, { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 });
       return {
         ...state,
         activeDeck: action.deck,
-        activeRun: createRunSession(
-          action.deck,
-          state.calibration.axes,
-          startArchetype.name,
-        ),
+        activeRun: createRunSession(action.deck, startStats, startArchetype.name),
         currentQuestion: 0,
       };
+    }
 
     case 'ANSWER': {
       const question = state.activeDeck?.questions[state.currentQuestion];
       if (!question) return state;
 
-      const optionWeights = action.option.weights ?? {};
-      const tensao = question.metadata.tensao;
       const isTraining = state.activeDeck?.isTraining === true;
 
-      // Training decks: snapshot da run + activeRun avançam, mas perfil
-      // (axes/beliefs/recentWeights/totalResponses) fica intocado.
+      // Training decks: activeRun avança mas perfil global (beliefs +
+      // totalResponses + toneHistory) fica intocado.
       const baseCalibration = isTraining
         ? state.calibration
-        : applyDampenedWeights(
-            state.calibration,
-            optionWeights,
-            action.option.tone,
-            tensao,
-            action.responseTimeMs,
-            action.intensity,
-          );
+        : recordAnswer(state.calibration, action.option.tone);
 
-      // Bayesian beliefs run in parallel to the legacy axes — agora que removemos
-      // resolveWeights, a fonte de verdade pra crença é só `option.evidence`.
       const evidence = action.option.evidence;
       const nextBeliefs = (!isTraining && evidence)
         ? updateProfile(
@@ -162,7 +153,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
               state.activeRun,
               question.id,
               action.option.tone,
-              optionWeights,
               action.option.evidence,
               action.responseTimeMs,
             )
@@ -176,7 +166,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const event = {
         questionId: question.id,
         tone: null,
-        weights: {},
         dominantAxis: null,
         timedOut: true,
       };
@@ -242,11 +231,16 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       // prevArchId/ARCHETYPES retained for hysteresis logic — re-introduced in Task 21 cleanup.
       void ARCHETYPES;
       void matchArchetype;
+      // Snapshot finalStats: derive from beliefs mean recentered to [-1, +1].
+      const finalStats = STAT_KEYS.reduce<Record<StatKey, number>>((acc, k) => {
+        acc[k] = (playerMean(finishBeliefs[k]) - 0.5) * 2;
+        return acc;
+      }, { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 });
       const snapshot = state.activeRun
         ? createDeckSnapshot({
             session: state.activeRun,
             archetypeName: archetype.name,
-            finalStats: state.calibration.axes,
+            finalStats,
           })
         : null;
 
@@ -369,12 +363,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
       // Apply calibration like a normal ANSWER so campaign responses still
       // shape the player's profile.
-      const baseCalibration = applyDampenedWeights(
-        state.calibration,
-        action.weights,
-        action.tone,
-        action.tensao,
-      );
+      const baseCalibration = recordAnswer(state.calibration, action.tone);
 
       const campaignNextBeliefs = action.evidence
         ? updateProfile(

@@ -156,17 +156,19 @@ function validateDeck(filePath: string): ValidationResult {
         err(`${oLabel}: feedback has ${feedbackWc} words (max 15)`);
       }
 
-      // 4b. Option precisa ter peso legado (`weights`) durante a transição.
-      const hasLegacy = opt.weights && typeof opt.weights === 'object';
-      // 4c. Evidence (bayesiano, Fase 3+)
+      // 4b. Evidence é o único formato suportado pós-Fase 4.
       const hasEvidence = opt.evidence && typeof opt.evidence === 'object';
-      if (hasEvidence) {
+      if (!hasEvidence) {
+        err(`${oLabel}: Option precisa de campo "evidence"`);
+      } else {
         const axes = Object.keys(opt.evidence);
         if (axes.length < 1 || axes.length > 3) {
           err(`${oLabel}: evidence deve declarar entre 1 e 3 eixos (tem ${axes.length})`);
         }
         let hasMin = false;
         let hasMax = false;
+        let dominant = "";
+        let dominantConf = 0;
         for (const [axis, ax] of Object.entries(opt.evidence as Record<string, any>)) {
           if (!(VALID_STATS as readonly string[]).includes(axis)) {
             err(`${oLabel}: evidence.${axis} — eixo invalido`);
@@ -191,49 +193,19 @@ function validateDeck(filePath: string): ValidationResult {
           }
           if (hasMinField) hasMin = true;
           if (hasMaxField) hasMax = true;
+
+          // Eixo dominante: maior confidence (empate → primeiro listado).
+          const c = typeof ax.confidence === 'number' ? ax.confidence : 0;
+          if (c > dominantConf) {
+            dominantConf = c;
+            dominant = axis;
+          }
+          axisAppearances[axis] = (axisAppearances[axis] || 0) + 1;
         }
         if (axes.length >= 2 && !(hasMin && hasMax)) {
           warn(`${oLabel}: evidence sem trade-off (só min ou só max em todos os eixos)`);
         }
-      }
-
-      if (!hasLegacy && !hasEvidence) {
-        err(`${oLabel}: Option precisa de evidence ou weights (legacy)`);
-      }
-
-      // Checa forma dos weights legados que existirem
-      const checkShape = (label: string, w: Record<string, number>) => {
-        const vals = Object.values(w);
-        const hasPos = vals.some((v) => v > 0);
-        const hasNeg = vals.some((v) => v < 0);
-        if (!hasPos || !hasNeg) {
-          err(`${oLabel}: ${label} precisa de pelo menos um valor positivo E um negativo`);
-        }
-        const sum = vals.reduce((a, b) => a + b, 0);
-        if (Math.abs(sum) > 3) {
-          warn(`${oLabel}: ${label} sum ${sum} (abs > 3)`);
-        }
-      };
-
-      if (hasLegacy) checkShape('weights', opt.weights);
-
-      // Usa weights pro tracking de dominant axis
-      const effective: Record<string, number> = opt.weights ?? {};
-
-      // Track dominant axis (highest absolute weight)
-      let maxAbs = 0;
-      let dominant = "";
-      for (const [axis, val] of Object.entries(effective)) {
-        if (Math.abs(val as number) > maxAbs) {
-          maxAbs = Math.abs(val as number);
-          dominant = axis;
-        }
-      }
-      if (dominant) dominantAxes.add(dominant);
-
-      // Track axis appearances across all options
-      for (const axis of Object.keys(effective)) {
-        axisAppearances[axis] = (axisAppearances[axis] || 0) + 1;
+        if (dominant) dominantAxes.add(dominant);
       }
     });
   });
@@ -241,7 +213,7 @@ function validateDeck(filePath: string): ValidationResult {
   // 8. Axis coverage warning
   for (const axis of VALID_AXES) {
     if (!dominantAxes.has(axis)) {
-      warn(`Axis "${axis}" never appears as the dominant weight in any option`);
+      warn(`Axis "${axis}" never appears as the dominant evidence in any option`);
     }
   }
 

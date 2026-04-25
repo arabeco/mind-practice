@@ -16,7 +16,7 @@ import { useToast } from '@/components/Toast';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
 import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
-import { archetypeDisplayState, globalConfidence, createPriorProfile } from '@/lib/bayesEngine';
+import { archetypeDisplayState, globalConfidence, createPriorProfile, playerMean } from '@/lib/bayesEngine';
 
 const container = { hidden: {}, show: { transition: { staggerChildren: 0.06 } } };
 const fadeUp = {
@@ -91,7 +91,12 @@ export default function PerfilPage() {
   const { calibration } = state;
   const { snapshots } = calibration;
   const hasData = snapshots.length > 0;
-  const maxAbs = Math.max(1, ...STAT_KEYS.map(key => Math.abs(calibration.axes[key])));
+  // Recentered playerMean ∈ [-1, 1] reproduz a semântica antiga de "axes" (sinal +/-).
+  const derivedAxes: Record<StatKey, number> = STAT_KEYS.reduce((acc, k) => {
+    acc[k] = (playerMean(beliefsProfile[k]) - 0.5) * 2;
+    return acc;
+  }, {} as Record<StatKey, number>);
+  const maxAbs = Math.max(1, ...STAT_KEYS.map(key => Math.abs(derivedAxes[key])));
   const bestPerDeck = getBestPerDeck(snapshots);
   const recentRuns = [...snapshots].reverse().slice(0, 3);
 
@@ -175,7 +180,7 @@ export default function PerfilPage() {
       <motion.section variants={fadeUp} className="relative">
         {/* Action icons — top right corner */}
         <div className="absolute right-0 top-0 z-10 flex flex-col gap-1.5">
-          <ShareButton archetype={archetype} axes={calibration.axes} nickname={nickname} compact />
+          <ShareButton archetype={archetype} axes={derivedAxes} nickname={nickname} compact />
           <button type="button" onClick={handleStartEdit} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Editar nickname">
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -304,7 +309,7 @@ export default function PerfilPage() {
           <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/45">Eixos</p>
           <div className="space-y-2.5">
             {STAT_KEYS.map((key) => {
-              const value = calibration.axes[key];
+              const value = derivedAxes[key];
               const pct = hasData ? Math.min(Math.abs(value) / maxAbs, 1) * 50 : 0;
               const color = STAT_COLORS[key];
               const isNeg = value < 0;

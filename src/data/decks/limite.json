@@ -33,11 +33,6 @@
           "text": "Subo e bato na porta agora.",
           "subtext": "Confronto direto",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao enrola ate o quarto dia.",
           "evidence": {
             "vigor": {
@@ -54,11 +49,6 @@
           "text": "Coloco abafador e durmo.",
           "subtext": "Resolve sozinho",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Voce cuida do seu sono sem guerra.",
           "evidence": {
             "desapego": {
@@ -75,12 +65,6 @@
           "text": "Mando mensagem educada pelo zap.",
           "subtext": "Aviso por texto",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce avisa sem subir escada.",
           "evidence": {
             "filtro": {
@@ -117,11 +101,6 @@
           "text": "Chamo o garcom e marco: 'Eu tava antes.'",
           "subtext": "Reivindica",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao abre mao do seu lugar.",
           "evidence": {
             "vigor": {
@@ -138,11 +117,6 @@
           "text": "Deixo. Cinco minutos nao matam.",
           "subtext": "Solta",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Voce escolhe onde plantar raiz.",
           "evidence": {
             "desapego": {
@@ -159,12 +133,6 @@
           "text": "Comento alto pra eles ouvirem.",
           "subtext": "Passivo-agressivo",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "filtro": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce sinaliza sem encarar direto.",
           "evidence": {
             "vigor": {
@@ -202,11 +170,6 @@
           "text": "Falo nao, direto.",
           "subtext": "Corta seco",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao enrola o nao.",
           "evidence": {
             "vigor": {
@@ -223,11 +186,6 @@
           "text": "Digo sim e depois me remoo.",
           "subtext": "Nao sabe negar",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "vigor": -2,
-            "filtro": -1
-          },
           "feedback": "Voce ganha paz — perde em outra moeda.",
           "evidence": {
             "harmonia": {
@@ -244,11 +202,6 @@
           "text": "Invento uma razao pra nao poder.",
           "subtext": "Nao desaponta",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce evita a cena mas paga em verdade.",
           "evidence": {
             "filtro": {
@@ -285,11 +238,6 @@
           "text": "Respondo: 'Isso fica comigo.'",
           "subtext": "Fecha o assunto",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce protege o que e seu com uma frase.",
           "evidence": {
             "vigor": {
@@ -306,11 +254,6 @@
           "text": "Respondo pouco e mudo de assunto.",
           "subtext": "Desvia sutil",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "presenca": -1,
-            "vigor": -2
-          },
           "feedback": "Voce sai da cena sem bater porta.",
           "evidence": {
             "desapego": {
@@ -327,12 +270,6 @@
           "text": "Respondo com outra pergunta.",
           "subtext": "Devolve",
           "tone": "provocativo",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce mantem o controle do campo.",
           "evidence": {
             "filtro": {
@@ -369,11 +306,6 @@
           "text": "Falo: 'Isso aqui e seu.'",
           "subtext": "Devolve",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao e pallet de carga dos outros.",
           "evidence": {
             "vigor": {
@@ -390,11 +322,6 @@
           "text": "Faco e engulo.",
           "subtext": "Aceita a tarefa",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Voce evita briga — mas soma ressentimento.",
           "evidence": {
             "harmonia": {
@@ -411,12 +338,6 @@
           "text": "Passo pro meu gestor: 'Ta rolando isso.'",
           "subtext": "Escala",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce aciona o sistema certo.",
           "evidence": {
             "filtro": {
@@ -453,11 +374,6 @@
           "text": "Falo na mesa: 'Nao deu graca.'",
           "subtext": "Corta",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao engole pra manter mesa.",
           "evidence": {
             "vigor": {
@@ -474,11 +390,6 @@
           "text": "Saio da mesa. Vou no banheiro.",
           "subtext": "Se retira",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao participa do que nao te serve.",
           "evidence": {
             "desapego": {
@@ -495,12 +406,6 @@
           "text": "Silencio frio. Nao rio nem respondo.",
           "subtext": "Gela",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "presenca": -1
-          },
           "feedback": "Voce nao alimenta — e eles sentem.",
           "evidence": {
             "filtro": {
@@ -537,11 +442,6 @@
           "text": "Respondo la, a altura.",
           "subtext": "Devolve no lugar",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao foge de campo aberto.",
           "evidence": {
             "vigor": {
@@ -558,11 +458,6 @@
           "text": "Bloqueio e sigo.",
           "subtext": "Sai do campo",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "vigor": -1,
-            "harmonia": -2
-          },
           "feedback": "Voce nao da holofote.",
           "evidence": {
             "desapego": {
@@ -579,12 +474,6 @@
           "text": "Deixo o comentario la. Plateia decide.",
           "subtext": "Nao moderar",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "desapego": -1
-          },
           "feedback": "Voce deixa a cena falar por si.",
           "evidence": {
             "filtro": {

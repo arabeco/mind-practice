@@ -33,11 +33,6 @@
           "text": "Falo na hora: 'Amigo, a fila e ali atras.'",
           "subtext": "Marca territorio",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Direto. Voce nao deixa passar.",
           "evidence": {
             "vigor": {
@@ -54,11 +49,6 @@
           "text": "Deixo quieto. Nao vale minha energia.",
           "subtext": "Vira a pagina",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Escolheu a paz. Nem todo combate interessa.",
           "evidence": {
             "desapego": {
@@ -75,12 +65,6 @@
           "text": "Depende do dia — as vezes falo, as vezes passo.",
           "subtext": "Leitura do momento",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "desapego": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce le o momento antes de reagir.",
           "evidence": {
             "filtro": {
@@ -118,11 +102,6 @@
           "text": "Corto seco: 'Nao curti essa.'",
           "subtext": "Marca o limite",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Amigo ou nao, voce tem limite claro.",
           "evidence": {
             "vigor": {
@@ -139,12 +118,6 @@
           "text": "Devolvo com outra piada. Jogo junto.",
           "subtext": "Joga o jogo",
           "tone": "pragmatico",
-          "weights": {
-            "harmonia": 3,
-            "desapego": 1,
-            "vigor": -2,
-            "filtro": -2
-          },
           "feedback": "Voce nao leva pro pessoal.",
           "evidence": {
             "harmonia": {
@@ -165,12 +138,6 @@
           "text": "Falo com ele depois, em privado.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "desapego": -1,
-            "vigor": -1
-          },
           "feedback": "Voce separa briga publica de resolucao.",
           "evidence": {
             "filtro": {
@@ -207,11 +174,6 @@
           "text": "Buzino longo e devolvo o dedo.",
           "subtext": "Reage na hora",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "Sangue quente. Voce nao engole.",
           "evidence": {
             "vigor": {
@@ -228,11 +190,6 @@
           "text": "Nem ligo. Gente assim nao merece meu minuto.",
           "subtext": "Segue a vida",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Voce nao alimenta briga de estranho.",
           "evidence": {
             "desapego": {
@@ -249,12 +206,6 @@
           "text": "Xingo sozinho no carro e sigo.",
           "subtext": "Libera e passa",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "desapego": -1
-          },
           "feedback": "Descarrega por dentro, segue a vida.",
           "evidence": {
             "filtro": {
@@ -291,11 +242,6 @@
           "text": "Falo. Prefiro discordar do que fingir.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao finge so pra caber.",
           "evidence": {
             "presenca": {
@@ -312,11 +258,6 @@
           "text": "Concordo pra manter o clima, penso depois.",
           "subtext": "Mantem a paz",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce protege o clima antes da razao.",
           "evidence": {
             "harmonia": {
@@ -333,12 +274,6 @@
           "text": "Faco uma pergunta esperta pra eles repensarem.",
           "subtext": "Discorda no esguelho",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "harmonia": -1,
-            "vigor": -1
-          },
           "feedback": "Voce desmonta sem brigar.",
           "evidence": {
             "filtro": {
@@ -376,11 +311,6 @@
           "text": "Aviso: 'Hoje nao, tô exausto(a).'",
           "subtext": "Nomeia o limite",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nomeia o que sente antes de errar.",
           "evidence": {
             "presenca": {
@@ -397,11 +327,6 @@
           "text": "Engulo e respondo como se nada fosse.",
           "subtext": "Nao mostra",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce segura — mas acumula.",
           "evidence": {
             "harmonia": {
@@ -418,11 +343,6 @@
           "text": "Estouro. Desconto na outra pessoa.",
           "subtext": "Explode",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "harmonia": -2,
-            "filtro": -1
-          },
           "feedback": "O cansaco virou voz.",
           "evidence": {
             "vigor": {
@@ -460,11 +380,6 @@
           "text": "Corrijo na hora: 'Legal, foi o que falei outro dia ne.'",
           "subtext": "Reclama credito",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao abre mao do que e seu.",
           "evidence": {
             "presenca": {
@@ -481,11 +396,6 @@
           "text": "Deixo passar. Nao vale brigar por isso aqui.",
           "subtext": "Nao vale a briga",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce escolhe as batalhas com cuidado.",
           "evidence": {
             "desapego": {
@@ -502,12 +412,6 @@
           "text": "Depois, em privado, pergunto direto pra ela.",
           "subtext": "Resolve offline",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce enfrenta — mas sem plateia.",
           "evidence": {
             "filtro": {
@@ -544,11 +448,6 @@
           "text": "Penso ate resolver na cabeca, nem que demore.",
           "subtext": "Mastiga tudo",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "desapego": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce nao solta enquanto nao entende.",
           "evidence": {
             "filtro": {
@@ -565,11 +464,6 @@
           "text": "Largo. Coloco outra coisa na cabeca.",
           "subtext": "Vira a pagina",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "filtro": -2,
-            "presenca": -1
-          },
           "feedback": "Voce sabe quando parar de mastigar.",
           "evidence": {
             "desapego": {
@@ -586,11 +480,6 @@
           "text": "Falo com alguem — jogo pra fora.",
           "subtext": "Processa junto",
           "tone": "neutro",
-          "weights": {
-            "presenca": 3,
-            "desapego": -2,
-            "filtro": -1
-          },
           "feedback": "Voce pensa alto, junto.",
           "evidence": {
             "presenca": {

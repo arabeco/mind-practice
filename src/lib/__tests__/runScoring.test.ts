@@ -17,7 +17,6 @@ test('appendRunAnswer persiste evidence quando presente', () => {
     { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 }, 'x');
   const updated = appendRunAnswer(
     session, 'q1', 'neutro',
-    { vigor: 2 },
     { vigor: { min: 0.6, confidence: 0.75 } },
     1000,
   );

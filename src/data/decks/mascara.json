@@ -33,11 +33,6 @@
           "text": "Posto. Se to bem, mostro.",
           "subtext": "Sem cerimonia",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "desapego": -2,
-            "filtro": -1
-          },
           "feedback": "Voce nao esconde o bom.",
           "evidence": {
             "presenca": {
@@ -54,11 +49,6 @@
           "text": "Guardo pra mim. Nem todo momento e pra tela.",
           "subtext": "Reserva",
           "tone": "neutro",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce vive sem precisar exibir.",
           "evidence": {
             "desapego": {
@@ -75,12 +65,6 @@
           "text": "Mando privado pra tres pessoas.",
           "subtext": "So os proximos",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "desapego": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce escolhe quem ve o que.",
           "evidence": {
             "filtro": {
@@ -117,11 +101,6 @@
           "text": "Entro e solto meu ponto.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "weights": {
-            "presenca": 3,
-            "desapego": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce nao comenta so no sofa.",
           "evidence": {
             "presenca": {
@@ -138,11 +117,6 @@
           "text": "Leio e passo. Meu minuto vale mais.",
           "subtext": "Nao alimenta",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao vai pra cada briga.",
           "evidence": {
             "desapego": {
@@ -159,12 +133,6 @@
           "text": "Curto quem ja disse o que eu pensava.",
           "subtext": "Apoio silencioso",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "vigor": -1,
-            "desapego": -1
-          },
           "feedback": "Voce marca presenca sem expor rosto.",
           "evidence": {
             "filtro": {
@@ -201,11 +169,6 @@
           "text": "Comento e compartilho. Feliz por ele(a).",
           "subtext": "Bota o rosto",
           "tone": "protetor",
-          "weights": {
-            "presenca": 3,
-            "desapego": -2,
-            "filtro": -1
-          },
           "feedback": "Voce celebra junto, sem receio.",
           "evidence": {
             "presenca": {
@@ -222,11 +185,6 @@
           "text": "Mando privado. Publico nao mostra sinceridade.",
           "subtext": "Reserva genuina",
           "tone": "neutro",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce se emociona sem vitrine.",
           "evidence": {
             "desapego": {
@@ -243,12 +201,6 @@
           "text": "Dou like e sigo o dia.",
           "subtext": "Minimo social",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce marca presenca sem esforco.",
           "evidence": {
             "filtro": {
@@ -285,11 +237,6 @@
           "text": "Respondo na hora, ironico tambem.",
           "subtext": "Devolve",
           "tone": "provocativo",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce nao engole provocacao publica.",
           "evidence": {
             "presenca": {
@@ -306,11 +253,6 @@
           "text": "Apago o comentario e sigo.",
           "subtext": "Limpa o espaco",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "presenca": -1,
-            "vigor": -2
-          },
           "feedback": "Voce cuida do seu espaco sem plateia.",
           "evidence": {
             "desapego": {
@@ -327,12 +269,6 @@
           "text": "Nem ligo. Ignoro mesmo.",
           "subtext": "Nao alimenta",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "harmonia": -1
-          },
           "feedback": "Voce escolhe nao dar atencao.",
           "evidence": {
             "filtro": {
@@ -369,11 +305,6 @@
           "text": "Mostro no grupo e zuo um pouco.",
           "subtext": "Comenta com amigos",
           "tone": "provocativo",
-          "weights": {
-            "presenca": 3,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Voce tem opiniao — e compartilha.",
           "evidence": {
             "presenca": {
@@ -390,11 +321,6 @@
           "text": "Nem noto. Cada um posta o que quer.",
           "subtext": "Nao julga",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "filtro": -1
-          },
           "feedback": "Voce nao gasta tempo com o que nao e seu.",
           "evidence": {
             "desapego": {
@@ -411,12 +337,6 @@
           "text": "Acho tosco mas nao falo. Guardo pra mim.",
           "subtext": "Filtra por dentro",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "harmonia": -1,
-            "desapego": -1
-          },
           "feedback": "Voce forma juizo sem precisar expressar.",
           "evidence": {
             "filtro": {
@@ -453,11 +373,6 @@
           "text": "Posto. E bom demais pra guardar.",
           "subtext": "Pra ser visto",
           "tone": "provocativo",
-          "weights": {
-            "presenca": 3,
-            "desapego": -2,
-            "filtro": -1
-          },
           "feedback": "Voce honra a frase, nao a plateia.",
           "evidence": {
             "presenca": {
@@ -474,11 +389,6 @@
           "text": "Guardo. Sei que e boa, so pra mim basta.",
           "subtext": "Auto-suficiente",
           "tone": "neutro",
-          "weights": {
-            "desapego": 3,
-            "presenca": -2,
-            "harmonia": -1
-          },
           "feedback": "Voce nao precisa da validacao.",
           "evidence": {
             "desapego": {
@@ -495,12 +405,6 @@
           "text": "Mando pra um amigo que ia rir.",
           "subtext": "Audiencia certa",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "presenca": -1,
-            "desapego": -1,
-            "vigor": -1
-          },
           "feedback": "Voce mede antes de publicar.",
           "evidence": {
             "filtro": {
@@ -537,11 +441,6 @@
           "text": "Largo o celular. Perdi tempo.",
           "subtext": "Corta o vicio",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": -1,
-            "harmonia": -2
-          },
           "feedback": "Voce se pega e reage.",
           "evidence": {
             "vigor": {
@@ -558,11 +457,6 @@
           "text": "Deixo rolar. Relaxar tambem e isso.",
           "subtext": "Sem culpa",
           "tone": "evasivo",
-          "weights": {
-            "desapego": 3,
-            "filtro": -2,
-            "vigor": -1
-          },
           "feedback": "Voce nao faz tempestade em meia hora.",
           "evidence": {
             "desapego": {
@@ -579,12 +473,6 @@
           "text": "Ja era, mas anoto pra prestar atencao.",
           "subtext": "Observa o padrao",
           "tone": "neutro",
-          "weights": {
-            "filtro": 3,
-            "vigor": -1,
-            "presenca": -1,
-            "desapego": -1
-          },
           "feedback": "Voce reconhece sem punir.",
           "evidence": {
             "filtro": {

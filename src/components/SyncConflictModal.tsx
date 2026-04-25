@@ -2,6 +2,8 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import type { PersistedGameState } from '@/lib/gameState/schema';
+import { STAT_KEYS, type StatKey } from '@/types/game';
+import { playerMean, createPriorProfile } from '@/lib/bayesEngine';
 
 export type ConflictChoice = 'use-cloud' | 'use-local' | 'cancel';
 
@@ -14,11 +16,12 @@ interface Props {
 
 function summarize(s: PersistedGameState) {
   const dominant = (() => {
-    const axes = s.calibration.axes;
-    let maxKey: keyof typeof axes = 'vigor';
-    let maxVal = axes.vigor;
-    for (const k of Object.keys(axes) as (keyof typeof axes)[]) {
-      if (axes[k] > maxVal) { maxVal = axes[k]; maxKey = k; }
+    const beliefs = s.calibration.beliefs ?? createPriorProfile();
+    let maxKey: StatKey = 'vigor';
+    let maxVal = playerMean(beliefs.vigor);
+    for (const k of STAT_KEYS) {
+      const v = playerMean(beliefs[k]);
+      if (v > maxVal) { maxVal = v; maxKey = k; }
     }
     return maxKey;
   })();

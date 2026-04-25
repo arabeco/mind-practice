@@ -36,12 +36,6 @@
           "text": "Grito 'Para de me ligar, golpista!' e desligo.",
           "subtext": "Explosao",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "filtro": -2,
-            "harmonia": -2
-          },
           "feedback": "Reagiu com raiva. Eficaz, mas a adrenalina ficou.",
           "evidence": {
             "vigor": {
@@ -62,12 +56,6 @@
           "text": "Desligo sem falar nada e bloqueio o numero.",
           "subtext": "Corte cirurgico",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 2,
-            "vigor": -2,
-            "harmonia": -1
-          },
           "feedback": "Frio e preciso. Nenhuma info vazou.",
           "evidence": {
             "filtro": {
@@ -88,12 +76,6 @@
           "text": "'Vou ligar pro banco confirmar. Obrigado.' Desligo.",
           "subtext": "Protocolo calmo",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Compostura mantida, procedimento correto.",
           "evidence": {
             "harmonia": {
@@ -114,12 +96,6 @@
           "text": "Fico na linha tentando arrancar info do golpista.",
           "subtext": "Contra-ataque",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 2,
-            "desapego": -2,
-            "filtro": -2
-          },
           "feedback": "Jogou o jogo dele. Divertido, mas arriscado.",
           "evidence": {
             "vigor": {
@@ -164,12 +140,6 @@
           "text": "'Sei que posso entregar. Me da 5 minutos.'",
           "subtext": "Autoafirmacao",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Nao deixou a provocacao te diminuir.",
           "evidence": {
             "vigor": {
@@ -190,12 +160,6 @@
           "text": "Sorrio: 'Deixo meu trabalho falar por mim.'",
           "subtext": "Confianca fria",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Absorveu o golpe sem piscar. Controle total.",
           "evidence": {
             "desapego": {
@@ -216,12 +180,6 @@
           "text": "'Entendo a surpresa. Posso explicar minha trajetoria?'",
           "subtext": "Construcao",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Transformou ceticismo em chance de narrativa.",
           "evidence": {
             "harmonia": {
@@ -242,12 +200,6 @@
           "text": "Levanto e saio: 'Nao provo nada pra quem ja decidiu.'",
           "subtext": "Orgulho",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "desapego": 1,
-            "harmonia": -3,
-            "presenca": -1
-          },
           "feedback": "Cabeca erguida, mas perdeu a chance.",
           "evidence": {
             "vigor": {
@@ -293,12 +245,6 @@
           "text": "Confronto na hora: 'Vi tudo. Me explica agora.'",
           "subtext": "Confronto imediato",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -2
-          },
           "feedback": "A bomba estourou. Consequencias imprevisiveis.",
           "evidence": {
             "vigor": {
@@ -319,12 +265,6 @@
           "text": "Guardo a info. Preciso pensar antes de agir.",
           "subtext": "Calculo estrategico",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Engoliu o veneno e guardou a carta.",
           "evidence": {
             "filtro": {
@@ -345,12 +285,6 @@
           "text": "Espero ate amanha e puxo conversa com calma.",
           "subtext": "Maturidade",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "filtro": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Deu tempo pro emocional acalmar.",
           "evidence": {
             "harmonia": {
@@ -371,12 +305,6 @@
           "text": "Decido que acabou. Nao preciso de explicacao.",
           "subtext": "Corte radical",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "vigor": 1,
-            "harmonia": -2,
-            "presenca": -1
-          },
           "feedback": "Cortou limpo. Sem drama, sem escuta.",
           "evidence": {
             "desapego": {
@@ -421,12 +349,6 @@
           "text": "'Isso nao tem graca.' Peco a conta na hora.",
           "subtext": "Limite duro",
           "tone": "pragmatico",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "desapego": -1
-          },
           "feedback": "Cortou na hora. Respeito proprio acima de tudo.",
           "evidence": {
             "vigor": {
@@ -447,12 +369,6 @@
           "text": "'Esse tipo de piada nao rola comigo.' Mudo de assunto.",
           "subtext": "Firmeza calibrada",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Limite marcado sem destruir o momento.",
           "evidence": {
             "harmonia": {
@@ -473,12 +389,6 @@
           "text": "Finjo que nao ouvi e planejo minha saida discreta.",
           "subtext": "Saida silenciosa",
           "tone": "evasivo",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Nao deu palco, mas engoliu o desconforto.",
           "evidence": {
             "filtro": {
@@ -499,12 +409,6 @@
           "text": "Rio junto pra disfarcar, mas por dentro doi.",
           "subtext": "Mascara",
           "tone": "evasivo",
-          "weights": {
-            "harmonia": 2,
-            "desapego": 1,
-            "vigor": -2,
-            "presenca": -1
-          },
           "feedback": "Protegeu o clima, traiu a si mesmo.",
           "evidence": {
             "harmonia": {
@@ -549,12 +453,6 @@
           "text": "'Depois de tudo que entreguei? Falta de respeito.'",
           "subtext": "Indignacao",
           "tone": "provocativo",
-          "weights": {
-            "vigor": 3,
-            "presenca": 1,
-            "harmonia": -2,
-            "filtro": -2
-          },
           "feedback": "Raiva justa, mas a ponte pode queimar.",
           "evidence": {
             "vigor": {
@@ -575,12 +473,6 @@
           "text": "'Entendido. Manda os documentos pro meu email.'",
           "subtext": "Pragmatismo frio",
           "tone": "pragmatico",
-          "weights": {
-            "filtro": 3,
-            "desapego": 1,
-            "vigor": -2,
-            "harmonia": -1
-          },
           "feedback": "Processou o golpe sem demonstrar. Controle maximo.",
           "evidence": {
             "filtro": {
@@ -601,12 +493,6 @@
           "text": "'Entendo. Existe transicao ou posicao alternativa?'",
           "subtext": "Negociacao",
           "tone": "neutro",
-          "weights": {
-            "harmonia": 3,
-            "presenca": 1,
-            "vigor": -2,
-            "desapego": -1
-          },
           "feedback": "Transformou o fim em negociacao.",
           "evidence": {
             "harmonia": {
@@ -627,12 +513,6 @@
           "text": "Levanto, aperto a mao e saio sem dizer nada.",
           "subtext": "Saida limpa",
           "tone": "pragmatico",
-          "weights": {
-            "desapego": 3,
-            "presenca": 1,
-            "vigor": -1,
-            "harmonia": -2
-          },
           "feedback": "Saida limpa. Nenhuma palavra desperdicada.",
           "evidence": {
             "desapego": {

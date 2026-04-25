@@ -89,13 +89,6 @@ export interface Option {
   tone: Tone;
 
   /**
-   * @deprecated Pesos legados consumidos pelo motor somatório (axes/recentWeights).
-   * Mantidos durante a transição UI: /perfil e /resultado ainda renderizam radar
-   * baseado em axes. Serão removidos quando esses surfaces migrarem pra beliefs.
-   */
-  weights?: Partial<Record<StatKey, number>>;
-
-  /**
    * Evidência bayesiana declarada nesta opção. Fonte de verdade pra `beliefs`.
    * Quem escolhe esta opção é evidência sobre θ em cada eixo declarado.
    */
@@ -230,11 +223,9 @@ export interface Archetype {
 // ============================================================
 
 export interface CalibrationState {
-  axes: Record<StatKey, number>;
-  /** Distribuições bayesianas por eixo (Fase 3+). */
-  beliefs?: import('@/lib/bayesEngine/types').PlayerBeliefs;
+  /** Distribuições bayesianas por eixo. Fonte única da verdade pro perfil. */
+  beliefs: import('@/lib/bayesEngine/types').PlayerBeliefs;
   totalResponses: number;
-  recentWeights: Record<StatKey, number[]>;
   toneHistory: Tone[];
   snapshots: DeckSnapshot[];
 }
@@ -242,9 +233,7 @@ export interface CalibrationState {
 export interface RunAnswerEvent {
   questionId: string;
   tone: Tone | null;
-  /** @deprecated — use `evidence`. Mantido pra snapshots legados. */
-  weights: Partial<Record<StatKey, number>>;
-  /** Evidência bayesiana aplicada nesta resposta (Fase 3+). */
+  /** Evidência bayesiana aplicada nesta resposta. Único formato pós-Fase 4. */
   evidence?: import('@/lib/bayesEngine/types').OptionEvidence;
   dominantAxis: StatKey | null;
   responseTimeMs?: number;
@@ -283,6 +272,8 @@ export interface DeckSnapshot {
   axisDelta: Record<StatKey, number>;
   profileShift: number;
   focusAlignment: number | null;
+  /** Respostas detalhadas — usadas pelo RunReportCard pra surface evidence per-answer. */
+  answers: RunAnswerEvent[];
   legacy: boolean;
 }
 
@@ -463,10 +454,8 @@ export const CONSISTENCY_WINDOW = 20;
 export const HOLD_DURATION_MS = 500;
 
 export const INITIAL_CALIBRATION: CalibrationState = {
-  axes: { vigor: 0, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 },
   beliefs: createPriorProfile(),
   totalResponses: 0,
-  recentWeights: { vigor: [], harmonia: [], filtro: [], presenca: [], desapego: [] },
   toneHistory: [],
   snapshots: [],
 };

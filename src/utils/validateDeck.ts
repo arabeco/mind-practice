@@ -79,14 +79,8 @@ export function validateDeck(deck: Deck): string[] {
     }
 
     for (const opt of q.options) {
-      const weights = Object.values(opt.weights ?? {});
-      if (weights.length === 0) {
-        errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." has no weights`);
-      }
-      const hasPos = weights.some(v => v > 0);
-      const hasNeg = weights.some(v => v < 0);
-      if (!hasPos || !hasNeg) {
-        errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." missing trade-off (needs + and - weights)`);
+      if (!opt.evidence || Object.keys(opt.evidence).length === 0) {
+        errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." has no evidence`);
       }
       if (!opt.tone) {
         errors.push(`${q.id}: Option "${opt.text.slice(0, 25)}..." missing tone`);

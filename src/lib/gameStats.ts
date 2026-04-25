@@ -8,18 +8,16 @@ import type {
   CalibrationState,
   Deck,
   GameState,
-  StatKey,
   Tone,
-  AnswerIntensity,
 } from '@/types/game';
 import {
   STAT_KEYS,
-  INTENSITY_MULTIPLIERS,
   CALIBRATION_WINDOW,
   CONSISTENCY_WINDOW,
 } from '@/types/game';
-import { timeFactor } from '@/lib/narrativeEngine';
 import { DECK_UNLOCK_ORDER } from '@/data/decks/index';
+import { axisConfidence as bayesAxisConfidence } from '@/lib/bayesEngine';
+import type { PlayerBeliefs } from '@/lib/bayesEngine/types';
 
 export const UNLOCK_COOLDOWN_MS = 24 * 60 * 60 * 1000;
 
@@ -47,50 +45,18 @@ export const INSTANT_UNLOCK_IDS = new Set<string>([
 ]);
 
 /**
- * Apply dampened weights to calibration axes.
- * Formula: axis += weight * tensionMult * intensityMult * timeFactor / min(totalResponses + 1, CALIBRATION_WINDOW)
+ * Bump totalResponses + push tone history. Beliefs são atualizados
+ * separadamente pelo motor bayesiano dentro do reducer.
  *
- * Intensity is the PRIMARY conviction signal — player declares it after choosing.
- * Time is a real penalty curve (`timeFactor`) — hesitation over 6s
- * progressively drops the weight toward 0.3 at the 12s timeout.
+ * (Antes: aplicava também o somatório de `weights` em `axes`/`recentWeights`,
+ * removido na Fase 4 — Task 21.)
  */
-export function applyDampenedWeights(
-  cal: CalibrationState,
-  weights: Partial<Record<StatKey, number>>,
-  tone: Tone,
-  tensao: number = 2,
-  responseTimeMs?: number,
-  intensity?: AnswerIntensity,
-): CalibrationState {
-  const divisor = Math.min(cal.totalResponses + 1, CALIBRATION_WINDOW);
-  const tensionMultiplier = 0.5 + (tensao * 0.5);
-  // tensao 1 → 1.0x, tensao 2 → 1.5x, tensao 3 → 2.0x, tensao 4 → 2.5x, tensao 5 → 3.0x
-  const intensityMult = intensity ? INTENSITY_MULTIPLIERS[intensity] : 1.0;
-  const timeMult = timeFactor(responseTimeMs);
-  const newAxes = { ...cal.axes };
-  const newRecent = { ...cal.recentWeights };
-
-  for (const key of STAT_KEYS) {
-    const w = weights[key];
-    if (w !== undefined) {
-      const adjustedW = w * tensionMultiplier * intensityMult * timeMult;
-      newAxes[key] = newAxes[key] + adjustedW / divisor;
-
-      // Update recent weights window for consistency tracking
-      const arr = [...(newRecent[key] || []), w];
-      if (arr.length > CONSISTENCY_WINDOW) arr.shift();
-      newRecent[key] = arr;
-    }
-  }
-
+export function recordAnswer(cal: CalibrationState, tone: Tone): CalibrationState {
   const newToneHistory = [...cal.toneHistory, tone];
   if (newToneHistory.length > CONSISTENCY_WINDOW) newToneHistory.shift();
-
   return {
     ...cal,
-    axes: newAxes,
     totalResponses: cal.totalResponses + 1,
-    recentWeights: newRecent,
     toneHistory: newToneHistory,
   };
 }
@@ -164,21 +130,17 @@ export function getPrecisionLabel(pct: number): { label: string; color: string }
   return { label: 'Fase de Descoberta', color: 'text-orange-400' };
 }
 
-export function getConsistency(recentWeights: Record<StatKey, number[]>): number {
-  let totalStdDev = 0;
-  let totalMaxDev = 0;
+/**
+ * Consistência derivada de PlayerBeliefs: média da `axisConfidence` (0-1) dos 5 eixos.
+ * Distribuição uniforme (jogador novo) → 0. Distribuição concentrada → 1.
+ */
+export function getConsistency(beliefs: PlayerBeliefs | undefined): number {
+  if (!beliefs) return 0;
+  let sum = 0;
   for (const key of STAT_KEYS) {
-    const vals = recentWeights[key];
-    if (vals.length < 3) continue;
-    const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
-    const variance = vals.reduce((sum, v) => sum + (v - mean) ** 2, 0) / vals.length;
-    const stdDev = Math.sqrt(variance);
-    const maxStdDev = 30;
-    totalStdDev += stdDev;
-    totalMaxDev += maxStdDev;
+    sum += bayesAxisConfidence(beliefs[key]);
   }
-  if (totalMaxDev === 0) return 0;
-  return Math.max(0, Math.min(1, 1 - totalStdDev / totalMaxDev));
+  return sum / STAT_KEYS.length;
 }
 
 export function getConsistencyLabel(
