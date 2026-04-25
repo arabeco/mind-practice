@@ -147,6 +147,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
           info={levelUp.info}
           beliefs={state.calibration.beliefs ?? createPriorProfile()}
           archetypeMatch={levelUp.archetypeMatch}
+          reward={levelUp.reward}
           onClose={dismissLevelUp}
         />
       )}

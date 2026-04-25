@@ -40,6 +40,7 @@ import {
   CALIBRAGEM_IDS,
   CALIBRAGEM_COMPLETION_FICHAS,
 } from '@/lib/gameStats';
+import { getLevelReward } from '@/lib/playerLevel';
 import { playerMean } from '@/lib/bayesEngine';
 import {
   DEFAULT_CONFIG,
@@ -498,7 +499,23 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'MARK_LEVEL_SEEN': {
       // Idempotente: so sobe (nunca rebaixa). Garante que ceremony nao reabre.
       if (action.level <= state.lastSeenLevel) return state;
-      return { ...state, lastSeenLevel: action.level };
+      // Soma fichas pra cada nivel intermediario que foi atingido (caso o
+      // jogador tenha pulado mais de um nivel entre dois saves).
+      let reward = 0;
+      for (let lvl = state.lastSeenLevel + 1; lvl <= action.level; lvl++) {
+        reward += getLevelReward(lvl);
+      }
+      return {
+        ...state,
+        lastSeenLevel: action.level,
+        wallet: reward > 0
+          ? {
+              ...state.wallet,
+              fichas: state.wallet.fichas + reward,
+              totalEarned: state.wallet.totalEarned + reward,
+            }
+          : state.wallet,
+      };
     }
 
     default:

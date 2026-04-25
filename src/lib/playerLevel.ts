@@ -87,6 +87,22 @@ export function getPlayerLevel(
   };
 }
 
+/**
+ * Recompensa em fichas por nivel atingido (indice = nivel).
+ * Indice 0 nao existe; indice 1 é zero (estado inicial, nao recompensa).
+ *
+ * Curva crescente — premia chegar em firme/soberano sem inflar economy
+ * (total acumulado lvl 2..10 = 1555 fichas, pouco mais que 2 decks raros).
+ *
+ * Referencias: DAILY_FICHAS=10, raro=150, epico=350, lendario=800.
+ */
+export const LEVEL_REWARDS: number[] = [0, 0, 25, 35, 50, 70, 100, 140, 190, 250, 400];
+
+export function getLevelReward(level: number): number {
+  if (level < 1 || level > 10) return 0;
+  return LEVEL_REWARDS[level] ?? 0;
+}
+
 /** Cor (hex) por tier — espelha STAT_COLORS pra harmonia visual. */
 export const LEVEL_TIER_COLOR: Record<LevelTier, string> = {
   descobrindo: '#94a3b8', // slate

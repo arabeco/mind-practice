@@ -12,7 +12,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import type { GameState } from '@/types/game';
-import { getPlayerLevel, type PlayerLevelInfo } from '@/lib/playerLevel';
+import { getPlayerLevel, getLevelReward, type PlayerLevelInfo } from '@/lib/playerLevel';
 import { matchArchetypes, createPriorProfile } from '@/lib/bayesEngine';
 import type { ArchetypeMatchResult } from '@/lib/bayesEngine/archetype';
 import type { GameAction } from './gameReducer';
@@ -24,6 +24,8 @@ export interface LevelCeremonyHookValue {
     phase: CeremonyPhase;
     info: PlayerLevelInfo;
     archetypeMatch: ArchetypeMatchResult;
+    /** Total de fichas a creditar pelo level-up (soma se pulou multiplos niveis). */
+    reward: number;
   } | null;
   advanceFromVideo: () => void;
   dismiss: () => void;
@@ -47,7 +49,11 @@ export function useLevelCeremony(
     lastFiredRef.current = info.level;
 
     const archetypeMatch = matchArchetypes(beliefs);
-    setPending({ phase: 'video', info, archetypeMatch });
+    let reward = 0;
+    for (let lvl = state.lastSeenLevel + 1; lvl <= info.level; lvl++) {
+      reward += getLevelReward(lvl);
+    }
+    setPending({ phase: 'video', info, archetypeMatch, reward });
   }, [
     hydrated,
     state.calibration.beliefs,

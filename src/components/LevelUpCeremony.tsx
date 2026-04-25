@@ -29,6 +29,8 @@ interface LevelUpCeremonyProps {
   info: PlayerLevelInfo;
   beliefs: PlayerBeliefs;
   archetypeMatch: ArchetypeMatchResult | null;
+  /** Fichas creditadas pelo level-up (≥0). Se 0, tile fica oculto. */
+  reward?: number;
   onClose: () => void;
 }
 
@@ -37,6 +39,7 @@ export default function LevelUpCeremony({
   info,
   beliefs,
   archetypeMatch,
+  reward = 0,
   onClose,
 }: LevelUpCeremonyProps) {
   const tint = LEVEL_TIER_COLOR[info.tier];
@@ -208,13 +211,64 @@ export default function LevelUpCeremony({
                 />
               </motion.div>
 
+              {/* Reward — pulse de fichas, drama maior */}
+              {reward > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.85, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 1.35, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative mt-4 overflow-hidden rounded-[1.1rem] border px-4 py-3.5"
+                  style={{
+                    borderColor: `${tint}50`,
+                    background: `linear-gradient(135deg, ${tint}1a, ${tint}08 80%)`,
+                    boxShadow: glow,
+                  }}
+                >
+                  <motion.div
+                    className="pointer-events-none absolute inset-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: [0, 0.5, 0.18] }}
+                    transition={{ delay: 1.45, duration: 1.2, times: [0, 0.5, 1] }}
+                    style={{
+                      background: `radial-gradient(circle at 50% 50%, ${tint}55, transparent 65%)`,
+                    }}
+                  />
+                  <div className="relative flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40">
+                        Recompensa
+                      </p>
+                      <p className="mt-0.5 text-[11px] leading-snug text-white/65">
+                        Sua identidade ficou mais clara — voce ganhou fichas.
+                      </p>
+                    </div>
+                    <motion.div
+                      initial={{ scale: 0.6, opacity: 0 }}
+                      animate={{ scale: [0.6, 1.18, 1], opacity: 1 }}
+                      transition={{ delay: 1.5, duration: 0.6, times: [0, 0.6, 1] }}
+                      className="flex items-baseline gap-1"
+                    >
+                      <span
+                        className="font-mono text-3xl font-bold tracking-tight"
+                        style={{ color: tint, textShadow: `0 0 18px ${tint}80` }}
+                      >
+                        +{reward}
+                      </span>
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                        fichas
+                      </span>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              )}
+
               {/* CTA */}
               <motion.button
                 type="button"
                 onClick={onClose}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.35, duration: 0.35 }}
+                transition={{ delay: reward > 0 ? 1.95 : 1.35, duration: 0.35 }}
                 className="mt-5 w-full rounded-full border px-5 py-3 text-sm font-semibold uppercase tracking-[0.2em] backdrop-blur-md transition-colors"
                 style={{
                   borderColor: `${tint}55`,
