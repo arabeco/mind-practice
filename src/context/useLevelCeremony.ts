@@ -1,13 +1,13 @@
 'use client';
 
 /**
- * useLevelCeremony — detecta level-up e gerencia abertura do modal cerimonial.
+ * useLevelCeremony — detecta level-up e gerencia abertura da cerimonia.
  *
- * Toda vez que `getPlayerLevel(beliefs, totalResponses).level` ultrapassa
- * `state.lastSeenLevel`, dispara `MARK_LEVEL_SEEN` (idempotente) e expoe
- * `pending` pro provider renderizar `<LevelUpCeremony>`.
+ * Fluxo de fases:
+ *   nivel sobe → phase = 'video' → onVideoEnd → phase = 'modal'
+ *   → modal dismiss → phase = null + MARK_LEVEL_SEEN
  *
- * Aguarda hydrate antes de comparar — evita modal disparar com level=1 do
+ * Aguarda hydrate antes de comparar — evita disparar com level=1 do
  * INITIAL_STATE quando o save real ainda nao chegou.
  */
 import { useEffect, useRef, useState } from 'react';
@@ -17,11 +17,15 @@ import { matchArchetypes, createPriorProfile } from '@/lib/bayesEngine';
 import type { ArchetypeMatchResult } from '@/lib/bayesEngine/archetype';
 import type { GameAction } from './gameReducer';
 
+export type CeremonyPhase = 'video' | 'modal';
+
 export interface LevelCeremonyHookValue {
   pending: {
+    phase: CeremonyPhase;
     info: PlayerLevelInfo;
     archetypeMatch: ArchetypeMatchResult;
   } | null;
+  advanceFromVideo: () => void;
   dismiss: () => void;
 }
 
@@ -39,12 +43,11 @@ export function useLevelCeremony(
     const info = getPlayerLevel(beliefs, state.calibration.totalResponses);
 
     if (info.level <= state.lastSeenLevel) return;
-    // Evita dispatch duplicado se o effect re-rodar antes do reducer atualizar.
     if (info.level === lastFiredRef.current) return;
     lastFiredRef.current = info.level;
 
     const archetypeMatch = matchArchetypes(beliefs);
-    setPending({ info, archetypeMatch });
+    setPending({ phase: 'video', info, archetypeMatch });
   }, [
     hydrated,
     state.calibration.beliefs,
@@ -52,11 +55,15 @@ export function useLevelCeremony(
     state.lastSeenLevel,
   ]);
 
+  const advanceFromVideo = () => {
+    setPending(prev => (prev && prev.phase === 'video' ? { ...prev, phase: 'modal' } : prev));
+  };
+
   const dismiss = () => {
     if (!pending) return;
     dispatch({ type: 'MARK_LEVEL_SEEN', level: pending.info.level });
     setPending(null);
   };
 
-  return { pending, dismiss };
+  return { pending, advanceFromVideo, dismiss };
 }

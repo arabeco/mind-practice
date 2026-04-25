@@ -21,6 +21,7 @@ import { gameReducer, type GameAction } from './gameReducer';
 import { INITIAL_STATE } from '@/lib/gameState/defaults';
 import SyncConflictModal from '@/components/SyncConflictModal';
 import LevelUpCeremony from '@/components/LevelUpCeremony';
+import LevelUpVideo from '@/components/LevelUpVideo';
 import { useSocialFeed } from './useSocialFeed';
 import { useGameStatePersistence } from './useGameStatePersistence';
 import { useLevelCeremony } from './useLevelCeremony';
@@ -57,7 +58,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_STATE);
   const { hydrated, conflict, resolveConflict } = useGameStatePersistence(state, dispatch);
   useSocialFeed(state, hydrated);
-  const { pending: levelUp, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
+  const { pending: levelUp, advanceFromVideo, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),
@@ -136,7 +137,11 @@ export function GameProvider({ children }: { children: ReactNode }) {
         cloud={conflict?.cloud ?? null}
         onResolve={resolveConflict}
       />
-      {levelUp && (
+      <LevelUpVideo
+        open={levelUp?.phase === 'video'}
+        onComplete={advanceFromVideo}
+      />
+      {levelUp?.phase === 'modal' && (
         <LevelUpCeremony
           open={true}
           info={levelUp.info}
