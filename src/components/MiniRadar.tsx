@@ -2,19 +2,31 @@
 
 import type { StatKey } from '@/types/game';
 import { STAT_KEYS, STAT_COLORS } from '@/types/game';
+import { playerMean } from '@/lib/bayesEngine';
+import type { PlayerBeliefs } from '@/lib/bayesEngine/types';
 
 interface MiniRadarProps {
-  axes: Record<StatKey, number>;
+  axes?: Record<StatKey, number>;
+  beliefs?: PlayerBeliefs;
   size?: number;
 }
 
-export default function MiniRadar({ axes, size = 120 }: MiniRadarProps) {
+export default function MiniRadar({ axes, beliefs, size = 120 }: MiniRadarProps) {
   const cx = size / 2;
   const cy = size / 2;
   const radius = size / 2 - 14; // leave room for dots
 
+  // Bayesian path: playerMean ∈ [0,1] re-centered around 0 → [-0.5, 0.5]
+  // mantém a renderização compatível com o radar simétrico antigo.
+  const values: Record<StatKey, number> = beliefs
+    ? STAT_KEYS.reduce((acc, k) => {
+        acc[k] = playerMean(beliefs[k]) - 0.5;
+        return acc;
+      }, {} as Record<StatKey, number>)
+    : (axes ?? STAT_KEYS.reduce((acc, k) => { acc[k] = 0; return acc; }, {} as Record<StatKey, number>));
+
   // Normalize values by max absolute value
-  const maxAbs = Math.max(...STAT_KEYS.map(k => Math.abs(axes[k])), 0.01);
+  const maxAbs = Math.max(...STAT_KEYS.map(k => Math.abs(values[k])), 0.01);
 
   // Calculate vertex positions for a pentagon (5 axes)
   const getPoint = (index: number, value: number): [number, number] => {
@@ -31,13 +43,13 @@ export default function MiniRadar({ axes, size = 120 }: MiniRadarProps) {
 
   // Data polygon
   const dataPoints = STAT_KEYS.map((key, i) => {
-    const [x, y] = getPoint(i, axes[key]);
+    const [x, y] = getPoint(i, values[key]);
     return `${x},${y}`;
   }).join(' ');
 
   // Vertex dots
   const dots = STAT_KEYS.map((key, i) => {
-    const [x, y] = getPoint(i, axes[key]);
+    const [x, y] = getPoint(i, values[key]);
     return { x, y, color: STAT_COLORS[key], key };
   });
 
