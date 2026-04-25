@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "deck:validate": "npx tsx scripts/validate-deck.ts",
+    "check:utf8": "npx tsx scripts/check-utf8.ts",
     "test": "node scripts/run-tests.mjs"
   },
   "dependencies": {
