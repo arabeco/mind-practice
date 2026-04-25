@@ -50,21 +50,36 @@ Fazer o estado do app sobreviver a qualquer mudança de schema, crash, limpeza d
 
 ---
 
-## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO
-**Mantém Nível 6. Já tem plan pronto:** `docs/superpowers/plans/2026-04-21-motor-bayesiano.md`.
+## 🧠 FASE 4 — MOTOR BAYESIANO EM PRODUÇÃO  🟡 EM ANDAMENTO (19/23)
+**Mantém Nível 6. Plan:** `docs/superpowers/plans/2026-04-21-motor-bayesiano.md`.
 
 ### Objetivo
 Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença + confiança; arquétipo tem estados "descobrindo / tendência / firme".
 
-### Tarefas
-Continuar a execução agêntica já iniciada no worktree `clever-hermann-768ec6`. Tasks 1-9 completas (27 testes engine + validator). Restam **Tasks 10-23**: migração de decks, integração runtime, UI, cleanup legacy.
+### Status
+- ✅ **Tasks 1-12** — Engine puro (priors, likelihood, drift, update, archetype matching), tipos, validator, migração automática dos 22 decks, runScoring com evidence (87 testes passando).
+- ✅ **Tasks 13-14** — `CalibrationState.beliefs` integrado; reducer ANSWER + CAMPAIGN_ANSWER rodam `updateProfile` em paralelo ao motor legado.
+- ✅ **Task 15** — `getCurrentArchetype` + reducer START_DECK/FINISH_DECK usam `matchArchetypes(beliefs)`.
+- ✅ **Task 16** — Schema v3→v4 wipe migration: pre-Bayes profiles resetam pra prior uniforme; wallet/streak/decks preservados.
+- ✅ **Task 17** — `isTraining: true` decks bypassam mutação de perfil (axes + beliefs intactos).
+- ✅ **Task 18** — `MiniRadar` aceita `beliefs?: PlayerBeliefs` (playerMean recentered).
+- ✅ **Task 19** — `ProfileCardCompact` + `/perfil` mostram `archetypeDisplayState` (discovering/tendency/firm) e label de confiança global.
+- ⏳ **Task 20** — `RunReportCard` mostra evidence per-answer (precisa adicionar `answers[].evidence` ao snapshot). [follow-up]
+- ⏳ **Task 21** — Cleanup legacy: deletar `resolveWeights`, `applyDampenedWeights`, `weights`/`intent`/`baseWeights` em decks. [follow-up — risco de breakage, fazer com calma]
+- ⏳ **Task 22-23** — Docs autores + golden test final. [follow-up]
 
 ### GATE ✅
-- `weights` legacy e `intent`/`baseWeights` **removidos** do código e dos JSON.
-- Radar/perfil renderizam belief + confidence.
-- `archetypeDisplayState` gate: descobrindo < 0.3, tendência < 0.6, firme ≥ 0.6.
-- Training decks bypassam persistência.
-- Golden test: pelo menos 10 runs sintéticas convergem pra arquétipo esperado.
+- ✅ Radar/perfil renderizam belief + confidence.
+- ✅ `archetypeDisplayState` gate: descobrindo < 0.3, tendência < 0.6, firme ≥ 0.6.
+- ✅ Training decks bypassam persistência.
+- ⏳ `weights` legacy e `intent`/`baseWeights` **removidos** do código e dos JSON. (Task 21 pendente)
+- ⏳ Golden test: pelo menos 10 runs sintéticas convergem pra arquétipo esperado. (Task 23 pendente)
+
+### Sanity (tip do main)
+- `npx tsc --noEmit` — 0 erros
+- `npm test` — 87/87 passando
+- `npm run build` — 10 rotas geradas
+- `npm run deck:validate` — 0 erros, 10 warnings (pré-existentes)
 
 ---
 
