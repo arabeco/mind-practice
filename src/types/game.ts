@@ -349,6 +349,8 @@ export interface GameState {
   lastSeenLevel: number;
   /** ISO timestamp da primeira vez que archetypeDisplayState virou "firm". Null = ainda nao aconteceu. */
   firstFirmArchetypeSeenAt: string | null;
+  /** ID do ultimo arquetipo "firme" visto pelo jogador. Usado pra detectar evolucoes (mudanca de arquetipo). */
+  lastFirmArchetypeId: string | null;
 }
 
 // ============================================================

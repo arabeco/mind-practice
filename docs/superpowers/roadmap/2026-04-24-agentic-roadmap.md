@@ -84,7 +84,7 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 
 ---
 
-## 🎨 FASE 5 — DESIGN SYSTEM + TELAS RITUAIS  🟡 EM ANDAMENTO (F5a ✅, F5b pendente)
+## 🎨 FASE 5 — DESIGN SYSTEM + TELAS RITUAIS  🟡 EM ANDAMENTO (F5a ✅, F5b 2/3)
 **Sobe ID visual de 7.5 → 9.**
 
 ### F5a — Tokens + Primitivos ✅
@@ -96,10 +96,12 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 - ✅ `scripts/check-utf8.ts` lint + sweep aplicado (568 substituições em 27 arquivos)
 - ✅ `docs/design/tokens.md` + `components.md`
 
-### F5b — Telas Rituais ⏳ (próximo brainstorm)
-- ⏳ "Primeiro arquétipo" — full-screen takeover, dispara 1 vez
-- ⏳ "Evolução" — quando arquétipo migra de A pra B
-- ⏳ "Season finale" — Wrapped-style ao terminar season
+### F5b — Telas Rituais 🟡 EM ANDAMENTO (2/3)
+- ✅ **F5b.1 — Primeiro Arquétipo** — full-screen takeover quando `archetypeDisplayState` atinge `firm` pela primeira vez. Hero scan glow, nome + tagline + description, mini radar de eixos firmados, secondary trace, CTA "Aceitar quem você é". Idempotente via `firstFirmArchetypeSeenAt`.
+- ✅ **F5b.2 — Evolução** — quando arquétipo firme muda (A → B). Hero com transformação A→B (arrow), description do novo arquétipo, mini radar, CTA "Continuar minha trajetória". Tracking via `lastFirmArchetypeId` + action `MARK_ARCHETYPE_EVOLUTION_SEEN`.
+- ⏳ F5b.3 — Season finale: Spotify-Wrapped-style ao terminar season
+
+**Precedência cerimônias:** firstArch > evolution > levelUp. Cada uma bloqueia as seguintes até dismiss.
 
 ### GATE F5a ✅
 - 0 estilos inline (hex/raw) em `Toast`, `BottomNav`, `ProfileCardCompact`

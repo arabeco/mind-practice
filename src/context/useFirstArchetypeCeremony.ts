@@ -58,7 +58,7 @@ export function useFirstArchetypeCeremony(
 
   const dismiss = () => {
     if (!pending) return;
-    dispatch({ type: 'MARK_FIRST_ARCHETYPE_SEEN' });
+    dispatch({ type: 'MARK_FIRST_ARCHETYPE_SEEN', archetypeId: pending.archetype.id });
     setPending(null);
   };
 

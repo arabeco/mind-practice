@@ -33,4 +33,5 @@ export const INITIAL_STATE: GameState = {
   plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
   lastSeenLevel: 1,
   firstFirmArchetypeSeenAt: null,
+  lastFirmArchetypeId: null,
 };

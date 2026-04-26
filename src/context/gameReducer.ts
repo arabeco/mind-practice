@@ -79,7 +79,8 @@ export type GameAction =
   | { type: 'SET_PLUS_STATUS'; active: boolean; expiresAt: string | null; startedAt?: string }
   | { type: 'CLAIM_DAILY_PLUS_BONUS' }
   | { type: 'MARK_LEVEL_SEEN'; level: number }
-  | { type: 'MARK_FIRST_ARCHETYPE_SEEN' };
+  | { type: 'MARK_FIRST_ARCHETYPE_SEEN'; archetypeId: string }
+  | { type: 'MARK_ARCHETYPE_EVOLUTION_SEEN'; archetypeId: string };
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -101,6 +102,7 @@ export const initialState: GameState = {
   plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
   lastSeenLevel: 1,
   firstFirmArchetypeSeenAt: null,
+  lastFirmArchetypeId: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -501,7 +503,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     case 'MARK_FIRST_ARCHETYPE_SEEN': {
       // Idempotente: so seta uma vez. Garante que cerimonia nao reabre.
       if (state.firstFirmArchetypeSeenAt) return state;
-      return { ...state, firstFirmArchetypeSeenAt: new Date().toISOString() };
+      return {
+        ...state,
+        firstFirmArchetypeSeenAt: new Date().toISOString(),
+        lastFirmArchetypeId: action.archetypeId,
+      };
+    }
+
+    case 'MARK_ARCHETYPE_EVOLUTION_SEEN': {
+      // Atualiza o ultimo arquetipo firme visto. Idempotente — se ja for o
+      // mesmo id, no-op.
+      if (state.lastFirmArchetypeId === action.archetypeId) return state;
+      return { ...state, lastFirmArchetypeId: action.archetypeId };
     }
 
     case 'MARK_LEVEL_SEEN': {

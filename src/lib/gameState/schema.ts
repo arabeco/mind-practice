@@ -66,6 +66,7 @@ export const GameStateSchema = z.object({
   plusSubscription: PlusSubscriptionSchema,
   lastSeenLevel: z.number().int().min(1).max(10).default(1),
   firstFirmArchetypeSeenAt: z.string().nullable().default(null),
+  lastFirmArchetypeId: z.string().nullable().default(null),
 }).strip();
 
 /** Tipo persistido — inclui schemaVersion + updatedAt + devicePersistedAt. */
