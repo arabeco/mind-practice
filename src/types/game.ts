@@ -150,6 +150,9 @@ export interface CampaignProgress {
   /** If equal to `currentSceneId`, bypasses the daily cooldown (paid skip).
    *  Cleared automatically when the next CAMPAIGN_ANSWER is dispatched. */
   pendingSkipSceneId?: string | null;
+  /** ISO timestamp de quando o jogador viu a cerimonia de Season Finale.
+   *  Null = ainda nao viu. Set uma vez via MARK_SEASON_FINALE_SEEN. */
+  finaleSeenAt?: string | null;
 }
 
 export interface Question {

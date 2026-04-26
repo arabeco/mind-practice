@@ -80,7 +80,8 @@ export type GameAction =
   | { type: 'CLAIM_DAILY_PLUS_BONUS' }
   | { type: 'MARK_LEVEL_SEEN'; level: number }
   | { type: 'MARK_FIRST_ARCHETYPE_SEEN'; archetypeId: string }
-  | { type: 'MARK_ARCHETYPE_EVOLUTION_SEEN'; archetypeId: string };
+  | { type: 'MARK_ARCHETYPE_EVOLUTION_SEEN'; archetypeId: string }
+  | { type: 'MARK_SEASON_FINALE_SEEN'; seasonId: string };
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -515,6 +516,24 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       // mesmo id, no-op.
       if (state.lastFirmArchetypeId === action.archetypeId) return state;
       return { ...state, lastFirmArchetypeId: action.archetypeId };
+    }
+
+    case 'MARK_SEASON_FINALE_SEEN': {
+      // Idempotente: so seta finaleSeenAt se a campaign existe e ainda nao
+      // tem o timestamp. Evita reabrir cerimonia.
+      const progress = state.campaigns[action.seasonId];
+      if (!progress) return state;
+      if (progress.finaleSeenAt) return state;
+      return {
+        ...state,
+        campaigns: {
+          ...state.campaigns,
+          [action.seasonId]: {
+            ...progress,
+            finaleSeenAt: new Date().toISOString(),
+          },
+        },
+      };
     }
 
     case 'MARK_LEVEL_SEEN': {

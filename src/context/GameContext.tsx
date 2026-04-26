@@ -24,11 +24,13 @@ import LevelUpCeremony from '@/components/LevelUpCeremony';
 import LevelUpVideo from '@/components/LevelUpVideo';
 import FirstArchetypeCeremony from '@/components/FirstArchetypeCeremony';
 import ArchetypeEvolutionCeremony from '@/components/ArchetypeEvolutionCeremony';
+import SeasonFinaleCeremony from '@/components/SeasonFinaleCeremony';
 import { useSocialFeed } from './useSocialFeed';
 import { useGameStatePersistence } from './useGameStatePersistence';
 import { useLevelCeremony } from './useLevelCeremony';
 import { useFirstArchetypeCeremony } from './useFirstArchetypeCeremony';
 import { useArchetypeEvolution } from './useArchetypeEvolution';
+import { useSeasonFinale } from './useSeasonFinale';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
@@ -65,6 +67,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const { pending: levelUp, advanceFromVideo, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
   const { pending: firstArch, dismiss: dismissFirstArch } = useFirstArchetypeCeremony(state, hydrated, dispatch);
   const { pending: evolution, dismiss: dismissEvolution } = useArchetypeEvolution(state, hydrated, dispatch);
+  const { pending: seasonFinale, dismiss: dismissSeasonFinale } = useSeasonFinale(state, hydrated, dispatch);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),
@@ -164,7 +167,18 @@ export function GameProvider({ children }: { children: ReactNode }) {
           onClose={dismissEvolution}
         />
       )}
-      {!firstArch && !evolution && (
+      {!firstArch && !evolution && seasonFinale && (
+        <SeasonFinaleCeremony
+          open={true}
+          season={seasonFinale.season}
+          ending={seasonFinale.ending}
+          archetypeMatch={seasonFinale.archetypeMatch}
+          answerCount={seasonFinale.answerCount}
+          decksCompletedInSeason={seasonFinale.decksCompletedInSeason}
+          onClose={dismissSeasonFinale}
+        />
+      )}
+      {!firstArch && !evolution && !seasonFinale && (
         <>
           <LevelUpVideo
             open={levelUp?.phase === 'video'}
