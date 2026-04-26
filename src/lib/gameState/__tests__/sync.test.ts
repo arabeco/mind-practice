@@ -19,6 +19,7 @@ const stateAt = (updatedAt: string, devicePersistedAt: string | null = null): Pe
   ownedDeckIds: [],
   plusSubscription: { active: false, startedAt: null, expiresAt: null, lastPlusDailyClaim: null },
   lastSeenLevel: 1,
+  firstFirmArchetypeSeenAt: null,
 });
 
 test('a) sem local sem cloud → initial', () => {

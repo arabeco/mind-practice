@@ -347,6 +347,8 @@ export interface GameState {
   plusSubscription: PlusSubscription;
   /** Maior nivel de perfil ja visto pelo jogador. Usado pra disparar a tela cerimonial em level-up. */
   lastSeenLevel: number;
+  /** ISO timestamp da primeira vez que archetypeDisplayState virou "firm". Null = ainda nao aconteceu. */
+  firstFirmArchetypeSeenAt: string | null;
 }
 
 // ============================================================

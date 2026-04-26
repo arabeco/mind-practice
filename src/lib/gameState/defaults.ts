@@ -32,4 +32,5 @@ export const INITIAL_STATE: GameState = {
   ownedDeckIds: [],
   plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
   lastSeenLevel: 1,
+  firstFirmArchetypeSeenAt: null,
 };

@@ -78,7 +78,8 @@ export type GameAction =
   | { type: 'UNLOCK_DECK'; deckId: string; cost: number }
   | { type: 'SET_PLUS_STATUS'; active: boolean; expiresAt: string | null; startedAt?: string }
   | { type: 'CLAIM_DAILY_PLUS_BONUS' }
-  | { type: 'MARK_LEVEL_SEEN'; level: number };
+  | { type: 'MARK_LEVEL_SEEN'; level: number }
+  | { type: 'MARK_FIRST_ARCHETYPE_SEEN' };
 
 // ---------------------------------------------------------------------------
 // Initial state
@@ -99,6 +100,7 @@ export const initialState: GameState = {
   ownedDeckIds: [],
   plusSubscription: { ...INITIAL_PLUS_SUBSCRIPTION },
   lastSeenLevel: 1,
+  firstFirmArchetypeSeenAt: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -494,6 +496,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         },
         ownedDeckIds: [...state.ownedDeckIds, action.deckId],
       };
+    }
+
+    case 'MARK_FIRST_ARCHETYPE_SEEN': {
+      // Idempotente: so seta uma vez. Garante que cerimonia nao reabre.
+      if (state.firstFirmArchetypeSeenAt) return state;
+      return { ...state, firstFirmArchetypeSeenAt: new Date().toISOString() };
     }
 
     case 'MARK_LEVEL_SEEN': {

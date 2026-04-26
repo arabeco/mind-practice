@@ -22,9 +22,11 @@ import { INITIAL_STATE } from '@/lib/gameState/defaults';
 import SyncConflictModal from '@/components/SyncConflictModal';
 import LevelUpCeremony from '@/components/LevelUpCeremony';
 import LevelUpVideo from '@/components/LevelUpVideo';
+import FirstArchetypeCeremony from '@/components/FirstArchetypeCeremony';
 import { useSocialFeed } from './useSocialFeed';
 import { useGameStatePersistence } from './useGameStatePersistence';
 import { useLevelCeremony } from './useLevelCeremony';
+import { useFirstArchetypeCeremony } from './useFirstArchetypeCeremony';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
@@ -59,6 +61,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const { hydrated, conflict, resolveConflict } = useGameStatePersistence(state, dispatch);
   useSocialFeed(state, hydrated);
   const { pending: levelUp, advanceFromVideo, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
+  const { pending: firstArch, dismiss: dismissFirstArch } = useFirstArchetypeCeremony(state, hydrated, dispatch);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),
@@ -137,19 +140,34 @@ export function GameProvider({ children }: { children: ReactNode }) {
         cloud={conflict?.cloud ?? null}
         onResolve={resolveConflict}
       />
-      <LevelUpVideo
-        open={levelUp?.phase === 'video'}
-        onComplete={advanceFromVideo}
-      />
-      {levelUp?.phase === 'modal' && (
-        <LevelUpCeremony
+      {/* Cerimônia de primeiro arquétipo tem precedência: bloqueia level-up
+          até o jogador dismissar. Level-up reabre naturalmente no próximo render. */}
+      {firstArch && (
+        <FirstArchetypeCeremony
           open={true}
-          info={levelUp.info}
+          archetype={firstArch.archetype}
           beliefs={state.calibration.beliefs ?? createPriorProfile()}
-          archetypeMatch={levelUp.archetypeMatch}
-          reward={levelUp.reward}
-          onClose={dismissLevelUp}
+          archetypeMatch={firstArch.archetypeMatch}
+          onClose={dismissFirstArch}
         />
+      )}
+      {!firstArch && (
+        <>
+          <LevelUpVideo
+            open={levelUp?.phase === 'video'}
+            onComplete={advanceFromVideo}
+          />
+          {levelUp?.phase === 'modal' && (
+            <LevelUpCeremony
+              open={true}
+              info={levelUp.info}
+              beliefs={state.calibration.beliefs ?? createPriorProfile()}
+              archetypeMatch={levelUp.archetypeMatch}
+              reward={levelUp.reward}
+              onClose={dismissLevelUp}
+            />
+          )}
+        </>
       )}
     </GameContext.Provider>
   );
