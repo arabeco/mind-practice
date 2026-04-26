@@ -14,16 +14,27 @@ import {
   removeFriend,
   listFriendships,
   listFriendFeed,
+  getProfile,
   type PublicProfile,
   type FriendshipsBuckets,
   type FeedEvent,
 } from '@/lib/supabase/social';
+import { useFeedRealtime, useFriendshipRealtime } from '@/lib/supabase/realtime';
 
 type Tab = 'feed' | 'amigos';
 
 export default function MundoPage() {
   const { user, enabled, loading: authLoading } = useAuth();
   const [tab, setTab] = useState<Tab>('feed');
+  const toast = useToast();
+
+  // Realtime: notifica quando alguem manda pedido de amizade.
+  useFriendshipRealtime(user?.id ?? null, async (row, eventType) => {
+    if (eventType !== 'INSERT' || row.status !== 'pending') return;
+    const requester = await getProfile(row.requester_id);
+    if (!requester) return;
+    toast.toast(`${requester.nickname} quer ser seu amigo`);
+  });
 
   if (authLoading) {
     return (
@@ -123,6 +134,21 @@ function FeedTab() {
   useEffect(() => {
     listFriendFeed(40).then(setEvents);
   }, []);
+
+  // Realtime: prepend novos eventos conforme chegam. Hidrata `author`
+  // via getProfile. RLS no server filtra pra self+amigos.
+  useFeedRealtime(events !== null, async raw => {
+    // Evita duplicar caso o evento ja apareca no fetch inicial
+    setEvents(prev => {
+      if (!prev) return prev;
+      if (prev.some(e => e.id === raw.id)) return prev;
+      // Insere imediatamente sem author; hidratacao chega async abaixo.
+      return [{ ...raw, author: undefined }, ...prev];
+    });
+    const author = await getProfile(raw.user_id);
+    if (!author) return;
+    setEvents(prev => prev?.map(e => (e.id === raw.id ? { ...e, author } : e)) ?? prev);
+  });
 
   if (events === null) {
     return <div className="mt-6 text-center text-sm text-white/50">Carregando...</div>;

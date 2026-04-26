@@ -118,18 +118,23 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 
 ---
 
-## 🌐 FASE 6 — SOCIAL REAL-TIME + LEADERBOARD
+## 🌐 FASE 6 — SOCIAL REAL-TIME + LEADERBOARD  🟡 EM ANDAMENTO (1/3)
 **Gate para Nível 7.** 🗄️ **Requer SQL.**
 
 ### Objetivo
 Fricção viral: ver amigos, comparar, competir.
 
-### Tarefas
-1. **Friends UI:** tela `/amigos` (buscar por nickname, pedido/aceitar/rejeitar). Schema `friendships` já existe ✅.
-2. **Feed real-time:** `/feed` com eventos dos amigos via Supabase Realtime subscription. `feed_events` schema pronto ✅.
-3. **Leaderboard semanal** por season: tabela nova `season_scores`, ranking top-50 visível em `/mundo`.
-4. **Presence:** mostrar quem tá online via Realtime presence (simples, opt-in).
-5. **Batch emit** de eventos (`archetype_changed`, `deck_completed`, `streak_milestone`) no reducer puro (ganho da F3).
+### Status
+- ✅ **F6.1 — Realtime feed + friend requests** — `useFeedRealtime` + `useFriendshipRealtime` hooks subscrevem ao publication `supabase_realtime`. Feed prepende eventos novos com author hidratado via `getProfile`. Pedidos de amizade disparam toast "{nickname} quer ser seu amigo". SQL migration em `supabase/migrations/2026-04-25-f6-realtime.sql` (precisa rodar no Supabase Studio).
+- ⏳ F6.2 — Leaderboard: `season_scores` table + scoring + ranking UI. Brainstorm separado (decisão de design: o que conta como score?).
+- ⏳ F6.3 — Presence: bolinha verde em amigos online via Realtime presence channel.
+
+### Tarefas originais (referência)
+1. ✅ **Friends UI:** tela `/mundo` com tab amigos (buscar por nickname, pedido/aceitar/rejeitar). Schema `friendships` ✅.
+2. ✅ **Feed real-time:** Supabase Realtime subscription em `feed_events`. (F6.1)
+3. ⏳ **Leaderboard semanal** por season: tabela nova `season_scores`, ranking top-50 visível em `/mundo`. (F6.2)
+4. ⏳ **Presence:** mostrar quem tá online via Realtime presence (simples, opt-in). (F6.3)
+5. ✅ **Batch emit** de eventos (`archetype_changed`, `deck_completed`, `streak_milestone`) — feito em F3 via `useSocialFeed`.
 
 ### 🗄️ SQL pra rodar no Supabase
 ```sql
