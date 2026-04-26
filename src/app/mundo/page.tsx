@@ -20,8 +20,9 @@ import {
   type FeedEvent,
 } from '@/lib/supabase/social';
 import { useFeedRealtime, useFriendshipRealtime } from '@/lib/supabase/realtime';
+import SeasonLeaderboard from '@/components/SeasonLeaderboard';
 
-type Tab = 'feed' | 'amigos';
+type Tab = 'feed' | 'amigos' | 'ranking';
 
 export default function MundoPage() {
   const { user, enabled, loading: authLoading } = useAuth();
@@ -72,8 +73,9 @@ export default function MundoPage() {
 
       {/* Sub-tabs */}
       <div className="mt-4 flex gap-1 rounded-full border border-white/10 bg-black/30 p-1">
-        {(['feed', 'amigos'] as Tab[]).map(t => {
+        {(['feed', 'amigos', 'ranking'] as Tab[]).map(t => {
           const active = tab === t;
+          const label = t === 'feed' ? 'Feed' : t === 'amigos' ? 'Amigos' : 'Ranking';
           return (
             <button
               key={t}
@@ -88,7 +90,7 @@ export default function MundoPage() {
                 />
               )}
               <span className={`relative ${active ? 'text-white' : 'text-white/50'}`}>
-                {t === 'feed' ? 'Feed' : 'Amigos'}
+                {label}
               </span>
             </button>
           );
@@ -97,7 +99,7 @@ export default function MundoPage() {
 
       <div className="mt-5">
         <AnimatePresence mode="wait">
-          {tab === 'feed' ? (
+          {tab === 'feed' && (
             <motion.div
               key="feed"
               initial={{ opacity: 0, y: 6 }}
@@ -107,7 +109,8 @@ export default function MundoPage() {
             >
               <FeedTab />
             </motion.div>
-          ) : (
+          )}
+          {tab === 'amigos' && (
             <motion.div
               key="amigos"
               initial={{ opacity: 0, y: 6 }}
@@ -116,6 +119,17 @@ export default function MundoPage() {
               transition={{ duration: 0.2 }}
             >
               <AmigosTab />
+            </motion.div>
+          )}
+          {tab === 'ranking' && (
+            <motion.div
+              key="ranking"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+            >
+              <SeasonLeaderboard />
             </motion.div>
           )}
         </AnimatePresence>

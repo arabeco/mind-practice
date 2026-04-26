@@ -31,6 +31,7 @@ import { useLevelCeremony } from './useLevelCeremony';
 import { useFirstArchetypeCeremony } from './useFirstArchetypeCeremony';
 import { useArchetypeEvolution } from './useArchetypeEvolution';
 import { useSeasonFinale } from './useSeasonFinale';
+import { useLeaderboardSync } from './useLeaderboardSync';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
@@ -64,6 +65,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(gameReducer, INITIAL_STATE);
   const { hydrated, conflict, resolveConflict } = useGameStatePersistence(state, dispatch);
   useSocialFeed(state, hydrated);
+  useLeaderboardSync(state, hydrated);
   const { pending: levelUp, advanceFromVideo, dismiss: dismissLevelUp } = useLevelCeremony(state, hydrated, dispatch);
   const { pending: firstArch, dismiss: dismissFirstArch } = useFirstArchetypeCeremony(state, hydrated, dispatch);
   const { pending: evolution, dismiss: dismissEvolution } = useArchetypeEvolution(state, hydrated, dispatch);
