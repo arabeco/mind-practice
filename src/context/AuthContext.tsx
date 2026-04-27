@@ -8,6 +8,7 @@ interface AuthState {
   user: User | null;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
+  signInWithApple: () => Promise<void>;
   signInWithPassword: (email: string, password: string) => Promise<{ error: string | null }>;
   signUpWithPassword: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -19,6 +20,7 @@ const AuthContext = createContext<AuthState>({
   user: null,
   loading: true,
   signInWithGoogle: async () => {},
+  signInWithApple: async () => {},
   signInWithPassword: async () => ({ error: 'Supabase não configurado' }),
   signUpWithPassword: async () => ({ error: 'Supabase não configurado' }),
   signOut: async () => {},
@@ -59,6 +61,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, [sb]);
 
+  const signInWithApple = useCallback(async () => {
+    if (!sb) return;
+    await sb.auth.signInWithOAuth({
+      provider: 'apple',
+      options: { redirectTo: window.location.origin },
+    });
+  }, [sb]);
+
   const signInWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!sb) return { error: 'Login indisponivel — Supabase não configurado.' };
     const { error } = await sb.auth.signInWithPassword({ email, password });
@@ -95,7 +105,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [sb]);
 
   return (
-    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithPassword, signUpWithPassword, signOut, enabled }}>
+    <AuthContext.Provider value={{ user, loading, signInWithGoogle, signInWithApple, signInWithPassword, signUpWithPassword, signOut, enabled }}>
       {children}
     </AuthContext.Provider>
   );

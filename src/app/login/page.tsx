@@ -11,7 +11,7 @@ type Stage = 'idle' | 'loading' | 'error';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { user, enabled, loading, signInWithGoogle, signInWithPassword, signUpWithPassword } = useAuth();
+  const { user, enabled, loading, signInWithGoogle, signInWithApple, signInWithPassword, signUpWithPassword } = useAuth();
 
   const [mode, setMode] = useState<Mode>('signin');
   const [email, setEmail] = useState('');
@@ -119,6 +119,18 @@ export default function LoginPage() {
               <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4 5.6l6.3 5.2C41.4 35.3 44 30 44 24c0-1.2-.1-2.3-.4-3.5z"/>
             </svg>
             Continuar com Google
+          </button>
+
+          <button
+            type="button"
+            onClick={signInWithApple}
+            disabled={isLoading}
+            className="mt-2.5 flex w-full items-center justify-center gap-2.5 rounded-full border border-white/18 bg-black py-3 text-sm font-semibold text-white transition hover:bg-zinc-900 disabled:opacity-50"
+          >
+            <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+            </svg>
+            Continuar com Apple
           </button>
 
           <div className="my-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] text-white/30">

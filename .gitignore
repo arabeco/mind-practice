@@ -17,6 +17,12 @@
 /.next/
 /out/
 
+# capacitor (plataformas geradas via `npx cap add`)
+# Comentar se quiser commitar projetos nativos pra reproducibilidade.
+/android/
+/ios/
+.capacitor/
+
 # production
 /build
 

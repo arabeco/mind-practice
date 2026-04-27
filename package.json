@@ -9,9 +9,22 @@
     "lint": "eslint",
     "deck:validate": "npx tsx scripts/validate-deck.ts",
     "check:utf8": "npx tsx scripts/check-utf8.ts",
-    "test": "node scripts/run-tests.mjs"
+    "test": "node scripts/run-tests.mjs",
+    "build:mobile": "cross-env MOBILE_BUILD=1 next build",
+    "cap:sync": "npm run build:mobile && npx cap sync",
+    "cap:android": "npm run cap:sync && npx cap open android",
+    "cap:ios": "npm run cap:sync && npx cap open ios"
   },
   "dependencies": {
+    "@capacitor/android": "^7.6.2",
+    "@capacitor/app": "^7.1.2",
+    "@capacitor/core": "^7.6.2",
+    "@capacitor/haptics": "^7.0.5",
+    "@capacitor/ios": "^7.6.2",
+    "@capacitor/preferences": "^7.0.4",
+    "@capacitor/splash-screen": "^7.0.5",
+    "@capacitor/status-bar": "^7.0.6",
+    "@revenuecat/purchases-capacitor": "^10.4.0",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.3",
     "class-variance-authority": "^0.7.1",
@@ -26,10 +39,12 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@capacitor/cli": "^7.6.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
