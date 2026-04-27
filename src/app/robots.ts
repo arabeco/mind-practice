@@ -1,0 +1,16 @@
+import type { MetadataRoute } from 'next';
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mindpractice.app';
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        userAgent: '*',
+        allow: ['/', '/a/', '/login'],
+        disallow: ['/api/', '/admin/', '/dev/', '/perfil', '/decks', '/play/', '/resultado/', '/mundo', '/campanha/', '/tiers', '/assinatura'],
+      },
+    ],
+    sitemap: `${SITE_URL}/sitemap.xml`,
+  };
+}

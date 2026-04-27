@@ -268,8 +268,23 @@ App na App Store + Play Store sem rewriting.
 
 ---
 
-## 🎯 FASE 9 — LANDING + CAPTURA + OG DINÂMICO
+## 🎯 FASE 9 — LANDING + CAPTURA + OG DINÂMICO  ✅ COMPLETA
 **Gate para Nível 9.** 🗄️ **Requer SQL.**
+
+### Status (2026-04-25)
+- ✅ Landing pública em `/` deslogado: hero "Descubra quem você é em 8 minutos", waitlist hero, ArchetypeShowcase grid (10 cards clicáveis), CTA secundário, footer com link /login
+- ✅ Auth-gated routing: `/` checa user, mostra `LandingPage` se deslogado e `HomeAuthed` se logado
+- ✅ Rota pública `/a/[archetypeId]`: SSG com 10 paths (1 por arquétipo), meta tags + OG/Twitter cards completos, description longa, waitlist form com archetypeHint, links pros outros arquétipos
+- ✅ OG images dinâmicas via `next/og`: `/api/og/archetype/[id]` gera PNG 1200×630 com avatar + nome + tagline + brand
+- ✅ Waitlist: `supabase/migrations/2026-04-25-f9-waitlist.sql` (table + RLS allow anon insert), `POST /api/waitlist` (validação email + idempotente), `WaitlistForm` componente reutilizável
+- ✅ SEO: `robots.ts` (allow `/`, `/a/`, `/login`, disallow internas), `sitemap.ts` (root + login + 10 archetype pages, com lastModified/changeFreq/priority)
+- ✅ HomeAuthed extraído de `app/page.tsx` pra `components/home/HomeAuthed.tsx` — separação limpa entre experiência logada e landing pública
+
+Sanity tip do main:
+- tsc 0 erros, 119/119 testes, build verde
+- 24 rotas total: 10 archetype SSG + landing + 4 API novas (og, waitlist) + robots/sitemap
+
+Pré-requisito manual: rodar `supabase/migrations/2026-04-25-f9-waitlist.sql` no Supabase Studio.
 
 ### Objetivo
 Ter algo pra mandar pra stranger na internet.
