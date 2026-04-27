@@ -170,8 +170,28 @@ alter publication supabase_realtime add table public.season_scores;
 
 ---
 
-## 💰 FASE 7 — PAYWALL + STRIPE + ECONOMIA
+## 💰 FASE 7 — PAYWALL + STRIPE + ECONOMIA  🟡 EM ANDAMENTO (F7.1 ✅)
 **Gate para Nível 8.** 🗄️ **Requer SQL.** Primeira receita real.
+
+### Status
+- ✅ **F7.1 — Subscription core** — `subscriptions` + `purchases` tables com RLS, Stripe SDK + lib/stripe.ts + lib/supabase/admin.ts (service role), 3 API routes (`/api/billing/checkout`, `/portal`, `/webhook` com signature validation), `useSubscription` hook reativo via Realtime channel, `/assinatura` page com 3 tier cards (Free/Pro 14,90/Founder 89), `/assinatura/sucesso` polling até webhook persistir, `PaywallModal` contextual, deck gate por `seasonId` (Season 0 free, +1 Pro), suporte a cartão + PIX + 7-day trial pro Pro. SQL migration em `supabase/migrations/2026-04-25-f7-subscriptions.sql`.
+- ⏳ **F7.2** — Run cap gate visual (atinge 5 runs/dia → modal contextual), Founder cap automático (500 slots), Runs pagos avulsos (R$ 1,90/5 runs).
+- ⏳ **F7.3** — Promo codes, annual plan com desconto, refund automation.
+
+### Pré-requisitos manuais (você precisa providenciar)
+1. Conta Stripe + 2 prices criados:
+   - Pro: recurring R$ 14,90/mês com 7-day trial
+   - Founder: one-time R$ 89,00
+2. `.env.local` com:
+   ```
+   STRIPE_SECRET_KEY=sk_test_...
+   STRIPE_WEBHOOK_SECRET=whsec_...
+   STRIPE_PRO_PRICE_ID=price_...
+   STRIPE_FOUNDER_PRICE_ID=price_...
+   SUPABASE_SERVICE_ROLE_KEY=eyJ...
+   ```
+3. Webhook endpoint no Stripe Dashboard apontando pra `<seu-domínio>/api/billing/webhook`, escutando: `checkout.session.completed`, `customer.subscription.created/updated/deleted`, `invoice.payment_failed`.
+4. Rodar `supabase/migrations/2026-04-25-f7-subscriptions.sql` no Supabase Studio.
 
 ### Objetivo
 Converter o `/tiers` placeholder em paywall funcional com 3 ofertas validadas.

@@ -10,6 +10,11 @@ import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
 import { getWeeklyDiscountDeckId, getDiscountTimeRemaining } from '@/lib/weeklyDiscount';
 import { CURRENT_SEASON_ID } from '@/lib/season';
+import { useAuth } from '@/context/AuthContext';
+import { useSubscription } from '@/lib/supabase/subscription';
+import PaywallModal from '@/components/PaywallModal';
+
+const FREE_SEASON_ID = 'season-0';
 
 type TabId = DeckCategory | 'loja';
 
@@ -39,8 +44,11 @@ const DECK_PRICES: Record<string, number> = {
 export default function DecksPage() {
   const [activeTab, setActiveTab] = useState<TabId>('calibragem');
   const [selectedDeck, setSelectedDeck] = useState<Deck | null>(null);
+  const [paywall, setPaywall] = useState<null | 'deck_locked'>(null);
   const router = useRouter();
   const { state, dispatch, isDeckLocked, spendFichas } = useGame();
+  const { user } = useAuth();
+  const { isPro } = useSubscription(user?.id ?? null);
   const weeklyFree = getWeeklyFreeDeckIds();
   const discountDeckId = getWeeklyDiscountDeckId();
   const POPULAR_DECK = 'basic_01';
@@ -49,6 +57,12 @@ export default function DecksPage() {
 
   const handlePlay = () => {
     if (!selectedDeck) return;
+    // Tier gate: Season 0 free, demais exigem Pro/Founder
+    if (!isPro && selectedDeck.seasonId !== FREE_SEASON_ID) {
+      setSelectedDeck(null);
+      setPaywall('deck_locked');
+      return;
+    }
     dispatch({ type: 'START_DECK', deck: selectedDeck });
     setSelectedDeck(null);
     router.push(`/play/${selectedDeck.deckId}`);
@@ -214,6 +228,12 @@ export default function DecksPage() {
               owned: true,
               onPlay: handlePlay,
             })}
+      />
+
+      <PaywallModal
+        open={paywall !== null}
+        reason={paywall ?? 'deck_locked'}
+        onClose={() => setPaywall(null)}
       />
     </main>
   );
