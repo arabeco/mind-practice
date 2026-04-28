@@ -12,6 +12,7 @@ import {
 } from '@/lib/archetypeAvatar';
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
+import ReferralPanel from '@/components/ReferralPanel';
 import LevelBadge from '@/components/LevelBadge';
 import { getPlayerLevel } from '@/lib/playerLevel';
 import { useToast } from '@/components/Toast';
@@ -403,6 +404,10 @@ export default function PerfilPage() {
           </div>
         </motion.section>
       )}
+
+      <motion.section variants={fadeUp} className="mt-3">
+        <ReferralPanel />
+      </motion.section>
 
       {!hasData && (
         <motion.section variants={fadeUp} className="mt-3">

@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import type { User } from '@supabase/supabase-js';
 import { getSupabase } from '@/lib/supabase/client';
 import { identifyUser, resetAnalytics, trackEvent } from '@/lib/analytics';
+import { attributeReferralOnSignup } from '@/lib/supabase/referrals';
 
 interface AuthState {
   user: User | null;
@@ -53,6 +54,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (event === 'SIGNED_IN' && nextUser) {
         identifyUser(nextUser.id, { email: nextUser.email });
         trackEvent('signup', { provider: nextUser.app_metadata?.provider ?? 'email' });
+        // Best-effort referral attribution (no-op se não tem code armazenado)
+        void attributeReferralOnSignup();
       } else if (event === 'SIGNED_OUT') {
         resetAnalytics();
       }
