@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import { GameProvider } from '@/context/GameContext';
+import { PresenceBridge } from '@/lib/supabase/PresenceBridge';
 import BottomNav from '@/components/BottomNav';
 import OnboardingGate from '@/components/OnboardingGate';
 import LoginGate from '@/components/LoginGate';
@@ -33,17 +34,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <ServiceWorkerRegistrar />
         <AuthProvider>
-          <GameProvider>
-            <ToastProvider>
-              <LoginGate>
-                <OnboardingGate>
-                  <main className="min-h-screen pb-20">{children}</main>
-                  <BottomNav />
-                </OnboardingGate>
-              </LoginGate>
-            </ToastProvider>
-            <DevTools />
-          </GameProvider>
+          <PresenceBridge>
+            <GameProvider>
+              <ToastProvider>
+                <LoginGate>
+                  <OnboardingGate>
+                    <main className="min-h-screen pb-20">{children}</main>
+                    <BottomNav />
+                  </OnboardingGate>
+                </LoginGate>
+              </ToastProvider>
+              <DevTools />
+            </GameProvider>
+          </PresenceBridge>
         </AuthProvider>
       </body>
     </html>

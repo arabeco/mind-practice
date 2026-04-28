@@ -20,6 +20,7 @@ import {
   type FeedEvent,
 } from '@/lib/supabase/social';
 import { useFeedRealtime, useFriendshipRealtime } from '@/lib/supabase/realtime';
+import { useIsOnline } from '@/lib/supabase/presence';
 import SeasonLeaderboard from '@/components/SeasonLeaderboard';
 
 type Tab = 'feed' | 'amigos' | 'ranking';
@@ -193,11 +194,19 @@ function FeedCard({ event }: { event: FeedEvent }) {
   const symbol = author?.avatar_variant === 'feminino' ? '\u2640' : '\u2642';
   const time = timeAgo(event.created_at);
   const { title, subtitle } = describeEvent(event);
+  const isOnline = useIsOnline(event.user_id);
 
   return (
     <div className="glass-card flex items-start gap-3 rounded-xl px-3 py-2.5">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-base font-bold text-white/80">
+      <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-base font-bold text-white/80">
         {symbol}
+        {isOnline && (
+          <span
+            className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-black bg-state-success"
+            style={{ boxShadow: '0 0 6px rgba(34,197,94,0.6)' }}
+            aria-label="online"
+          />
+        )}
       </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
@@ -468,10 +477,18 @@ function ProfileRow({
   action: React.ReactNode;
 }) {
   const symbol = profile.avatar_variant === 'feminino' ? '\u2640' : '\u2642';
+  const isOnline = useIsOnline(profile.id);
   return (
     <div className="glass-card flex items-center gap-3 rounded-xl px-3 py-2">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-base font-bold text-white/80">
+      <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-black/40 text-base font-bold text-white/80">
         {symbol}
+        {isOnline && (
+          <span
+            className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-black bg-state-success"
+            style={{ boxShadow: '0 0 6px rgba(34,197,94,0.6)' }}
+            aria-label="online"
+          />
+        )}
       </div>
       <span className="flex-1 truncate text-sm font-semibold text-white/85">
         {profile.nickname}

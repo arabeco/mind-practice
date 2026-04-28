@@ -118,7 +118,7 @@ Trocar somatório de pesos por IRT/belief updates. Radar passa a mostrar crença
 
 ---
 
-## 🌐 FASE 6 — SOCIAL REAL-TIME + LEADERBOARD  🟡 EM ANDAMENTO (2/3)
+## 🌐 FASE 6 — SOCIAL REAL-TIME + LEADERBOARD  ✅ COMPLETA (3/3)
 **Gate para Nível 7.** 🗄️ **Requer SQL.**
 
 ### Objetivo
@@ -127,13 +127,13 @@ Fricção viral: ver amigos, comparar, competir.
 ### Status
 - ✅ **F6.1 — Realtime feed + friend requests** — `useFeedRealtime` + `useFriendshipRealtime` hooks subscrevem ao publication `supabase_realtime`. Feed prepende eventos novos com author hidratado via `getProfile`. Pedidos de amizade disparam toast "{nickname} quer ser seu amigo". SQL migration em `supabase/migrations/2026-04-25-f6-realtime.sql` (precisa rodar no Supabase Studio).
 - ✅ **F6.2 — Leaderboard por season** — `season_scores` table com RLS read-public/write-own, score híbrido `respostas×10 + decks×100 + run_score×5` calculado client-side via `computeSeasonScore` puro (6 testes). `useLeaderboardSync` debounce 1.5s, upsert ao supabase. UI `SeasonLeaderboard` com season selector, top 50 + sua posição (mesmo se fora do top), realtime channel atualiza ranking ao vivo. Aba `ranking` adicionada em `/mundo`. SQL migration em `supabase/migrations/2026-04-25-f6-leaderboard.sql`.
-- ⏳ F6.3 — Presence: bolinha verde em amigos online via Realtime presence channel.
+- ✅ **F6.3 — Presence** (2026-04-25) — Supabase Realtime presence channel global `mindpractice-presence`. `PresenceProvider` (em `src/lib/supabase/presence.tsx`) faz track + listen sync events; expõe Set<string> de user_ids online via context. `PresenceBridge` client wrapper conecta `useAuth().user.id` ao provider sem quebrar server-component layout. Hook `useIsOnline(userId)` retorna boolean. Bolinha verde com glow em `ProfileRow` (lista de amigos) e `FeedCard` (autores do feed). Sem pré-requisito SQL — channel é managed pelo Supabase Realtime.
 
 ### Tarefas originais (referência)
 1. ✅ **Friends UI:** tela `/mundo` com tab amigos (buscar por nickname, pedido/aceitar/rejeitar). Schema `friendships` ✅.
 2. ✅ **Feed real-time:** Supabase Realtime subscription em `feed_events`. (F6.1)
 3. ✅ **Leaderboard por season:** tabela `season_scores`, ranking top-50 + sua posição visível em `/mundo` aba ranking. (F6.2)
-4. ⏳ **Presence:** mostrar quem tá online via Realtime presence (simples, opt-in). (F6.3)
+4. ✅ **Presence:** quem está online via Realtime presence channel global. (F6.3)
 5. ✅ **Batch emit** de eventos (`archetype_changed`, `deck_completed`, `streak_milestone`) — feito em F3 via `useSocialFeed`.
 
 ### 🗄️ SQL pra rodar no Supabase
