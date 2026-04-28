@@ -18,6 +18,9 @@ import { useSubscription } from '@/lib/supabase/subscription';
 import { useToast } from '@/components/Toast';
 import { Button, Card, Badge } from '@/components/ui';
 import { getSupabase } from '@/lib/supabase/client';
+import { trackEvent } from '@/lib/analytics';
+import { useEffect } from 'react';
+// useState already imported above
 
 interface TierCard {
   id: 'free' | 'pro' | 'founder';
@@ -86,6 +89,11 @@ export default function AssinaturaPage() {
 
   const canceled = search.get('canceled') === '1';
 
+  // Analytics: paywall_viewed quando a página carrega (uma vez por mount)
+  useEffect(() => {
+    trackEvent('paywall_viewed', { source: 'assinatura_page' });
+  }, []);
+
   if (authLoading) {
     return (
       <main className="mx-auto flex min-h-screen max-w-3xl flex-col px-4 py-8">
@@ -116,6 +124,7 @@ export default function AssinaturaPage() {
 
   async function handleCheckout(tier: 'pro' | 'founder') {
     setSubmitting(tier);
+    trackEvent('checkout_started', { tier });
     try {
       const sb = getSupabase();
       const { data: { session } } = (await sb?.auth.getSession()) ?? { data: { session: null } };

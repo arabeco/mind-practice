@@ -84,6 +84,13 @@ export function useSeasonFinale(
 
   const dismiss = () => {
     if (!pending) return;
+    void import('@/lib/analytics').then(({ trackEvent }) =>
+      trackEvent('season_finale_seen', {
+        season_id: pending.seasonId,
+        ending_id: pending.ending.id,
+        answers: pending.answerCount,
+      }),
+    );
     dispatch({ type: 'MARK_SEASON_FINALE_SEEN', seasonId: pending.seasonId });
     setPending(null);
   };

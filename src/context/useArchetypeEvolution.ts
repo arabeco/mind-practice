@@ -67,6 +67,12 @@ export function useArchetypeEvolution(
 
   const dismiss = () => {
     if (!pending) return;
+    void import('@/lib/analytics').then(({ trackEvent }) =>
+      trackEvent('archetype_evolved', {
+        from: pending.fromArchetype.id,
+        to: pending.toArchetype.id,
+      }),
+    );
     dispatch({
       type: 'MARK_ARCHETYPE_EVOLUTION_SEEN',
       archetypeId: pending.toArchetype.id,

@@ -13,6 +13,7 @@ import { CURRENT_SEASON_ID } from '@/lib/season';
 import { useAuth } from '@/context/AuthContext';
 import { useSubscription } from '@/lib/supabase/subscription';
 import PaywallModal from '@/components/PaywallModal';
+import { trackEvent } from '@/lib/analytics';
 
 const FREE_SEASON_ID = 'season-0';
 
@@ -63,6 +64,11 @@ export default function DecksPage() {
       setPaywall('deck_locked');
       return;
     }
+    trackEvent('deck_started', {
+      deck_id: selectedDeck.deckId,
+      season_id: selectedDeck.seasonId,
+      category: selectedDeck.category,
+    });
     dispatch({ type: 'START_DECK', deck: selectedDeck });
     setSelectedDeck(null);
     router.push(`/play/${selectedDeck.deckId}`);

@@ -7,8 +7,10 @@
  * Não faz checkout direto — leva pro /assinatura. Mantém UX simples:
  * 1 razão + 1 CTA pra ver planos + 1 dismiss.
  */
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Dialog, Badge } from '@/components/ui';
+import { trackEvent } from '@/lib/analytics';
 
 export type PaywallReason = 'deck_locked' | 'run_cap' | 'share_premium';
 
@@ -37,8 +39,18 @@ export default function PaywallModal({ open, reason, onClose }: PaywallModalProp
   const router = useRouter();
   const copy = REASON_COPY[reason];
 
+  // Track view quando modal abre
+  useEffect(() => {
+    if (open) trackEvent('paywall_viewed', { source: 'modal', reason });
+  }, [open, reason]);
+
+  const handleDismiss = () => {
+    trackEvent('paywall_dismissed', { reason });
+    onClose();
+  };
+
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={open} onClose={handleDismiss}>
       <div className="text-center">
         <Badge variant="gold">Pro</Badge>
         <h2 className="mt-3 text-xl font-bold text-text-primary">{copy.headline}</h2>
@@ -55,7 +67,7 @@ export default function PaywallModal({ open, reason, onClose }: PaywallModalProp
         >
           Ver planos
         </Button>
-        <Button variant="ghost" fullWidth onClick={onClose}>
+        <Button variant="ghost" fullWidth onClick={handleDismiss}>
           Agora não
         </Button>
       </div>

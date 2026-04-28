@@ -67,6 +67,9 @@ export function useLevelCeremony(
 
   const dismiss = () => {
     if (!pending) return;
+    void import('@/lib/analytics').then(({ trackEvent }) =>
+      trackEvent('level_up', { level: pending.info.level, tier: pending.info.tier }),
+    );
     dispatch({ type: 'MARK_LEVEL_SEEN', level: pending.info.level });
     setPending(null);
   };

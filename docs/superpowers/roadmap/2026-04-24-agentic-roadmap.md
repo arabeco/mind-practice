@@ -318,8 +318,12 @@ create policy waitlist_insert_anon on public.waitlist
 
 ---
 
-## 📊 FASE 10 — ANALYTICS + A/B + GROWTH LOOPS
+## 📊 FASE 10 — ANALYTICS + A/B + GROWTH LOOPS  🟡 EM ANDAMENTO (F10.1 ✅)
 **Nível 9.** 🗄️ **Requer SQL.**
+
+### Status
+- ✅ **F10.1 — PostHog + events + A/B** (2026-04-25) — `posthog-js` instalado, `src/lib/analytics.ts` com lazy init idle até `NEXT_PUBLIC_POSTHOG_KEY` ser setado. Catalog de 15 eventos canônicos: signup, onboarding_complete, deck_started, deck_completed, archetype_unlocked, archetype_evolved, share_tapped, paywall_viewed, paywall_dismissed, checkout_started, checkout_completed, subscription_canceled, waitlist_joined, level_up, season_finale_seen. `useExperiment(flagKey, fallback)` hook pra A/B. Wired: AuthContext (signup/identify/reset), WaitlistForm (waitlist_joined), /assinatura (paywall_viewed + checkout_started), /sucesso (checkout_completed uma vez), PaywallModal (paywall_viewed + paywall_dismissed), ShareButton (share_tapped), todos os ceremony hooks (archetype_unlocked, archetype_evolved, season_finale_seen, level_up), `useAnalyticsEvents` no GameProvider observa snapshots → deck_completed + onboarding_complete (primeiro deck).
+- ⏳ **F10.2** — Admin dashboard `/admin` (DAU/MAU/conversão) + Referral loop (table + código único + reward 7 dias Pro).
 
 ### Objetivo
 Parar de chutar. Começar a medir.

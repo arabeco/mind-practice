@@ -4,6 +4,7 @@ import { useRef, useCallback, useState } from 'react';
 import html2canvas from 'html2canvas';
 import ShareCard from './ShareCard';
 import type { Archetype, StatKey } from '@/types/game';
+import { trackEvent } from '@/lib/analytics';
 
 interface ShareButtonProps {
   archetype: Archetype;
@@ -20,6 +21,7 @@ export default function ShareButton({ archetype, axes, nickname, compact }: Shar
   const handleShare = useCallback(async () => {
     if (!cardRef.current || generating) return;
     setGenerating(true);
+    trackEvent('share_tapped', { archetype: archetype.id, surface: 'profile' });
 
     try {
       const canvas = await html2canvas(cardRef.current, {

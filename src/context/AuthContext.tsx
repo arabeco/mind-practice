@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { getSupabase } from '@/lib/supabase/client';
+import { identifyUser, resetAnalytics, trackEvent } from '@/lib/analytics';
 
 interface AuthState {
   user: User | null;
@@ -45,9 +46,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     });
 
-    // Listen for auth changes
-    const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    // Listen for auth changes — também rastreia analytics
+    const { data: { subscription } } = sb.auth.onAuthStateChange((event, session) => {
+      const nextUser = session?.user ?? null;
+      setUser(nextUser);
+      if (event === 'SIGNED_IN' && nextUser) {
+        identifyUser(nextUser.id, { email: nextUser.email });
+        trackEvent('signup', { provider: nextUser.app_metadata?.provider ?? 'email' });
+      } else if (event === 'SIGNED_OUT') {
+        resetAnalytics();
+      }
     });
 
     return () => subscription.unsubscribe();

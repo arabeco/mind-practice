@@ -9,17 +9,19 @@
  * Timeout: 20s (depois sugere refresh manual). Webhook tipicamente
  * chega em <5s; PIX pode demorar mais (assíncrono).
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useSubscription } from '@/lib/supabase/subscription';
 import { Button, Card, Badge } from '@/components/ui';
+import { trackEvent } from '@/lib/analytics';
 
 export default function SucessoPage() {
   const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const { isPro, tier, refresh } = useSubscription(user?.id ?? null);
   const [waitedSeconds, setWaitedSeconds] = useState(0);
+  const trackedRef = useRef(false);
 
   // Polling até confirmar Pro/Founder ou timeout
   useEffect(() => {
@@ -30,6 +32,14 @@ export default function SucessoPage() {
     }, 1500);
     return () => clearInterval(interval);
   }, [user, isPro, refresh]);
+
+  // Track checkout_completed apenas uma vez, quando webhook confirmar tier
+  useEffect(() => {
+    if (isPro && !trackedRef.current) {
+      trackedRef.current = true;
+      trackEvent('checkout_completed', { tier });
+    }
+  }, [isPro, tier]);
 
   if (authLoading) {
     return (
