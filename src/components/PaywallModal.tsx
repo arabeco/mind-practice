@@ -23,15 +23,15 @@ interface PaywallModalProps {
 const REASON_COPY: Record<PaywallReason, { headline: string; body: string }> = {
   deck_locked: {
     headline: 'Esse deck é Pro',
-    body: 'Decks de seasons além da Fundação destravam com Pro. 7 dias grátis pra testar.',
+    body: 'Decks além da Fundação destravam com Pro — disponível no app quando lançar nas lojas.',
   },
   run_cap: {
     headline: 'Limite de runs do dia',
-    body: 'Você usou suas 3 runs grátis. Pro destrava runs ilimitadas — 7 dias grátis pra começar.',
+    body: 'Você usou suas 3 runs grátis. Pro destrava runs ilimitadas — disponível no app.',
   },
   share_premium: {
     headline: 'Share card premium',
-    body: 'Cards visuais avançados são exclusivos Pro. Continue compartilhando o básico ou desbloqueia tudo.',
+    body: 'Cards visuais avançados são exclusivos Pro. Continue com o básico ou destrave tudo no app.',
   },
 };
 

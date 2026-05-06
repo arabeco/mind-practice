@@ -35,7 +35,6 @@
     "posthog-js": "^1.372.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "stripe": "^17.7.0",
     "tailwind-merge": "^2.6.1",
     "zod": "^3.25.76"
   },

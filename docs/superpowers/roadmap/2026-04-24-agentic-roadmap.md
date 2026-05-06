@@ -170,7 +170,15 @@ alter publication supabase_realtime add table public.season_scores;
 
 ---
 
-## 💰 FASE 7 — PAYWALL + STRIPE + ECONOMIA  🟡 EM ANDAMENTO (F7.1 ✅)
+## 💰 FASE 7 — PAYWALL (IAP nativo via RevenueCat)  🟡 SCAFFOLDED — ESPERANDO RevenueCat ATIVAR
+**Pivot 2026-04-25:** produto é app-only (Apple Store + Google Play). Stripe web foi **deletado** — Apple/Google forçam IAP nativo pra digital goods. Pagamento real vai pelo RevenueCat (scaffolded em F8). Pivô removeu ~600 LOC de Stripe sem regressão.
+
+### Status
+- ❌ ~~F7.1 Stripe~~ — deletado em commit pós-pivot. Subscriptions table mantida (RevenueCat webhook escreve nela).
+- ✅ `/assinatura` adaptada: "Em breve no Google Play e App Store" + waitlist embutida + cards informativos dos 3 tiers (Free/Pro/Founder)
+- ✅ `useSubscription` mantido (lê tier do Supabase — agnóstico ao provider de payment)
+- ✅ `PaywallModal` adaptado pro contexto "disponível no app"
+- ⏳ **F7-IAP** — quando user ativar conta Apple Dev + Google Play + RevenueCat, wire-up de purchase via `src/lib/revenuecat.ts` (já scaffolded). RevenueCat webhook → Supabase Edge Function → `subscriptions.tier`.
 **Gate para Nível 8.** 🗄️ **Requer SQL.** Primeira receita real.
 
 ### Status

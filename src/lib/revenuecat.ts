@@ -24,7 +24,7 @@
  *      (atualiza subscriptions.tier baseado em entitlement ativo)
  *   6. Copiar API keys (iOS + Android) pro .env.local
  */
-import type { Tier } from './stripe';
+import type { Tier } from './supabase/subscription';
 
 const PRODUCTS = {
   PRO_MONTHLY: 'mindpractice_pro_monthly',

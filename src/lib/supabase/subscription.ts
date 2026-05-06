@@ -9,7 +9,22 @@
  */
 import { useEffect, useState } from 'react';
 import { getSupabase } from './client';
-import type { Tier, SubscriptionStatus } from '@/lib/stripe';
+
+/**
+ * Tier de assinatura. Source of truth: subscriptions.tier no Supabase.
+ * Webhook (Stripe legado ou RevenueCat futuro) escreve aqui.
+ */
+export type Tier = 'free' | 'pro' | 'founder';
+
+/**
+ * Status da assinatura. Mapeado do provider (Stripe ou RevenueCat).
+ */
+export type SubscriptionStatus =
+  | 'active'
+  | 'past_due'
+  | 'canceled'
+  | 'trialing'
+  | 'incomplete';
 
 export interface SubscriptionRow {
   user_id: string;

@@ -83,12 +83,6 @@ commitar pra ter projetos reproducíveis).
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
-# Stripe (hibernado — só ativa se quiser web payment paralelo)
-# STRIPE_SECRET_KEY=sk_...
-# STRIPE_WEBHOOK_SECRET=whsec_...
-# STRIPE_PRO_PRICE_ID=price_...
-# STRIPE_FOUNDER_PRICE_ID=price_...
-
 # RevenueCat (mobile IAP) — DEIXAR EM BRANCO até criar conta
 NEXT_PUBLIC_REVENUECAT_IOS_KEY=
 NEXT_PUBLIC_REVENUECAT_ANDROID_KEY=
@@ -125,8 +119,7 @@ Pra **upload pra loja**:
 | Login Google + Apple | `src/app/login/page.tsx` | Botões prontos. OAuth via Supabase ativa quando providers forem configurados no Supabase Dashboard. |
 | Capacitor config | `capacitor.config.ts` | Pronto. App ID `com.mindpractice.app`, splash screen + status bar configurados. |
 | RevenueCat helper | `src/lib/revenuecat.ts` | Idle até env keys serem setadas. `isRevenueCatActive()` controla degradação graciosa. |
-| Stripe (web fallback) | `src/lib/stripe.ts` + `/api/billing/*` | Hibernado. Volta no ar se setar env vars. |
-| Tier system | `subscriptions` table + `useSubscription` hook | Funciona com qualquer source — Stripe webhook OU RevenueCat webhook. |
+| Tier system | `subscriptions` table + `useSubscription` hook | Tier source: webhook do RevenueCat (mobile) escreve no Supabase. Web mostra status read-only. |
 
 ## 7. Próximos passos recomendados
 
