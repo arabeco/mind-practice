@@ -16,7 +16,7 @@ import { getSupabase } from '@/lib/supabase/client';
 import { SEASONS, type Season } from '@/data/seasons';
 
 interface SeasonLeaderboardProps {
-  /** ID da season; se nao passado, usa a mais recente. */
+  /** ID da season; se não passado, usa a mais recente. */
   seasonId?: string;
   topLimit?: number;
 }

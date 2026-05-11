@@ -153,7 +153,7 @@ function FeedTab() {
   // Realtime: prepend novos eventos conforme chegam. Hidrata `author`
   // via getProfile. RLS no server filtra pra self+amigos.
   useFeedRealtime(events !== null, async raw => {
-    // Evita duplicar caso o evento ja apareca no fetch inicial
+    // Evita duplicar caso o evento já apareça no fetch inicial
     setEvents(prev => {
       if (!prev) return prev;
       if (prev.some(e => e.id === raw.id)) return prev;

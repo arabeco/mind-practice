@@ -7,7 +7,7 @@
  *
  * Estrutura:
  *   - Hero com transformação A → B (ambos os tints)
- *   - "Voce era X" / arrow / "Agora voce e Y"
+ *   - "Você era X" / arrow / "Agora você é Y"
  *   - Tagline do novo arquetipo
  *   - Description do novo arquetipo
  *   - Mini radar com eixos firmados
@@ -105,7 +105,7 @@ export default function ArchetypeEvolutionCeremony({
               >
                 <div className="flex flex-1 flex-col items-end gap-0.5">
                   <span className="text-[8px] uppercase tracking-[0.22em] text-white/40">
-                    Voce era
+                    Você era
                   </span>
                   <span
                     className="text-base font-semibold tracking-tight opacity-70"
@@ -143,7 +143,7 @@ export default function ArchetypeEvolutionCeremony({
 
                 <div className="flex flex-1 flex-col items-start gap-0.5">
                   <span className="text-[8px] uppercase tracking-[0.22em] text-white/40">
-                    Agora voce e
+                    Agora você é
                   </span>
                   <motion.span
                     initial={{ opacity: 0 }}
