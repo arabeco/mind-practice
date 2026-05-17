@@ -10,7 +10,7 @@
     "deck:validate": "npx tsx scripts/validate-deck.ts",
     "check:utf8": "npx tsx scripts/check-utf8.ts",
     "test": "node scripts/run-tests.mjs",
-    "build:mobile": "cross-env MOBILE_BUILD=1 next build",
+    "build:mobile": "node scripts/build-mobile.mjs",
     "cap:sync": "npm run build:mobile && npx cap sync",
     "cap:android": "npm run cap:sync && npx cap open android",
     "cap:ios": "npm run cap:sync && npx cap open ios"
