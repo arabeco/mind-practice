@@ -1,15 +1,15 @@
-# Mobile setup — Capacitor 7 + RevenueCat (Android + iOS)
+# Mobile setup — Capacitor 7 + IAP nativo (Android + iOS)
 
 Tudo do código mobile já está pronto e idle no repo. Você precisa fazer
 **3 setups manuais** quando quiser ativar:
 
 1. Instalar tools nativas (Android Studio + Xcode)
 2. Adicionar plataformas Capacitor (`npx cap add android` + `npx cap add ios`)
-3. Criar contas Apple Developer + Google Play Console + RevenueCat
-4. Setar env vars
+3. Criar contas Apple Developer + Google Play Console + cadastrar 2 produtos
 
-Depois disso, `npm run cap:android` e `npm run cap:ios` abrem os projetos
-nativos em IDE prontos pra build/upload.
+Pagamento usa **In-App Purchase nativo** via `@capgo/native-purchases` — sem
+intermediários (RevenueCat, Stripe). User toca botão → Apple/Google abre UI
+nativa de pagamento → app escreve tier no Supabase.
 
 ---
 
@@ -17,7 +17,6 @@ nativos em IDE prontos pra build/upload.
 
 **Android (qualquer OS):**
 - [Android Studio](https://developer.android.com/studio) (latest)
-- Durante instalação, aceitar SDK + emulador
 
 **iOS (apenas macOS):**
 - [Xcode](https://apps.apple.com/us/app/xcode/id497799835) (latest, App Store)
@@ -29,104 +28,125 @@ nativos em IDE prontos pra build/upload.
 Rodar **uma vez** quando estiver pronto:
 
 ```bash
-# Build estático primeiro (gera ./out/)
-npm run build:mobile
-
-# Adicionar plataformas (cria ./android e ./ios)
-npx cap add android
-npx cap add ios   # macOS apenas
-
-# Sincronizar
-npx cap sync
+npm run build:mobile      # gera ./out/ (static export)
+npx cap add android       # cria ./android (commitar OU manter em .gitignore — sua escolha)
+npx cap add ios           # macOS apenas — cria ./ios
+npx cap sync              # copia out/ + plugins
 ```
 
-Os diretórios `android/` e `ios/` são gerados — adicione ao git ou ao
-.gitignore conforme política de versionamento (Capacitor recomenda
-commitar pra ter projetos reproducíveis).
-
-## 3. Criar contas e produtos
+## 3. Criar contas + cadastrar produtos
 
 ### 3.1. Google Play Console (US$ 25 one-time)
 - https://play.google.com/console
-- Criar app "MindPractice", package name = `com.mindpractice.app`
-- **Internal testing track** (ativa rapidíssimo, não passa por review pra ≤100 testers)
+- Criar app "MindPractice", package = `com.mindpractice.app`
+- **Monetize → Products:**
+  - **Subscription** com productId = `pro_monthly`
+    - Preço base R$ 14,90/mês
+    - Free trial: 7 dias
+  - **Managed product (one-time)** com productId = `founder_lifetime`
+    - Preço R$ 89,00
+- **Internal testing track** pra distribuir build sem review
 
 ### 3.2. Apple Developer Program (US$ 99/ano)
 - https://developer.apple.com/programs/
-- Criar app no App Store Connect, bundle id = `com.mindpractice.app`
-- **TestFlight** (interna sem review pra equipe; review rápido pra externa ≤10k testers)
+- App Store Connect → criar app "MindPractice", bundle = `com.mindpractice.app`
+- **In-App Purchases → Manage:**
+  - **Auto-Renewable Subscription** com productId = `pro_monthly`
+    - Preço R$ 14,90/mês
+    - Introductory offer: 7-day free trial
+  - **Non-Consumable** com productId = `founder_lifetime`
+    - Preço R$ 89,00
+- **TestFlight** pra distribuir build (review interna ~minutos, externa 1-2 dias)
 
-### 3.3. RevenueCat (free até US$ 10k MRR)
-- https://www.revenuecat.com/
-- Criar projeto, conectar App Store Connect + Google Play Console
-- Criar produtos:
-  - `mindpractice_pro_monthly` (subscription R$ 14,90/mês com 7d trial)
-  - `mindpractice_founder` (one-time R$ 89, lifetime entitlement)
-- Criar entitlements:
-  - `pro` → inclui `mindpractice_pro_monthly`
-  - `founder` → inclui `mindpractice_founder`
-- Configurar webhook RevenueCat → Supabase Edge Function
-  (atualiza `subscriptions.tier` baseado em entitlement ativo)
-- Copiar **public API keys** (uma iOS, uma Android)
+**IMPORTANTE:** os productIds devem ser EXATAMENTE `pro_monthly` e
+`founder_lifetime` (case-sensitive). Eles estão hardcoded em
+`src/lib/iap.ts`. Quer mudar? Edita lá e nos products das lojas.
 
-### 3.4. Supabase OAuth providers
+### 3.3. Supabase OAuth providers
 - Dashboard → Authentication → Providers
 - **Google**: ativar, cole Client ID + Secret (do Google Cloud Console)
 - **Apple**: ativar, cole Service ID + Team ID + Key ID + .p8 file
   (do Apple Developer Console → Certificates, Identifiers & Profiles)
-- Configurar redirect URL Supabase no Google e Apple
 
-## 4. Env vars (`.env.local`)
+## 4. SQL adicional pra IAP
+
+Roda essa migration no Supabase Studio (idempotente):
+
+```bash
+supabase/migrations/2026-05-17-iap-client-write.sql
+```
+
+Adiciona RLS `subs_insert_own` + `subs_update_own` pra cliente conseguir
+escrever a própria row em `subscriptions` após purchase nativo.
+
+## 5. Env vars (`.env.local`)
 
 ```bash
 # Supabase (já existe)
 NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
-# RevenueCat (mobile IAP) — DEIXAR EM BRANCO até criar conta
-NEXT_PUBLIC_REVENUECAT_IOS_KEY=
-NEXT_PUBLIC_REVENUECAT_ANDROID_KEY=
+# Admin dashboard (opcional)
+ADMIN_USER_ID=<seu-uuid-do-supabase-auth>
+
+# Webhook ops (opcional, só pra rotas /api/admin/* e /api/referrals/attribute)
+SUPABASE_SERVICE_ROLE_KEY=eyJ...
 ```
 
-Sem essas keys preenchidas, `isRevenueCatActive()` retorna false e o
-app gracefully degrada — botões de assinatura ficam disabled.
+**Não precisa de env pra IAP** — `@capgo/native-purchases` lê productIds
+do código + da loja diretamente, sem API keys externas.
 
-## 5. Build flow
+## 6. Build flow
 
 ```bash
-# Web (igual antes)
-npm run dev      # localhost:3000
-npm run build    # build SSR completo
+# Web (igual antes — sem features de IAP, só vitrine + waitlist)
+npm run dev       # localhost:3000
+npm run build     # build SSR completo
 
 # Mobile
-npm run build:mobile         # gera ./out/ (static export)
-npm run cap:sync             # copia out/ + plugins pro android/ios
-npm run cap:android          # abre Android Studio
-npm run cap:ios              # abre Xcode (macOS apenas)
+npm run build:mobile      # gera ./out/ (static export)
+npm run cap:sync          # copia out/ + plugins pro android/ios
+npm run cap:android       # abre Android Studio
+npm run cap:ios           # abre Xcode (macOS apenas)
 ```
 
 No Android Studio: Run → escolhe device/emulador → app builda e roda.
 No Xcode: Product → Run → escolhe simulator/device.
 
-Pra **upload pra loja**:
+**Upload pra loja:**
 - Android: Generate Signed Bundle/APK → upload .aab no Play Console
 - iOS: Archive → Distribute App → App Store Connect → submit pra TestFlight
 
-## 6. O que já está implementado e idle
+## 7. O que já está implementado e idle
 
 | Componente | Onde | Estado |
 |---|---|---|
 | Login Google + Apple | `src/app/login/page.tsx` | Botões prontos. OAuth via Supabase ativa quando providers forem configurados no Supabase Dashboard. |
-| Capacitor config | `capacitor.config.ts` | Pronto. App ID `com.mindpractice.app`, splash screen + status bar configurados. |
-| RevenueCat helper | `src/lib/revenuecat.ts` | Idle até env keys serem setadas. `isRevenueCatActive()` controla degradação graciosa. |
-| Tier system | `subscriptions` table + `useSubscription` hook | Tier source: webhook do RevenueCat (mobile) escreve no Supabase. Web mostra status read-only. |
+| Capacitor config | `capacitor.config.ts` | Pronto. App ID `com.mindpractice.app`, splash + status bar configurados. |
+| IAP helper | `src/lib/iap.ts` | Idle em web (`isNativeApp()` retorna false). Em Capacitor nativo, `purchaseProduct()` abre StoreKit/Play Billing. |
+| Tier system | `subscriptions` table + `useSubscription` hook | Cliente escreve tier direto após purchase nativo. RLS protege (só own row). |
+| `/assinatura` | `src/app/assinatura/page.tsx` | Em web: vitrine + waitlist. Em app: botões "Assinar" funcionais + "Restaurar compras". |
 
-## 7. Próximos passos recomendados
+## 8. Próximos passos recomendados
 
 Quando você tiver as contas:
 
 1. **Habilitar OAuth Google + Apple no Supabase** → testa login no web e mobile
-2. **Adicionar plataforma Android primeiro** (review é mais rápido) → roda no emulador
-3. **Configurar RevenueCat** → produtos + entitlements + webhook pra Supabase
+2. **Cadastrar `pro_monthly` + `founder_lifetime`** em ambas as lojas com preços iguais
+3. **Adicionar plataforma Android primeiro** → roda no emulador, testa purchase
 4. **TestFlight + Internal Testing** → distribuir build pra quem quiser testar
 5. **iOS depois** (mais burocrático)
+
+## 9. Segurança / fraude
+
+Cliente escreve `subscriptions.tier` direto após purchase nativo. RLS
+garante que só pode escrever a própria row, mas user avançado conseguiria
+em tese forjar uma escrita pulando o purchase real.
+
+Pra MVP, aceitável (Apple/Google bloqueiam grande parte). Pra v2:
+- Adicionar Supabase Edge Function que recebe receipt do purchase
+- Valida receipt com Apple `verifyReceipt` ou Google Play Developer API
+- Só após validação, escreve tier (via service role, bypassa RLS)
+- Cliente perde permissão de write direto
+
+Implementar quando tiver tração real (>50 users pagando).

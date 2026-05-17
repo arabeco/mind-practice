@@ -170,15 +170,22 @@ alter publication supabase_realtime add table public.season_scores;
 
 ---
 
-## 💰 FASE 7 — PAYWALL (IAP nativo via RevenueCat)  🟡 SCAFFOLDED — ESPERANDO RevenueCat ATIVAR
-**Pivot 2026-04-25:** produto é app-only (Apple Store + Google Play). Stripe web foi **deletado** — Apple/Google forçam IAP nativo pra digital goods. Pagamento real vai pelo RevenueCat (scaffolded em F8). Pivô removeu ~600 LOC de Stripe sem regressão.
+## 💰 FASE 7 — PAYWALL (IAP nativo direto, sem intermediário)  ✅ CÓDIGO PRONTO
+**Pivot 2026-05-17:** Stripe + RevenueCat + PostHog removidos. Produto é app-only com **IAP nativo direto** via `@capgo/native-purchases`. Sem middleware, sem analytics externos.
 
 ### Status
-- ❌ ~~F7.1 Stripe~~ — deletado em commit pós-pivot. Subscriptions table mantida (RevenueCat webhook escreve nela).
-- ✅ `/assinatura` adaptada: "Em breve no Google Play e App Store" + waitlist embutida + cards informativos dos 3 tiers (Free/Pro/Founder)
-- ✅ `useSubscription` mantido (lê tier do Supabase — agnóstico ao provider de payment)
-- ✅ `PaywallModal` adaptado pro contexto "disponível no app"
-- ⏳ **F7-IAP** — quando user ativar conta Apple Dev + Google Play + RevenueCat, wire-up de purchase via `src/lib/revenuecat.ts` (já scaffolded). RevenueCat webhook → Supabase Edge Function → `subscriptions.tier`.
+- ❌ ~~Stripe~~ — deletado (Apple/Google proíbem payment web em apps)
+- ❌ ~~RevenueCat~~ — removido (não queremos intermediário)
+- ❌ ~~PostHog~~ — removido (sem analytics externo por enquanto)
+- ✅ `src/lib/iap.ts` — helper direto: `purchaseProduct('pro_monthly')` → StoreKit/Play Billing nativo → escreve `subscriptions.tier` no Supabase. `restorePurchases()` pra requisito de loja.
+- ✅ `/assinatura` detecta `isNativeApp()`: em app mostra botões reais "Assinar Pro" e "Virar Founder" + "Restaurar compras"; em web mostra vitrine + waitlist
+- ✅ Produtos hardcoded (cadastrar exatamente em Play Console + App Store Connect):
+  - `pro_monthly` — subscription mensal R$ 14,90 com 7-day trial
+  - `founder_lifetime` — non-consumable R$ 89,00
+- ✅ SQL `2026-05-17-iap-client-write.sql` adiciona RLS `subs_insert_own` + `subs_update_own` (cliente escreve tier após purchase nativo)
+
+### Riscos conhecidos (MVP)
+- Cliente escreve direto em `subscriptions.tier` — usuário avançado poderia forjar (RLS protege apenas que escreve own row). Pra >50 users pagando: adicionar Edge Function que valida receipt com Apple `verifyReceipt` / Google Play Developer API antes de aceitar upsert.
 **Gate para Nível 8.** 🗄️ **Requer SQL.** Primeira receita real.
 
 ### Status
@@ -326,11 +333,11 @@ create policy waitlist_insert_anon on public.waitlist
 
 ---
 
-## 📊 FASE 10 — ANALYTICS + A/B + GROWTH LOOPS  ✅ COMPLETA
+## 📊 FASE 10 — ANALYTICS + A/B + GROWTH LOOPS  🟡 PARCIAL (analytics removido, growth mantido)
 **Nível 9.** 🗄️ **Requer SQL.**
 
 ### Status
-- ✅ **F10.1 — PostHog + events + A/B** (2026-04-25) — `posthog-js` instalado, `src/lib/analytics.ts` com lazy init idle até `NEXT_PUBLIC_POSTHOG_KEY` ser setado. Catalog de 15 eventos canônicos. `useExperiment(flagKey, fallback)` hook pra A/B. Wired em 11 surfaces (auth, waitlist, paywall, share, ceremonies, deck progression).
+- ❌ ~~F10.1 — PostHog + events + A/B~~ — **removido 2026-05-17 a pedido do usuário.** `analytics.ts`, `useExperiment.ts`, `useAnalyticsEvents.ts` deletados. Todos `trackEvent` calls strippados (11 surfaces). Sem provider de analytics no momento.
 - ✅ **F10.2 — Admin + Referrals** (2026-04-25) — `referrals` table com RLS read/insert own + service role update via `/api/referrals/attribute`. `src/lib/supabase/referrals.ts` com `getOrCreateMyReferralCode` (6-char alphanum, retry em colisão), `attributeReferralOnSignup` (wired no AuthContext SIGNED_IN). `/r/[code]` page captura code → localStorage → redirect. `ReferralPanel` em `/perfil` mostra link + share/copy + stats (signed_up/converted). `/admin` page (gated por `ADMIN_USER_ID` env) + `/api/admin/stats` retorna counts agregados (profiles, waitlist, subs por tier, referrals, decks_completed via feed_events) com MRR estimado. SQL em `supabase/migrations/2026-04-25-f10-referrals.sql`.
 
 ### Objetivo

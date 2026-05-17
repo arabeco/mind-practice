@@ -3,7 +3,6 @@
 import { useState, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui';
-import { trackEvent } from '@/lib/analytics';
 
 interface WaitlistFormProps {
   /** Identifica de onde veio o signup (ex: 'hero', 'archetype-page'). */
@@ -46,7 +45,6 @@ export default function WaitlistForm({
         return;
       }
       setStatus('success');
-      trackEvent('waitlist_joined', { source, archetype_hint: archetypeHint ?? null });
     } catch {
       setErrorMsg('Erro de rede');
       setStatus('error');

@@ -58,9 +58,6 @@ export function useFirstArchetypeCeremony(
 
   const dismiss = () => {
     if (!pending) return;
-    void import('@/lib/analytics').then(({ trackEvent }) =>
-      trackEvent('archetype_unlocked', { archetype_id: pending.archetype.id }),
-    );
     dispatch({ type: 'MARK_FIRST_ARCHETYPE_SEEN', archetypeId: pending.archetype.id });
     setPending(null);
   };
