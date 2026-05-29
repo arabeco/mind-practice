@@ -18,10 +18,21 @@
 /out/
 
 # capacitor (plataformas geradas via `npx cap add`)
-# Comentar se quiser commitar projetos nativos pra reproducibilidade.
-/android/
-/ios/
+# Commitamos android/ pra preservar o plugin nativo StoreBilling (custom).
+# Build artifacts ficam excluídos abaixo.
+# /android/    ← descomentado intencionalmente
+# /ios/        ← descomentado quando adicionar ios
 .capacitor/
+
+# Android build artifacts (cache local, não precisa commitar)
+/android/.gradle/
+/android/.idea/
+/android/build/
+/android/app/build/
+/android/app/release/
+/android/local.properties
+/android/captures/
+/android/app/google-services.json
 
 # production
 /build
