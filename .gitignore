@@ -34,6 +34,11 @@
 /android/captures/
 /android/app/google-services.json
 
+# Android signing — NUNCA commitar (keystore + senhas)
+/android/key.properties
+/android/*.jks
+/android/*.keystore
+
 # production
 /build
 
