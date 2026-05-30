@@ -26,7 +26,7 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.38.4";
-import { SignJWT, importPKCS8 } from "npm:jose@5.9.6";
+import { SignJWT, importPKCS8 } from "https://esm.sh/jose@5.9.6";
 
 // ============================================================
 // Env vars

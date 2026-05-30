@@ -33,7 +33,7 @@ import { IAP_CATALOG, FICHA_SPEND_CATALOG, type TierCode } from '@/constants/bil
 
 // Detecta se está em ambiente de desenvolvimento — pra mostrar banner
 // alertando sobre secrets não configurados.
-const SECRETS_NOT_CONFIGURED_NOTE = true; // ⚠️ TROCAR PRA false QUANDO CONFIGURAR SECRETS
+const SECRETS_NOT_CONFIGURED_NOTE = false; // secrets Google Play setados na Supabase (2026-05-30)
 
 export default function AssinaturaPage() {
   const { user, enabled, loading: authLoading } = useAuth();
