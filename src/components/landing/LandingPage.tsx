@@ -75,7 +75,7 @@ export default function LandingPage() {
           className="mb-8 text-center"
         >
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-text-tertiary">
-            10 arquétipos possíveis
+            15 arquétipos possíveis
           </p>
           <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
             Qual deles é você?

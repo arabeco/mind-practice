@@ -1,13 +1,42 @@
 'use client';
 
 import { forwardRef } from 'react';
-import type { CampaignEnding } from '@/types/game';
+import type { CampaignEnding, StatKey } from '@/types/game';
+import { AXIS_POLES, AXIS_POLE_SLUGS } from '@/lib/axisPoles';
 
 interface EndingShareCardProps {
   ending: CampaignEnding;
   seasonLabel: string;
   deckName: string;
   nickname: string;
+}
+
+// Mesmo mapeamento de CampanhaClient — emblemas do caminho que o final representa.
+const ENDING_POLES: Record<string, { axis: StatKey; pole: string }[]> = {
+  selo_quebrado: [
+    { axis: 'vigor', pole: 'agressivo' },
+    { axis: 'presenca', pole: 'dominante' },
+  ],
+  pacto_frio: [
+    { axis: 'filtro', pole: 'calculista' },
+  ],
+  cinzas: [
+    { axis: 'desapego', pole: 'desapegado' },
+  ],
+  reescrita: [
+    { axis: 'presenca', pole: 'dominante' },
+    { axis: 'harmonia', pole: 'paz' },
+  ],
+};
+
+function polesFor(endingId: string) {
+  const polos = ENDING_POLES[endingId] ?? [];
+  return polos.map(p => {
+    const slugs = AXIS_POLE_SLUGS[p.axis];
+    const labels = AXIS_POLES[p.axis];
+    const idx = slugs.findIndex(s => s === p.pole);
+    return { slug: p.pole, label: idx >= 0 ? labels[idx] : '' };
+  });
 }
 
 /**
@@ -137,26 +166,73 @@ const EndingShareCard = forwardRef<HTMLDivElement, EndingShareCardProps>(
           </div>
         </div>
 
-        {/* Divider */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 1050,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: 120,
-            height: 2,
-            background:
-              'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.6) 50%, transparent 100%)',
-          }}
-        />
+        {/* Emblemas do caminho */}
+        {(() => {
+          const polos = polesFor(ending.id);
+          if (polos.length === 0) {
+            return (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 1050,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 120,
+                  height: 2,
+                  background:
+                    'linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.6) 50%, transparent 100%)',
+                }}
+              />
+            );
+          }
+          return (
+            <div
+              style={{
+                position: 'absolute',
+                top: 1010,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 60,
+              }}
+            >
+              {polos.map(p => (
+                <div
+                  key={p.slug}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}
+                >
+                  <img
+                    src={`/icons/${p.slug}.png`}
+                    width={160}
+                    height={160}
+                    alt={p.label}
+                    style={{ display: 'block', objectFit: 'contain' }}
+                  />
+                  <div
+                    style={{
+                      fontSize: 22,
+                      fontWeight: 700,
+                      letterSpacing: '0.24em',
+                      color: 'rgba(255,255,255,0.6)',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {p.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
 
         {/* Flavor */}
         {ending.flavor && (
           <div
             style={{
               position: 'absolute',
-              top: 1100,
+              top: 1230,
               left: 0,
               right: 0,
               textAlign: 'center',
@@ -180,7 +256,7 @@ const EndingShareCard = forwardRef<HTMLDivElement, EndingShareCardProps>(
         <div
           style={{
             position: 'absolute',
-            top: 1220,
+            top: 1320,
             left: 100,
             right: 100,
             textAlign: 'center',

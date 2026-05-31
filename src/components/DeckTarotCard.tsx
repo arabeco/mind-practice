@@ -6,6 +6,8 @@ import { TIER_CONFIG, type TierLevel } from '@/types/game';
 import { getDeckArt } from '@/lib/deckArt';
 import { getSeason } from '@/data/seasons';
 import { RarityBadge } from '@/components/decks/RarityBadge';
+import PoleIcon from '@/components/PoleIcon';
+import { AXIS_POLE_SLUGS } from '@/lib/axisPoles';
 
 interface DeckTarotCardProps {
   deck: Deck;
@@ -262,6 +264,18 @@ export default function DeckTarotCard({
             </p>
           )}
         </div>
+
+        {/* Emblema do eixo treinado (so pra decks tipo "eixo" com focusAxis) */}
+        {deck.category === 'eixo' && deck.focusAxis && !locked && (
+          <div className="absolute top-2 left-2 z-30">
+            <PoleIcon
+              axis={deck.focusAxis}
+              pole={AXIS_POLE_SLUGS[deck.focusAxis][1]}
+              size={36}
+              title={`Treina ${AXIS_POLE_SLUGS[deck.focusAxis][1]}`}
+            />
+          </div>
+        )}
 
         {/* Lock overlay — image stays visible underneath */}
         {locked && (

@@ -3,6 +3,7 @@
 import { forwardRef } from 'react';
 import type { Archetype, StatKey } from '@/types/game';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
+import { pickPoleSlug } from '@/lib/axisPoles';
 
 interface ShareCardProps {
   archetype: Archetype;
@@ -67,11 +68,64 @@ const ShareCard = forwardRef<HTMLDivElement, ShareCardProps>(
           }}
         />
 
+        {/* Top 3 polos dominantes — emblema visual de quem eu sou */}
+        {(() => {
+          const tops = STAT_KEYS
+            .map(k => ({ key: k as StatKey, abs: Math.abs(axes[k]) }))
+            .sort((a, b) => b.abs - a.abs)
+            .slice(0, 3)
+            .filter(d => d.abs > 0.05)
+            .map(d => pickPoleSlug(d.key, axes[d.key]));
+
+          if (tops.length === 0) return null;
+
+          return (
+            <div
+              style={{
+                position: 'absolute',
+                top: 110,
+                left: 0,
+                right: 0,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: 36,
+              }}
+            >
+              {tops.map(p => (
+                <div
+                  key={p.slug}
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}
+                >
+                  <img
+                    src={`/icons/${p.slug}.png`}
+                    width={120}
+                    height={120}
+                    alt={p.label}
+                    style={{ display: 'block', objectFit: 'contain' }}
+                  />
+                  <div
+                    style={{
+                      fontSize: 18,
+                      fontWeight: 700,
+                      color: 'rgba(255,255,255,0.55)',
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {p.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
+
         {/* Archetype name */}
         <div
           style={{
             position: 'absolute',
-            top: 260,
+            top: 320,
             left: 0,
             right: 0,
             textAlign: 'center',
