@@ -33,7 +33,7 @@ SHA256 do AAB: `CCC38CDE7C385183D6E10844B2AF1F431373F0020B0E637A555B9F367B2FD2A7
 
 ### ⚠️ Backup obrigatório (fora do repo)
 - [ ] `android/mindpractice-release.jks` copiada pra local seguro (Drive/pendrive/gerenciador)
-- [ ] Senha `***REDACTED***` (store + key) anotada no gerenciador de senhas
+- [ ] Senha da keystore (store + key) anotada no gerenciador de senhas — valor real só em `android/key.properties` (gitignored)
 - [ ] Alias `mindpractice_release` anotado
 
 > Se perder a `.jks` ANTES de aceitar Play App Signing, ou perder a chave de upload depois,
