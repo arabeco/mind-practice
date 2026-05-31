@@ -16,6 +16,8 @@ import ReferralPanel from '@/components/ReferralPanel';
 import LevelBadge from '@/components/LevelBadge';
 import { getPlayerLevel } from '@/lib/playerLevel';
 import { useToast } from '@/components/Toast';
+import { deleteAccountRequest } from '@/lib/accountDeletion';
+import { useRouter } from 'next/navigation';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
 import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
@@ -34,6 +36,7 @@ export default function PerfilPage() {
   const { state, dispatch, getArchetype, precision, consistency, isIdentityValidated } = useGame();
   const { user, enabled: authEnabled, signOut } = useAuth();
   const toast = useToast();
+  const router = useRouter();
   const archetype = getArchetype();
   const visual = useMemo(() => getArchetypeAvatarVisual(archetype), [archetype]);
   const beliefsProfile = state.calibration.beliefs ?? createPriorProfile();
@@ -60,6 +63,10 @@ export default function PerfilPage() {
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
   const [resetModalOpen, setResetModalOpen] = useState(false);
   const [variantModalOpen, setVariantModalOpen] = useState(false);
+  const [deleteAccountModalOpen, setDeleteAccountModalOpen] = useState(false);
+  const [deleteAccountConfirmText, setDeleteAccountConfirmText] = useState('');
+  const [deleteAccountBusy, setDeleteAccountBusy] = useState(false);
+  const [deleteAccountError, setDeleteAccountError] = useState<string | null>(null);
 
   // Hydrate from localStorage
   useEffect(() => {
@@ -170,6 +177,36 @@ export default function PerfilPage() {
     } catch {
       toast.error('Falha ao sair');
     }
+  }
+
+  async function handleDeleteAccount() {
+    if (deleteAccountBusy) return;
+    if (deleteAccountConfirmText.trim().toUpperCase() !== 'EXCLUIR') {
+      setDeleteAccountError('Digite EXCLUIR para confirmar.');
+      return;
+    }
+    setDeleteAccountBusy(true);
+    setDeleteAccountError(null);
+    const result = await deleteAccountRequest();
+    if (!result.success) {
+      setDeleteAccountError(result.error ?? 'Falha ao excluir conta');
+      setDeleteAccountBusy(false);
+      return;
+    }
+    // Sucesso: limpa estado local e desloga
+    try {
+      dispatch({ type: 'RESET_ALL' });
+    } catch { /* ignore */ }
+    try {
+      localStorage.clear();
+    } catch { /* ignore */ }
+    try {
+      await signOut();
+    } catch { /* ignore */ }
+    setDeleteAccountBusy(false);
+    setDeleteAccountModalOpen(false);
+    toast.success('Conta excluída.');
+    router.replace('/');
   }
 
   return (
@@ -438,6 +475,18 @@ export default function PerfilPage() {
                 </button>
               </div>
             ) : (
+              null
+            )}
+            {user && (
+              <button
+                type="button"
+                onClick={() => setDeleteAccountModalOpen(true)}
+                className="mt-2 w-full text-center text-[10px] text-white/30 hover:text-red-300/80 transition-colors"
+              >
+                Excluir minha conta
+              </button>
+            )}
+            {!user && (
               <Link
                 href="/login"
                 className="flex items-center justify-center gap-2 rounded-xl border border-accent-gold/25 bg-accent-gold/[0.06] py-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-gold/90 transition-colors hover:bg-accent-gold/12"
@@ -648,6 +697,89 @@ export default function PerfilPage() {
                   className="flex-1 rounded-xl bg-accent-purple/25 py-2.5 text-sm font-semibold text-accent-purple transition-colors hover:bg-accent-purple/35"
                 >
                   Trocar
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ================================================================ */}
+      {/* Delete Account Confirmation Modal                                */}
+      {/* Compliance Google Play Data Safety + LGPD                        */}
+      {/* ================================================================ */}
+      <AnimatePresence>
+        {deleteAccountModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+            onClick={() => {
+              if (deleteAccountBusy) return;
+              setDeleteAccountModalOpen(false);
+              setDeleteAccountConfirmText('');
+              setDeleteAccountError(null);
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 10 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="mx-6 w-full max-w-xs rounded-2xl border border-white/10 bg-[#0c0c14] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.6)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-red-500/12">
+                <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M1 7h22M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3" />
+                </svg>
+              </div>
+              <h3 className="text-base font-bold text-white/90">Excluir minha conta</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-white/55">
+                Isso apaga sua conta e TODOS os dados associados: stats, runs, fichas, assinatura e historico de compras. Acao imediata e irreversivel.
+              </p>
+              <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-white/40">
+                Digite <span className="font-bold text-red-300">EXCLUIR</span> para confirmar:
+              </p>
+              <input
+                type="text"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+                value={deleteAccountConfirmText}
+                onChange={(e) => {
+                  setDeleteAccountConfirmText(e.target.value);
+                  if (deleteAccountError) setDeleteAccountError(null);
+                }}
+                disabled={deleteAccountBusy}
+                placeholder="EXCLUIR"
+                className="mt-1.5 w-full rounded-xl border border-white/15 bg-black/30 px-3 py-2 text-sm tracking-widest text-white placeholder:text-white/25 focus:border-red-400/60 focus:outline-none"
+              />
+              {deleteAccountError && (
+                <p className="mt-2 text-[11px] text-red-300/90">{deleteAccountError}</p>
+              )}
+              <div className="mt-4 flex flex-col gap-2">
+                <button
+                  type="button"
+                  onClick={handleDeleteAccount}
+                  disabled={deleteAccountBusy || deleteAccountConfirmText.trim().toUpperCase() !== 'EXCLUIR'}
+                  className="w-full rounded-xl bg-red-500/25 py-2.5 text-sm font-semibold text-red-200 transition-colors hover:bg-red-500/35 disabled:opacity-40 disabled:hover:bg-red-500/25"
+                >
+                  {deleteAccountBusy ? 'Excluindo...' : 'Excluir conta agora'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDeleteAccountModalOpen(false);
+                    setDeleteAccountConfirmText('');
+                    setDeleteAccountError(null);
+                  }}
+                  disabled={deleteAccountBusy}
+                  className="w-full rounded-xl bg-white/6 py-2.5 text-sm font-semibold text-white/65 transition-colors hover:bg-white/10 disabled:opacity-40"
+                >
+                  Cancelar
                 </button>
               </div>
             </motion.div>

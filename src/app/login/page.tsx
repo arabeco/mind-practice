@@ -216,6 +216,27 @@ export default function LoginPage() {
             Voltar ao app
           </Link>
         </div>
+
+        {/* Rodapé legal — Google Play / App Store pedem links visíveis */}
+        <div className="mt-4 flex items-center justify-center gap-3 text-[10px] text-white/30">
+          <a
+            href="https://arabeco.github.io/termos-mind-practice.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/60"
+          >
+            Termos
+          </a>
+          <span className="text-white/15">·</span>
+          <a
+            href="https://arabeco.github.io/privacidade-mind-practice.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white/60"
+          >
+            Privacidade
+          </a>
+        </div>
       </motion.div>
     </div>
   );

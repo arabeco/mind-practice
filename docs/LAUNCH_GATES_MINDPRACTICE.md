@@ -101,6 +101,10 @@ SITE_MAE_URL          = https://arabeco.github.io      # paginas legais hospedad
 - [x] Política de Privacidade publicada — https://arabeco.github.io/privacidade-mind-practice.html
 - [x] Termos de Uso publicados — https://arabeco.github.io/termos-mind-practice.html
 - [x] Página/fluxo de **Exclusão de conta** — https://arabeco.github.io/mind-practice/exclusao.html
+- [x] **Links legais no /login** (Termos · Privacidade) — adicionados em letrinhas no rodapé
+- [x] **Botão "Excluir minha conta" in-app** (/perfil) com confirmação "digite EXCLUIR"
+- [x] **RPC `delete_my_account()`** rodada no Supabase (security definer, só `authenticated` executa)
+- [x] **Edge Function `delete-account`** deployada (apaga 12 tabelas public + auth.users + audit log)
 
 **Google Cloud (🔁 1× pra todos):**
 - [x] Projeto Cloud — configurado (user confirmou "no cloud já está")
@@ -119,8 +123,8 @@ SITE_MAE_URL          = https://arabeco.github.io      # paginas legais hospedad
 **Build / Assinatura:**
 - [x] Keystore gerada — `android/mindpractice-release.jks` (alias `mindpractice_release`, RSA 2048). Config via `key.properties` + signingConfig no build.gradle. Fingerprints em `docs/SIGNING_KEYS_STATUS.md`.
 - [x] AAB de release assinada — `app-release.aab` gerado e assinado (Billing 8.0.0, `MINDPRAC.RSA`)
-- [ ] ⚠️ **Backup da .jks + senha fora do PC** (Drive/gerenciador) — FAZER
-- [ ] ⚠️ **Senha `***REDACTED***` está no histórico git LOCAL** — não dar push antes de limpar/trocar
+- [x] **Backup da .jks + senha fora do PC** (gerenciador de senhas) — feito 2026-05-31
+- [x] **Historico git scrubado** com git-filter-repo (senhas removidas de todos os blobs) — 2026-05-31
 
 **Assets de loja (offline):**
 - [ ] Ícone, feature graphic, screenshots, descrição — pendente
@@ -162,12 +166,11 @@ SITE_MAE_URL          = https://arabeco.github.io      # paginas legais hospedad
 - Keystore `mindpractice-release.jks` + AAB assinado (Billing 8.0.0)
 
 ## 🎯 Próximas ações concretas (ordem)
-1. ⚠️ **Backup da keystore** (`mindpractice-release.jks`) + senha fora do PC. SEM ISSO, perda = nunca mais atualiza o app.
-2. ⚠️ **Resolver a senha no histórico git** antes do `git push` (trocar senha da keystore OU limpar histórico).
-3. **Assets de loja:** ícone, feature graphic, screenshots, descrição curta/longa.
-4. **Play Console (Gate 10):** criar app `com.mindpractice.app` → store listing (com os 3 URLs) → Data Safety + Content rating → criar produtos (fichas_100/300/700 + pro_monthly) → subir AAB em Closed testing (liga o relógio dos 14 dias).
-5. **Vincular Service Account no Play Console** (Acesso à API) — senão a função toma 401 do Google.
-6. **Smoke real:** comprar como license tester → conferir `mobile_purchases` no banco.
+1. **Smoke test da exclusão de conta** (amanhã): logar com conta fake → /perfil → "Excluir minha conta" → digitar EXCLUIR → confirmar no SQL Editor que `auth.users` ficou sem a linha e que `account_deletion_web_requests` tem 1 row `status='completed'`.
+2. **Assets de loja:** ícone (512×512), feature graphic (1024×500), 2-8 screenshots, descrição curta (≤80) + longa (≤4000), categoria.
+3. **Play Console (Gate 10):** criar app `com.mindpractice.app` → store listing (com os 3 URLs) → Data Safety + Content rating → criar produtos (fichas_100/300/700 + pro_monthly) → subir AAB em Closed testing (liga o relógio dos 14 dias).
+4. **Vincular Service Account no Play Console** (Acesso à API) — senão a função toma 401 do Google.
+5. **Smoke real de compra:** comprar como license tester → conferir `mobile_purchases` no banco (idempotência ok ao reabrir/restaurar).
 
 ## Mapa de dependências
 ```
