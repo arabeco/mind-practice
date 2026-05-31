@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import HoldButton from '@/components/HoldButton';
-import { STAT_COLORS } from '@/types/game';
 import type { Option, Question } from '@/types/game';
 import { OPTIONS_TIME_LIMIT_MS, type ScenePresentationProfile } from '@/lib/scenePresentation';
-import { getDominantAxisFromEvidence } from '@/lib/runScoring';
+
+// Cor neutra (dourada) pras opcoes — sem dica do eixo dominante.
+const NEUTRAL_HOLD_COLOR = '#d4af37';
 
 /** Deterministic shuffle seeded by question id so order is stable per question */
 function seededShuffle<T>(arr: T[], seed: string): T[] {
@@ -110,8 +111,7 @@ export default function SceneOptionsStage({
 
         <div className={`grid gap-1.5 ${shuffledOptions.length >= 4 ? 'sm:grid-cols-2' : ''}`}>
           {shuffledOptions.map((option, index) => {
-            const dominantAxis = getDominantAxisFromEvidence(option.evidence);
-            const holdColor = dominantAxis ? STAT_COLORS[dominantAxis] : '#94a3b8';
+            const holdColor = NEUTRAL_HOLD_COLOR;
 
             return (
               <motion.div

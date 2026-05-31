@@ -3,9 +3,12 @@
 import { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import HoldButton from '@/components/HoldButton';
-import { INTENSITY_LABELS, STAT_COLORS } from '@/types/game';
+import { INTENSITY_LABELS } from '@/types/game';
 import type { AnswerIntensity, Option, Question } from '@/types/game';
-import { getDominantAxisFromEvidence } from '@/lib/runScoring';
+
+// Cor neutra (dourada) pras opcoes — sem dica do eixo dominante.
+// Evita vies do jogador escolher a cor que ele "quer subir".
+const NEUTRAL_HOLD_COLOR = '#d4af37';
 
 interface QuickSceneProps {
   question: Question;
@@ -171,8 +174,7 @@ export default function QuickScene({
       {/* Options */}
       <div className="flex flex-col gap-2">
         {shuffled.map((option, i) => {
-          const dominantAxis = getDominantAxisFromEvidence(option.evidence);
-          const holdColor = dominantAxis ? STAT_COLORS[dominantAxis] : '#94a3b8';
+          const holdColor = NEUTRAL_HOLD_COLOR;
           const isFocused = picking === i;
           const isHidden = picking !== null && picking !== i;
           const isDimmed = holdingIdx !== null && holdingIdx !== i;
