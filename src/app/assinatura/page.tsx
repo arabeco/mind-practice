@@ -33,6 +33,7 @@ import { IAP_CATALOG, FICHA_SPEND_CATALOG, type TierCode } from '@/constants/bil
 import { STAT_KEYS } from '@/types/game';
 import { AXIS_POLE_SLUGS } from '@/lib/axisPoles';
 import PoleIcon from '@/components/PoleIcon';
+import { PackIcon, TierIcon } from '@/components/StoreIcons';
 
 // Detecta se está em ambiente de desenvolvimento — pra mostrar banner
 // alertando sobre secrets não configurados.
@@ -238,8 +239,10 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
         {!native && (
           <Card variant="glass" padding="md" className="mt-3">
             <p className="text-sm text-text-secondary">
-              Os packs estarão disponíveis quando o app sair na Play Store. Entre na
-              waitlist:
+              Os pacotes de fichas só aparecem no aplicativo Android. Baixe pela Google Play pra comprar e jogar offline.
+            </p>
+            <p className="mt-2 text-xs text-text-tertiary">
+              Sem o app por enquanto? Entre na lista de espera e a gente avisa:
             </p>
             <div className="mt-3">
               <WaitlistForm source="assinatura-fichas" ctaLabel="Avise-me" />
@@ -260,12 +263,10 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Card variant="glass" padding="md" className="flex flex-col h-full">
+                  <Card variant="glass" padding="md" className="flex flex-col h-full items-center text-center">
+                    <PackIcon code={code} size={96} className="mb-2" />
                     <div className="flex-1">
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-text-tertiary">
-                        Pack
-                      </p>
-                      <p className="mt-1 text-2xl font-black text-accent-gold">
+                      <p className="text-2xl font-black text-accent-gold">
                         +{amount}
                       </p>
                       <p className="text-xs text-text-tertiary">fichas</p>
@@ -338,8 +339,13 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
             <div className="absolute -top-2 left-1/2 -translate-x-1/2">
               <Badge variant="gold">Recomendado</Badge>
             </div>
-            <h3 className="text-xl font-bold text-text-primary">Pro</h3>
-            <p className="mt-1 text-xs text-text-tertiary">30 dias de acesso</p>
+            <div className="mb-2 flex items-center gap-3">
+              <TierIcon code="pro" size={56} />
+              <div>
+                <h3 className="text-xl font-bold text-text-primary leading-tight">Pro</h3>
+                <p className="text-xs text-text-tertiary">30 dias de acesso</p>
+              </div>
+            </div>
             <ul className="mt-4 space-y-2 text-sm text-text-secondary">
               <li>• Partidas ilimitadas</li>
               <li>• Todas as temporadas</li>
@@ -383,14 +389,19 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
             padding="lg"
             className="relative flex flex-col border-accent-gold-border"
           >
-            <h3 className="text-xl font-bold text-accent-gold">Founder</h3>
-            <p className="mt-1 text-xs text-text-tertiary">Vitalício — sem expiração</p>
-            <ul className="mt-4 space-y-2 text-sm text-text-secondary">
+            <div className="mb-2 flex items-center gap-3">
+              <TierIcon code="founder" size={56} />
+              <div>
+                <h3 className="text-xl font-bold text-accent-gold leading-tight">Founder</h3>
+                <p className="text-xs text-text-tertiary">Vitalício — sem expiração</p>
+              </div>
+            </div>
+            <ul className="mt-2 space-y-2 text-sm text-text-secondary">
               <li>• Tudo do Pro pra sempre</li>
-              <li>• Badge Founder no perfil</li>
-              <li>• Early access a decks novos</li>
-              <li>• Voto em decks futuros</li>
-              <li>• Apenas via fichas (prestígio)</li>
+              <li>• Selo Founder fixo no seu perfil</li>
+              <li>• Decks novos sempre antes de todo mundo</li>
+              <li>• Voto nos decks que vêm por aí</li>
+              <li>• Só dá pra ter trocando fichas (prestígio)</li>
             </ul>
 
             <div className="mt-6">
