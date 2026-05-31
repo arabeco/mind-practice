@@ -17,9 +17,11 @@ import {
 import HoldButton from '@/components/HoldButton';
 import EndingShareButton from '@/components/EndingShareButton';
 import { useLocalProfile } from '@/hooks/useLocalProfile';
-import { STAT_COLORS, SKIP_COOLDOWN_COST } from '@/types/game';
+import { SKIP_COOLDOWN_COST } from '@/types/game';
 import type { CampaignEnding, CampaignProgress, Option, Question } from '@/types/game';
-import { getDominantAxisFromEvidence } from '@/lib/runScoring';
+
+// Cor neutra dourada nas opcoes — sem dica do eixo dominante (evita vies).
+const NEUTRAL_HOLD_COLOR = '#d4af37';
 
 export default function CampanhaClient({ seasonId }: { seasonId: string }) {
   const router = useRouter();
@@ -747,8 +749,7 @@ function SceneView({
                 {scene.options.map((opt, i) => {
                   const isSelected = selectedIdx === i;
                   const isHidden = selectedIdx != null && !isSelected;
-                  const dom = getDominantAxisFromEvidence(opt.evidence);
-                  const holdColor = dom ? STAT_COLORS[dom] : '#94a3b8';
+                  const holdColor = NEUTRAL_HOLD_COLOR;
                   return (
                     <motion.div
                       key={i}
