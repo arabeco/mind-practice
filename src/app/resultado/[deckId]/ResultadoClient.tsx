@@ -9,6 +9,7 @@ import ShareButton from '@/components/ShareButton';
 import { useGame } from '@/context/GameContext';
 import { getDeckById } from '@/data/decks';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
+import PoleIcon from '@/components/PoleIcon';
 import type { StatKey } from '@/types/game';
 import { playerMean, createPriorProfile } from '@/lib/bayesEngine';
 import {
@@ -329,24 +330,34 @@ export default function ResultadoClient({ deckId }: { deckId: string }) {
                         const value = derivedAxes[key as StatKey];
                         const width = `${(Math.abs(value) / maxAbs) * 100}%`;
                         const color = value >= 0 ? STAT_COLORS[key] : '#ef4444';
+                        const hasSignal = Math.abs(value) > 0.05;
                         return (
-                          <div key={key} className="glass-surface rounded-xl px-3 py-2">
-                            <div className="mb-1 flex items-center justify-between">
-                              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/46">
-                                {STAT_LABELS[key]}
-                              </span>
-                              <span className="text-[10px] font-mono font-bold" style={{ color }}>
-                                {value > 0 ? '+' : ''}{value.toFixed(1)}
-                              </span>
-                            </div>
-                            <div className="h-1.5 overflow-hidden rounded-full bg-white/8">
-                              <motion.div
-                                className="h-full rounded-full"
-                                initial={{ width: 0 }}
-                                animate={{ width }}
-                                transition={{ duration: 0.4, ease: 'easeOut' }}
-                                style={{ backgroundColor: color }}
-                              />
+                          <div key={key} className="glass-surface flex items-center gap-2.5 rounded-xl px-3 py-2">
+                            <PoleIcon
+                              axis={key}
+                              value={value}
+                              size={30}
+                              dimmed={!hasSignal}
+                              noGlow={!hasSignal}
+                            />
+                            <div className="min-w-0 flex-1">
+                              <div className="mb-1 flex items-center justify-between">
+                                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/46">
+                                  {STAT_LABELS[key]}
+                                </span>
+                                <span className="text-[10px] font-mono font-bold" style={{ color }}>
+                                  {value > 0 ? '+' : ''}{value.toFixed(1)}
+                                </span>
+                              </div>
+                              <div className="h-1.5 overflow-hidden rounded-full bg-white/8">
+                                <motion.div
+                                  className="h-full rounded-full"
+                                  initial={{ width: 0 }}
+                                  animate={{ width }}
+                                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                                  style={{ backgroundColor: color }}
+                                />
+                              </div>
                             </div>
                           </div>
                         );

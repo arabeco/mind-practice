@@ -317,6 +317,20 @@ export default function PerfilPage() {
                 </span>
               )}
             </p>
+
+            {/* Top 3 polos dominantes — emblema rapido de quem voce e */}
+            {hasData && (
+              <div className="mt-2 flex items-center justify-center gap-2">
+                {STAT_KEYS
+                  .map(k => ({ key: k, abs: Math.abs(derivedAxes[k]) }))
+                  .sort((a, b) => b.abs - a.abs)
+                  .slice(0, 3)
+                  .filter(d => d.abs > 0.05)
+                  .map(d => (
+                    <PoleIcon key={d.key} axis={d.key} value={derivedAxes[d.key]} size={34} />
+                  ))}
+              </div>
+            )}
           </div>
         </div>
       </motion.section>

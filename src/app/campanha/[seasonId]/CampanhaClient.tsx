@@ -18,10 +18,30 @@ import HoldButton from '@/components/HoldButton';
 import EndingShareButton from '@/components/EndingShareButton';
 import { useLocalProfile } from '@/hooks/useLocalProfile';
 import { SKIP_COOLDOWN_COST } from '@/types/game';
-import type { CampaignEnding, CampaignProgress, Option, Question } from '@/types/game';
+import type { CampaignEnding, CampaignProgress, Option, Question, StatKey } from '@/types/game';
+import PoleIcon from '@/components/PoleIcon';
 
 // Cor neutra dourada nas opcoes — sem dica do eixo dominante (evita vies).
 const NEUTRAL_HOLD_COLOR = '#d4af37';
+
+// Polos que cada final do Livro Amaldicoado representa.
+// Usado pra renderizar emblemas no card do final.
+const ENDING_POLES: Record<string, { axis: StatKey; pole: string }[]> = {
+  selo_quebrado: [
+    { axis: 'vigor', pole: 'agressivo' },
+    { axis: 'presenca', pole: 'dominante' },
+  ],
+  pacto_frio: [
+    { axis: 'filtro', pole: 'calculista' },
+  ],
+  cinzas: [
+    { axis: 'desapego', pole: 'desapegado' },
+  ],
+  reescrita: [
+    { axis: 'presenca', pole: 'dominante' },
+    { axis: 'harmonia', pole: 'paz' },
+  ],
+};
 
 export default function CampanhaClient({ seasonId }: { seasonId: string }) {
   const router = useRouter();
@@ -499,6 +519,14 @@ function EndingReveal({
               transition={{ duration: 0.8 }}
               className="mt-8 rounded-2xl border border-purple-300/25 bg-black/55 p-5 backdrop-blur-xl"
             >
+              {/* Emblemas do caminho que o jogador trilhou */}
+              {ENDING_POLES[ending.id] && (
+                <div className="mb-4 flex items-center justify-center gap-3">
+                  {ENDING_POLES[ending.id].map(({ axis, pole }) => (
+                    <PoleIcon key={pole} axis={axis} pole={pole} size={56} showLabel />
+                  ))}
+                </div>
+              )}
               <p className="text-[13px] leading-relaxed text-white/75">{ending.description}</p>
               {ending.flavor && (
                 <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-accent-gold/70">

@@ -30,6 +30,9 @@ import { canUseNativeStoreBilling, getNativeActivePurchases } from '@/lib/native
 import { purchaseIap } from '@/lib/iapPurchase';
 import { purchaseTierWithFichas } from '@/lib/fichasPurchase';
 import { IAP_CATALOG, FICHA_SPEND_CATALOG, type TierCode } from '@/constants/billingCatalog';
+import { STAT_KEYS } from '@/types/game';
+import { AXIS_POLE_SLUGS } from '@/lib/axisPoles';
+import PoleIcon from '@/components/PoleIcon';
 
 // Detecta se está em ambiente de desenvolvimento — pra mostrar banner
 // alertando sobre secrets não configurados.
@@ -288,6 +291,39 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
       </section>
 
       {/* ============================================================
+          OS 10 POLOS — teaser do que o jogador descobre sobre si
+          ============================================================ */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold">Os 10 polos do seu perfil</h2>
+        <p className="mt-1 text-xs text-text-tertiary">
+          Cinco eixos, dois polos cada. Suas escolhas revelam pra qual lado voce pesa em cada um.
+        </p>
+
+        <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-3 py-4">
+          <div className="grid grid-cols-5 gap-x-2 gap-y-3">
+            {STAT_KEYS.map(k => (
+              <PoleIcon
+                key={`${k}-neg`}
+                axis={k}
+                pole={AXIS_POLE_SLUGS[k][0]}
+                size={42}
+                showLabel
+              />
+            ))}
+            {STAT_KEYS.map(k => (
+              <PoleIcon
+                key={`${k}-pos`}
+                axis={k}
+                pole={AXIS_POLE_SLUGS[k][1]}
+                size={42}
+                showLabel
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
           TIERS — PRO E FOUNDER
           ============================================================ */}
       <section className="mt-10">
@@ -305,10 +341,10 @@ npx supabase secrets set GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app ...`}
             <h3 className="text-xl font-bold text-text-primary">Pro</h3>
             <p className="mt-1 text-xs text-text-tertiary">30 dias de acesso</p>
             <ul className="mt-4 space-y-2 text-sm text-text-secondary">
-              <li>• Runs ilimitadas</li>
-              <li>• Todas as seasons</li>
-              <li>• Share cards premium</li>
-              <li>• Histórico completo</li>
+              <li>• Partidas ilimitadas</li>
+              <li>• Todas as temporadas</li>
+              <li>• Cartões premium pra compartilhar</li>
+              <li>• Histórico completo de evolução</li>
             </ul>
 
             <div className="mt-6 flex flex-col gap-2">
