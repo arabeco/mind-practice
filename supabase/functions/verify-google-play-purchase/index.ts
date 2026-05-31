@@ -84,6 +84,7 @@ const CATALOG: Record<string, CatalogEntry> = {
 // ============================================================
 const DEFAULT_ALLOWED_ORIGINS = [
   SUPABASE_URL,
+  "https://mind-practice-two.vercel.app",
   "https://mindpractice.app",
   "https://www.mindpractice.app",
   "capacitor://localhost",

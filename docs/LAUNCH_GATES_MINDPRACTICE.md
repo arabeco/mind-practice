@@ -111,7 +111,7 @@ SITE_MAE_URL          = https://mindpractice.app       # ❓ confirmar onde fica
 - [x] Edge Function deployada — `verify-google-play-purchase` no ar (deploy 2026-05-30 via CLI; import jose em esm.sh)
 - [x] Secret `GOOGLE_PLAY_PACKAGE_NAME` — setado (30 May 20:19) = com.mindpractice.app
 - [x] Secret `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON` — setado (30 May 20:19)
-- [~] `ALLOWED_ORIGINS` com VERCEL_URL — default inclui mindpractice.app; ❓ confirmar domínio real
+- [x] `ALLOWED_ORIGINS` com VERCEL_URL — https://mind-practice-two.vercel.app adicionado e redeployado (2026-05-30)
 - [x] Provider Google habilitado no Supabase Auth (login Google funciona)
 
 **Build / Assinatura:**
