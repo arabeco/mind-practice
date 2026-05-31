@@ -38,6 +38,8 @@
 /android/key.properties
 /android/*.jks
 /android/*.keystore
+# Arquivo de status com SENHA em texto puro (manter so local na raiz)
+/SIGNING_KEYS_STATUS.md
 
 # production
 /build

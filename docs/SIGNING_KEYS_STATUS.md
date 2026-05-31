@@ -25,6 +25,12 @@ SHA1:   0D:4F:04:9D:CC:15:EF:BE:FF:AC:73:42:50:D0:62:41:BF:46:B4:9F
 SHA256: C4:C6:9F:51:EC:57:14:BF:38:4F:61:09:2D:07:8F:CD:1E:C1:AC:7E:ED:2D:A0:C8:7F:D7:FF:CB:25:29:E4:3E
 ```
 
+**AAB release gerado:** `android/app/build/outputs/bundle/release/app-release.aab`
+SHA256 do AAB: `CCC38CDE7C385183D6E10844B2AF1F431373F0020B0E637A555B9F367B2FD2A7`
+
+> ⚠️ A senha da keystore NÃO fica aqui (este arquivo é versionado). Ela está só em
+> `android/key.properties` (gitignored) + backup no gerenciador de senhas.
+
 ### ⚠️ Backup obrigatório (fora do repo)
 - [ ] `android/mindpractice-release.jks` copiada pra local seguro (Drive/pendrive/gerenciador)
 - [ ] Senha `***REDACTED***` (store + key) anotada no gerenciador de senhas
