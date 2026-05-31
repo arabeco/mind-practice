@@ -14,14 +14,17 @@ APP_NOME              = MindPractice
 PACKAGE_NAME          = com.mindpractice.app          # capacitor.config.ts:16
 SUPABASE_PROJECT_REF  = clkorbtmxzodttxnwldi          # do .env.local
 SUPABASE_URL          = https://clkorbtmxzodttxnwldi.supabase.co
-VERCEL_URL            = https://mindpractice.app       # ❓ confirmar domínio real (visto no ALLOWED_ORIGINS)
+VERCEL_URL            = https://mind-practice-two.vercel.app   # confirmado no Supabase Auth Site URL
 LOGIN_COM_GOOGLE?     = sim                            # AuthContext: signInWithGoogle (OAuth) + email/senha
 PRODUTOS:
   - productId = fichas_100   | basePlanId = (n/a)        | tipo = consumable     (100 fichas)
   - productId = fichas_300   | basePlanId = (n/a)        | tipo = consumable     (350 fichas)
   - productId = fichas_700   | basePlanId = (n/a)        | tipo = consumable     (800 fichas)
   - productId = pro_monthly  | basePlanId = ❓ confirmar  | tipo = subscription   (Pro 30d, R$14,90)
-SITE_MAE_URL          = https://mindpractice.app       # ❓ confirmar onde ficam privacidade/termos/exclusão
+SITE_MAE_URL          = https://arabeco.github.io      # paginas legais hospedadas no GitHub Pages
+  Privacidade  = https://arabeco.github.io/privacidade-mind-practice.html
+  Termos       = https://arabeco.github.io/termos-mind-practice.html
+  Exclusao     = https://arabeco.github.io/mind-practice/exclusao.html
 ```
 
 > Nota de produto: além dos IAP acima, existem 2 "produtos" comprados **só com fichas**
@@ -92,19 +95,18 @@ SITE_MAE_URL          = https://mindpractice.app       # ❓ confirmar onde fica
 ### 🚧 DAQUI É LANÇAMENTO — Play Console só no Gate 10 ↓
 ---
 
-## Gate 9 — Conformidade & Nuvem (pré-loja) — [~] em andamento
+## Gate 9 — Conformidade & Nuvem (pré-loja) — ✅ quase fechado (faltam assets de loja)
 
-**Site-mãe / Conformidade legal:**
-- [ ] Política de Privacidade publicada (URL) — ❓ pendente
-- [ ] Termos de Uso publicados — ❓ pendente
-- [ ] Página/fluxo de **Exclusão de conta** (URL) — ❓ pendente
+**Site-mãe / Conformidade legal:** (GitHub Pages — arabeco.github.io)
+- [x] Política de Privacidade publicada — https://arabeco.github.io/privacidade-mind-practice.html
+- [x] Termos de Uso publicados — https://arabeco.github.io/termos-mind-practice.html
+- [x] Página/fluxo de **Exclusão de conta** — https://arabeco.github.io/mind-practice/exclusao.html
 
 **Google Cloud (🔁 1× pra todos):**
-- [~] Projeto Cloud — existem vários `gen-lang-client-*` (lixo do AI Studio) + `glyph-489315`.
-      ⚠️ **Falta um projeto NOMEADO limpo pro MindPractice.** (ver memória: 1 app = 1 projeto)
-- [ ] **Google Play Android Developer API** habilitada — ❓
-- [ ] **Service Account** + chave JSON gerada — ❓ (é compartilhada entre apps)
-- [x] OAuth Client (LOGIN_COM_GOOGLE = sim) — login Google já funciona, então existe ❓ confirmar redirect
+- [x] Projeto Cloud — configurado (user confirmou "no cloud já está")
+- [x] **Google Play Android Developer API** habilitada (user confirmou)
+- [x] **Service Account** + chave JSON gerada (JSON já está no secret da Supabase)
+- [x] OAuth Client (LOGIN_COM_GOOGLE = sim) — Client ID 857606127673-... + Secret OK; callback `https://clkorbtmxzodttxnwldi.supabase.co/auth/v1/callback` registrado
 
 **Supabase (por app):**
 - [x] SQL rodado — `mobile_purchases` + RPC + `purchase_tier_with_fichas` + drop das policies de client-write (2026-05-30, confirmado: sobrou só `subs_read_own`)
@@ -115,13 +117,15 @@ SITE_MAE_URL          = https://mindpractice.app       # ❓ confirmar onde fica
 - [x] Provider Google habilitado no Supabase Auth (login Google funciona)
 
 **Build / Assinatura:**
-- [ ] Keystore / Play App Signing gerada e guardada — ❓
-- [ ] AAB de release assinada — ❓
+- [x] Keystore gerada — `android/mindpractice-release.jks` (alias `mindpractice_release`, RSA 2048). Config via `key.properties` + signingConfig no build.gradle. Fingerprints em `docs/SIGNING_KEYS_STATUS.md`.
+- [x] AAB de release assinada — `app-release.aab` gerado e assinado (Billing 8.0.0, `MINDPRAC.RSA`)
+- [ ] ⚠️ **Backup da .jks + senha fora do PC** (Drive/gerenciador) — FAZER
+- [ ] ⚠️ **Senha `***REDACTED***` está no histórico git LOCAL** — não dar push antes de limpar/trocar
 
 **Assets de loja (offline):**
-- [ ] Ícone, feature graphic, screenshots, descrição — ❓
+- [ ] Ícone, feature graphic, screenshots, descrição — pendente
 
-- [ ] **GATE:** ainda não — faltam políticas, secrets Google Play, keystore e assets
+- [~] **GATE:** quase — só faltam os assets de loja (e backup da keystore)
 
 ## Gate 10 — Play Console & Produto Vivo — [ ] não iniciado
 **Conta & vínculo (🔁 1× pra todos):**
@@ -151,17 +155,23 @@ SITE_MAE_URL          = https://mindpractice.app       # ❓ confirmar onde fica
 
 ---
 
+## ✅ Já concluído (Gates 1–9, exceto assets)
+- Produto + billing em código (Gates 1–8)
+- 3 URLs legais publicados (privacidade/termos/exclusão no arabeco.github.io)
+- Google Cloud + Service Account + OAuth + secrets + Edge Function deployada + SQL
+- Keystore `mindpractice-release.jks` + AAB assinado (Billing 8.0.0)
+
 ## 🎯 Próximas ações concretas (ordem)
-1. **Publicar Privacidade + Termos + Exclusão de conta** (3 URLs) — bloqueia Play.
-2. **Google Cloud:** criar projeto nomeado `mindpractice`, habilitar Android Publisher API, gerar Service Account + JSON (essa JSON é reusada nos 5 apps).
-3. **Supabase secrets:** setar `GOOGLE_PLAY_PACKAGE_NAME=com.mindpractice.app` + `GOOGLE_PLAY_SERVICE_ACCOUNT_JSON`, depois trocar `SECRETS_NOT_CONFIGURED_NOTE` → `false` em `src/app/assinatura/page.tsx:36`.
-4. **Confirmar deploy** da Edge Function.
-5. **Keystore** + AAB assinada → subir em Closed testing (liga o relógio dos 14 dias).
-6. Resto do Gate 10 (loja, produtos, smoke real).
+1. ⚠️ **Backup da keystore** (`mindpractice-release.jks`) + senha fora do PC. SEM ISSO, perda = nunca mais atualiza o app.
+2. ⚠️ **Resolver a senha no histórico git** antes do `git push` (trocar senha da keystore OU limpar histórico).
+3. **Assets de loja:** ícone, feature graphic, screenshots, descrição curta/longa.
+4. **Play Console (Gate 10):** criar app `com.mindpractice.app` → store listing (com os 3 URLs) → Data Safety + Content rating → criar produtos (fichas_100/300/700 + pro_monthly) → subir AAB em Closed testing (liga o relógio dos 14 dias).
+5. **Vincular Service Account no Play Console** (Acesso à API) — senão a função toma 401 do Google.
+6. **Smoke real:** comprar como license tester → conferir `mobile_purchases` no banco.
 
 ## Mapa de dependências
 ```
 Gates 1–8 : ✅ feito (produto + billing em código)
-Gate 9    : 🔧 em andamento — falta políticas, Google Cloud SA, secrets, keystore, assets
-Gate 10   : ⬜ não iniciado — Play Console + 20/14d + produção
+Gate 9    : ✅ quase — falta só assets de loja + backup keystore
+Gate 10   : ⬜ Play Console (app, produtos, AAB→Closed, 20/14d) + vincular SA + smoke real
 ```
