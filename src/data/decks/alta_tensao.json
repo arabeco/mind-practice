@@ -1,7 +1,7 @@
 {
   "deckId": "alta_tensao",
   "name": "Alta Tensao",
-  "description": "Situacoes de pressao emocional intensa. Prepare-se para decisoes dificeis.",
+  "description": "Cenas de pressao emocional intensa. Decisoes dificeis, sem ensaio.",
   "tema": "Pressao Emocional",
   "category": "cenario",
   "tier": 2,
@@ -13,7 +13,7 @@
     {
       "id": "at1",
       "type": "NORMAL",
-      "sceneHook": "Numero desconhecido. Tom urgente",
+      "sceneHook": "Ligacao do nada, voz de banco",
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",
@@ -24,11 +24,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Ligacao de numero desconhecido. Tom urgente, diz ser do banco."
+          "texto": "20h21, voce no sofa, jantar terminando. Numero desconhecido vibra. Voz feminina, tom urgente, diz ser do seu banco."
         },
         {
           "tipo": "evento",
-          "texto": "Diz que sua conta foi invadida. Exige seus dados agora."
+          "texto": "Ela afirma que sua conta foi invadida agora ha pouco. Exige seu CPF, senha e codigo do app pra confirmar. Voce..."
         }
       ],
       "options": [
@@ -38,18 +38,9 @@
           "tone": "provocativo",
           "feedback": "Reagiu com raiva. Eficaz, mas a adrenalina ficou.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -58,18 +49,9 @@
           "tone": "pragmatico",
           "feedback": "Frio e preciso. Nenhuma info vazou.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -78,18 +60,9 @@
           "tone": "neutro",
           "feedback": "Compostura mantida, procedimento correto.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -98,18 +71,9 @@
           "tone": "provocativo",
           "feedback": "Jogou o jogo dele. Divertido, mas arriscado.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -117,7 +81,7 @@
     {
       "id": "at2",
       "type": "NORMAL",
-      "sceneHook": "Entrevista dos sonhos. Sala intimidadora",
+      "sceneHook": "Entrevista dos sonhos, sala intimidadora",
       "metadata": {
         "tensao": 5,
         "ambiente": "Profissional",
@@ -128,11 +92,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Entrevista pro emprego dos sonhos. Semanas de preparo. Sala intimidadora."
+          "texto": "Sala envidracada, mesa preta, tres pessoas do outro lado. Voce ensaiou tres semanas. Cafe servido, ar gelado."
         },
         {
           "tipo": "evento",
-          "texto": "Entrevistador diz: 'Olhando seu curriculo, não sei o que faz aqui.'"
+          "texto": "O do meio te encara sobre o oculo: 'Olhando seu curriculo, sinceramente, nao sei o que voce ta fazendo aqui.' Voce..."
         }
       ],
       "options": [
@@ -140,20 +104,11 @@
           "text": "'Sei que posso entregar. Me da 5 minutos.'",
           "subtext": "Autoafirmacao",
           "tone": "pragmatico",
-          "feedback": "Não deixou a provocacao te diminuir.",
+          "feedback": "Nao deixou a provocacao te diminuir.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -162,18 +117,9 @@
           "tone": "pragmatico",
           "feedback": "Absorveu o golpe sem piscar. Controle total.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -182,38 +128,20 @@
           "tone": "neutro",
           "feedback": "Transformou ceticismo em chance de narrativa.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Levanto e saio: 'Não provo nada pra quem já decidiu.'",
+          "text": "Levanto e saio: 'Nao provo nada pra quem ja decidiu.'",
           "subtext": "Orgulho",
           "tone": "provocativo",
           "feedback": "Cabeca erguida, mas perdeu a chance.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -221,7 +149,7 @@
     {
       "id": "at5",
       "type": "NORMAL",
-      "sceneHook": "De noite, mexendo no celular",
+      "sceneHook": "Noite, descobrindo algo no celular",
       "metadata": {
         "tensao": 5,
         "ambiente": "Privado",
@@ -233,11 +161,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "De noite no quarto, mexendo no celular. Algo te faz checar uma conversa."
+          "texto": "23h, abajur ligado, parceiro(a) dormindo do lado. Voce sem sono, pega o celular. Notificacao antiga, link estranho."
         },
         {
           "tipo": "evento",
-          "texto": "Mensagens provam que alguem proximo traiu sua confianca."
+          "texto": "Voce le. Le de novo. Mensagens claras provam que essa pessoa que dorme ao lado traiu sua confianca. Voce..."
         }
       ],
       "options": [
@@ -247,18 +175,9 @@
           "tone": "provocativo",
           "feedback": "A bomba estourou. Consequencias imprevisiveis.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -267,58 +186,31 @@
           "tone": "pragmatico",
           "feedback": "Engoliu o veneno e guardou a carta.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Espero até amanha e puxo conversa com calma.",
+          "text": "Espero ate amanha e puxo conversa com calma.",
           "subtext": "Maturidade",
           "tone": "neutro",
           "feedback": "Deu tempo pro emocional acalmar.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Decido que acabou. Não preciso de explicacao.",
+          "text": "Decido que acabou. Nao preciso de explicacao.",
           "subtext": "Corte radical",
           "tone": "pragmatico",
           "feedback": "Cortou limpo. Sem drama, sem escuta.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -326,7 +218,7 @@
     {
       "id": "at7",
       "type": "NORMAL",
-      "sceneHook": "Encontro indo bem. Clima otimo",
+      "sceneHook": "Date indo bem, fim da noite",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -337,92 +229,56 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Encontro indo bem. Conversa fluindo, clima otimo entre voces."
+          "texto": "Bar pequeno, mesa pra dois, vela acesa. Conversa fluindo ja faz duas horas, clima leve, voces dois rindo facil."
         },
         {
           "tipo": "evento",
-          "texto": "A pessoa faz piada desrespeitosa sobre seu corpo, rindo como se nada."
+          "texto": "Do nada essa pessoa solta uma piada desrespeitosa sobre seu corpo. Ri sozinha esperando voce rir junto. Voce..."
         }
       ],
       "options": [
         {
-          "text": "'Isso não tem graca.' Peco a conta na hora.",
+          "text": "'Isso nao tem graca.' Peco a conta na hora.",
           "subtext": "Limite duro",
           "tone": "pragmatico",
           "feedback": "Cortou na hora. Respeito proprio acima de tudo.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "'Esse tipo de piada não rola comigo.' Mudo de assunto.",
+          "text": "'Esse tipo de piada nao rola comigo.' Mudo de assunto.",
           "subtext": "Firmeza calibrada",
           "tone": "neutro",
           "feedback": "Limite marcado sem destruir o momento.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Finjo que não ouvi e planejo minha saida discreta.",
+          "text": "Finjo que nao ouvi e planejo minha saida discreta.",
           "subtext": "Saida silenciosa",
           "tone": "evasivo",
-          "feedback": "Não deu palco, mas engoliu o desconforto.",
+          "feedback": "Nao deu palco, mas engoliu o desconforto.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Rio junto pra disfarcar, mas por dentro doi.",
-          "subtext": "Máscara",
+          "subtext": "Mascara",
           "tone": "evasivo",
           "feedback": "Protegeu o clima, traiu a si mesmo.",
           "evidence": {
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -430,7 +286,7 @@
     {
       "id": "at10",
       "type": "NORMAL",
-      "sceneHook": "Sexta, fim do expediente. Porta fechada",
+      "sceneHook": "Sexta, fim do expediente, porta fechada",
       "metadata": {
         "tensao": 5,
         "ambiente": "Profissional",
@@ -441,11 +297,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Sexta, fim do expediente. Chefe te chama na sala e fecha a porta."
+          "texto": "17h35 de sexta. Chefe te chama na sala dele, fecha a porta, senta. Cara serio. Voce nem teve tempo de tirar o casaco."
         },
         {
           "tipo": "evento",
-          "texto": "'A empresa reestruturou. Seu cargo foi eliminado. Hoje e seu ultimo dia.'"
+          "texto": "Olho no olho: 'A empresa reestruturou. Seu cargo foi eliminado. Hoje e seu ultimo dia.' Voce..."
         }
       ],
       "options": [
@@ -455,18 +311,9 @@
           "tone": "provocativo",
           "feedback": "Raiva justa, mas a ponte pode queimar.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -475,18 +322,9 @@
           "tone": "pragmatico",
           "feedback": "Processou o golpe sem demonstrar. Controle maximo.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -495,18 +333,9 @@
           "tone": "neutro",
           "feedback": "Transformou o fim em negociacao.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -515,18 +344,9 @@
           "tone": "pragmatico",
           "feedback": "Saida limpa. Nenhuma palavra desperdicada.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

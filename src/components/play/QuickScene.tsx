@@ -45,16 +45,29 @@ export default function QuickScene({
     [question.id, question.options],
   );
 
+  // Renderização em camadas (imersão cinematográfica):
+  //   ambiente → ator → contexto → evento (heading)
+  // Backward compat: decks antigos só com `evento` ainda funcionam — campos
+  // opcionais ficam null e não renderizam.
+  const sceneAmbiente = useMemo(
+    () => question.slides.find(s => s.tipo === 'ambiente')?.texto ?? null,
+    [question.slides],
+  );
+  const sceneAtor = useMemo(
+    () => question.slides.find(s => s.tipo === 'ator')?.texto ?? null,
+    [question.slides],
+  );
+  const sceneContexto = useMemo(
+    () => question.slides.find(s => s.tipo === 'contexto')?.texto ?? null,
+    [question.slides],
+  );
   const prompt = useMemo(() => {
     const event = question.slides.find(s => s.tipo === 'evento')?.texto;
-    const context = question.slides.find(s => s.tipo === 'contexto')?.texto;
-    return event ?? context ?? question.slides[0]?.texto ?? '';
-  }, [question.slides]);
-  const scenario = useMemo(() => {
-    const event = question.slides.find(s => s.tipo === 'evento')?.texto;
-    const context = question.slides.find(s => s.tipo === 'contexto')?.texto;
-    return event && context ? context : null;
-  }, [question.slides]);
+    return event ?? sceneContexto ?? question.slides[0]?.texto ?? '';
+  }, [question.slides, sceneContexto]);
+  // Se só tem evento (sem ambiente/ator/contexto), prompt é o único texto —
+  // evita duplicar como "scenario" acima.
+  const hasLayers = Boolean(sceneAmbiente || sceneAtor || sceneContexto);
 
   const startedAt = useMemo(() => Date.now(), [question.id]);
 
@@ -103,27 +116,53 @@ export default function QuickScene({
           initial={{ opacity: 0 }}
           animate={{ opacity: picking !== null ? 0.3 : 1 }}
           transition={{ delay: 0.1, duration: 0.4 }}
-          className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-accent-gold/75"
+          className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-accent-gold/75"
         >
           {question.sceneHook}
         </motion.p>
       )}
 
-      {scenario && (
+      {/* AMBIENTE — onde + quando + corpo (sensorial, italic) */}
+      {sceneAmbiente && (
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: picking !== null ? 0.3 : 1 }}
-          transition={{ delay: 0.18, duration: 0.4 }}
-          className="mb-3 text-[12px] leading-relaxed text-white/55"
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: picking !== null ? 0.3 : 1, y: 0 }}
+          transition={{ delay: 0.14, duration: 0.4 }}
+          className="mb-2 text-[12.5px] italic leading-relaxed text-white/55"
         >
-          {scenario}
+          {sceneAmbiente}
         </motion.p>
       )}
 
+      {/* ATOR — quem é o outro */}
+      {sceneAtor && (
+        <motion.p
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: picking !== null ? 0.3 : 1, y: 0 }}
+          transition={{ delay: 0.18, duration: 0.4 }}
+          className="mb-2 text-[13px] leading-relaxed text-white/68"
+        >
+          {sceneAtor}
+        </motion.p>
+      )}
+
+      {/* CONTEXTO — legado dos decks antigos (extra setup acima do evento) */}
+      {sceneContexto && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: picking !== null ? 0.3 : 1 }}
+          transition={{ delay: 0.22, duration: 0.4 }}
+          className="mb-3 text-[12.5px] leading-relaxed text-white/60"
+        >
+          {sceneContexto}
+        </motion.p>
+      )}
+
+      {/* EVENTO — ação que dispara o dilema (heading) */}
       <motion.h2
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: picking !== null ? 0.5 : 1, y: 0 }}
-        transition={{ delay: 0.25, duration: 0.45 }}
+        transition={{ delay: hasLayers ? 0.28 : 0.18, duration: 0.45 }}
         className="mb-6 text-[19px] font-semibold leading-snug text-white/95"
       >
         {prompt}

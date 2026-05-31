@@ -1,7 +1,7 @@
 {
   "deckId": "mascara",
-  "name": "A Máscara",
-  "description": "O mundo digital testa quem você finge ser e quem realmente e.",
+  "name": "A Mascara",
+  "description": "O mundo digital testa quem voce finge ser e quem realmente e.",
   "tema": "Redes Sociais",
   "category": "calibragem",
   "tier": 1,
@@ -14,7 +14,7 @@
     {
       "id": "q1",
       "type": "NORMAL",
-      "sceneHook": "Foto saiu otima. Você ta bem",
+      "sceneHook": "Foto boa, dedo no botao",
       "metadata": {
         "tensao": 2,
         "ambiente": "Digital",
@@ -24,8 +24,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Sabado de manha, cafe na mao, luz boa entrando pela janela. Voce de bom humor, semana atras."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Tirou uma foto agora ha pouco. Ficou otima — angulo bom, voce esta bem, fundo limpo."
+        },
+        {
           "tipo": "evento",
-          "texto": "Você pensa em postar. Hesita. O que faz?"
+          "texto": "Editor do stories aberto. Dedo no botao 'Publicar'. Voce hesita por dois segundos. Voce..."
         }
       ],
       "options": [
@@ -33,48 +41,30 @@
           "text": "Posto. Se to bem, mostro.",
           "subtext": "Sem cerimonia",
           "tone": "pragmatico",
-          "feedback": "Você não esconde o bom.",
+          "feedback": "Voce nao esconde o bom.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Guardo pra mim. Nem todo momento e pra tela.",
           "subtext": "Reserva",
           "tone": "neutro",
-          "feedback": "Você vive sem precisar exibir.",
+          "feedback": "Voce vive sem precisar exibir.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Mando privado pra tres pessoas.",
           "subtext": "So os proximos",
           "tone": "neutro",
-          "feedback": "Você escolhe quem ve o que.",
+          "feedback": "Voce escolhe quem ve o que.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -82,7 +72,7 @@
     {
       "id": "q2",
       "type": "NORMAL",
-      "sceneHook": "Briga publica no Twitter/X",
+      "sceneHook": "Briga publica no timeline",
       "metadata": {
         "tensao": 3,
         "ambiente": "Digital",
@@ -92,8 +82,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Onibus indo pro trabalho, voce no celular, scroll automatico. Manha fria, cara fechada."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Discussao pegando fogo entre duas figuras conhecidas que voce segue. Comentarios subindo em tempo real."
+        },
+        {
           "tipo": "evento",
-          "texto": "Tem uma discussao ardendo e você tem uma opiniao."
+          "texto": "Voce tem uma opiniao forte sobre o tema. Sabe exatamente o que diria. Caixa de comentario te chamando. Voce..."
         }
       ],
       "options": [
@@ -101,48 +99,30 @@
           "text": "Entro e solto meu ponto.",
           "subtext": "Voz propria",
           "tone": "pragmatico",
-          "feedback": "Você não comenta so no sofa.",
+          "feedback": "Voce nao comenta so no sofa.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Leio e passo. Meu minuto vale mais.",
-          "subtext": "Não alimenta",
+          "subtext": "Nao alimenta",
           "tone": "evasivo",
-          "feedback": "Você não vai pra cada briga.",
+          "feedback": "Voce nao vai pra cada briga.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Curto quem já disse o que eu pensava.",
+          "text": "Curto quem ja disse o que eu pensava.",
           "subtext": "Apoio silencioso",
           "tone": "neutro",
-          "feedback": "Você marca presenca sem expor rosto.",
+          "feedback": "Voce marca presenca sem expor rosto.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -150,7 +130,7 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Amigo(a) comeca a dar hits",
+      "sceneHook": "Amigo bombou na rede",
       "metadata": {
         "tensao": 2,
         "ambiente": "Digital",
@@ -160,8 +140,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Voce em casa, jantar terminando, abre o feed por habito. Tela acende com varias notificacoes."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Amigo proximo viralizou. Post com 50 mil visualizacoes em poucas horas, comentarios bombando."
+        },
+        {
           "tipo": "evento",
-          "texto": "Alguem proximo explode nas redes. Muita gente junto."
+          "texto": "Voce esta genuinamente feliz. Os mil amigos em comum ja comentaram emoji de fogo. Sua vez. Voce..."
         }
       ],
       "options": [
@@ -169,48 +157,30 @@
           "text": "Comento e compartilho. Feliz por ele(a).",
           "subtext": "Bota o rosto",
           "tone": "protetor",
-          "feedback": "Você celebra junto, sem receio.",
+          "feedback": "Voce celebra junto, sem receio.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Mando privado. Publico não mostra sinceridade.",
+          "text": "Mando privado. Publico nao mostra sinceridade.",
           "subtext": "Reserva genuina",
           "tone": "neutro",
-          "feedback": "Você se emociona sem vitrine.",
+          "feedback": "Voce se emociona sem vitrine.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Dou like e sigo o dia.",
           "subtext": "Minimo social",
           "tone": "neutro",
-          "feedback": "Você marca presenca sem esforco.",
+          "feedback": "Voce marca presenca sem esforco.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -218,7 +188,7 @@
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Comentario azedo na sua foto",
+      "sceneHook": "Comentario ironico no seu post",
       "metadata": {
         "tensao": 3,
         "ambiente": "Digital",
@@ -228,8 +198,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Voce no almoco, comendo na frente do computador. Aba do feed aberta de fundo."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Perfil estranho, sem foto, sete seguidores. Comentou no seu post de duas horas atras."
+        },
+        {
           "tipo": "evento",
-          "texto": "Um perfil estranho deixa um comentario ironico no seu post."
+          "texto": "Comentario ironico, com aquela cara de 'so to brincando' mas claramente provocativo. Voce..."
         }
       ],
       "options": [
@@ -237,48 +215,30 @@
           "text": "Respondo na hora, ironico tambem.",
           "subtext": "Devolve",
           "tone": "provocativo",
-          "feedback": "Você não engole provocacao publica.",
+          "feedback": "Voce nao engole provocacao publica.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Apago o comentario e sigo.",
           "subtext": "Limpa o espaco",
           "tone": "pragmatico",
-          "feedback": "Você cuida do seu espaco sem plateia.",
+          "feedback": "Voce cuida do seu espaco sem plateia.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Nem ligo. Ignoro mesmo.",
-          "subtext": "Não alimenta",
+          "subtext": "Nao alimenta",
           "tone": "evasivo",
-          "feedback": "Você escolhe não dar atencao.",
+          "feedback": "Voce escolhe nao dar atencao.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -286,7 +246,7 @@
     {
       "id": "q5",
       "type": "NORMAL",
-      "sceneHook": "Conhecido postou algo patetico",
+      "sceneHook": "Stories meio constrangedor",
       "metadata": {
         "tensao": 2,
         "ambiente": "Digital",
@@ -296,8 +256,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Voce no sofa, fim de tarde de domingo, scrolling lento sem destino. Cafe morno na mao."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Um conhecido do trabalho — daqueles que voce cumprimenta no corredor — postou um stories."
+        },
+        {
           "tipo": "evento",
-          "texto": "O feed mostrou algo cringe de alguem que você conhece."
+          "texto": "Texto longo, tom dramatico, foto sua tentando fazer pose de modelo. Da vontade de mostrar pra alguem. Voce..."
         }
       ],
       "options": [
@@ -305,48 +273,30 @@
           "text": "Mostro no grupo e zuo um pouco.",
           "subtext": "Comenta com amigos",
           "tone": "provocativo",
-          "feedback": "Você tem opiniao — e compartilha.",
+          "feedback": "Voce tem opiniao — e compartilha.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Nem noto. Cada um posta o que quer.",
-          "subtext": "Não julga",
+          "subtext": "Nao julga",
           "tone": "evasivo",
-          "feedback": "Você não gasta tempo com o que não e seu.",
+          "feedback": "Voce nao gasta tempo com o que nao e seu.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Acho tosco mas não falo. Guardo pra mim.",
+          "text": "Acho tosco mas nao falo. Guardo pra mim.",
           "subtext": "Filtra por dentro",
           "tone": "neutro",
-          "feedback": "Você forma juizo sem precisar expressar.",
+          "feedback": "Voce forma juizo sem precisar expressar.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -354,7 +304,7 @@
     {
       "id": "q6",
       "type": "NORMAL",
-      "sceneHook": "Você pensou numa resposta incrivel",
+      "sceneHook": "Aquela tweet matadora",
       "metadata": {
         "tensao": 2,
         "ambiente": "Digital",
@@ -364,8 +314,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "No banho, voce pensa numa frase. Sai do banho secando o cabelo, ja com o celular na mao."
+        },
+        {
+          "tipo": "ator",
+          "texto": "A frase em si — voce sabe que e boa. Daquelas que iam render likes, talvez ate um print."
+        },
+        {
           "tipo": "evento",
-          "texto": "Aquela frase matadora. Posta ou não?"
+          "texto": "Editor aberto. Frase digitada. Cursor piscando. Dois segundos pra decidir. Voce..."
         }
       ],
       "options": [
@@ -373,48 +331,30 @@
           "text": "Posto. E bom demais pra guardar.",
           "subtext": "Pra ser visto",
           "tone": "provocativo",
-          "feedback": "Você honra a frase, não a plateia.",
+          "feedback": "Voce honra a frase, nao a plateia.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Guardo. Sei que e boa, so pra mim basta.",
           "subtext": "Auto-suficiente",
           "tone": "neutro",
-          "feedback": "Você não precisa da validacao.",
+          "feedback": "Voce nao precisa da validacao.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Mando pra um amigo que ia rir.",
           "subtext": "Audiencia certa",
           "tone": "neutro",
-          "feedback": "Você mede antes de publicar.",
+          "feedback": "Voce mede antes de publicar.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -422,7 +362,7 @@
     {
       "id": "q7",
       "type": "NORMAL",
-      "sceneHook": "Pegou o celular so pra ver a hora",
+      "sceneHook": "So pra ver as horas",
       "metadata": {
         "tensao": 1,
         "ambiente": "Privado",
@@ -432,8 +372,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Voce na cama, sabado de manha, ainda sem levantar. Cabeca ainda mole, agua escorrendo no banheiro."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Voce mesmo. Pegou o celular pra ver a hora — uma a primeira vez. Depois outra. Depois outra."
+        },
+        {
           "tipo": "evento",
-          "texto": "Trinta minutos depois ainda ta rolando o feed."
+          "texto": "Trinta e dois minutos depois voce ainda ta rolando o feed sem prestar atencao. Voce..."
         }
       ],
       "options": [
@@ -441,48 +389,30 @@
           "text": "Largo o celular. Perdi tempo.",
           "subtext": "Corta o vicio",
           "tone": "pragmatico",
-          "feedback": "Você se pega e reage.",
+          "feedback": "Voce se pega e reage.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Deixo rolar. Relaxar tambem e isso.",
           "subtext": "Sem culpa",
           "tone": "evasivo",
-          "feedback": "Você não faz tempestade em meia hora.",
+          "feedback": "Voce nao faz tempestade em meia hora.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Ja era, mas anoto pra prestar atencao.",
           "subtext": "Observa o padrao",
           "tone": "neutro",
-          "feedback": "Você reconhece sem punir.",
+          "feedback": "Voce reconhece sem punir.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

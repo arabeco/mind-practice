@@ -1,7 +1,7 @@
 {
   "deckId": "teste",
   "name": "O Teste",
-  "description": "Situacoes de pressao que mostram como você lida com stress.",
+  "description": "Situacoes de pressao que mostram como voce lida com stress.",
   "tema": "Pressao",
   "category": "calibragem",
   "tier": 1,
@@ -14,7 +14,7 @@
     {
       "id": "q1",
       "type": "NORMAL",
-      "sceneHook": "Prazo apertado. Colega te passa erro",
+      "sceneHook": "Uma hora antes da entrega",
       "metadata": {
         "tensao": 4,
         "ambiente": "Profissional",
@@ -24,57 +24,47 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Quinta-feira, 16h, fones nos ouvidos, voce ja na reta final. Cafe vazio, prazo no horizonte."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Colega de time, voz preocupada, apoia no canto da sua mesa. Cara abatida, sabe que da merda."
+        },
+        {
           "tipo": "evento",
-          "texto": "Uma hora antes da entrega, um erro grave cai no seu colo."
+          "texto": "Diz que descobriu um erro grave no que voces entregam em uma hora. Ninguem mais sabe ainda. Voce..."
         }
       ],
       "options": [
         {
           "text": "Asumo o controle e conserto.",
-          "subtext": "Você resolve",
+          "subtext": "Voce resolve",
           "tone": "pragmatico",
-          "feedback": "Você vira o barco antes de afundar.",
+          "feedback": "Voce vira o barco antes de afundar.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Aceito e respondo no automatico.",
           "subtext": "Engole e faz",
           "tone": "evasivo",
-          "feedback": "Você entrega — mas acumula por dentro.",
+          "feedback": "Voce entrega — mas acumula por dentro.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Chamo o time. Isso e coisa nossa.",
           "subtext": "Distribui",
           "tone": "neutro",
-          "feedback": "Você divide o peso na pressao.",
+          "feedback": "Voce divide o peso na pressao.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -82,7 +72,7 @@
     {
       "id": "q2",
       "type": "NORMAL",
-      "sceneHook": "Chefe te cobra publicamente",
+      "sceneHook": "Bronca publica do chefe",
       "metadata": {
         "tensao": 4,
         "ambiente": "Profissional",
@@ -92,8 +82,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Sala de reuniao, 10h da manha. Oito pessoas em volta da mesa, telao ligado mostrando metricas vermelhas."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu chefe, voz subindo, dedo apontando uma metrica especifica. Time todo olhando pra voce."
+        },
+        {
           "tipo": "evento",
-          "texto": "Numa reuniao, o chefe desanca você na frente do time."
+          "texto": "Ele te culpa diretamente, com nome, na frente de todos. Voce sabe que parte e injusta. Voce..."
         }
       ],
       "options": [
@@ -101,48 +99,30 @@
           "text": "Respondo firme, la mesmo.",
           "subtext": "Defende o seu",
           "tone": "pragmatico",
-          "feedback": "Você não abaixa a cabeca na plateia.",
+          "feedback": "Voce nao abaixa a cabeca na plateia.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Aceito calado. Falo em privado depois.",
-          "subtext": "Não vira cena",
+          "subtext": "Nao vira cena",
           "tone": "evasivo",
-          "feedback": "Você separa cena de resolucao.",
+          "feedback": "Voce separa cena de resolucao.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Redireciono: 'Podemos falar disso depois?'",
           "subtext": "Pausa tecnica",
           "tone": "neutro",
-          "feedback": "Você compra tempo sem ceder.",
+          "feedback": "Voce compra tempo sem ceder.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -150,7 +130,7 @@
     {
       "id": "q3",
       "type": "NORMAL",
-      "sceneHook": "Você tem que apresentar pra 50 pessoas",
+      "sceneHook": "Cinco minutos pro palco",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -160,8 +140,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Bastidor de evento. Cinquenta pessoas la fora, microfones testando, slides na sua mao tremendo um pouco."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Voce mesmo. Coracao acelerado, mao gelada, voz ja meio rouca, ja ensaiou cem vezes."
+        },
+        {
           "tipo": "evento",
-          "texto": "Cinco minutos antes de subir, você trava."
+          "texto": "Cinco minutos. Voce nao consegue lembrar nem o primeiro slide. Branco completo. Voce..."
         }
       ],
       "options": [
@@ -169,48 +157,30 @@
           "text": "Subo mesmo assim. Medo passa depois.",
           "subtext": "Encara",
           "tone": "pragmatico",
-          "feedback": "Você não espera o medo sair.",
+          "feedback": "Voce nao espera o medo sair.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Peco 5 minutos pra recompor.",
           "subtext": "Nomeia o bloqueio",
           "tone": "neutro",
-          "feedback": "Você cuida do seu estado antes de entregar.",
+          "feedback": "Voce cuida do seu estado antes de entregar.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Respiro, esqueco todo mundo, so leio.",
           "subtext": "Modo automatico",
           "tone": "evasivo",
-          "feedback": "Você entrega no minimo, sem travar.",
+          "feedback": "Voce entrega no minimo, sem travar.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -218,7 +188,7 @@
     {
       "id": "q4",
       "type": "NORMAL",
-      "sceneHook": "Você e o unico contra",
+      "sceneHook": "Unico voto contra",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -228,8 +198,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Sala de reuniao, fim de tarde, cafe ja frio. Seis colegas em volta, projeto na tela, decisao no ar."
+        },
+        {
+          "tipo": "ator",
+          "texto": "O time inteiro empolgado com a direcao escolhida — bater de frente vai parecer pe-no-freio."
+        },
+        {
           "tipo": "evento",
-          "texto": "Reuniao fechada em consenso. Você tem problema serio com a decisao."
+          "texto": "Voce ve um problema serio que ninguem viu. Lider pergunta: 'Todos de acordo?'. Voce..."
         }
       ],
       "options": [
@@ -237,48 +215,30 @@
           "text": "Levanto e coloco minha discordancia.",
           "subtext": "Voz contraria",
           "tone": "pragmatico",
-          "feedback": "Você não deixa isso passar.",
+          "feedback": "Voce nao deixa isso passar.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Deixo passar. Era voto vencido mesmo.",
           "subtext": "Aceita derrota",
           "tone": "evasivo",
-          "feedback": "Você escolhe onde plantar bandeira.",
+          "feedback": "Voce escolhe onde plantar bandeira.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Mando email depois com a pergunta chave.",
           "subtext": "Semeia duvida depois",
           "tone": "neutro",
-          "feedback": "Você faz o questionamento sem plateia.",
+          "feedback": "Voce faz o questionamento sem plateia.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -286,7 +246,7 @@
     {
       "id": "q5",
       "type": "NORMAL",
-      "sceneHook": "Você errou feio. O erro veio a publico",
+      "sceneHook": "Seu erro caiu na reuniao",
       "metadata": {
         "tensao": 4,
         "ambiente": "Profissional",
@@ -296,8 +256,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Reuniao geral as 9h da segunda. Time todo, lider de area, projetor mostrando o relatorio da semana."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Colega proximo, sem querer, comenta um numero que vazou. Vira a tela, todos olhando."
+        },
+        {
           "tipo": "evento",
-          "texto": "O erro que você fez foi exposto na frente do time."
+          "texto": "O erro foi seu. Voce sabe. Todo mundo agora tambem sabe. Voce sente o silencio. Voce..."
         }
       ],
       "options": [
@@ -305,48 +273,30 @@
           "text": "Assumo: 'Foi meu. Ja to resolvendo.'",
           "subtext": "Cara e coragem",
           "tone": "pragmatico",
-          "feedback": "Você paga a conta na hora.",
+          "feedback": "Voce paga a conta na hora.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Minimizo. 'Não e grande coisa.'",
+          "text": "Minimizo. 'Nao e grande coisa.'",
           "subtext": "Defende imagem",
           "tone": "evasivo",
-          "feedback": "Você protege o rosto antes da verdade.",
+          "feedback": "Voce protege o rosto antes da verdade.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Explico o contexto sem fugir da culpa.",
           "subtext": "Contextualiza",
           "tone": "neutro",
-          "feedback": "Você assume — mas enquadra.",
+          "feedback": "Voce assume — mas enquadra.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -354,7 +304,7 @@
     {
       "id": "q6",
       "type": "NORMAL",
-      "sceneHook": "Você acabou a semana no limite",
+      "sceneHook": "Sexta esgotado, lista enorme",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -364,8 +314,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Sexta, 21h, voce em casa, laptop aberto, ja na quarta xicara de cafe do dia. Olho seco, sentar nao adianta."
+        },
+        {
+          "tipo": "ator",
+          "texto": "A lista — quinze itens, oito marcados, sete brancos. Email piscando, slack vermelho, prazos amontoados."
+        },
+        {
           "tipo": "evento",
-          "texto": "Sexta a noite. Você ta esgotado(a). E ainda tem um monte por fazer."
+          "texto": "Voce nao rende mais nada. Mas a semana terminou e tem coisa importante pra entregar. Voce..."
         }
       ],
       "options": [
@@ -373,48 +331,30 @@
           "text": "Paro tudo. Domingo resolvo.",
           "subtext": "Corta o dia",
           "tone": "pragmatico",
-          "feedback": "Você sabe que nada sai bem cansado.",
+          "feedback": "Voce sabe que nada sai bem cansado.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Forco mais uma hora. Ja tava em ritmo.",
           "subtext": "Insiste",
           "tone": "pragmatico",
-          "feedback": "Você aposta na inercia — as vezes cedo demais.",
+          "feedback": "Voce aposta na inercia — as vezes cedo demais.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Faco o minimo urgente e desligo.",
           "subtext": "Triagem curta",
           "tone": "neutro",
-          "feedback": "Você separa fogo de fumaca.",
+          "feedback": "Voce separa fogo de fumaca.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -422,7 +362,7 @@
     {
       "id": "q7",
       "type": "NORMAL",
-      "sceneHook": "Situacao desconhecida, decisao rapida",
+      "sceneHook": "Alguem caiu na calcada",
       "metadata": {
         "tensao": 3,
         "ambiente": "Publico",
@@ -432,8 +372,16 @@
       },
       "slides": [
         {
+          "tipo": "ambiente",
+          "texto": "Domingo de tarde, calcada de uma rua movimentada. Voce voltando do mercado, sacolas pesando."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Uns dez metros a frente, uma senhora idosa cambaleia. Sozinha, sem ninguem com ela."
+        },
+        {
           "tipo": "evento",
-          "texto": "Alguem passa mal na sua frente na rua. Decisão: 10 segundos."
+          "texto": "Ela cai sentada no chao, claramente passando mal. Cinco pessoas em volta hesitam. Voce..."
         }
       ],
       "options": [
@@ -441,48 +389,30 @@
           "text": "Chego junto. Pergunto o que fazer.",
           "subtext": "Entra em cena",
           "tone": "protetor",
-          "feedback": "Você aparece quando precisa.",
+          "feedback": "Voce aparece quando precisa.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Ligo 192 e observo de perto.",
+          "text": "Ligo pra emergencia e observo de perto.",
           "subtext": "Aciona quem sabe",
           "tone": "neutro",
-          "feedback": "Você aciona o sistema que resolve.",
+          "feedback": "Voce aciona o sistema que resolve.",
           "evidence": {
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Paro, confiro se alguem já ta junto.",
+          "text": "Paro, confiro se alguem ja ta junto.",
           "subtext": "Observa",
           "tone": "evasivo",
-          "feedback": "Você não atropela quem já ta ajudando.",
+          "feedback": "Voce nao atropela quem ja ta ajudando.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

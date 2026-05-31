@@ -13,7 +13,7 @@
     {
       "id": "s2",
       "type": "NORMAL",
-      "sceneHook": "Algo ta errado com o novo namoro do amigo",
+      "sceneHook": "Amigo no relacionamento errado",
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",
@@ -25,11 +25,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Seu melhor amigo comecou a namorar alguem novo. Algo parece errado."
+          "texto": "Cafe da manha de domingo, voce e seu melhor amigo, sentados na varanda dele. Faz tres meses que ele namora alguem novo."
         },
         {
           "tipo": "evento",
-          "texto": "O parceiro dele manipula, isola e controla. Seu amigo não enxerga."
+          "texto": "Voce ja viu padrao: controla onde ele vai, isola dos amigos antigos, te tira dos planos. Ele nao percebe. Voce..."
         }
       ],
       "options": [
@@ -37,20 +37,11 @@
           "text": "Sento e digo na cara: 'Essa pessoa ta te destruindo.'",
           "subtext": "Verdade crua",
           "tone": "pragmatico",
-          "feedback": "A verdade doeu. Ele pode se afastar, mas você falou.",
+          "feedback": "A verdade doeu. Ele pode se afastar, mas voce falou.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -59,18 +50,9 @@
           "tone": "evasivo",
           "feedback": "Se protegeu. Seu amigo perdeu uma voz de alerta.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -79,18 +61,9 @@
           "tone": "protetor",
           "feedback": "Plantou sementes sem forcar. Mudanca vem de dentro.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -99,18 +72,9 @@
           "tone": "neutro",
           "feedback": "Montou o caso com paciencia. Dificil de ignorar.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -118,7 +82,7 @@
     {
       "id": "s3",
       "type": "NORMAL",
-      "sceneHook": "Você virou meme. Post inocente",
+      "sceneHook": "Post comum virou meme",
       "metadata": {
         "tensao": 4,
         "ambiente": "Digital",
@@ -129,11 +93,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Você postou uma foto normal nas redes. So seu dia a dia."
+          "texto": "Segunda 9h da manha, voce abre o celular pra ver notificacoes da noite. Centenas. Mil curtidas no post de ontem."
         },
         {
           "tipo": "evento",
-          "texto": "Conta anonima faz comentario cruel. O post viralizou como meme."
+          "texto": "Conta anonima fez comentario cruel com print do seu post. Viralizou. Reposts em massa, voce virou meme. Voce..."
         }
       ],
       "options": [
@@ -143,38 +107,20 @@
           "tone": "provocativo",
           "feedback": "Entrou na guerra digital. Heroi ou mais meme.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Deleto o post, bloqueio a conta e sigo minha vida.",
           "subtext": "Reset",
           "tone": "evasivo",
-          "feedback": "Cortou o oxigenio do fogo. Não alimentou nada.",
+          "feedback": "Cortou o oxigenio do fogo. Nao alimentou nada.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -183,38 +129,20 @@
           "tone": "neutro",
           "feedback": "Virou o ataque em conteudo. O anonimo perdeu poder.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Ignoro em publico, mas investigo quem e o fake.",
           "subtext": "Investigacao fria",
           "tone": "pragmatico",
-          "feedback": "Não reagiu no calor, mas não largou. Estrategico.",
+          "feedback": "Nao reagiu no calor, mas nao largou. Estrategico.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -222,7 +150,7 @@
     {
       "id": "s5",
       "type": "NORMAL",
-      "sceneHook": "Festa animada. Você flagra algo",
+      "sceneHook": "Festa, voce viu o que nao devia",
       "metadata": {
         "tensao": 5,
         "ambiente": "Publico",
@@ -234,11 +162,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Festa animada. Você encontra um amigo que confia muito em você."
+          "texto": "Aniversario de amiga em comum, casa lotada, musica alta. Voce indo no banheiro, atravessa o corredor escuro."
         },
         {
           "tipo": "evento",
-          "texto": "Você flagra o parceiro dele ficando com outra num canto escondido."
+          "texto": "Num canto, voce ve o parceiro do seu melhor amigo beijando outra pessoa. Eles nao te viram. Seu amigo nao sabe. Voce..."
         }
       ],
       "options": [
@@ -246,40 +174,22 @@
           "text": "Vou direto no amigo e conto tudo ali mesmo.",
           "subtext": "Verdade imediata",
           "tone": "provocativo",
-          "feedback": "Bomba na festa. Caos total, mas não segurou.",
+          "feedback": "Bomba na festa. Caos total, mas nao segurou.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Finjo que não vi. Não e meu relacionamento.",
-          "subtext": "Não interferencia",
+          "text": "Finjo que nao vi. Nao e meu relacionamento.",
+          "subtext": "Nao interferencia",
           "tone": "evasivo",
           "feedback": "Se protegeu. O peso de saber vai ficar.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -288,18 +198,9 @@
           "tone": "protetor",
           "feedback": "Escolheu o momento certo. Verdade com respeito.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -308,18 +209,9 @@
           "tone": "pragmatico",
           "feedback": "Forcou a mao do traidor. Pode resolver ou explodir.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -327,7 +219,7 @@
     {
       "id": "s9",
       "type": "NORMAL",
-      "sceneHook": "Formatura do amigo. Você no publico",
+      "sceneHook": "Formatura, discurso constrangedor",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -339,11 +231,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Formatura de um amigo proximo. Você ta orgulhoso e feliz por ele."
+          "texto": "Auditorio cheio, voce sentado na plateia, terno apertado, ramo de flores na mao. Amigo proximo subindo pra discursar."
         },
         {
           "tipo": "evento",
-          "texto": "No discurso, contam uma historia constrangedora sua que era segredo. Todos riem."
+          "texto": "No meio da fala, ele conta uma historia constrangedora sua — algo que era segredo entre voces. Plateia ri alto. Voce..."
         }
       ],
       "options": [
@@ -353,38 +245,20 @@
           "tone": "provocativo",
           "feedback": "Sua saida foi notada. O constrangimento mudou de alvo.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Rio junto como se não me afetasse. Processo depois.",
-          "subtext": "Máscara social",
+          "text": "Rio junto como se nao me afetasse. Processo depois.",
+          "subtext": "Mascara social",
           "tone": "evasivo",
           "feedback": "Absorveu o golpe em publico. Ninguem viu a ferida.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -393,38 +267,20 @@
           "tone": "neutro",
           "feedback": "Virou o jogo. A piada agora e sua.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Fico quieto, depois puxo quem contou: 'Não era pra sair.'",
+          "text": "Fico quieto, depois puxo quem contou: 'Nao era pra sair.'",
           "subtext": "Confronto privado",
           "tone": "pragmatico",
           "feedback": "Segurou na hora certa. Cobrou no lugar certo.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -432,7 +288,7 @@
     {
       "id": "s10",
       "type": "NORMAL",
-      "sceneHook": "Descoberta grave sobre o melhor amigo",
+      "sceneHook": "Provas contra seu melhor amigo",
       "metadata": {
         "tensao": 5,
         "ambiente": "Privado",
@@ -444,11 +300,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Você descobre algo grave sobre quem considerava seu melhor amigo."
+          "texto": "Voce na cama, 1h da manha, celular na mao. Mensagens encaminhadas por um conhecido — print apos print, contexto pesado."
         },
         {
           "tipo": "evento",
-          "texto": "Provas de que ele te sabotou, falou mal e fingiu lealdade."
+          "texto": "Provas de que seu melhor amigo te sabotou no trampo, falou mal por meses e fingiu lealdade na sua cara. Voce..."
         }
       ],
       "options": [
@@ -458,38 +314,20 @@
           "tone": "provocativo",
           "feedback": "A mascara caiu. Doloroso, mas libertador.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Sumo sem explicacao. Ele não merece nem o confronto.",
+          "text": "Sumo sem explicacao. Ele nao merece nem o confronto.",
           "subtext": "Desaparecimento",
           "tone": "evasivo",
           "feedback": "O silencio e a pior resposta pra quem quer atencao.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -498,18 +336,9 @@
           "tone": "protetor",
           "feedback": "Saiu pela porta dos fundos. Sem guerra, sem cena.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -518,18 +347,9 @@
           "tone": "pragmatico",
           "feedback": "Deu chance de defesa. Justo, mas arriscado.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

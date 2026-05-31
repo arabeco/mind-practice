@@ -1,7 +1,7 @@
 {
   "deckId": "livro_amaldicoado",
   "name": "O Livro Amaldicoado",
-  "description": "Temporada 0. Um manuscrito antigo antecipa conflitos e cobra um preco por cada resposta. Uma cena por dia, sete dias de caminho, até um dos quatro finais possiveis.",
+  "description": "Temporada 0. Um manuscrito antigo antecipa conflitos e cobra um preco por cada resposta. Uma cena por dia, sete dias de caminho, ate um dos quatro finais possiveis.",
   "tema": "Temporada 0 — Campanha narrativa ramificada",
   "category": "campanha",
   "tier": 6,
@@ -14,29 +14,29 @@
     {
       "id": "selo_quebrado",
       "title": "O Selo Quebrado",
-      "tagline": "Você rasgou o pacto. O livro ficou em silencio.",
-      "description": "Escolhas frontais, sem negociacao. O livro deixou de sussurrar porque não tinha mais nada a te oferecer.",
+      "tagline": "Voce rasgou o pacto. O livro ficou em silencio.",
+      "description": "Escolhas frontais, sem negociacao. O livro deixou de sussurrar porque nao tinha mais nada a te oferecer.",
       "flavor": "Caminho do Vigor / Presenca"
     },
     {
       "id": "pacto_frio",
       "title": "O Pacto Frio",
-      "tagline": "Você entrou no jogo sem entregar a alma.",
-      "description": "Manipulou o manuscrito com a mesma frieza com que ele te manipulava. O pacto ficou, mas você ficou no comando.",
+      "tagline": "Voce entrou no jogo sem entregar a alma.",
+      "description": "Manipulou o manuscrito com a mesma frieza com que ele te manipulava. O pacto ficou, mas voce ficou no comando.",
       "flavor": "Caminho do Filtro"
     },
     {
       "id": "cinzas",
       "title": "Cinzas",
-      "tagline": "Você não quis o livro nem a historia que ele oferecia.",
+      "tagline": "Voce nao quis o livro nem a historia que ele oferecia.",
       "description": "Escolheu apagar tudo antes que o manuscrito te definisse. Saiu limpo — e talvez vazio.",
       "flavor": "Caminho do Desapego"
     },
     {
       "id": "reescrita",
       "title": "A Reescrita",
-      "tagline": "Você entrou na historia antes de virar objeto dela.",
-      "description": "Nem confronto, nem fuga. Negociou os termos e saiu com uma versao nova de si. O livro virou sua testemunha, não seu dono.",
+      "tagline": "Voce entrou na historia antes de virar objeto dela.",
+      "description": "Nem confronto, nem fuga. Negociou os termos e saiu com uma versao nova de si. O livro virou sua testemunha, nao seu dono.",
       "flavor": "Caminho da Presenca / Harmonia"
     }
   ],
@@ -44,7 +44,7 @@
     {
       "id": "la1",
       "type": "NORMAL",
-      "sceneHook": "Dia 1 — O sebo vazio",
+      "sceneHook": "Dia 1 — Sebo silencioso, livro sem capa",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -55,78 +55,51 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Num sebo vazio, você acha um livro sem titulo. A pagina descreve a conversa que tera em breve."
+          "texto": "Sabado tarde, sebo no fim da rua. Voce abre um livro sem titulo. A pagina descreve, em detalhes, a conversa que ainda vai ter."
         },
         {
           "tipo": "evento",
-          "texto": "O livro previu: seu amigo vai expor sua historia pra ganhar atencao. Ele já pega o celular."
+          "texto": "O livro acertou: seu amigo ja pegou o celular pra contar sua historia em publico e ganhar plateia. Voce..."
         }
       ],
       "options": [
         {
-          "text": "Tomo o celular: 'Não usa meu nome pra tua plateia.'",
+          "text": "Tomo o celular: 'Nao usa meu nome pra tua plateia.'",
           "subtext": "Vigor/Ruptura",
           "tone": "provocativo",
           "feedback": "Quebrou o feitico na forca. O clima morreu ali.",
-          "aftermath": "A mao dele ainda no ar onde o celular estava. Você saiu antes do silencio engrossar — a amizade virou passado numa frase. O livro pesa diferente na bolsa agora, e a proxima pagina já ta aberta. Você evita olhar.",
+          "aftermath": "A mao dele ainda no ar onde o celular estava. Voce saiu antes do silencio engrossar — a amizade virou passado numa frase. O livro pesa diferente na bolsa agora, e a proxima pagina ja ta aberta. Voce evita olhar.",
           "nextSceneId": "la3",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Seguro o celular com calma: 'Isso não e teu pra contar.'",
+          "text": "Seguro o celular com calma: 'Isso nao e teu pra contar.'",
           "subtext": "Vigor/Limite firme",
           "tone": "protetor",
           "feedback": "Acao firme sem explosao. Ele parou, mas ficou ressentido.",
-          "aftermath": "Ele pousou o celular na mesa e não te olhou mais. A amizade ficou funcional, esvaziada — uma sala depois da festa. A noite, o livro abriu sozinho numa pagina nova. Você fechou antes de ler — mas já viu que a letra não era a sua.",
+          "aftermath": "Ele pousou o celular na mesa e nao te olhou mais. A amizade ficou funcional, esvaziada — uma sala depois da festa. A noite, o livro abriu sozinho numa pagina nova. Voce fechou antes de ler — mas ja viu que a letra nao era a sua.",
           "nextSceneId": "la3",
           "evidence": {
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Deixo postar. Não vou entrar no show do livro.",
-          "subtext": "Desapego/Não alimenta",
+          "text": "Deixo postar. Nao vou entrar no show do livro.",
+          "subtext": "Desapego/Nao alimenta",
           "tone": "evasivo",
           "feedback": "Recusou o palco, mas entregou a narrativa ao outro.",
-          "aftermath": "O post subiu. Você sentiu o ar mudar mas não olhou o celular uma vez sequer. Agora a versao que circula sobre você não e sua — e o livro, calado na bolsa, parece estar esperando alguem te encontrar por causa dela.",
+          "aftermath": "O post subiu. Voce sentiu o ar mudar mas nao olhou o celular uma vez sequer. Agora a versao que circula sobre voce nao e sua — e o livro, calado na bolsa, parece estar esperando alguem te encontrar por causa dela.",
           "nextSceneId": "la5",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -134,21 +107,12 @@
           "subtext": "Presenca/Reescrita",
           "tone": "neutro",
           "feedback": "Entrou na historia antes de virar objeto dela.",
-          "aftermath": "Ele riu sem entender, e depois parou de rir. A historia virou uma coisa que voces dois carregam agora — não mais so dele. O livro, no bolso, ficou estranhamente leve. Você sabe que isso não dura.",
+          "aftermath": "Ele riu sem entender, e depois parou de rir. A historia virou uma coisa que voces dois carregam agora — nao mais so dele. O livro, no bolso, ficou estranhamente leve. Voce sabe que isso nao dura.",
           "nextSceneId": "la3",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -156,21 +120,12 @@
           "subtext": "Filtro/Contrajogo",
           "tone": "pragmatico",
           "feedback": "Jogou por cima sem confronto. Estrategia fria e eficaz.",
-          "aftermath": "Seu comentario pegou. A historia dele virou outra sem ninguem perceber que você mexeu o leme. Você saiu ileso — mas algo em você gostou demais do sabor. O livro registrou. Quem le, tambem.",
+          "aftermath": "Seu comentario pegou. A historia dele virou outra sem ninguem perceber que voce mexeu o leme. Voce saiu ileso — mas algo em voce gostou demais do sabor. O livro registrou. Quem le, tambem.",
           "nextSceneId": "la5",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -189,100 +144,64 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "No trabalho, o livro previu a reuniao de hoje. O texto mostra seu chefe jogando um erro em você."
+          "texto": "Sala de reuniao, 10h da manha. O livro descreveu na noite passada: seu chefe vai te culpar publicamente por um erro que nao foi seu."
         },
         {
           "tipo": "evento",
-          "texto": "Na frente de todos, ele diz: 'Aconteceu porque você não antecipou.' Silencio total."
+          "texto": "Diante de oito colegas, ele aponta o numero vermelho e diz: 'Aconteceu porque voce nao antecipou.' Silencio total. Voce..."
         }
       ],
       "options": [
         {
-          "text": "Corto: 'Não. Eu antecipei e tenho registro.'",
+          "text": "Corto: 'Nao. Eu antecipei e tenho registro.'",
           "subtext": "Vigor/Defesa frontal",
           "tone": "pragmatico",
           "feedback": "Rasgou a narrativa dele em publico. Sem volta.",
-          "aftermath": "O chefe congelou. Alguem tossiu pra disfarcar. A reuniao continuou mas você não falou mais nada — e nem precisou. Saiu cansado, e na bolsa o livro pesa como se já soubesse o proximo endereco antes de você.",
+          "aftermath": "O chefe congelou. Alguem tossiu pra disfarcar. A reuniao continuou mas voce nao falou mais nada — e nem precisou. Saiu cansado, e na bolsa o livro pesa como se ja soubesse o proximo endereco antes de voce.",
           "nextSceneId": "la5",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Jogo de volta: 'Quem assinou a decisao foi você.'",
+          "text": "Jogo de volta: 'Quem assinou a decisao foi voce.'",
           "subtext": "Vigor/Contra-ataque",
           "tone": "provocativo",
           "feedback": "Virou o jogo, mas declarou guerra aberta.",
-          "aftermath": "A sala parou de respirar. Ele perdeu a plateia, você perdeu o chefe — e ganhou um inimigo permanente no lugar. Na volta pra casa o vagao ta vazio demais pra essa hora. Você sente que não ta sozinho, e não quer olhar pra confirmar.",
+          "aftermath": "A sala parou de respirar. Ele perdeu a plateia, voce perdeu o chefe — e ganhou um inimigo permanente no lugar. Na volta pra casa o vagao ta vazio demais pra essa hora. Voce sente que nao ta sozinho, e nao quer olhar pra confirmar.",
           "nextSceneId": "la5",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Anoto tudo e deixo a resposta pra depois, por escrito.",
           "subtext": "Filtro/Xadrez",
           "tone": "pragmatico",
-          "feedback": "Não comprou a guerra na hora. Silencio calculado.",
-          "aftermath": "A reuniao acabou sem climax. Você saiu sem reagir — todo mundo ficou em duvida sobre o que você realmente pensou. Em casa, o livro ta mais pesado do que deveria. A resposta vai ser cobrada, so não sabe quando nem por quem.",
+          "feedback": "Nao comprou a guerra na hora. Silencio calculado.",
+          "aftermath": "A reuniao acabou sem climax. Voce saiu sem reagir — todo mundo ficou em duvida sobre o que voce realmente pensou. Em casa, o livro ta mais pesado do que deveria. A resposta vai ser cobrada, so nao sabe quando nem por quem.",
           "nextSceneId": "la8",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Calmo: 'Posso contextualizar pra sala não sair confusa.'",
+          "text": "Calmo: 'Posso contextualizar pra sala nao sair confusa.'",
           "subtext": "Presenca/Reposicionamento",
           "tone": "neutro",
           "feedback": "Corrigiu a historia sem incendiar a sala.",
-          "aftermath": "A sala respirou. O chefe assentiu sem te olhar de novo, e você saiu inteiro. A noite, porem, o livro abre numa pagina que você não reconhece. A letra e sua. O que ta escrito, não.",
+          "aftermath": "A sala respirou. O chefe assentiu sem te olhar de novo, e voce saiu inteiro. A noite, porem, o livro abre numa pagina que voce nao reconhece. A letra e sua. O que ta escrito, nao.",
           "nextSceneId": "la8",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -290,7 +209,7 @@
     {
       "id": "la5",
       "type": "NORMAL",
-      "sceneHook": "Dia 3 — O estranho no metro",
+      "sceneHook": "Dia 3 — Estranho no metro",
       "metadata": {
         "tensao": 3,
         "ambiente": "Publico",
@@ -301,11 +220,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "No metro, um desconhecido nota o livro na sua bolsa e senta do seu lado de proposito."
+          "texto": "Vagao do metro, 19h, lotado. Voce com o livro entreaberto no colo. Um desconhecido sem traco notavel senta exatamente do seu lado."
         },
         {
           "tipo": "evento",
-          "texto": "Ele sussurra: 'Pago qualquer valor. Se não vender, alguem toma de você.'"
+          "texto": "Ele se inclina, voz baixa, olhos no livro: 'Pago qualquer valor agora. Se nao vender, alguem toma de voce em breve.' Voce..."
         }
       ],
       "options": [
@@ -314,21 +233,12 @@
           "subtext": "Vigor/Defesa de posse",
           "tone": "provocativo",
           "feedback": "Marcou territorio na forca. Ele recuou, mas te marcou.",
-          "aftermath": "Ele desceu na proxima estacao sem olhar pra tras, mas tirou uma foto do vagao antes de sair. Você viu — e soube que o teu caminho virou endereco publico. O livro ficou quieto por dias depois disso. Quieto demais.",
+          "aftermath": "Ele desceu na proxima estacao sem olhar pra tras, mas tirou uma foto do vagao antes de sair. Voce viu — e soube que o teu caminho virou endereco publico. O livro ficou quieto por dias depois disso. Quieto demais.",
           "nextSceneId": "la7",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -336,21 +246,12 @@
           "subtext": "Filtro/Saida limpa",
           "tone": "pragmatico",
           "feedback": "Saiu inteiro. Sobrevivencia tambem e maestria.",
-          "aftermath": "Você sumiu dele antes da porta fechar. Por um dia inteiro o livro parece ter perdido o fio — calado, morno, como se tivesse errado o alvo. Em casa, de madrugada, uma pagina aparece sozinha. A letra e sua. A acusacao tambem.",
+          "aftermath": "Voce sumiu dele antes da porta fechar. Por um dia inteiro o livro parece ter perdido o fio — calado, morno, como se tivesse errado o alvo. Em casa, de madrugada, uma pagina aparece sozinha. A letra e sua. A acusacao tambem.",
           "nextSceneId": "la8",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -358,43 +259,25 @@
           "subtext": "Presenca/Aviso",
           "tone": "neutro",
           "feedback": "Ficou ali, inteiro. Bastou pra quebrar o apetite dele.",
-          "aftermath": "Ele desceu sem insistir, mas pegou algo do bolso antes — não um celular, uma foto impressa. Você não conseguiu ver de quem era. O livro vai deixar claro em breve: a cena dele não acabou quando ele saiu do vagao.",
+          "aftermath": "Ele desceu sem insistir, mas pegou algo do bolso antes — nao um celular, uma foto impressa. Voce nao conseguiu ver de quem era. O livro vai deixar claro em breve: a cena dele nao acabou quando ele saiu do vagao.",
           "nextSceneId": "la7",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Ignoro e continuo lendo como se ele não existisse.",
+          "text": "Ignoro e continuo lendo como se ele nao existisse.",
           "subtext": "Desapego/Apagamento",
           "tone": "evasivo",
-          "feedback": "Virou invisivel. Ele ficou confuso, mas não desistiu.",
-          "aftermath": "Ele ficou sentado do teu lado por mais tres estacoes, depois sumiu sem dizer nada. Você nunca vai saber se ele era real ou um teste do livro. Em casa, outra pagina apareceu sozinha — e essa, infelizmente, e inconfundivelmente sua.",
+          "feedback": "Virou invisivel. Ele ficou confuso, mas nao desistiu.",
+          "aftermath": "Ele ficou sentado do teu lado por mais tres estacoes, depois sumiu sem dizer nada. Voce nunca vai saber se ele era real ou um teste do livro. Em casa, outra pagina apareceu sozinha — e essa, infelizmente, e inconfundivelmente sua.",
           "nextSceneId": "la8",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -402,7 +285,7 @@
     {
       "id": "la7",
       "type": "NORMAL",
-      "sceneHook": "Dia 4 — A copia na rua",
+      "sceneHook": "Dia 4 — A foto na esquina",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -413,56 +296,38 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Uma pagina do livro amanhece em você mesmo, com uma foto atual sua numa esquina que você conhece."
+          "texto": "Pagina do livro amanheceu com uma foto sua tirada hoje cedo, em uma esquina que voce sabe exatamente onde fica."
         },
         {
           "tipo": "evento",
-          "texto": "Você passa no local. Um desconhecido tira uma foto sua sem disfarcar e sorri pra camera."
+          "texto": "Voce passa no local. Um desconhecido te ve, levanta o celular, sorri pra camera e tira a foto sem nenhum disfarce. Voce..."
         }
       ],
       "options": [
         {
-          "text": "Vou até ele e exijo apagar ali na frente.",
+          "text": "Vou ate ele e exijo apagar ali na frente.",
           "subtext": "Vigor/Confronto direto",
           "tone": "provocativo",
           "feedback": "Imps a lei com o corpo. Saiu dali marcado, mas dono da cena.",
-          "aftermath": "Ele apagou a foto na sua frente, mas você viu o backup subir pra nuvem antes do dedo chegar no botao. Saiu da rua marcado, e sabendo disso. Em casa, o livro pede outro tipo de coragem — dessa vez contra alguem que você ama.",
+          "aftermath": "Ele apagou a foto na sua frente, mas voce viu o backup subir pra nuvem antes do dedo chegar no botao. Saiu da rua marcado, e sabendo disso. Em casa, o livro pede outro tipo de coragem — dessa vez contra alguem que voce ama.",
           "nextSceneId": "la8",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Finjo não ver e sigo andando num ritmo firme.",
+          "text": "Finjo nao ver e sigo andando num ritmo firme.",
           "subtext": "Desapego/Despriorizar",
           "tone": "evasivo",
-          "feedback": "Negou a interacao. O livro não conseguiu escrever a cena.",
-          "aftermath": "Você não sabe se ele conseguiu a foto. E pior — se era pra isso mesmo. O livro ficou em silencio o resto do dia, como se a cena tivesse fugido dele. Mas a noite voltou. Dessa vez escrevendo na sua letra.",
+          "feedback": "Negou a interacao. O livro nao conseguiu escrever a cena.",
+          "aftermath": "Voce nao sabe se ele conseguiu a foto. E pior — se era pra isso mesmo. O livro ficou em silencio o resto do dia, como se a cena tivesse fugido dele. Mas a noite voltou. Dessa vez escrevendo na sua letra.",
           "nextSceneId": "la8",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -470,21 +335,12 @@
           "subtext": "Filtro/Inverte o jogo",
           "tone": "pragmatico",
           "feedback": "Converteu ameaca em prova. Frio e eficaz.",
-          "aftermath": "Ele desviou o olhar, fingiu mexer no celular, foi embora rapido demais. Você tem agora o rosto dele guardado — prova de alguma coisa que ainda não sabe o que e. Em casa, o livro virou sozinho pra uma ameaca mais intima, e infinitamente pior.",
+          "aftermath": "Ele desviou o olhar, fingiu mexer no celular, foi embora rapido demais. Voce tem agora o rosto dele guardado — prova de alguma coisa que ainda nao sabe o que e. Em casa, o livro virou sozinho pra uma ameaca mais intima, e infinitamente pior.",
           "nextSceneId": "la8",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -492,7 +348,7 @@
     {
       "id": "la8",
       "type": "NORMAL",
-      "sceneHook": "Dia 5 — A carta acusatoria",
+      "sceneHook": "Dia 5 — Carta na sua letra",
       "metadata": {
         "tensao": 3,
         "ambiente": "Privado",
@@ -503,11 +359,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Uma pagina traz uma carta na sua letra acusando alguem proximo de ter sabotado sua vida."
+          "texto": "Quarto, fim de tarde. O livro abriu sozinho. Uma carta na sua letra acusa, com detalhes, alguem proximo de ter sabotado sua vida."
         },
         {
           "tipo": "evento",
-          "texto": "A pessoa chega pra te ver sem saber o que você acabou de ler."
+          "texto": "Campainha. A pessoa nomeada na carta esta na porta, sorrindo, sem ideia do que voce acabou de ler. Voce..."
         }
       ],
       "options": [
@@ -516,43 +372,25 @@
           "subtext": "Vigor/Interrogatorio",
           "tone": "provocativo",
           "feedback": "Forcou a verdade a se defender. Quarto ficou pequeno.",
-          "aftermath": "Ela chorou, negou, confessou coisas que você não queria ouvir. No fim, os dois sairam daquele comodo menores do que entraram. Sem consolo possivel. Dias depois, um bilhete novo aparece no livro. Um endereco. Um horario. Uma instrucao.",
+          "aftermath": "Ela chorou, negou, confessou coisas que voce nao queria ouvir. No fim, os dois sairam daquele comodo menores do que entraram. Sem consolo possivel. Dias depois, um bilhete novo aparece no livro. Um endereco. Um horario. Uma instrucao.",
           "nextSceneId": "la9",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Guardo a carta e observo cada gesto antes de agir.",
           "subtext": "Filtro/Observacao fria",
           "tone": "pragmatico",
-          "feedback": "Não entregou o jogo. O livro não soube se venceu.",
-          "aftermath": "Você deixou a conversa fluir. Ela não soube de nada, e você tambem não sabe se ela e culpada. O livro ficou morno, sem resposta pra te dar — e isso te incomoda mais do que qualquer acusacao. Na proxima pagina, uma isca nova. Mais cara que a anterior.",
+          "feedback": "Nao entregou o jogo. O livro nao soube se venceu.",
+          "aftermath": "Voce deixou a conversa fluir. Ela nao soube de nada, e voce tambem nao sabe se ela e culpada. O livro ficou morno, sem resposta pra te dar — e isso te incomoda mais do que qualquer acusacao. Na proxima pagina, uma isca nova. Mais cara que a anterior.",
           "nextSceneId": "la9",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -560,43 +398,25 @@
           "subtext": "Harmonia/Teste de verdade",
           "tone": "neutro",
           "feedback": "Abriu fresta em vez de explodir. Paciente e inteligente.",
-          "aftermath": "Ela respondeu com naturalidade demais, ou normal demais — impossivel saber qual. A duvida ficou como companhia nova. A relacao continua, mas com sombra atras. O livro percebe, e já ta te chamando pra um lugar onde você vai precisar ir sozinho.",
+          "aftermath": "Ela respondeu com naturalidade demais, ou normal demais — impossivel saber qual. A duvida ficou como companhia nova. A relacao continua, mas com sombra atras. O livro percebe, e ja ta te chamando pra um lugar onde voce vai precisar ir sozinho.",
           "nextSceneId": "la9",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Queimo a carta ali mesmo. O livro não vai vencer.",
+          "text": "Queimo a carta ali mesmo. O livro nao vai vencer.",
           "subtext": "Desapego/Recusa do jogo",
           "tone": "protetor",
           "feedback": "Destruiu a isca. Livre do veneno, sem a resposta.",
-          "aftermath": "O papel virou cinza na pia. Ela nunca soube do que foi acusada. Você tambem nunca vai saber se merecia. Talvez esteja tudo bem assim. Mas o livro não parou — e a proxima isca já ta aberta. Essa e mais dificil de queimar.",
+          "aftermath": "O papel virou cinza na pia. Ela nunca soube do que foi acusada. Voce tambem nunca vai saber se merecia. Talvez esteja tudo bem assim. Mas o livro nao parou — e a proxima isca ja ta aberta. Essa e mais dificil de queimar.",
           "nextSceneId": "la9",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -604,7 +424,7 @@
     {
       "id": "la9",
       "type": "NORMAL",
-      "sceneHook": "Dia 6 — O oferecimento",
+      "sceneHook": "Dia 6 — Endereco a meia-noite",
       "metadata": {
         "tensao": 4,
         "ambiente": "Privado",
@@ -615,11 +435,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Uma bilhete no livro pede pra você ir a um endereco a meia-noite. So você."
+          "texto": "Bilhete dentro do livro: endereco numa rua sem nome, instrucao pra ir sozinho, meia-noite em ponto. Voce ja esta na porta a essa hora."
         },
         {
           "tipo": "evento",
-          "texto": "Uma mulher te espera com um cofre aberto. 'Troca. O livro pelo que você sempre quis.'"
+          "texto": "Uma mulher de cinquenta abre, te leva a uma sala com cofre aberto: 'Troca. O livro pelo que sempre quis.' Voce..."
         }
       ],
       "options": [
@@ -628,43 +448,25 @@
           "subtext": "Vigor/Tomada",
           "tone": "provocativo",
           "feedback": "Rompeu o contrato. Fez inimiga nova e levou o premio.",
-          "aftermath": "Ela não correu atras. So disse o seu nome baixo, como quem anota pra depois. Você voltou rico e marcado — as duas coisas ao mesmo tempo. No dia seguinte, o telefone toca. E alguem da sua vida. Alguem com peso real. Precisa te ver hoje.",
+          "aftermath": "Ela nao correu atras. So disse o seu nome baixo, como quem anota pra depois. Voce voltou rico e marcado — as duas coisas ao mesmo tempo. No dia seguinte, o telefone toca. E alguem da sua vida. Alguem com peso real. Precisa te ver hoje.",
           "nextSceneId": "la10",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
           "text": "Rejeito a troca sem olhar pro cofre. Saio.",
           "subtext": "Presenca/Integridade",
           "tone": "neutro",
-          "feedback": "Não comprou a cena. O livro ficou quieto no caminho de casa.",
-          "aftermath": "Ela te olhou por um segundo longo, fechou o cofre sem pressa, desapareceu no corredor. Você voltou inteiro de um jeito que dinheiro não compraria. Na manha seguinte, alguem que você já conhece pede pra te ver a sos. O livro já deixou a ultima pagina aberta.",
+          "feedback": "Nao comprou a cena. O livro ficou quieto no caminho de casa.",
+          "aftermath": "Ela te olhou por um segundo longo, fechou o cofre sem pressa, desapareceu no corredor. Voce voltou inteiro de um jeito que dinheiro nao compraria. Na manha seguinte, alguem que voce ja conhece pede pra te ver a sos. O livro ja deixou a ultima pagina aberta.",
           "nextSceneId": "la10",
           "evidence": {
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -672,21 +474,12 @@
           "subtext": "Filtro/Ponte fria",
           "tone": "pragmatico",
           "feedback": "Virou o jogo sem bater de frente. Saiu com mais informacao.",
-          "aftermath": "Ela sorriu no meio da conversa, o que te deixou com mais medo do que se tivesse recusado de cara. Você saiu com o livro e com um nome novo — o de quem te procurava desde o primeiro dia. Amanha essa pessoa vai aparecer na sua frente. E não sabe que você sabe.",
+          "aftermath": "Ela sorriu no meio da conversa, o que te deixou com mais medo do que se tivesse recusado de cara. Voce saiu com o livro e com um nome novo — o de quem te procurava desde o primeiro dia. Amanha essa pessoa vai aparecer na sua frente. E nao sabe que voce sabe.",
           "nextSceneId": "la10",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -694,21 +487,12 @@
           "subtext": "Desapego/Cortar raiz",
           "tone": "protetor",
           "feedback": "Entregou o problema ao proprio problema. Livre — mas sem a prova.",
-          "aftermath": "Ela pegou o livro, fechou o cofre, sumiu no escuro. Você saiu mais leve do que esperava — e mais vazio tambem, como se parte da sua historia tivesse ido junto. Mas o livro não te soltou. Uma ultima pagina apareceu na sua mesa em casa. E quem a escreveu ta a caminho.",
+          "aftermath": "Ela pegou o livro, fechou o cofre, sumiu no escuro. Voce saiu mais leve do que esperava — e mais vazio tambem, como se parte da sua historia tivesse ido junto. Mas o livro nao te soltou. Uma ultima pagina apareceu na sua mesa em casa. E quem a escreveu ta a caminho.",
           "nextSceneId": "la10",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -727,34 +511,25 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Ultima pagina. O livro revela quem o procurava: uma figura de autoridade da sua vida atual."
+          "texto": "Sua casa, fim de tarde. Ultima pagina aberta sobre a mesa. O livro revela quem o procurava — uma figura de autoridade da sua vida."
         },
         {
           "tipo": "evento",
-          "texto": "Ela surge e oferece poder em troca do livro e do silencio sobre tudo."
+          "texto": "Ela atravessa, senta de frente, voz firme: oferece poder concreto em troca do livro e do seu silencio. Voce..."
         }
       ],
       "options": [
         {
-          "text": "Recuso e exponho tudo: 'Não compra meu silencio.'",
+          "text": "Recuso e exponho tudo: 'Nao compra meu silencio.'",
           "subtext": "Vigor/Ruptura final",
           "tone": "provocativo",
           "feedback": "Escolheu guerra aberta. O livro vibrou aprovando.",
-          "aftermath": "Ela empalideceu. Você falou sem gritar — mas com fogo atras das palavras. Não tem mais recuo possivel pra nenhum dos dois. O livro vibrou uma ultima vez nas suas maos e ficou em silencio absoluto. Como se finalmente tivesse encontrado o dono real.",
+          "aftermath": "Ela empalideceu. Voce falou sem gritar — mas com fogo atras das palavras. Nao tem mais recuo possivel pra nenhum dos dois. O livro vibrou uma ultima vez nas suas maos e ficou em silencio absoluto. Como se finalmente tivesse encontrado o dono real.",
           "endingId": "selo_quebrado",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -762,21 +537,12 @@
           "subtext": "Vigor/Desprezo total",
           "tone": "provocativo",
           "feedback": "Destruiu o pacto e a ponte. Livre, mas so.",
-          "aftermath": "As paginas se espalharam aos pes dela num ruido seco. Você saiu sem olhar pra tras e sem dizer mais uma palavra. A autoridade e o livro ficaram juntos, numa sala que já não importa. A historia acabou ali — antes de virar sua de verdade.",
+          "aftermath": "As paginas se espalharam aos pes dela num ruido seco. Voce saiu sem olhar pra tras e sem dizer mais uma palavra. A autoridade e o livro ficaram juntos, numa sala que ja nao importa. A historia acabou ali — antes de virar sua de verdade.",
           "endingId": "cinzas",
           "evidence": {
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -784,65 +550,38 @@
           "subtext": "Filtro/Pacto frio",
           "tone": "pragmatico",
           "feedback": "Entrou no pacto sem entregar a alma. Perigoso.",
-          "aftermath": "Ela sorriu aliviada, do jeito de quem acha que ganhou. Você sorriu calculando, do jeito de quem sabe que o jogo mal comecou. O livro ficou na mao dela — mas as paginas que importam você já leu. O pacto existe. O dono e outro. Ela ainda não sabe disso.",
+          "aftermath": "Ela sorriu aliviada, do jeito de quem acha que ganhou. Voce sorriu calculando, do jeito de quem sabe que o jogo mal comecou. O livro ficou na mao dela — mas as paginas que importam voce ja leu. O pacto existe. O dono e outro. Ela ainda nao sabe disso.",
           "endingId": "pacto_frio",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Digo: 'Negocio em termos claros ou não negocio nada.'",
+          "text": "Digo: 'Negocio em termos claros ou nao negocio nada.'",
           "subtext": "Presenca/Ultima mesa",
           "tone": "neutro",
           "feedback": "Recusou ser engolido. Se houver acordo, sera seu.",
-          "aftermath": "Ela parou de falar por um segundo longo. Pela primeira vez em muito tempo, alguem falou com ela como igual — não como sudito. A mesa mudou de dono sem ninguem gritar. O livro ficou aberto entre voces, esperando uma historia nova. Escrita em dois, dessa vez.",
+          "aftermath": "Ela parou de falar por um segundo longo. Pela primeira vez em muito tempo, alguem falou com ela como igual — nao como sudito. A mesa mudou de dono sem ninguem gritar. O livro ficou aberto entre voces, esperando uma historia nova. Escrita em dois, dessa vez.",
           "endingId": "reescrita",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Devolvo: 'Não preciso disso pra saber quem você e.'",
+          "text": "Devolvo: 'Nao preciso disso pra saber quem voce e.'",
           "subtext": "Desapego/Libertacao",
           "tone": "protetor",
           "feedback": "Largou a arma e saiu inteiro. Sem poder, sem corrente.",
-          "aftermath": "Você saiu antes dela terminar a proposta. Deixou o livro na mesa, a oferta no ar, e a versao de você que teria aceitado pra tras. Do lado de fora, o ar ta mais fino. Limpo. Vazio. Você nunca se sentiu menos a venda.",
+          "aftermath": "Voce saiu antes dela terminar a proposta. Deixou o livro na mesa, a oferta no ar, e a versao de voce que teria aceitado pra tras. Do lado de fora, o ar ta mais fino. Limpo. Vazio. Voce nunca se sentiu menos a venda.",
           "endingId": "cinzas",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

@@ -115,14 +115,24 @@ function validateDeck(filePath: string): ValidationResult {
     }
 
     // Slides word counts (rule 5)
+    //   ambiente : max 32 (setup sensorial — pode respirar)
+    //   ator     : max 26 (descricao do outro)
+    //   contexto : max 25 (legado)
+    //   evento   : max 22 (acao + "Voce..." — direto)
     if (Array.isArray(q.slides)) {
       for (const slide of q.slides) {
         const wc = wordCount(slide.texto ?? "");
+        if (slide.tipo === "ambiente" && wc > 32) {
+          err(`${qLabel}: ambiente slide has ${wc} words (max 32)`);
+        }
+        if (slide.tipo === "ator" && wc > 26) {
+          err(`${qLabel}: ator slide has ${wc} words (max 26)`);
+        }
         if (slide.tipo === "contexto" && wc > 25) {
           err(`${qLabel}: context slide has ${wc} words (max 25)`);
         }
-        if (slide.tipo === "evento" && wc > 20) {
-          err(`${qLabel}: event slide has ${wc} words (max 20)`);
+        if (slide.tipo === "evento" && wc > 22) {
+          err(`${qLabel}: event slide has ${wc} words (max 22)`);
         }
       }
     }

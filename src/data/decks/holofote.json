@@ -1,7 +1,7 @@
 {
   "deckId": "holofote",
   "name": "Holofote",
-  "description": "Treino de Presenca. Cenas para ocupar espaco, sustentar olhar e não sumir de si mesmo.",
+  "description": "Treino de Presenca. Cenas para ocupar espaco, sustentar olhar e nao sumir de si mesmo.",
   "tema": "Presenca",
   "category": "eixo",
   "focusAxis": "presenca",
@@ -14,7 +14,7 @@
     {
       "id": "h1",
       "type": "NORMAL",
-      "sceneHook": "Reuniao com cliente. Sua proposta",
+      "sceneHook": "Reuniao com cliente, sua proposta",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -25,11 +25,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Reuniao com cliente. Você apresenta sua proposta e a sala escuta."
+          "texto": "Sala de reuniao, cliente importante na outra ponta. Voce apresentando ha quinze minutos, sala atenta, projetor ligado."
         },
         {
           "tipo": "evento",
-          "texto": "Colega te corta e repete sua ideia como se fosse dele."
+          "texto": "Um colega te corta no meio da frase e repete sua ideia como se fosse dele. Cliente acena pra ele. Voce..."
         }
       ],
       "options": [
@@ -39,18 +39,9 @@
           "tone": "pragmatico",
           "feedback": "Puxou o foco de volta. A sala entendeu quem conduzia.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -59,18 +50,9 @@
           "tone": "evasivo",
           "feedback": "Clima preservado, mas sua autoria sumiu da conversa.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -79,18 +61,9 @@
           "tone": "neutro",
           "feedback": "Retomou protagonismo sem virar duelo. Presenca limpa.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -99,18 +72,9 @@
           "tone": "provocativo",
           "feedback": "Marcou territorio, mas criou atrito na sala.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -118,7 +82,7 @@
     {
       "id": "h4",
       "type": "NORMAL",
-      "sceneHook": "Revisao mensal. Resultados do time",
+      "sceneHook": "Revisao mensal de resultados",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -129,11 +93,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Revisao mensal com seu gestor. Ele mostra resultados da equipe."
+          "texto": "Sala da diretoria, 14h. Seu gestor no telao mostrando metricas do mes. Time todo sentado, copo d agua na mao."
         },
         {
           "tipo": "evento",
-          "texto": "No maior resultado do mes, ele elogia o time sem te citar."
+          "texto": "No grafico maior do trimestre, ele elogia o time inteiro pelo resultado — e nao cita voce. Olhares se viram. Voce..."
         }
       ],
       "options": [
@@ -143,38 +107,20 @@
           "tone": "pragmatico",
           "feedback": "Carimbou seu nome no resultado. A sala registrou.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Anoto e fico quieto. Não preciso me vender toda hora.",
+          "text": "Anoto e fico quieto. Nao preciso me vender toda hora.",
           "subtext": "Recuo estrategico",
           "tone": "evasivo",
           "feedback": "Segurou a disputa, mas abriu mao de aparecer.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -183,18 +129,9 @@
           "tone": "neutro",
           "feedback": "Assumiu autoria sem soar carente. Classe com coluna.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -203,18 +140,9 @@
           "tone": "pragmatico",
           "feedback": "Jogou nos bastidores. Funcional, mas sem brilho publico.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -222,7 +150,7 @@
     {
       "id": "h6",
       "type": "NORMAL",
-      "sceneHook": "Call com lideranca. Cameras desligadas",
+      "sceneHook": "Call com lideranca, cameras off",
       "metadata": {
         "tensao": 3,
         "ambiente": "Digital",
@@ -233,11 +161,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Call com lideranca. Quase todo mundo de camera desligada."
+          "texto": "Call de 25 pessoas, 11h da terca. Quase todos com camera desligada, miniaturas com inicial em circulo cinza."
         },
         {
           "tipo": "evento",
-          "texto": "Diretor pede sem aviso: 'Liga a camera e explica agora.'"
+          "texto": "O diretor escolhe seu nome sem aviso: 'Liga a camera e explica agora, em duas frases, onde voce esta.' Voce..."
         }
       ],
       "options": [
@@ -247,18 +175,9 @@
           "tone": "pragmatico",
           "feedback": "Entrou em quadro sem drama. Reuniao ganhou centro.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -267,18 +186,9 @@
           "tone": "evasivo",
           "feedback": "Se protegeu, mas recuou da vitrine.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -287,18 +197,9 @@
           "tone": "neutro",
           "feedback": "Criou presenca antes do conteudo. Sala no seu ritmo.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -307,14 +208,8 @@
           "tone": "provocativo",
           "feedback": "Apareceu, mas a ansiedade roubou sua clareza.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -322,7 +217,7 @@
     {
       "id": "h8",
       "type": "NORMAL",
-      "sceneHook": "Elevador cheio de executivos",
+      "sceneHook": "Elevador cheio de gente importante",
       "metadata": {
         "tensao": 3,
         "ambiente": "Profissional",
@@ -333,11 +228,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Elevador cheio de executivos. Você quieto esperando seu andar."
+          "texto": "Elevador da empresa, segunda de manha. Voce com fones, cracha pendurado. Cinco diretores entram, falando baixo entre si."
         },
         {
           "tipo": "evento",
-          "texto": "A CEO olha seu cracha e pergunta: 'Em uma frase, quem e você?'"
+          "texto": "A CEO olha pro seu cracha, ergue a sobrancelha e pergunta: 'Em uma frase, quem voce e na empresa?' Voce..."
         }
       ],
       "options": [
@@ -347,18 +242,9 @@
           "tone": "pragmatico",
           "feedback": "Se apresentou como quem sabe seu peso. Direto.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -367,18 +253,9 @@
           "tone": "evasivo",
           "feedback": "Tirou pressao com humor, mas ficou indefinido.",
           "evidence": {
-            "desapego": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "harmonia": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -387,18 +264,9 @@
           "tone": "neutro",
           "feedback": "Se nomeou sem inflar nem encolher. Presenca nitida.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -407,14 +275,8 @@
           "tone": "pragmatico",
           "feedback": "Quis brilhar demais e a imagem saiu borrada.",
           "evidence": {
-            "vigor": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]
@@ -422,7 +284,7 @@
     {
       "id": "h10",
       "type": "NORMAL",
-      "sceneHook": "Painel aberto. Plateia esperando",
+      "sceneHook": "Painel publico, plateia atenta",
       "metadata": {
         "tensao": 4,
         "ambiente": "Publico",
@@ -433,11 +295,11 @@
       "slides": [
         {
           "tipo": "contexto",
-          "texto": "Painel aberto com plateia. Você na primeira fila, mediador abre perguntas."
+          "texto": "Auditorio cheio, voce no painel ha quarenta minutos. Mediador abre perguntas, microfone passando pelo publico."
         },
         {
           "tipo": "evento",
-          "texto": "Alguem critica sua decisao. O mediador te oferece o microfone."
+          "texto": "Uma pessoa critica em voz alta uma decisao publica sua, com nome e contexto. Mediador te estende o microfone. Voce..."
         }
       ],
       "options": [
@@ -447,18 +309,9 @@
           "tone": "provocativo",
           "feedback": "Ocupou o palco inteiro. Resposta afiada e impossivel de ignorar.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "vigor": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "harmonia": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -467,38 +320,20 @@
           "tone": "neutro",
           "feedback": "Poucas palavras, muito peso. Presenca sem guerra.",
           "evidence": {
-            "presenca": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "filtro": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
-          "text": "Recuso o microfone. Não vou transformar isso em show.",
+          "text": "Recuso o microfone. Nao vou transformar isso em show.",
           "subtext": "Retirada estrategica",
           "tone": "evasivo",
           "feedback": "Protegeu sua paz, mas sua versao ficou fora do palco.",
           "evidence": {
-            "filtro": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "desapego": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "presenca": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
           }
         },
         {
@@ -507,18 +342,9 @@
           "tone": "protetor",
           "feedback": "Virou o jogo sem combate. Plateia ficou do seu lado.",
           "evidence": {
-            "harmonia": {
-              "min": 0.6,
-              "confidence": 0.75
-            },
-            "presenca": {
-              "min": 0.55,
-              "confidence": 0.6
-            },
-            "vigor": {
-              "max": 0.45,
-              "confidence": 0.6
-            }
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
           }
         }
       ]

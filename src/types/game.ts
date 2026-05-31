@@ -78,8 +78,16 @@ export interface SceneMetadata {
   urgencia?: SceneUrgencia;
 }
 
+/**
+ * Tipos de slide de uma pergunta. Renderizados em ordem (ambiente → ator
+ * → contexto → evento) pra construir imersão antes do dilema.
+ * - `ambiente`: onde + quando + corpo/estado (sensorial)
+ * - `ator`: quem é a outra pessoa, com textura visual
+ * - `contexto`: setup adicional (legado — antigos decks usavam só esse)
+ * - `evento`: ação que dispara o dilema (sempre obrigatório)
+ */
 export interface Slide {
-  tipo: 'contexto' | 'evento';
+  tipo: 'ambiente' | 'ator' | 'contexto' | 'evento';
   texto: string;
 }
 

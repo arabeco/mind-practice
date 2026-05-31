@@ -150,6 +150,30 @@ body {
   overflow-x: hidden;
 }
 
+/* ============================================================
+ * Scrollbars invisíveis (estilo mobile/iOS)
+ * - Mobile: nativo já esconde
+ * - Desktop/Capacitor WebView: fica sumido até o user scrollar
+ * ============================================================ */
+html {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge legado */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+/* Scrollable interno (modais, listas) tambem fica invisivel */
+.scroll-hide {
+  scrollbar-width: none;
+}
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @layer components {
   .glass-card,
   .glass-card-hover,
