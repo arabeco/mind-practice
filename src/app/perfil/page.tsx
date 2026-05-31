@@ -19,6 +19,8 @@ import { useToast } from '@/components/Toast';
 import { deleteAccountRequest } from '@/lib/accountDeletion';
 import { useRouter } from 'next/navigation';
 import { STAT_KEYS, STAT_LABELS, STAT_COLORS } from '@/types/game';
+import { AXIS_POLES, AXIS_POLE_SLUGS } from '@/lib/axisPoles';
+import PoleIcon from '@/components/PoleIcon';
 import type { DeckSnapshot, StatKey } from '@/types/game';
 import { getDeckById } from '@/data/decks';
 import { archetypeDisplayState, globalConfidence, createPriorProfile, playerMean } from '@/lib/bayesEngine';
@@ -369,36 +371,59 @@ export default function PerfilPage() {
               const poles = AXIS_POLES[key];
               // Position of the number indicator: 50% + or - pct
               const indicatorPos = isNeg ? `${50 - pct}%` : `${50 + pct}%`;
+              const dominantPoleIdx: 0 | 1 = hasData && value !== 0 ? (isNeg ? 0 : 1) : 1;
               return (
-                <div key={key}>
-                  {/* Pole labels + floating number */}
-                  <div className="relative mb-1 flex items-center justify-between">
-                    <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[0]}</span>
-                    <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[1]}</span>
-                    {/* Floating value indicator */}
-                    {(hasData && value !== 0) && (
-                      <motion.span
-                        className="absolute -top-0.5 text-[9px] font-mono font-bold"
-                        style={{ color: isNeg ? '#ef4444' : color, left: indicatorPos, transform: 'translateX(-50%)' }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.3 }}
-                      >
-                        {value > 0 ? '+' : ''}{value.toFixed(1)}
-                      </motion.span>
-                    )}
+                <div key={key} className="flex items-center gap-2">
+                  {/* Polo NEGATIVO icon (esmaecido se nao for dominante) */}
+                  <PoleIcon
+                    axis={key}
+                    pole={AXIS_POLE_SLUGS[key][0]}
+                    size={28}
+                    dimmed={hasData ? dominantPoleIdx !== 0 : true}
+                    noGlow={dominantPoleIdx !== 0}
+                    title={poles[0]}
+                  />
+
+                  {/* Middle column: labels + bar */}
+                  <div className="min-w-0 flex-1">
+                    {/* Pole labels + floating number */}
+                    <div className="relative mb-1 flex items-center justify-between">
+                      <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[0]}</span>
+                      <span className="text-[8px] font-medium uppercase tracking-[0.1em] text-white/35">{poles[1]}</span>
+                      {(hasData && value !== 0) && (
+                        <motion.span
+                          className="absolute -top-0.5 text-[9px] font-mono font-bold"
+                          style={{ color: isNeg ? '#ef4444' : color, left: indicatorPos, transform: 'translateX(-50%)' }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.4, duration: 0.3 }}
+                        >
+                          {value > 0 ? '+' : ''}{value.toFixed(1)}
+                        </motion.span>
+                      )}
+                    </div>
+                    {/* Bar */}
+                    <div className="relative h-2 overflow-hidden rounded-full bg-white/8">
+                      <div className="absolute left-1/2 top-0 z-10 h-full w-px -translate-x-px bg-white/25" />
+                      <motion.div
+                        className="absolute top-0 h-full"
+                        style={{ backgroundColor: isNeg ? '#ef4444' : color }}
+                        initial={{ left: '50%', width: 0 }}
+                        animate={{ left: barLeft, width: barWidth }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                      />
+                    </div>
                   </div>
-                  {/* Bar */}
-                  <div className="relative h-2 overflow-hidden rounded-full bg-white/8">
-                    <div className="absolute left-1/2 top-0 z-10 h-full w-px -translate-x-px bg-white/25" />
-                    <motion.div
-                      className="absolute top-0 h-full"
-                      style={{ backgroundColor: isNeg ? '#ef4444' : color }}
-                      initial={{ left: '50%', width: 0 }}
-                      animate={{ left: barLeft, width: barWidth }}
-                      transition={{ duration: 0.5, ease: 'easeOut' }}
-                    />
-                  </div>
+
+                  {/* Polo POSITIVO icon (esmaecido se nao for dominante) */}
+                  <PoleIcon
+                    axis={key}
+                    pole={AXIS_POLE_SLUGS[key][1]}
+                    size={28}
+                    dimmed={hasData ? dominantPoleIdx !== 1 : true}
+                    noGlow={dominantPoleIdx !== 1}
+                    title={poles[1]}
+                  />
                 </div>
               );
             })}
@@ -802,13 +827,7 @@ function getRankFromScore(score: number | null): RankLetter {
   return 'E';
 }
 
-const AXIS_POLES: Record<StatKey, [string, string]> = {
-  vigor: ['Passivo', 'Agressivo'],
-  harmonia: ['Conflito', 'Paz'],
-  filtro: ['Impulsivo', 'Calculista'],
-  presenca: ['Invisivel', 'Dominante'],
-  desapego: ['Apegado', 'Desapegado'],
-};
+// AXIS_POLES centralizado em '@/types/game' (compartilhado com PoleIcon e share).
 
 const RANK_STYLES: Record<RankLetter, string> = {
   S: 'border-yellow-300/40 bg-yellow-300/14 text-yellow-200',

@@ -386,6 +386,8 @@ export const STAT_LABELS: Record<StatKey, string> = {
   desapego: 'Desapego',
 };
 
+// AXIS_POLES, AXIS_POLE_SLUGS e pickPoleSlug agora vivem em '@/lib/axisPoles'.
+
 // ============================================================
 // Tier System
 // ============================================================
