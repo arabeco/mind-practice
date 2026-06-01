@@ -1,0 +1,384 @@
+{
+  "deckId": "carteira_pesada",
+  "name": "A Carteira Pesada",
+  "description": "Dinheiro entre gente proxima. O lugar onde laco e contrato se misturam.",
+  "tema": "Dinheiro",
+  "category": "cenario",
+  "tier": 2,
+  "difficulty": 3,
+  "rarity": "raro",
+  "seasonId": "season-1",
+  "priceFichas": 250,
+  "questions": [
+    {
+      "id": "cp1",
+      "type": "NORMAL",
+      "sceneHook": "Amigo pede ajuda no aluguel",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Quinta de noite, voce em casa. Notebook aberto, conta do mes na tela. Tem espaco, mas nao sobra muito."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Amigo proximo, daqueles que voce confia. Manda audio longo, voz quebrada. Conta que perdeu o trabalho."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Pede R$ 1500 emprestado pro aluguel deste mes. Promete devolver em 60 dias. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Emprestpo. Combinaria no zap pra registrar.",
+          "subtext": "Empresta com contrato leve",
+          "tone": "neutro",
+          "feedback": "Voce ajuda mas nao apaga a clareza.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Empresto sem cobrar nada. Confio nele.",
+          "subtext": "Confia no laco",
+          "tone": "protetor",
+          "feedback": "Voce honra a amizade — aposta sem rede.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Falo nao: 'Cara, nao da agora.'",
+          "subtext": "Recusa firme",
+          "tone": "pragmatico",
+          "feedback": "Voce protege seu fluxo — mas o silencio depois vai pesar.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cp2",
+      "type": "NORMAL",
+      "sceneHook": "Irmao cobra divida antiga",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Sabado de tarde, voce no carro com seu irmao. Vao buscar algo pra mae. Radio baixo, semaforo vermelho."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu irmao mais velho. Voz seca, nao olha pra voce, dedos apertando o volante."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Lembra dos R$ 800 que eu cobri pro teu cartao em 2024? Preciso disso agora.' Voce esqueceu completamente. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Caraio, foi mal. Pago essa semana.'",
+          "subtext": "Assume na hora",
+          "tone": "pragmatico",
+          "feedback": "Voce nao foge da divida — ela some.",
+          "evidence": {
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Calma, nao da pra parcelar?'",
+          "subtext": "Negocia o pagamento",
+          "tone": "neutro",
+          "feedback": "Voce nao foge — mas pede tempo.",
+          "evidence": {
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Cara, lembro nao. Nao foi 500?'",
+          "subtext": "Discute o valor",
+          "tone": "provocativo",
+          "feedback": "Voce contesta — pode estar certo, pode azedar tudo.",
+          "evidence": {
+            "vigor": { "min": 0.62, "confidence": 0.75 },
+            "filtro": { "max": 0.4, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cp3",
+      "type": "NORMAL",
+      "sceneHook": "Conta dividida na rachada",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Sexta de noite, restaurante razoavelmente caro. Voces seis comemorando aniversario de um amigo. Conta de R$ 1200."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Um da mesa pediu dois drinks de R$ 90 cada e uma porcao que so ele comeu. Outros pediram pratos mais simples."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Garcom traz a conta. Alguem sugere rachar igual: R$ 200 por cabeca. Voce ve a injustica. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Vou pagar so o meu.' Pego o app pra calcular.",
+          "subtext": "Paga exato",
+          "tone": "pragmatico",
+          "feedback": "Voce nao engole desequilibrio — mas vira chato do grupo.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Pago a rachada. Sigo o grupo.",
+          "subtext": "Aceita o desequilibrio",
+          "tone": "evasivo",
+          "feedback": "Voce paga a mais pela paz — mas escolhe quando isso vale.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Galera, tira os drinks fora da rachada?'",
+          "subtext": "Sugere ajuste",
+          "tone": "neutro",
+          "feedback": "Voce coloca a verdade na mesa — sem virar fogo.",
+          "evidence": {
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cp4",
+      "type": "NORMAL",
+      "sceneHook": "Heranca pequena, divisao truncada",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Reuniao na casa do tio mais velho. Tres irmaos do seu pai, sua tia. Cafe na mesa, papeis na frente."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Voce representa seu pai, ja falecido. Os outros tres discutem como dividir a casa da vo entre voces quatro."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Tio mais velho propoe ficar com a casa e pagar aos outros em parcelas — sua parte em 5 anos. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Aceito e assino. Confio neles.",
+          "subtext": "Confia na familia",
+          "tone": "protetor",
+          "feedback": "Voce honra o laco — paga a confianca como aposta.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Preciso de advogado e contrato. Sem ofensa.'",
+          "subtext": "Pede formalidade",
+          "tone": "pragmatico",
+          "feedback": "Voce protege o seu — mas o cafe esfria.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Posso pensar e voltar com voces amanha?'",
+          "subtext": "Compra tempo",
+          "tone": "neutro",
+          "feedback": "Voce nao decide quente — ganha clareza.",
+          "evidence": {
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cp5",
+      "type": "NORMAL",
+      "sceneHook": "Cliente atrasa fatura pessoal",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Terca de manha, voce no escritorio em casa. Cafe ja na segunda xicara, planilha de recebimentos aberta."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Cliente regular, paga em dia ha 2 anos. Mas esse mes uma fatura ja ta atrasada 18 dias. R$ 4.500."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce sabe que ele perdeu um socio. Sua conta nao espera, mas relacao tambem importa. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando email formal cobrando + multa contratual.",
+          "subtext": "Aplica o contrato",
+          "tone": "pragmatico",
+          "feedback": "Voce nao mistura empatia com fluxo de caixa.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Mando audio: 'Cara, fica numa boa, mas vamos remarcar?'",
+          "subtext": "Mostra empatia mas cobra",
+          "tone": "neutro",
+          "feedback": "Voce honra a relacao sem soltar a divida.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Espero mais 7 dias antes de cobrar.",
+          "subtext": "Da prazo extra",
+          "tone": "evasivo",
+          "feedback": "Voce protege a relacao — e seu fluxo de caixa sofre.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cp6",
+      "type": "NORMAL",
+      "sceneHook": "Parceiro sugere conta conjunta",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "seguranca",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Domingo de tarde, voces dois deitados no sofa, serie rolando. Sol caindo, dia tranquilo, conversa solta."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu(sua) parceiro(a). Voces moram juntos ha um ano. Ganham parecido. Conversa pula pro tema financeiro."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele(a) sugere abrir conta conjunta pra tudo. Voce sente algo travar mas nao sabe nomear. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Bora. Faz sentido a essa altura.'",
+          "subtext": "Topa direto",
+          "tone": "protetor",
+          "feedback": "Voce aposta no nos — sem reler o contrato.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Topo, mas vamos modelar como vai funcionar.'",
+          "subtext": "Aceita com regras",
+          "tone": "neutro",
+          "feedback": "Voce topa sem renunciar a clareza.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Acho que ainda nao. Vamos manter separado.'",
+          "subtext": "Recusa por hora",
+          "tone": "pragmatico",
+          "feedback": "Voce nomeia o desconforto — pode dar pano pra conversa.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    }
+  ]
+}

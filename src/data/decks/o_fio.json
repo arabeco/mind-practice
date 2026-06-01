@@ -1,0 +1,384 @@
+{
+  "deckId": "o_fio",
+  "name": "O Fio",
+  "description": "Treino de Harmonia. Cenas onde o equilibrio entre paz e conflito ta no fio da navalha.",
+  "tema": "Harmonia",
+  "category": "eixo",
+  "focusAxis": "harmonia",
+  "tier": 3,
+  "difficulty": 3,
+  "rarity": "epico",
+  "seasonId": "season-1",
+  "priceFichas": 500,
+  "questions": [
+    {
+      "id": "f1",
+      "type": "NORMAL",
+      "sceneHook": "Mesa de jantar, semana puxada",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Terca, 21h, voce e mais tres em casa. Comida quase no fim, conversa fluindo. Telao desligado, so a luz da pendente acesa."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Sua irma e o namorado dela. Ela cansada, voz mais alta que o normal. Ele defensivo, mexendo no garfo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Os dois comecam a se alfinetar no meio da fala. Voce e a sua mae presenciam. Em vinte segundos vira briga. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mudo de assunto puxando uma historia leve.",
+          "subtext": "Salva o jantar",
+          "tone": "neutro",
+          "feedback": "Voce sabe quando parar o atrito antes de virar incendio.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Calma, gente. Nao vamos por ai agora.'",
+          "subtext": "Pacificacao direta",
+          "tone": "protetor",
+          "feedback": "Voce intervem sem cortar — abre espaco pra eles respirarem.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Deixo. Briga deles, problema deles.",
+          "subtext": "Nao se mete",
+          "tone": "evasivo",
+          "feedback": "Voce protege seu espaco — mas o jantar paga o preco.",
+          "evidence": {
+            "desapego": { "min": 0.62, "confidence": 0.75 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "type": "NORMAL",
+      "sceneHook": "Grupo do trabalho explode no chat",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Quinta de manha, voce no onibus indo trabalhar. Cafe na mao, fone ligado, sem pressa."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Grupo do time no whatsapp: dois colegas trocando farpas por uma decisao de ontem. Mensagens longas, em CAIXA ALTA."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce ve quem ta certo — mas os dois ja se machucaram. Outros nove leem em silencio. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando audio: 'Vamos pausar e resolver hoje na call.'",
+          "subtext": "Para o ritmo",
+          "tone": "protetor",
+          "feedback": "Voce nao escolhe lado — tira a briga do publico.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Apoio quem ta certo, com argumento solido.",
+          "subtext": "Toma lado",
+          "tone": "pragmatico",
+          "feedback": "Voce nao engole injustica — mas o coro vai dividir.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Saio do grupo discretamente, leio quando passar.",
+          "subtext": "Foge da fogueira",
+          "tone": "evasivo",
+          "feedback": "Voce escolhe nao queimar energia em briga online.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "type": "NORMAL",
+      "sceneHook": "Amigo te puxa pra briga dele",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Sabado de tarde, bar movimentado, mesa de quatro. Cerveja na metade, conversa boa, fundo musical alto."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu melhor amigo se desentende com outro da mesa por uma piada que pegou pesado. Vozes subindo."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele se vira pra voce: 'Voce viu, ne? Fala ai. Voce concorda comigo.' Mesa esperando. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Achei pesado, sim. Mas vamos diminuir o tom.'",
+          "subtext": "Concorda e freia",
+          "tone": "neutro",
+          "feedback": "Voce honra a amizade sem alimentar a explosao.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Confirmo seco: 'Sim, foi grosseiro.'",
+          "subtext": "Toma lado direto",
+          "tone": "pragmatico",
+          "feedback": "Voce nao engole injustica — mas joga gasolina.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Nao quero entrar nessa, vou no banheiro.'",
+          "subtext": "Sai de cena",
+          "tone": "evasivo",
+          "feedback": "Voce protege a si, mas seu amigo vai sentir.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "type": "NORMAL",
+      "sceneHook": "Aniversariante magoado, voces dois sobrando",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Social",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Aniversario de uma amiga, casa cheia, musica alta. Ja sao 2h da manha, festa esvaziando."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Aniversariante chorosa sentada na varanda. Voce e mais um colega proximos restaram pra conversar."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ela desabafa sobre algo grave que voce acha que ela ta exagerando. O outro amigo concorda 100% com ela. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Escuto sem opinar, abraco no fim.",
+          "subtext": "Acolhe sem julgar",
+          "tone": "protetor",
+          "feedback": "Voce sabe que opiniao agora nao ajuda.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Coloco com cuidado: 'Acho que ta meio pesado, ne?'",
+          "subtext": "Verdade gentil",
+          "tone": "neutro",
+          "feedback": "Voce ousa o desconforto sem virar conflito.",
+          "evidence": {
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Concordo com tudo. Hora dela.",
+          "subtext": "Coro da paz",
+          "tone": "evasivo",
+          "feedback": "Voce protege o clima — mas concorda sem concordar.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "max": 0.42, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "type": "NORMAL",
+      "sceneHook": "Vizinha vem reclamar do som",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Domingo de tarde, sol entrando, voce em casa. Musica em volume razoavel, nao alto. Cerveja na mao."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Toque na porta firme. Vizinha que voce mal conhece, de touca, cara fechada. Filho dela atras com olho vermelho."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Voce nunca diminui esse som. Ja conversei com voce 4 vezes.' Voce nunca falou com ela. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Peco desculpa e abaixo na hora.",
+          "subtext": "Resolve sem brigar",
+          "tone": "neutro",
+          "feedback": "Voce nao precisa estar certo pra escolher paz.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Acho que voce ta me confundindo com outro andar.'",
+          "subtext": "Corrige o fato",
+          "tone": "pragmatico",
+          "feedback": "Voce defende a verdade — corre risco de ser visto como duro.",
+          "evidence": {
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Abaixo o som e fecho a porta sem falar.",
+          "subtext": "Fim da conversa",
+          "tone": "evasivo",
+          "feedback": "Voce nao alimenta — mas a vizinhanca fica fria.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "type": "NORMAL",
+      "sceneHook": "Filho do amigo passa do limite",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Tarde quente, churrasco no quintal da casa do seu amigo. Cinco familias, criancas correndo, musica de fundo."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Filho dele, sete anos, comeca a derrubar coisa sua de proposito. Provoca olhando. Pai do garoto distraido."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce ja avisou tres vezes em tom leve. Da quarta vez, ele derrama refrigerante na sua mochila. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Falo firme com o garoto: 'Para agora.'",
+          "subtext": "Encara a crianca",
+          "tone": "pragmatico",
+          "feedback": "Voce nao espera o pai notar — mas pode soar duro.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Chamo o amigo de lado: 'Ele ta meio agitado hoje, ne?'",
+          "subtext": "Escala pro pai",
+          "tone": "neutro",
+          "feedback": "Voce passa o problema pra quem deve resolver.",
+          "evidence": {
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Pego a mochila, saio do alcance dele, continuo o churrasco.",
+          "subtext": "Tira de cena",
+          "tone": "evasivo",
+          "feedback": "Voce remove o estimulo sem cena.",
+          "evidence": {
+            "desapego": { "min": 0.62, "confidence": 0.75 },
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    }
+  ]
+}

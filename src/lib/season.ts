@@ -27,9 +27,16 @@ export const SEASONS: SeasonConfig[] = [
     startDate: '2026-04-01',
     endDate: '2026-04-30',
   },
+  {
+    id: 'season-1',
+    label: 'Temporada 1 — Segunda Camada',
+    campaignDeckId: 'o_convite',
+    startDate: '2026-07-01',
+    endDate: '2026-09-30',
+  },
 ];
 
-export const CURRENT_SEASON_ID = 'season-0';
+export const CURRENT_SEASON_ID = 'season-1';
 
 export function getCurrentSeason(): SeasonConfig {
   const s = SEASONS.find(s => s.id === CURRENT_SEASON_ID);

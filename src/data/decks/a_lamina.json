@@ -1,0 +1,384 @@
+{
+  "deckId": "a_lamina",
+  "name": "A Lamina",
+  "description": "Treino de Filtro. Decisoes onde calcular ou agir no impulso muda tudo.",
+  "tema": "Filtro",
+  "category": "eixo",
+  "focusAxis": "filtro",
+  "tier": 3,
+  "difficulty": 3,
+  "rarity": "epico",
+  "seasonId": "season-1",
+  "priceFichas": 500,
+  "questions": [
+    {
+      "id": "l1",
+      "type": "NORMAL",
+      "sceneHook": "Promocao caindo, contas com a parceria",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Dinheiro",
+        "pilar": "seguranca",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Quarta de noite, voce em casa, cafe morno. Notebook aberto na planilha de contas do mes."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Voce e seu(sua) parceiro(a) acabaram de receber R$ 3000 a mais que nao esperavam. Bonus do trabalho dele(a)."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele(a) quer torrar metade em uma viagem agora. Voce pensava em quitar o cartao. Discussao comecando. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Falo na hora: 'Vamos quitar a divida.'",
+          "subtext": "Impulso pragmatico",
+          "tone": "pragmatico",
+          "feedback": "Voce decide pelo racional — mas atropela a vontade do outro.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Pego papel e calculo o real custo de cada opcao.",
+          "subtext": "Mostra os numeros",
+          "tone": "neutro",
+          "feedback": "Voce traz a planilha pra mesa — decisao vira diferente.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Aceito a viagem. Felicidade conta mais.",
+          "subtext": "Vai pelo desejo",
+          "tone": "evasivo",
+          "feedback": "Voce escolhe o agora — paga a divida com juros depois.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "l2",
+      "type": "NORMAL",
+      "sceneHook": "Vaga aberta, dois caminhos",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Segunda 9h, voce na sua mesa. Email aberto, cafe fumegando. Dois meses esperando essa noticia."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Chefe avisa que abriu uma vaga senior — bem pago, prestigio, mais responsabilidade. Voce sabe que existe."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce pode candidatar hoje (chance alta de pegar) ou esperar 6 meses por uma vaga melhor que pode nem existir. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Candidato agora. Garanto o passaro na mao.",
+          "subtext": "Pega a oportunidade",
+          "tone": "pragmatico",
+          "feedback": "Voce nao deixa o agora escapar.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Pego dois dias pra mapear cenarios e custo de oportunidade.",
+          "subtext": "Calcula antes",
+          "tone": "neutro",
+          "feedback": "Voce nao decide quente — investe em clareza.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Espero. Tenho fe de que vai aparecer melhor.",
+          "subtext": "Aposta no futuro",
+          "tone": "evasivo",
+          "feedback": "Voce aposta na fe — pode dar certo, pode te custar caro.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "l3",
+      "type": "NORMAL",
+      "sceneHook": "Match perfeito de date, vermelho subtil",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Terceira saida com alguem que ta indo otimo. Bar quieto, vinho na mesa, conversa boa, voces se gostam."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Essa pessoa solta uma frase casual que indica que ela mente pra mae sobre coisas serias. Cinco anos."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Pode ser nada. Pode ser sinal de outras mentiras. Voce ta gostando. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Sigo a noite. Decido quando virar coisa seria.",
+          "subtext": "Adia avaliacao",
+          "tone": "evasivo",
+          "feedback": "Voce posterga — pode amadurecer ou virar arrependimento.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Pergunto direto: 'Por que voce mente pra ela?'",
+          "subtext": "Investiga ao vivo",
+          "tone": "pragmatico",
+          "feedback": "Voce nao espera pra ver — corre o risco de quebrar a noite.",
+          "evidence": {
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Anoto mentalmente. Vou observar daqui pra frente.",
+          "subtext": "Coleta dados",
+          "tone": "neutro",
+          "feedback": "Voce nao acusa nem ignora — pesa antes de decidir.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "l4",
+      "type": "NORMAL",
+      "sceneHook": "Insulto na rua, contexto duvidoso",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Publico",
+        "relacao": "Desconhecido",
+        "aposta": "Paz Emocional",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Sabado, calcada movimentada, voce voltando do mercado. Sacolas na mao, fone meio caido."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Tres caras passam — um deles solta um comentario feio que parece ser pra voce. Riem entre eles."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Pode ser pra voce, pode ser piada interna. Eles passam reto. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Viro: 'O que foi, irmao?' Encaro.",
+          "subtext": "Confronta no impulso",
+          "tone": "provocativo",
+          "feedback": "Voce nao deixa passar — pode virar problema serio por nada.",
+          "evidence": {
+            "vigor": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Calculo: tres contra um, dia limpo, sigo.",
+          "subtext": "Triagem rapida",
+          "tone": "neutro",
+          "feedback": "Voce sabe quando o custo de reagir e maior que a ofensa.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Engolo. Acelero o passo. Esqueco.",
+          "subtext": "Nao alimenta",
+          "tone": "evasivo",
+          "feedback": "Voce protege a si — mas vai mastigar isso depois.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "l5",
+      "type": "NORMAL",
+      "sceneHook": "Stories diferente da pessoa",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "ego",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Domingo a noite, voce no sofa, scroll lento sem destino. Cafe quente. Ja em modo pijama."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu parceiro ou amigo proximo postou stories sobre um lugar onde 'foi sozinho ontem'. Marcou local."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Voce sabe que ele estava com outra pessoa la — porque ele te contou semana passada. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Mando ja: 'Sozinho? Como assim?'",
+          "subtext": "Confronta no quente",
+          "tone": "provocativo",
+          "feedback": "Voce nao espera — mas reage sem ouvir o porque.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Espero ele tocar no assunto. Observo sem mostrar.",
+          "subtext": "Coleta antes de agir",
+          "tone": "neutro",
+          "feedback": "Voce ganha contexto antes de qualquer movimento.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Mando pra um amigo: 'Olha isso. O que tu acha?'",
+          "subtext": "Valida com terceiro",
+          "tone": "evasivo",
+          "feedback": "Voce nao confronta — alimenta a fofoca em paralelo.",
+          "evidence": {
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 },
+            "presenca": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "l6",
+      "type": "NORMAL",
+      "sceneHook": "Pai pede pra voce ser fiador",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Autoridade",
+        "aposta": "Dinheiro",
+        "pilar": "seguranca",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Almoco de domingo na casa dos seus pais. Comida na mesa, todo mundo presente, conversa fluindo."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu pai puxa voce de lado depois do cafe. Voz baixa, tom serio, jeito que voce conhece bem."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Pede pra voce assinar fiancao de um emprestimo de R$ 80 mil dele. Voce sabe que ele atrasa contas. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Aceito na hora. E meu pai.",
+          "subtext": "Lealdade familiar",
+          "tone": "protetor",
+          "feedback": "Voce coloca laco antes de calculo — pode pagar caro.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.35, "confidence": 0.7 }
+          }
+        },
+        {
+          "text": "'Pai, deixa eu pensar na semana e te dou resposta.'",
+          "subtext": "Pede tempo",
+          "tone": "neutro",
+          "feedback": "Voce nao decide quente — espaco pra clareza.",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Falo direto: 'Nao consigo. Tenho meus compromissos.'",
+          "subtext": "Recusa firme",
+          "tone": "pragmatico",
+          "feedback": "Voce protege o seu — mas vai pesar no almoco do mes que vem.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    }
+  ]
+}

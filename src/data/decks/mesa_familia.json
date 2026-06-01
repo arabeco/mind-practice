@@ -1,0 +1,385 @@
+{
+  "deckId": "mesa_familia",
+  "name": "Mesa de Familia",
+  "description": "Almocos, ceias, encontros. Familia testa seus limites como ninguem.",
+  "tema": "Familia",
+  "category": "cenario",
+  "tier": 2,
+  "difficulty": 3,
+  "rarity": "raro",
+  "seasonId": "season-1",
+  "priceFichas": 250,
+  "questions": [
+    {
+      "id": "mf1",
+      "type": "NORMAL",
+      "sceneHook": "Almoco de domingo, comentario da prima",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Domingo, casa da vo. Doze pessoas na mesa, comida farta, conversa cruzada. Voce ja comeu, ta bebendo agua."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Prima sua, mesma idade, que sempre se compara. Hoje veio com pose: emprego novo, namoro novo, planos."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ela vira pra voce no meio do almoco: 'E voce, hein? Continua naquele mesmo trabalho ne? Sem novidade?' Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Tudo igual. Mas tudo bem assim.'",
+          "subtext": "Corta o jogo",
+          "tone": "pragmatico",
+          "feedback": "Voce nao entra na competicao — nem aceita o rebaixamento.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Conto algo bom que aconteceu — mesmo pequeno.",
+          "subtext": "Disputa o terreno",
+          "tone": "neutro",
+          "feedback": "Voce entra no jogo — mas joga no seu ritmo.",
+          "evidence": {
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Mudo de assunto puxando algo sobre ela.",
+          "subtext": "Reposiciona o foco",
+          "tone": "evasivo",
+          "feedback": "Voce desvia sem confrontar — paz mantida, ego intacto.",
+          "evidence": {
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mf2",
+      "type": "NORMAL",
+      "sceneHook": "Mae critica sua escolha de novo",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Autoridade",
+        "aposta": "Paz Emocional",
+        "pilar": "ego",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Ceia de aniversario. Sua mae fez o jantar. Voce comendo no canto, conversa correndo entre os outros."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Sua mae, voz que voce ja conhece em todos os tons. Hoje ela ta puxando assunto direto contigo, em frente aos outros."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ela traz pela quinta vez no mes algo que voce escolheu (carreira, parceiro, lugar de morar) e nao concorda. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Mae, ja conversamos. Eu decidi.'",
+          "subtext": "Encerra o ciclo",
+          "tone": "pragmatico",
+          "feedback": "Voce nao alimenta a discussao recorrente.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Engulo e mudo de assunto.",
+          "subtext": "Salva o aniversario",
+          "tone": "evasivo",
+          "feedback": "Voce protege a festa — paga o preco em silencio.",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "vigor": { "max": 0.4, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Falo com ela em particular no fim da noite.",
+          "subtext": "Resolve offline",
+          "tone": "neutro",
+          "feedback": "Voce escolhe o lugar certo pra colocar.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mf3",
+      "type": "NORMAL",
+      "sceneHook": "Tio puxa politica na mesa",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Imagem Publica",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Natal, mesa cheia, vinho corrente. Crianca correndo, panela passando, conversa em camadas."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Tio que voce gosta mas pensa o oposto sobre quase tudo. Voz subindo, gestos largos, vai entrar no tema."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele puxa um assunto polemico olhando direto pra voce, esperando reacao. Mesa silencia. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Entro firme: defendo o que penso.",
+          "subtext": "Encara o debate",
+          "tone": "provocativo",
+          "feedback": "Voce nao engole — mas o natal vira campo de batalha.",
+          "evidence": {
+            "vigor": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Tio, hoje nao. Vamos curtir o jantar.'",
+          "subtext": "Recusa o debate",
+          "tone": "neutro",
+          "feedback": "Voce nao se nega — mas escolhe o momento.",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "min": 0.55, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Sorrio, dou de ombros e mudo de assunto.",
+          "subtext": "Desviar fisico",
+          "tone": "evasivo",
+          "feedback": "Voce nao alimenta — provoca menos peso, mas zero embate.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mf4",
+      "type": "NORMAL",
+      "sceneHook": "Pai pergunta se voce vai ter filho",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Autoridade",
+        "aposta": "Paz Emocional",
+        "pilar": "ego",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Cafe da manha sabado, casa do seu pai. So voces dois na mesa, jornal aberto, sol entrando."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu pai, voz calma, jeito que parece despretensioso mas voce conhece. Tom de quem ta puxando pro lugar."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Voce ja pensou em ter filho? Sua mae ficaria feliz.' Voce nao planeja agora — talvez nunca. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Falo a verdade, com calma: 'Hoje nao penso nisso.'",
+          "subtext": "Verdade serena",
+          "tone": "neutro",
+          "feedback": "Voce nao mente nem se justifica — apenas se posiciona.",
+          "evidence": {
+            "presenca": { "min": 0.62, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Pai, isso e coisa minha.'",
+          "subtext": "Marca limite",
+          "tone": "pragmatico",
+          "feedback": "Voce protege o terreno — mas o cafe esfria.",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Quem sabe, ne. Vamos ver.'",
+          "subtext": "Resposta neutra",
+          "tone": "evasivo",
+          "feedback": "Voce evita o atrito — mas ele vai voltar.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mf5",
+      "type": "NORMAL",
+      "sceneHook": "Irmao seu chega bebado no jantar",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Paz Emocional",
+        "pilar": "pertencimento",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Sexta de noite, casa dos seus pais. Jantar marcado as 20h pra apresentar uma noticia em familia."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Seu irmao mais velho chega 21h30 visivelmente bebado. Cambaleia entrando, voz alta, sorriso desfocado."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Sua mae olha pra voce com olho cheio. Seu pai aperta o garfo. Irmao sentou e nem percebeu o clima. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Chamo ele de lado: 'Vai dormir, falo com eles.'",
+          "subtext": "Salva a cena",
+          "tone": "protetor",
+          "feedback": "Voce tira o problema antes da explosao — mas carrega o peso.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "desapego": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Sigo a noite como se fosse normal.",
+          "subtext": "Finge que nao viu",
+          "tone": "evasivo",
+          "feedback": "Voce protege o irmao — todos sentem.",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Mano, voce ta sem nocao. Vai pra casa.'",
+          "subtext": "Encara em publico",
+          "tone": "pragmatico",
+          "feedback": "Voce expoe o que todos veem — fim do disfarce.",
+          "evidence": {
+            "vigor": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "mf6",
+      "type": "NORMAL",
+      "sceneHook": "Avo conta historia constrangedora sua",
+      "metadata": {
+        "tensao": 2,
+        "ambiente": "Privado",
+        "relacao": "Autoridade",
+        "aposta": "Imagem Publica",
+        "pilar": "ego",
+        "proximidade": "alta"
+      },
+      "slides": [
+        {
+          "tipo": "ambiente",
+          "texto": "Almoco grande, voce trouxe um(a) namorado(a) pela primeira vez. Todos curiosos, conversa relaxada."
+        },
+        {
+          "tipo": "ator",
+          "texto": "Sua avo, encantada com o(a) novo(a). Comeca a contar pra ele(a) historias do tempo que voce era crianca."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ela puxa UMA historia bem constrangedora que voce contou pra ela em confianca. Mesa ja rindo. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Rio junto. Conto a versao da minha cabeca.",
+          "subtext": "Reapropriar a piada",
+          "tone": "neutro",
+          "feedback": "Voce vira o jogo — a piada virou sua.",
+          "evidence": {
+            "presenca": { "min": 0.62, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Vo, essa nao precisava contar...'",
+          "subtext": "Para a historia",
+          "tone": "pragmatico",
+          "feedback": "Voce protege o segredo — mas a mesa nota o desconforto.",
+          "evidence": {
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Forco sorriso e mudo de assunto rapido.",
+          "subtext": "Cobre o vexame",
+          "tone": "evasivo",
+          "feedback": "Voce sai pelas tangentes — todo mundo nota o esforco.",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "presenca": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    }
+  ]
+}

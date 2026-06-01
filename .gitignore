@@ -70,4 +70,8 @@ next-env.d.ts
 # supabase CLI temp
 supabase/.temp/
 
+# playwright MCP scratch + screenshots de dev (nao sao assets finais da loja)
+.playwright-mcp/
+docs/playstore-assets/screenshots/dev/
+
 .claude/worktrees/
