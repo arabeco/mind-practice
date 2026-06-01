@@ -10,6 +10,12 @@ import roda from './roda.json';
 import teste from './teste.json';
 import limite from './limite.json';
 import escolha from './escolha.json';
+// Season 1 — "Ocupando Espaço"
+import oFio from './o_fio.json';
+import aLamina from './a_lamina.json';
+import mesaFamilia from './mesa_familia.json';
+import carteiraPesada from './carteira_pesada.json';
+import oConvite from './o_convite.json';
 import type { Deck, DeckCategory } from '@/types/game';
 
 export const ALL_DECKS: Deck[] = [
@@ -25,6 +31,12 @@ export const ALL_DECKS: Deck[] = [
   teste as unknown as Deck,
   limite as unknown as Deck,
   escolha as unknown as Deck,
+  // Season 1 — "Ocupando Espaço"
+  oFio as unknown as Deck,
+  aLamina as unknown as Deck,
+  mesaFamilia as unknown as Deck,
+  carteiraPesada as unknown as Deck,
+  oConvite as unknown as Deck,
 ];
 
 export const getDeckById = (id: string): Deck | undefined =>

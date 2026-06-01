@@ -1,0 +1,436 @@
+{
+  "deckId": "o_convite",
+  "name": "O Convite",
+  "description": "Temporada 1. Uma oferta tentadora chega no momento certo — e cresce. Quem voce vira pra ser aceito?",
+  "tema": "Temporada 1 — Campanha narrativa ramificada",
+  "category": "campanha",
+  "tier": 6,
+  "difficulty": 5,
+  "rarity": "campanha",
+  "seasonId": "season-1",
+  "priceFichas": 200,
+  "startSceneId": "ct1",
+  "endings": [
+    {
+      "id": "o_pertencente",
+      "title": "O Pertencente",
+      "tagline": "Voce aceitou. Por dentro virou outro.",
+      "description": "Voce entrou e ficou. As regras viraram suas. Quem voce era cabe num porta-retrato no canto da nova casa.",
+      "flavor": "Caminho da Harmonia / Pertencimento"
+    },
+    {
+      "id": "o_negociador",
+      "title": "O Negociador",
+      "tagline": "Voce entrou nos seus termos.",
+      "description": "Voce nao aceitou de joelho nem virou as costas. Reescreveu o contrato em voz baixa, e ficou no jogo sem deixar de ser voce.",
+      "flavor": "Caminho do Filtro / Presenca"
+    },
+    {
+      "id": "o_recusado",
+      "title": "O Recusado",
+      "tagline": "Voce disse nao, e dormiu bem.",
+      "description": "Voce escolheu nao caber. Saiu da sala sem performance. As vezes esse e o luxo maior.",
+      "flavor": "Caminho do Desapego / Vigor"
+    },
+    {
+      "id": "o_incendiario",
+      "title": "O Incendiario",
+      "tagline": "Voce entrou pra queimar tudo por dentro.",
+      "description": "Voce viu o jogo, entrou, e nao guardou o segredo. Custou caro — mas alguem precisava falar a verdade na sala fechada.",
+      "flavor": "Caminho do Vigor / Presenca"
+    }
+  ],
+  "questions": [
+    {
+      "id": "ct1",
+      "type": "NORMAL",
+      "sceneHook": "Dia 1 — Cafe inesperado, oferta improvavel",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Quarta a tarde, alguem que voce admira ha anos te chama pra um cafe rapido perto do escritorio. Vai sem agenda."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Sentado em frente a voce, ele convida pra entrar num grupo seleto — circulo de oito pessoas que se ajudam. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Que honra. To dentro.'",
+          "subtext": "Aceita na hora",
+          "tone": "protetor",
+          "feedback": "Voce nao quis perder o trem — entrou sem ler.",
+          "aftermath": "Ele sorriu como quem nao esperava. Te explicou que tem reuniao na proxima quinta. Voce saiu daquele cafe com algo dentro: orgulho misturado com algo que voce ainda nao sabe nomear. Em casa, a noite, ja sentiu o peso de pertencer.",
+          "nextSceneId": "ct3",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Adorei. Posso pensar e te dar resposta semana que vem?'",
+          "subtext": "Compra tempo",
+          "tone": "neutro",
+          "feedback": "Voce nao se entrega — investe em clareza.",
+          "aftermath": "Ele assentiu com respeito visivel. Voce saiu do cafe ja pensando — quanto custa pertencer? Em casa, fez uma lista mental. Algumas coisas nao bateram. Outros dias se passaram, e a pergunta nao saiu.",
+          "nextSceneId": "ct3",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Obrigado, mas nao quero entrar em grupos.'",
+          "subtext": "Recusa de cara",
+          "tone": "pragmatico",
+          "feedback": "Voce ja sabe que nao cabe — sem precisar testar.",
+          "aftermath": "Ele cumprimentou e foi embora antes do cafe esfriar. Voce voltou a pe, sentindo um vazio leve no peito. A noite ja sabia que nao era arrependimento — era so o lugar limpo onde a oferta esteve por trinta minutos.",
+          "nextSceneId": "ct5",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "desapego": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ct3",
+      "type": "NORMAL",
+      "sceneHook": "Dia 3 — Primeira reuniao do grupo",
+      "metadata": {
+        "tensao": 3,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "pertencimento"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sexta a noite, apartamento alto, ar refrigerado, vinho bom. Sete pessoas, voce o oitavo, todos numa idade parecida. Voce nao conhecia nenhum."
+        },
+        {
+          "tipo": "evento",
+          "texto": "A conversa flui ate uma mulher pedir: 'Conta um segredo seu que ninguem aqui ainda sabe — pra ancorar.' Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Conto um segredo serio meu.",
+          "subtext": "Entrega genuina",
+          "tone": "presenca",
+          "feedback": "Voce escolhe pertencer pelo risco — vulnerabilidade real.",
+          "aftermath": "Voce falou. A sala assentiu. Tres pessoas tambem contaram. No fim da noite, alguem te abracou. Voce saiu sentindo um pertencimento estranho. No metro de volta, percebeu que tres desconhecidos sabem coisas que sua mae nao sabe. Algo travou.",
+          "nextSceneId": "ct5",
+          "evidence": {
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Conto algo leve, controlado.",
+          "subtext": "Gerencia o que entrega",
+          "tone": "neutro",
+          "feedback": "Voce entra no jogo sem se entregar.",
+          "aftermath": "A sala riu na hora certa. Voce nao mentiu, mas tambem nao se abriu. No final da noite, voce notou tres pessoas se olharem entre si — leitura compartilhada. Voce nao sabe se passou no teste ou foi marcado como reservado demais.",
+          "nextSceneId": "ct5",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Prefiro nao. Posso ouvir antes de contar?'",
+          "subtext": "Recusa o ritual",
+          "tone": "pragmatico",
+          "feedback": "Voce nao topa a regra do primeiro pedido — define seu tempo.",
+          "aftermath": "Silencio breve. Quem pediu sorriu apertado. A conversa continuou, mas com uma nota a menos. No metro, voce sentiu que cruzou uma linha que ninguem explicou direito. Ja saiu sabendo: ou eles te aceitam assim, ou nao adianta entrar.",
+          "nextSceneId": "ct5",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ct5",
+      "type": "NORMAL",
+      "sceneHook": "Dia 4 — Mensagem privada com pedido",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Digital",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sabado de manha, voce no cafe lendo. Chega mensagem de um do grupo — pessoa que voce mal conhece."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Pede um favor que so voce faria no trabalho. Pequeno, eticamente cinza. 'E como funcionamos.' Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Faco. Pertencer custa coisa.",
+          "subtext": "Paga o ingresso",
+          "tone": "protetor",
+          "feedback": "Voce aceita o codigo silencioso — virou peca da engrenagem.",
+          "aftermath": "Voce fez. Mensagem de obrigado, emoji de fogo. Na semana seguinte, alguem te ofereceu algo de volta — informacao, acesso, conexao. O sistema funcionou. Mas algo em voce trocou de lugar. A noite, voce percebeu que nao escreveria sobre isso num diario.",
+          "nextSceneId": "ct7",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Negocio: 'Faco se voce me ajudar em X tambem.'",
+          "subtext": "Entra no contrato",
+          "tone": "pragmatico",
+          "feedback": "Voce nao recusa nem aceita de graca — entrou nos termos.",
+          "aftermath": "A pessoa demorou cinco minutos pra responder. Depois disse: 'Acordo'. Voce sentiu o nivel do jogo mudar. Voce nao ta mais sendo testado. Voce ta sendo negociado. A diferenca e que agora os dois lados se respeitam — e isso pode ser tudo, ou ser o comeco do fim.",
+          "nextSceneId": "ct7",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Cara, esse nao da. Sem ofensa.'",
+          "subtext": "Recusa com cuidado",
+          "tone": "pragmatico",
+          "feedback": "Voce protege a sua linha — paga o preco em pertencimento.",
+          "aftermath": "Ele leu, e nao respondeu. Tres dias depois, voce nao foi chamado pra um almoco do grupo. Coincidencia? Voce sabe que nao. Em casa, voce dormiu bem mesmo assim. Pela primeira vez essa semana.",
+          "nextSceneId": "ct7",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "filtro": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ct7",
+      "type": "NORMAL",
+      "sceneHook": "Dia 5 — Aviso anonimo no email",
+      "metadata": {
+        "tensao": 4,
+        "ambiente": "Digital",
+        "relacao": "Desconhecido",
+        "aposta": "Status",
+        "pilar": "seguranca"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Domingo de manha, voce abre o email pra ver newsletter. No meio, uma mensagem de remetente desconhecido, criptografada."
+        },
+        {
+          "tipo": "evento",
+          "texto": "'Entrou no que eu sai ano passado. Vao te pedir algo grande em duas semanas. Te conto se quiser.' Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "Respondo: 'Quero ouvir.'",
+          "subtext": "Investiga o aviso",
+          "tone": "neutro",
+          "feedback": "Voce nao ignora o sinal vermelho — paga a duvida com clareza.",
+          "aftermath": "Ele te contou. Voce nao soube se era verdade, mas a historia bate com tres detalhes que voce ja percebeu. Em casa, voce desligou o celular por uma hora e sentou no sofa pensando em quem voce queria ser daqui pra frente. Algumas perguntas ja tinham resposta.",
+          "nextSceneId": "ct9",
+          "evidence": {
+            "filtro": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Apago e bloqueio. Nao vou ouvir desconhecido.",
+          "subtext": "Recusa o ruido",
+          "tone": "pragmatico",
+          "feedback": "Voce protege seu foco — pode ter perdido algo importante.",
+          "aftermath": "Apagou. Bloqueou. Voltou pro livro. A semana correu normal. Voce nao soube se era amigo ou inimigo aquele anonimo — mas escolheu nao alimentar fantasma. A vida segue mais limpa assim, ou mais cega. Voce ainda nao sabe.",
+          "nextSceneId": "ct9",
+          "evidence": {
+            "desapego": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.45, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "Mostro o email pra alguem do grupo.",
+          "subtext": "Testa lealdade",
+          "tone": "provocativo",
+          "feedback": "Voce empurra a verdade pra eles resolverem — abre o jogo.",
+          "aftermath": "A resposta foi 'que loucura, alguem ta tentando te confundir, ignora'. Voce sorriu pra pessoa e disse que sim. Mas notou algo fugaz no olho dela quando voce mostrou. Voltou pra casa carregando um eco. Quem mentiu? Voce nao sabe — mas alguem mentiu naquela troca.",
+          "nextSceneId": "ct9",
+          "evidence": {
+            "vigor": { "min": 0.6, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ct9",
+      "type": "NORMAL",
+      "sceneHook": "Dia 6 — O pedido grande",
+      "metadata": {
+        "tensao": 5,
+        "ambiente": "Profissional",
+        "relacao": "Autoridade",
+        "aposta": "Status",
+        "pilar": "propriedade"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Quinta a tarde, sala privada, persianas baixas. Quem te convidou ha cinco dias ta sentado em frente, mais serio agora."
+        },
+        {
+          "tipo": "evento",
+          "texto": "Ele faz um pedido que custa caro: voce abre informacao do seu trabalho, em troca de promocao garantida la dentro. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'To dentro. Manda como funciona.'",
+          "subtext": "Cruza a linha",
+          "tone": "pragmatico",
+          "feedback": "Voce escolheu o lado — agora pertence de verdade.",
+          "aftermath": "Voce fez. A promocao saiu na segunda. Voce ficou sem dormir tres noites. Decimo dia, voce sorriu de novo. Decimo quinto, voce mandou audio comemorando pra um amigo que nao conhece o circulo. Voce ja virou.",
+          "nextSceneId": "ct10",
+          "evidence": {
+            "harmonia": { "min": 0.6, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "filtro": { "max": 0.38, "confidence": 0.7 }
+          }
+        },
+        {
+          "text": "'Posso pensar 24h?'",
+          "subtext": "Compra tempo final",
+          "tone": "neutro",
+          "feedback": "Voce nao decide na pressao — clareza acima do conforto.",
+          "aftermath": "Ele assentiu mas levou trinta segundos a mais que da outra vez. Voce saiu daquela sala pra rua. O sol bateu na sua cara, voce sentiu medo de verdade pela primeira vez em meses. Em casa, abriu o notebook e olhou pra documento em branco por horas. As respostas precisam ser suas.",
+          "nextSceneId": "ct10",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Nao vou fazer. E nao quero falar disso de novo.'",
+          "subtext": "Encerra a relacao",
+          "tone": "pragmatico",
+          "feedback": "Voce nomeia o limite — fechou a porta dessa sala.",
+          "aftermath": "Ele te encarou por um segundo longo. Disse 'entendido', sem expressao. Voce saiu da sala e nao foi mais chamado pra nada. Tres semanas depois, voce ouviu falar de uma demissao no seu setor. Voce nao tem certeza se foi consequencia. Mas dormiu bem.",
+          "nextSceneId": "ct10",
+          "evidence": {
+            "vigor": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        }
+      ]
+    },
+    {
+      "id": "ct10",
+      "type": "NORMAL",
+      "sceneHook": "Dia 7 — Sua resposta final",
+      "metadata": {
+        "tensao": 5,
+        "ambiente": "Privado",
+        "relacao": "Par",
+        "aposta": "Status",
+        "pilar": "ego"
+      },
+      "slides": [
+        {
+          "tipo": "contexto",
+          "texto": "Sexta a noite, voce em casa, luz baixa, vinho na mesa. Voce sabe que precisa fechar a historia — pra si ou pra eles."
+        },
+        {
+          "tipo": "evento",
+          "texto": "O telefone toca: alguem do grupo. Pergunta direto: 'A gente conta com voce ou nao?' A semana toda vem junto. Voce..."
+        }
+      ],
+      "options": [
+        {
+          "text": "'Conta sim. Eu to dentro pra valer agora.'",
+          "subtext": "Vincula de vez",
+          "tone": "protetor",
+          "feedback": "Voce escolheu pertencer. Agora carrega o codigo deles como seu.",
+          "aftermath": "Voce desligou e sentou em silencio. Saiu na manha seguinte pra trabalhar com algo novo no ombro — peso de pertencer. Em seis meses ja era um deles. Em dois anos ja nao se lembra de quem era antes desse cafe.",
+          "endingId": "o_pertencente",
+          "evidence": {
+            "harmonia": { "min": 0.62, "confidence": 0.75 },
+            "presenca": { "min": 0.55, "confidence": 0.6 },
+            "vigor": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Conta. Mas nos meus termos — vou expor o que nao concordo.'",
+          "subtext": "Aceita renegociando",
+          "tone": "neutro",
+          "feedback": "Voce entrou sem se ajoelhar — pacto re-escrito.",
+          "aftermath": "Houve um silencio. Depois ele disse: 'A gente conversa quarta.' Voce conseguiu reescrever o que parecia trava. Nem todo grupo aceita — esse aceitou. Voce ficou la, presente, com voz. Em dois anos virou referencia interna. Sem perder o nome.",
+          "endingId": "o_negociador",
+          "evidence": {
+            "filtro": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.42, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Nao conta. Obrigado por tudo, mas saio.'",
+          "subtext": "Sai limpo",
+          "tone": "pragmatico",
+          "feedback": "Voce escolhe nao caber — sem espetaculo, sem briga.",
+          "aftermath": "Voce desligou e ficou no silencio bom. Bloqueou tres contatos. Foi dormir cedo. Na manha seguinte, voce sentiu algo limpo, como ar entrando depois de chuva. As coisas vao acontecer mais devagar agora — mas sao todas suas.",
+          "endingId": "o_recusado",
+          "evidence": {
+            "desapego": { "min": 0.62, "confidence": 0.75 },
+            "vigor": { "min": 0.55, "confidence": 0.6 },
+            "harmonia": { "max": 0.4, "confidence": 0.6 }
+          }
+        },
+        {
+          "text": "'Conta. Mas vou contar tudo isso publicamente em duas semanas.'",
+          "subtext": "Entra pra expor",
+          "tone": "provocativo",
+          "feedback": "Voce entra pra incendiar — alguem precisava ser a voz.",
+          "aftermath": "Voce desligou com a mao tremendo. Duas semanas depois, voce publicou. Quatro pessoas te procuraram em silencio agradecendo. Outras tres te bloquearam pra sempre. Voce perdeu trabalho. Ganhou uma versao mais inteira de voce. Saiu inteiro do que parecia ser sua morte profissional. As vezes vale.",
+          "endingId": "o_incendiario",
+          "evidence": {
+            "vigor": { "min": 0.65, "confidence": 0.75 },
+            "presenca": { "min": 0.6, "confidence": 0.75 },
+            "harmonia": { "max": 0.38, "confidence": 0.7 }
+          }
+        }
+      ]
+    }
+  ]
+}
