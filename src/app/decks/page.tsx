@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useGame } from '@/context/GameContext';
-import { ALL_DECKS, DECK_UNLOCK_ORDER, getDecksByCategory, getWeeklyFreeDeckIds } from '@/data/decks/index';
+import { ALL_DECKS, getDecksByCategory, getWeeklyFreeDeckIds } from '@/data/decks/index';
 import type { Deck, DeckCategory } from '@/types/game';
 import DeckTarotCard from '@/components/DeckTarotCard';
 import DeckDetailModal from '@/components/DeckDetailModal';
@@ -16,9 +16,10 @@ import PaywallModal from '@/components/PaywallModal';
 
 const FREE_SEASON_ID = 'season-0';
 
-type TabId = DeckCategory | 'loja';
+type TabId = DeckCategory | 'tudo' | 'loja';
 
 const TABS: { id: TabId; label: string }[] = [
+  { id: 'tudo', label: 'Tudo' },
   { id: 'calibragem', label: 'Calibragem' },
   { id: 'eixo', label: 'Eixos' },
   { id: 'cenario', label: 'Cenarios' },
@@ -26,23 +27,16 @@ const TABS: { id: TabId; label: string }[] = [
   { id: 'loja', label: 'Loja' },
 ];
 
-const DECK_PRICES: Record<string, number> = {
-  basic_01: 0,
-  espelho: 0,
-  mascara: 0,
-  roda: 0,
-  teste: 0,
-  limite: 0,
-  escolha: 0,
-  holofote: 10,
-  alta_tensao: 15,
-  profissional: 25,
-  social: 35,
-  livro_amaldicoado: 50,
-};
+type Ownership = 'tudo' | 'meus' | 'faltantes';
+const OWNERSHIP_FILTERS: { id: Ownership; label: string }[] = [
+  { id: 'tudo', label: 'Tudo' },
+  { id: 'meus', label: 'Meus' },
+  { id: 'faltantes', label: 'Faltantes' },
+];
 
 export default function DecksPage() {
-  const [activeTab, setActiveTab] = useState<TabId>('calibragem');
+  const [activeTab, setActiveTab] = useState<TabId>('tudo');
+  const [ownership, setOwnership] = useState<Ownership>('tudo');
   const [selectedDeck, setSelectedDeck] = useState<Deck | null>(null);
   const [paywall, setPaywall] = useState<null | 'deck_locked'>(null);
   const router = useRouter();
@@ -53,7 +47,29 @@ export default function DecksPage() {
   const discountDeckId = getWeeklyDiscountDeckId();
   const POPULAR_DECK = 'basic_01';
 
-  const decks = activeTab === 'loja' ? ALL_DECKS : getDecksByCategory(activeTab);
+  // Filtro de categoria
+  const decksRaw = activeTab === 'tudo' || activeTab === 'loja'
+    ? ALL_DECKS
+    : getDecksByCategory(activeTab);
+
+  // Filtro de propriedade (tem ou nao tem). Free weekly conta como "meu".
+  const decks = decksRaw.filter(d => {
+    if (ownership === 'tudo') return true;
+    const isFree = (d.priceFichas ?? 0) === 0 || weeklyFree.includes(d.deckId);
+    const isMine = !isDeckLocked(d.deckId) || isFree;
+    return ownership === 'meus' ? isMine : !isMine;
+  });
+
+  // Calcula coleção (decks que tem, considerando free)
+  const collectionStats = (() => {
+    const total = ALL_DECKS.length;
+    const owned = ALL_DECKS.filter(d => {
+      const isFree = (d.priceFichas ?? 0) === 0 || weeklyFree.includes(d.deckId);
+      return !isDeckLocked(d.deckId) || isFree;
+    }).length;
+    const pct = total > 0 ? Math.round((owned / total) * 100) : 0;
+    return { total, owned, pct };
+  })();
 
   const handlePlay = () => {
     if (!selectedDeck) return;
@@ -69,7 +85,8 @@ export default function DecksPage() {
   };
 
   const getEffectivePrice = (deckId: string): number => {
-    const base = DECK_PRICES[deckId] ?? 50;
+    const deck = ALL_DECKS.find(d => d.deckId === deckId);
+    const base = deck?.priceFichas ?? 0;
     if (deckId === discountDeckId) return Math.floor(base * 0.5);
     return base;
   };
@@ -95,55 +112,65 @@ export default function DecksPage() {
       <div className="mb-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/68">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
+            <div className="glass-pill inline-flex items-center gap-2 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.24em] text-accent-gold/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-gold shadow-[0_0_14px_rgba(212,175,55,0.85)]" />
               Biblioteca
             </div>
             <h2 className="mt-2 text-xl font-bold text-accent-gold">Decks</h2>
             <p className="mt-0.5 text-xs text-white/46">Escolha seu desafio</p>
           </div>
 
-          {/* Progresso da jornada — discreto, no canto */}
-          {(() => {
-            const doneIds = new Set(Object.keys(state.completedDecks));
-            const doneCount = DECK_UNLOCK_ORDER.filter(id => doneIds.has(id)).length;
-            const totalCount = DECK_UNLOCK_ORDER.length;
-            const pct = (doneCount / totalCount) * 100;
-            return (
-              <div className="shrink-0 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2 text-right">
-                <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">
-                  Jornada
-                </p>
-                <p className="text-sm font-bold tabular-nums text-white/88">
-                  {doneCount}<span className="text-white/30"> / {totalCount}</span>
-                </p>
-                <div className="mt-1 h-1 w-16 overflow-hidden rounded-full bg-white/8">
-                  <motion.div
-                    className="h-full rounded-full bg-gradient-to-r from-accent-purple to-accent-gold"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${pct}%` }}
-                    transition={{ duration: 0.6, ease: 'easeOut' }}
-                  />
-                </div>
-              </div>
-            );
-          })()}
+          {/* Coleção: X/Y · % — destaque dourado */}
+          <div className="shrink-0 rounded-xl border border-accent-gold/30 bg-accent-gold/[0.06] px-3 py-2 text-right">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-accent-gold/70">
+              Colecao
+            </p>
+            <p className="text-sm font-bold tabular-nums text-white/92">
+              {collectionStats.owned}<span className="text-white/30"> / {collectionStats.total}</span>
+              <span className="ml-1.5 text-[11px] font-mono text-accent-gold/90">{collectionStats.pct}%</span>
+            </p>
+            <div className="mt-1 h-1 w-20 overflow-hidden rounded-full bg-white/8">
+              <motion.div
+                className="h-full rounded-full bg-accent-gold"
+                initial={{ width: 0 }}
+                animate={{ width: `${collectionStats.pct}%` }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="glass-surface mb-4 flex gap-1.5 rounded-xl p-1.5">
+      {/* Tabs — categoria do deck (scroll horizontal se necessario) */}
+      <div className="glass-surface mb-2 flex gap-1.5 overflow-x-auto rounded-xl p-1.5 scroll-hide">
         {TABS.map(tab => (
           <button
             key={tab.id}
             onClick={() => { setActiveTab(tab.id); setSelectedDeck(null); }}
-            className={`glass-button flex-1 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.12em] transition-all ${
+            className={`glass-button shrink-0 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-[0.12em] transition-all ${
               activeTab === tab.id
-                ? 'glass-pill text-white shadow-[0_0_18px_rgba(103,232,249,0.16)]'
+                ? 'glass-pill text-accent-gold shadow-[0_0_18px_rgba(212,175,55,0.22)]'
                 : 'glass-pill text-white/46 hover:text-white/72'
             }`}
           >
             {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Filtro de propriedade — Meus / Faltantes / Tudo */}
+      <div className="mb-4 flex gap-1.5">
+        {OWNERSHIP_FILTERS.map(f => (
+          <button
+            key={f.id}
+            onClick={() => setOwnership(f.id)}
+            className={`flex-1 rounded-lg border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] transition-colors ${
+              ownership === f.id
+                ? 'border-accent-gold/55 bg-accent-gold/14 text-accent-gold'
+                : 'border-white/10 bg-white/[0.03] text-white/40 hover:bg-white/[0.06] hover:text-white/70'
+            }`}
+          >
+            {f.label}
           </button>
         ))}
       </div>
