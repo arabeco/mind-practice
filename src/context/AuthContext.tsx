@@ -4,6 +4,12 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import type { User } from '@supabase/supabase-js';
 import { getSupabase } from '@/lib/supabase/client';
 import { attributeReferralOnSignup } from '@/lib/supabase/referrals';
+import {
+  getOAuthRedirectUrl,
+  isCapacitorNativeRuntime,
+  isNativeAuthCallbackUrl,
+  parseNativeAuthCallback,
+} from '@/lib/nativeAuth';
 
 interface AuthState {
   user: User | null;
@@ -59,21 +65,76 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   }, [sb]);
 
-  const signInWithGoogle = useCallback(async () => {
-    if (!sb) return;
-    await sb.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: window.location.origin },
-    });
+  // Deep link OAuth de volta no app nativo: captura com.mindpractice.app://auth/callback,
+  // troca o code por sessão. Sem isso, login Google/Apple não fecha no APK.
+  useEffect(() => {
+    if (!sb || !isCapacitorNativeRuntime()) return;
+
+    let disposed = false;
+    let removeListener: (() => void) | null = null;
+
+    void (async () => {
+      const { App } = await import('@capacitor/app');
+      const { Browser } = await import('@capacitor/browser');
+      const handle = await App.addListener('appUrlOpen', async ({ url }) => {
+        if (disposed || !isNativeAuthCallbackUrl(url)) return;
+
+        const { code, error } = parseNativeAuthCallback(url);
+        try {
+          await Browser.close();
+        } catch {
+          // noop — em alguns devices o Custom Tab já fechou
+        }
+        if (error || !code) return;
+        await sb.auth.exchangeCodeForSession(code);
+        // onAuthStateChange (acima) cuida de setUser/redirect
+      });
+      removeListener = () => {
+        void handle.remove();
+      };
+      if (disposed) removeListener();
+    })();
+
+    return () => {
+      disposed = true;
+      if (removeListener) removeListener();
+    };
   }, [sb]);
 
-  const signInWithApple = useCallback(async () => {
-    if (!sb) return;
-    await sb.auth.signInWithOAuth({
-      provider: 'apple',
-      options: { redirectTo: window.location.origin },
-    });
-  }, [sb]);
+  const signInWithOAuthProvider = useCallback(
+    async (provider: 'google' | 'apple') => {
+      if (!sb) return;
+      const origin = typeof window !== 'undefined' ? window.location.origin : '';
+      const native = isCapacitorNativeRuntime();
+
+      const { data, error } = await sb.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: getOAuthRedirectUrl(origin),
+          skipBrowserRedirect: native, // no app, NÃO redireciona o WebView
+        },
+      });
+      if (error) throw error;
+
+      // No app: abre o login no navegador REAL (Chrome Custom Tab).
+      if (native && data?.url) {
+        const { Browser } = await import('@capacitor/browser');
+        await Browser.open({ url: data.url });
+      }
+      // No web: o supabase-js já redirecionou a aba.
+    },
+    [sb],
+  );
+
+  const signInWithGoogle = useCallback(
+    () => signInWithOAuthProvider('google'),
+    [signInWithOAuthProvider],
+  );
+
+  const signInWithApple = useCallback(
+    () => signInWithOAuthProvider('apple'),
+    [signInWithOAuthProvider],
+  );
 
   const signInWithPassword = useCallback(async (email: string, password: string): Promise<{ error: string | null }> => {
     if (!sb) return { error: 'Login indisponivel — Supabase não configurado.' };
