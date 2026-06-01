@@ -227,12 +227,12 @@ export default function PerfilPage() {
         {/* Action icons — top right corner */}
         <div className="absolute right-0 top-0 z-10 flex flex-col gap-1.5">
           <ShareButton archetype={archetype} axes={derivedAxes} nickname={nickname} compact />
-          <button type="button" onClick={handleStartEdit} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/50 transition-colors hover:text-white/80" title="Editar nickname">
+          <button type="button" onClick={handleStartEdit} className="flex h-8 w-8 items-center justify-center rounded-full border border-accent-gold/25 bg-accent-gold/8 text-accent-gold/70 transition-colors hover:border-accent-gold/55 hover:bg-accent-gold/15 hover:text-accent-gold" title="Editar nickname">
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
             </svg>
           </button>
-          <button type="button" onClick={requestToggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full bg-white/8 text-white/60 transition-colors hover:text-white/90" title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}>
+          <button type="button" onClick={requestToggleVariant} className="flex h-8 w-8 items-center justify-center rounded-full border border-accent-gold/25 bg-accent-gold/8 text-accent-gold/80 transition-colors hover:border-accent-gold/55 hover:bg-accent-gold/15 hover:text-accent-gold" title={`Trocar para ${variant === 'masculino' ? 'feminino' : 'masculino'}`}>
             <span className="text-[13px] font-bold leading-none" aria-hidden>
               {variant === 'masculino' ? '♀' : '♂'}
             </span>
@@ -244,7 +244,7 @@ export default function PerfilPage() {
           <button
             type="button"
             onClick={() => setAvatarModalOpen(true)}
-            className="group relative overflow-hidden rounded-2xl border-2 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all hover:border-white/35 hover:shadow-[0_8px_40px_rgba(192,192,192,0.12)]"
+            className="group relative overflow-hidden rounded-2xl border-2 border-accent-gold/45 shadow-[0_8px_32px_rgba(0,0,0,0.55),0_0_28px_rgba(212,175,55,0.18)] transition-all hover:border-accent-gold/75 hover:shadow-[0_8px_40px_rgba(0,0,0,0.55),0_0_42px_rgba(212,175,55,0.32)]"
             style={{ background: visual.background, width: '130px', aspectRatio: '9 / 16' }}
           >
             {!imageFailed && (
