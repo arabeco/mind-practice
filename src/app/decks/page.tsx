@@ -99,7 +99,7 @@ export default function DecksPage() {
               <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
               Biblioteca
             </div>
-            <h2 className="mt-2 text-xl font-bold text-white/92">Decks</h2>
+            <h2 className="mt-2 text-xl font-bold text-accent-gold">Decks</h2>
             <p className="mt-0.5 text-xs text-white/46">Escolha seu desafio</p>
           </div>
 

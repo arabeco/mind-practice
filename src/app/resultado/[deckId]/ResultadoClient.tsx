@@ -322,7 +322,7 @@ export default function ResultadoClient({ deckId }: { deckId: string }) {
                 <div className="flex flex-col gap-4 pt-3">
                   {/* Axis bars */}
                   <div className="glass-card rounded-[1.4rem] p-4">
-                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/34">
+                    <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-accent-gold/70">
                       Eixos atuais
                     </p>
                     <div className="space-y-2">

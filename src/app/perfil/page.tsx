@@ -307,7 +307,7 @@ export default function PerfilPage() {
               )}
             </div>
             {/* Archetype name + tagline */}
-            <h2 className="mt-0.5 text-xl font-bold text-white/95">{archetype.name}</h2>
+            <h2 className="mt-0.5 text-xl font-bold text-accent-gold/95">{archetype.name}</h2>
             <p className="text-[10px] italic text-white/45">{archetype.tagline}</p>
             <p className="mt-1 text-[10px] text-white/55">
               {confidenceLabel}
