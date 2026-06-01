@@ -103,20 +103,21 @@ export function getLevelReward(level: number): number {
   return LEVEL_REWARDS[level] ?? 0;
 }
 
-/** Cor (hex) por tier — espelha STAT_COLORS pra harmonia visual. */
+/** Cor (hex) por tier — escala de cinza ate dourado pra alinhar com a
+ *  identidade do app (preto + dourado). Progressao visual sem fugir do brand. */
 export const LEVEL_TIER_COLOR: Record<LevelTier, string> = {
-  descobrindo: '#94a3b8', // slate
-  esboco:      '#a78bfa', // violet
-  contorno:    '#7dd3fc', // sky
-  firme:       '#d4af37', // gold
-  soberano:    '#f97316', // orange flame
+  descobrindo: '#9ca3af', // cinza claro
+  esboco:      '#cbd5e1', // prata
+  contorno:    '#e5e7eb', // branco quase puro
+  firme:       '#d4af37', // dourado MindPractice
+  soberano:    '#facc15', // dourado intenso
 };
 
-/** Glow CSS-ready por tier — pra cards/modais. */
+/** Glow CSS-ready por tier — escala cinza → dourado, sem matiz de outras cores. */
 export const LEVEL_TIER_GLOW: Record<LevelTier, string> = {
-  descobrindo: '0 0 18px rgba(148,163,184,0.18)',
-  esboco:      '0 0 24px rgba(167,139,250,0.22)',
-  contorno:    '0 0 26px rgba(125,211,252,0.24)',
+  descobrindo: '0 0 20px rgba(156,163,175,0.18)',
+  esboco:      '0 0 24px rgba(203,213,225,0.20)',
+  contorno:    '0 0 26px rgba(229,231,235,0.22)',
   firme:       '0 0 30px rgba(212,175,55,0.30)',
-  soberano:    '0 0 36px rgba(249,115,22,0.34)',
+  soberano:    '0 0 36px rgba(250,204,21,0.34)',
 };
