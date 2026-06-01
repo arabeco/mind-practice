@@ -64,7 +64,7 @@ Status no repo (schema.sql + migrations) — todas com RLS **e** policy:
 - [x] referrals, season_scores
 - [x] subscriptions (só `subs_read_own` — write via service_role), purchases
 - [x] waitlist (insert anon), ficha_spend_log, mobile_purchases
-- [ ] ⚠️ Rodar a query acima no SQL Editor pra confirmar que o banco REAL bate com o repo
+- [x] ✅ **Confirmado no banco REAL (2026-06-01):** 14 tabelas, todas com `rls_on=true` E ≥1 policy. Zero tabela com RLS-sem-policy. (inclui `account_deletion_web_requests`)
 
 ## 5️⃣ Conformidade / Build
 - [x] Privacidade — https://arabeco.github.io/privacidade-mind-practice.html
