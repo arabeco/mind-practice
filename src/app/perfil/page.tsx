@@ -14,6 +14,7 @@ import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
 import ReferralPanel from '@/components/ReferralPanel';
 import LevelBadge from '@/components/LevelBadge';
+import DailyAndAchievements from '@/components/DailyAndAchievements';
 import { getPlayerLevel } from '@/lib/playerLevel';
 import { useToast } from '@/components/Toast';
 import { deleteAccountRequest } from '@/lib/accountDeletion';
@@ -340,6 +341,16 @@ export default function PerfilPage() {
       {/* ================================================================ */}
       <motion.section variants={fadeUp} className="mt-3">
         <LevelBadge info={levelInfo} />
+      </motion.section>
+
+      {/* ================================================================ */}
+      {/* Daily login + Achievements                                       */}
+      {/* ================================================================ */}
+      <motion.section variants={fadeUp} className="mt-3">
+        <DailyAndAchievements
+          state={state}
+          onClaim={() => dispatch({ type: 'CLAIM_DAILY' })}
+        />
       </motion.section>
 
       {/* ================================================================ */}

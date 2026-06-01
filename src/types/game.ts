@@ -308,7 +308,14 @@ export const INITIAL_WALLET: Wallet = {
   runsPaidDate: null,
 };
 
-export const DAILY_FICHAS = 10;
+/** Fichas que o jogador ganha ao logar pela 1a vez no dia (escasso). */
+export const DAILY_FICHAS = 3;
+
+/** Bonus extra concedido a cada N dias consecutivos de login. */
+export const DAILY_STREAK_BONUS_FICHAS = 15;
+
+/** Tamanho da streak (em dias) que dispara o bonus. */
+export const DAILY_STREAK_LENGTH = 7;
 
 // Ficha economy — fonts/sinks.
 export const RUN_PISO_FICHAS = 3;             // era 2
@@ -362,6 +369,12 @@ export interface GameState {
   firstFirmArchetypeSeenAt: string | null;
   /** ID do ultimo arquetipo "firme" visto pelo jogador. Usado pra detectar evolucoes (mudanca de arquetipo). */
   lastFirmArchetypeId: string | null;
+  /** Data ISO (YYYY-MM-DD local) do ultimo claim de fichas diarias. Null = nunca clamou. */
+  dailyLoginClaimedAt: string | null;
+  /** Streak de logins consecutivos. Quebra se pular um dia. */
+  loginStreak: number;
+  /** Achievements destrancados: { achievementId: ISO timestamp do unlock }. */
+  achievements: Record<string, string>;
 }
 
 // ============================================================

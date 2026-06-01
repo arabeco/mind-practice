@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const CURRENT_SCHEMA_VERSION = 4;
+export const CURRENT_SCHEMA_VERSION = 5;
 
 const WalletSchema = z.object({
   fichas: z.number().default(20),
@@ -67,6 +67,10 @@ export const GameStateSchema = z.object({
   lastSeenLevel: z.number().int().min(1).max(10).default(1),
   firstFirmArchetypeSeenAt: z.string().nullable().default(null),
   lastFirmArchetypeId: z.string().nullable().default(null),
+  // v5 — daily login + achievements
+  dailyLoginClaimedAt: z.string().nullable().default(null),
+  loginStreak: z.number().int().min(0).default(0),
+  achievements: z.record(z.string(), z.string()).default({}),
 }).strip();
 
 /** Tipo persistido — inclui schemaVersion + updatedAt + devicePersistedAt. */

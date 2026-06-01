@@ -5,6 +5,8 @@ import {
   useContext,
   useReducer,
   useCallback,
+  useEffect,
+  useRef,
   type ReactNode,
 } from 'react';
 import { type GameState, type Deck, type Archetype } from '@/types/game';
@@ -32,6 +34,7 @@ import { useFirstArchetypeCeremony } from './useFirstArchetypeCeremony';
 import { useArchetypeEvolution } from './useArchetypeEvolution';
 import { useSeasonFinale } from './useSeasonFinale';
 import { useLeaderboardSync } from './useLeaderboardSync';
+import { checkAchievements } from '@/lib/achievementChecks';
 
 // Re-export stat helpers so existing callers (perfil page etc) continue working.
 export {
@@ -70,6 +73,37 @@ export function GameProvider({ children }: { children: ReactNode }) {
   const { pending: firstArch, dismiss: dismissFirstArch } = useFirstArchetypeCeremony(state, hydrated, dispatch);
   const { pending: evolution, dismiss: dismissEvolution } = useArchetypeEvolution(state, hydrated, dispatch);
   const { pending: seasonFinale, dismiss: dismissSeasonFinale } = useSeasonFinale(state, hydrated, dispatch);
+
+  // Avaliacao automatica de achievements — dispara unlocks idempotente
+  // sempre que o estado relevante muda (runs, respostas, decks completados).
+  const lastAchievementCheck = useRef<string>('');
+  useEffect(() => {
+    if (!hydrated) return;
+    const snaps = state.calibration?.snapshots?.length ?? 0;
+    const resp = state.calibration?.totalResponses ?? 0;
+    const completed = state.completedDecks ? Object.keys(state.completedDecks).length : 0;
+    const achs = state.achievements ? Object.keys(state.achievements).length : 0;
+    const sig = `${snaps}|${resp}|${completed}|${achs}`;
+    if (sig === lastAchievementCheck.current) return;
+    lastAchievementCheck.current = sig;
+    // Garante state minimo pra check rodar sem crash
+    const safeState = {
+      ...state,
+      achievements: state.achievements ?? {},
+      completedDecks: state.completedDecks ?? {},
+    };
+    const newUnlocks = checkAchievements(safeState);
+    for (const u of newUnlocks) {
+      dispatch({ type: 'UNLOCK_ACHIEVEMENT', achievementId: u.id, rewardFichas: u.rewardFichas });
+    }
+  }, [
+    hydrated,
+    state.calibration?.snapshots?.length,
+    state.calibration?.totalResponses,
+    state.completedDecks,
+    state.achievements,
+    state,
+  ]);
 
   const isDeckLocked = useCallback(
     (deckId: string) => !state.unlockedDecks.includes(deckId),

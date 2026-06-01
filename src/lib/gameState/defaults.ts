@@ -34,4 +34,7 @@ export const INITIAL_STATE: GameState = {
   lastSeenLevel: 1,
   firstFirmArchetypeSeenAt: null,
   lastFirmArchetypeId: null,
+  dailyLoginClaimedAt: null,
+  loginStreak: 0,
+  achievements: {},
 };

@@ -16,6 +16,8 @@ import {
   INITIAL_WALLET,
   INITIAL_PLUS_SUBSCRIPTION,
   DAILY_FICHAS,
+  DAILY_STREAK_BONUS_FICHAS,
+  DAILY_STREAK_LENGTH,
   RUN_PISO_FICHAS,
   RUN_PISO_CAP_PER_DAY,
   FIRST_RUN_OF_DAY_BONUS,
@@ -78,6 +80,7 @@ export type GameAction =
   | { type: 'UNLOCK_DECK'; deckId: string; cost: number }
   | { type: 'SET_PLUS_STATUS'; active: boolean; expiresAt: string | null; startedAt?: string }
   | { type: 'CLAIM_DAILY_PLUS_BONUS' }
+  | { type: 'UNLOCK_ACHIEVEMENT'; achievementId: string; rewardFichas: number }
   | { type: 'MARK_LEVEL_SEEN'; level: number }
   | { type: 'MARK_FIRST_ARCHETYPE_SEEN'; archetypeId: string }
   | { type: 'MARK_ARCHETYPE_EVOLUTION_SEEN'; archetypeId: string }
@@ -104,6 +107,9 @@ export const initialState: GameState = {
   lastSeenLevel: 1,
   firstFirmArchetypeSeenAt: null,
   lastFirmArchetypeId: null,
+  dailyLoginClaimedAt: null,
+  loginStreak: 0,
+  achievements: {},
 };
 
 // ---------------------------------------------------------------------------
@@ -280,14 +286,38 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case 'CLAIM_DAILY': {
       const today = new Date().toISOString().split('T')[0];
-      if (state.wallet.lastDailyClaim === today) return state;
+      if (state.dailyLoginClaimedAt === today) return state;
+
+      // Calcula nova streak: +1 se claim foi ontem, reset pra 1 caso contrario.
+      const last = state.dailyLoginClaimedAt
+        ? new Date(state.dailyLoginClaimedAt + 'T00:00:00')
+        : null;
+      let newStreak = 1;
+      if (last) {
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yIso = yesterday.toISOString().split('T')[0];
+        if (state.dailyLoginClaimedAt === yIso) {
+          newStreak = state.loginStreak + 1;
+        }
+      }
+
+      // Bonus a cada N dias consecutivos.
+      const streakBonus =
+        newStreak > 0 && newStreak % DAILY_STREAK_LENGTH === 0
+          ? DAILY_STREAK_BONUS_FICHAS
+          : 0;
+      const totalEarnedNow = DAILY_FICHAS + streakBonus;
+
       return {
         ...state,
+        dailyLoginClaimedAt: today,
+        loginStreak: newStreak,
         wallet: {
           ...state.wallet,
-          fichas: state.wallet.fichas + DAILY_FICHAS,
+          fichas: state.wallet.fichas + totalEarnedNow,
           lastDailyClaim: today,
-          totalEarned: state.wallet.totalEarned + DAILY_FICHAS,
+          totalEarned: state.wallet.totalEarned + totalEarnedNow,
         },
       };
     }
@@ -555,6 +585,23 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
               totalEarned: state.wallet.totalEarned + reward,
             }
           : state.wallet,
+      };
+    }
+
+    case 'UNLOCK_ACHIEVEMENT': {
+      // Idempotente: nao destranca duas vezes.
+      if (state.achievements[action.achievementId]) return state;
+      return {
+        ...state,
+        achievements: {
+          ...state.achievements,
+          [action.achievementId]: new Date().toISOString(),
+        },
+        wallet: {
+          ...state.wallet,
+          fichas: state.wallet.fichas + action.rewardFichas,
+          totalEarned: state.wallet.totalEarned + action.rewardFichas,
+        },
       };
     }
 

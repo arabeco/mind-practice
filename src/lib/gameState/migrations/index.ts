@@ -2,6 +2,7 @@ import { CURRENT_SCHEMA_VERSION, VersionTooNewError } from '../schema';
 import { v1ToV2 } from './v1-to-v2';
 import { v2ToV3 } from './v2-to-v3';
 import { v3ToV4 } from './v3-to-v4';
+import { v4ToV5 } from './v4-to-v5';
 
 export type Migration = (raw: unknown) => unknown;
 
@@ -13,6 +14,7 @@ export const MIGRATIONS: Record<number, Migration> = {
   1: v1ToV2,
   2: v2ToV3,
   3: v3ToV4,
+  4: v4ToV5,
 };
 
 /**

@@ -21,6 +21,9 @@ const stateAt = (updatedAt: string, devicePersistedAt: string | null = null): Pe
   lastSeenLevel: 1,
   firstFirmArchetypeSeenAt: null,
   lastFirmArchetypeId: null,
+  dailyLoginClaimedAt: null,
+  loginStreak: 0,
+  achievements: {},
 });
 
 test('a) sem local sem cloud → initial', () => {
