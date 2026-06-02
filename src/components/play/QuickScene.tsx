@@ -206,20 +206,22 @@ export default function QuickScene({
                   onHoldCancel={() => setHoldingIdx(null)}
                   holdColor={holdColor}
                   enableHaptics={enableHaptics}
-                  className="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3.5 text-left backdrop-blur-md transition-colors hover:border-white/22 hover:bg-white/10"
+                  className="group/opt relative w-full overflow-hidden rounded-2xl border border-accent-gold/15 bg-gradient-to-b from-white/[0.07] to-white/[0.025] px-4 py-3.5 text-left backdrop-blur-md transition-all duration-200 hover:border-accent-gold/40 hover:from-white/[0.10] hover:to-white/[0.04] hover:shadow-[0_4px_24px_rgba(212,175,55,0.10)]"
                 >
                   <OptionRow option={option} index={i} holdColor={holdColor} />
                 </HoldButton>
               ) : (
                 <div
-                  className="w-full rounded-2xl border px-4 py-3.5 text-left"
+                  className="w-full overflow-hidden rounded-2xl border px-4 py-3.5 text-left"
                   style={{
                     borderColor: isFocused ? `${holdColor}66` : 'rgba(255,255,255,0.08)',
-                    backgroundColor: isFocused ? `${holdColor}14` : 'rgba(255,255,255,0.04)',
-                    boxShadow: isFocused ? `0 0 22px ${holdColor}33` : undefined,
+                    background: isFocused
+                      ? `linear-gradient(180deg, ${holdColor}1f, ${holdColor}0a)`
+                      : 'rgba(255,255,255,0.03)',
+                    boxShadow: isFocused ? `0 0 26px ${holdColor}33` : undefined,
                   }}
                 >
-                  <OptionRow option={option} index={i} holdColor={holdColor} />
+                  <OptionRow option={option} index={i} holdColor={holdColor} dimmed={!isFocused} />
                 </div>
               )}
             </motion.div>
@@ -296,31 +298,48 @@ function OptionRow({
   option,
   index,
   holdColor,
+  dimmed = false,
 }: {
   option: Option;
   index: number;
   holdColor: string;
+  dimmed?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className={`flex items-center gap-3.5 ${dimmed ? 'opacity-55' : ''}`}>
+      {/* Badge A/B/C — maior e mais presente */}
       <span
-        className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border text-[10px] font-bold"
+        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl border text-[13px] font-extrabold shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
         style={{
           borderColor: `${holdColor}55`,
           color: holdColor,
-          backgroundColor: `${holdColor}18`,
+          background: `linear-gradient(180deg, ${holdColor}26, ${holdColor}10)`,
         }}
       >
         {String.fromCharCode(65 + index)}
       </span>
       <div className="min-w-0 flex-1">
-        <p className="text-[14px] leading-snug text-white/92">{option.text}</p>
+        <p className="text-[14px] font-medium leading-snug text-white/92">{option.text}</p>
         {option.subtext && (
-          <p className="mt-0.5 text-[10px] uppercase tracking-[0.18em] text-white/42">
+          <p
+            className="mt-1 text-[9.5px] font-semibold uppercase tracking-[0.2em]"
+            style={{ color: `${holdColor}aa` }}
+          >
             {option.subtext}
           </p>
         )}
       </div>
+      {/* Chevron sutil — dica de "segure pra avancar" */}
+      <svg
+        className="h-4 w-4 flex-shrink-0 text-white/20 transition-colors group-hover/opt:text-accent-gold/60"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={2.2}
+        aria-hidden
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
     </div>
   );
 }
