@@ -119,8 +119,17 @@ export default function SceneTextStage({
             >
               {slide.texto}
             </motion.p>
-            <p className="mt-4 text-xs uppercase tracking-[0.24em] text-white/30">
-              {canTapAdvance ? 'Toque para acelerar' : isEvent ? 'Segura o impacto...' : 'Lendo o clima...'}
+            <p className="mt-4 flex items-center gap-1.5 text-xs uppercase tracking-[0.24em] text-white/40">
+              {canTapAdvance ? (
+                <>
+                  Toque para continuar
+                  <svg className="h-3 w-3 text-accent-gold/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4} aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </>
+              ) : (
+                <span className="text-white/25">{isEvent ? 'Respira...' : 'Sentindo o clima...'}</span>
+              )}
             </p>
           </div>
         </div>

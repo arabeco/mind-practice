@@ -191,16 +191,24 @@ export function getScenePhaseTimings(
   const contextWords = countWords(getSlideText(question, 'contexto'));
   const eventWords = countWords(getSlideText(question, 'evento'));
   const optionStaggerMs = reducedMotion ? 45 : 90;
-  const contextMs = clamp(2200 + contextWords * 45, 3000, 6000);
-  const eventMs = clamp(1800 + eventWords * 38, 2500, 5000);
+
+  // Filosofia de ritmo: o JOGADOR controla quando avancar (toque), assim que
+  // termina de ler. O auto-advance e so uma REDE DE SEGURANCA bem longa, pra
+  // quem deixa o celular de lado — nunca corta quem ta lendo.
+  //   - auto-advance: tempo de leitura generoso (~430ms/palavra) + base, com
+  //     piso de 7s/6s pra nunca cortar cedo, e teto de 20s/18s.
+  //   - skip: ~900ms, so o suficiente pro texto terminar de entrar — depois
+  //     disso o toque ja avanca, no ritmo da pessoa.
+  const contextMs = clamp(3500 + contextWords * 430, 7000, 20000);
+  const eventMs = clamp(3000 + eventWords * 430, 6000, 18000);
   const delayMs = getSceneDelay(question.metadata.tensao);
   const optionsReadyMs = (reducedMotion ? 150 : 220) + optionStaggerMs * 2;
 
   return {
     contextMs,
-    contextSkipMs: 3000,
+    contextSkipMs: reducedMotion ? 400 : 900,
     eventMs,
-    eventSkipMs: 3000,
+    eventSkipMs: reducedMotion ? 400 : 900,
     delayMs,
     optionStaggerMs,
     optionsReadyMs,
