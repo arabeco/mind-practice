@@ -2,7 +2,24 @@ import type { Deck, Question, QuestionType, Ambiente } from '@/types/game';
 import { getSceneDelay } from '@/types/game';
 
 export type ScenePhase = 'ready' | 'context' | 'event' | 'delay' | 'options' | 'feedback';
-export const OPTIONS_TIME_LIMIT_MS = 12_000;
+
+// O cronometro so comeca DEPOIS que todas as opcoes terminam de aparecer
+// (revelacao uma a uma). 10s de tempo real pra escolher, sem contar o reveal.
+export const OPTIONS_TIME_LIMIT_MS = 10_000;
+
+// Revelacao das opcoes: cada uma entra com este intervalo, e a animacao de
+// entrada dura OPTION_REVEAL_ANIM_MS. O director usa esses valores pra saber
+// quando a ultima opcao terminou de aparecer e so entao armar o cronometro.
+export const OPTION_REVEAL_STAGGER_MS = 360;
+export const OPTION_REVEAL_ANIM_MS = 420;
+
+/** Tempo total ate a ultima das `n` opcoes terminar de entrar. */
+export function getOptionsRevealMs(n: number, reducedMotion = false): number {
+  if (reducedMotion) return 200;
+  const stagger = OPTION_REVEAL_STAGGER_MS * Math.max(0, n - 1);
+  return stagger + OPTION_REVEAL_ANIM_MS;
+}
+
 export type TensionBand = 'leve' | 'media' | 'alta';
 
 export interface PresentationPrefs {

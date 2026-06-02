@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Option, Question } from '@/types/game';
 import {
   getScenePhaseTimings,
+  getOptionsRevealMs,
   OPTIONS_TIME_LIMIT_MS,
   type ScenePhase,
   type ScenePhaseTimings,
@@ -35,6 +36,16 @@ export function useSceneDirector({
   const onAnswerRef = useRef(onAnswerResolved);
   const onTimeoutRef = useRef(onTimeout);
   const optionsShownAtRef = useRef<number>(0);
+  const questionRef = useRef<Question | null>(question);
+  const reducedMotionRef = useRef<boolean>(reducedMotion);
+
+  useEffect(() => {
+    questionRef.current = question;
+  }, [question]);
+
+  useEffect(() => {
+    reducedMotionRef.current = reducedMotion;
+  }, [reducedMotion]);
 
   useEffect(() => {
     onAnswerRef.current = onAnswerResolved;
@@ -67,9 +78,17 @@ export function useSceneDirector({
     clearTimers();
     setPhase('options');
     setCanTapAdvance(false);
-    optionsShownAtRef.current = Date.now();
-    setOptionsDeadline(Date.now() + OPTIONS_TIME_LIMIT_MS);
-    schedule(handleTimeoutInternal, OPTIONS_TIME_LIMIT_MS);
+    // O cronometro NAO comeca junto com a fase: as opcoes aparecem uma a uma
+    // primeiro. So depois que a ultima entra, armamos o deadline + timeout.
+    setOptionsDeadline(null);
+    const numOpts = questionRef.current?.options.length ?? 4;
+    const reduced = reducedMotionRef.current;
+    const revealMs = getOptionsRevealMs(numOpts, reduced);
+    schedule(() => {
+      optionsShownAtRef.current = Date.now();
+      setOptionsDeadline(Date.now() + OPTIONS_TIME_LIMIT_MS);
+      schedule(handleTimeoutInternal, OPTIONS_TIME_LIMIT_MS);
+    }, revealMs);
   }, [clearTimers, handleTimeoutInternal, schedule]);
 
   const startPhase = useCallback((nextPhase: ScenePhase) => {
