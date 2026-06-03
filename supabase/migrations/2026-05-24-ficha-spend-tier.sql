@@ -84,10 +84,10 @@ begin
     -- 2. Catálogo server-side (defesa em profundidade)
     case p_tier_code
         when 'pro' then
-            v_price_fichas := 1000;
+            v_price_fichas := 400;   -- economia v2 (era 1000)
             v_duration_days := 30;
         when 'founder' then
-            v_price_fichas := 8000;
+            v_price_fichas := 2500;  -- economia v2 (era 8000)
             v_duration_days := null; -- vitalício
         else
             raise exception 'UNKNOWN_TIER:%', p_tier_code using errcode = 'P0001';

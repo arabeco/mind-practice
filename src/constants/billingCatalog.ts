@@ -9,9 +9,9 @@
  *   - fichas_700 (R$ 24,90 → 800 fichas, +14% bonus)
  *   - pro_monthly (R$ 14,90/mês, subscription, 7d trial)
  *
- * Apenas fichas (gasto interno) — 2 produtos:
- *   - pro_monthly (custa 1000 fichas, expira em 30 dias, força reroll)
- *   - founder_lifetime (custa 8000 fichas, vitalício, NÃO vende por R$)
+ * Apenas fichas (gasto interno) — 2 produtos (economia v2):
+ *   - pro_monthly (custa 400 fichas, expira em 30 dias, força reroll)
+ *   - founder_lifetime (custa 2500 fichas, vitalício, NÃO vende por R$)
  *
  * Padrão: Edge Function `verify-google-play-purchase` valida o productId
  * recebido contra esse catálogo. Cliente nunca é autoridade.
@@ -93,13 +93,13 @@ export const IAP_CATALOG: Record<string, IapProduct> = {
 export const FICHA_SPEND_CATALOG: Record<TierCode, FichaSpendProduct> = {
   pro: {
     code: 'pro',
-    priceFichas: 1000,
+    priceFichas: 400, // v2: ~20 dias de f2p (era 1000)
     durationDays: 30, // expira em 30d, força reroll
     tier: 'pro',
   },
   founder: {
     code: 'founder',
-    priceFichas: 8000,
+    priceFichas: 2500, // v2: prestígio ~125 dias (era 8000)
     durationDays: null, // vitalício
     tier: 'founder',
   },

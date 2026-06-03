@@ -308,23 +308,30 @@ export const INITIAL_WALLET: Wallet = {
   runsPaidDate: null,
 };
 
-/** Fichas que o jogador ganha ao logar pela 1a vez no dia (escasso). */
-export const DAILY_FICHAS = 5;
+// ============================================================
+// Economia v2 — "começo generoso, parede escassa" (viral + lucro)
+// Diário simples: 10/dia (login) + 50 no streak de 5 dias = ~20/dia em regime.
+// Onboarding generoso via DECK_FIRST_TIME_BONUS (1ª semana rende forte → arquétipo).
+// SEM grind por run (piso/1ª-do-dia/sem-timeout = 0) → mata farm infinito.
+// ============================================================
 
-/** Bonus extra concedido a cada N dias consecutivos de login. */
-export const DAILY_STREAK_BONUS_FICHAS = 15;
+/** Fichas ao logar pela 1a vez no dia. */
+export const DAILY_FICHAS = 10;
+
+/** Bonus ao completar o streak de login. */
+export const DAILY_STREAK_BONUS_FICHAS = 50;
 
 /** Tamanho da streak (em dias) que dispara o bonus. */
-export const DAILY_STREAK_LENGTH = 7;
+export const DAILY_STREAK_LENGTH = 5;
 
 // Ficha economy — fonts/sinks.
-export const RUN_PISO_FICHAS = 3;             // era 2
+export const RUN_PISO_FICHAS = 0;             // v2: sem grind por run
 export const RUN_PISO_CAP_PER_DAY = 5;
-export const FIRST_RUN_OF_DAY_BONUS = 5;      // era +3 inline
-export const STREAK_7_BONUS = 20;             // valor explicito (era inline)
-export const DECK_FIRST_TIME_BONUS = 15;      // NOVO — primeira vez completando deck
-export const NO_TIMEOUT_RUN_BONUS = 2;        // reduzido (5→2) + capado ao cap diario
-export const CAMPAIGN_ENDING_BONUS = 40;      // era 30
+export const FIRST_RUN_OF_DAY_BONUS = 0;      // v2: diário vem do CLAIM_DAILY
+export const STREAK_7_BONUS = 0;              // v2: streak consolidada no login
+export const DECK_FIRST_TIME_BONUS = 25;      // onboarding generoso (1ª vez por deck)
+export const NO_TIMEOUT_RUN_BONUS = 0;        // v2: sem bonus por run
+export const CAMPAIGN_ENDING_BONUS = 40;      // payoff narrativo (mantido)
 export const FRIEND_ACCEPT_BONUS = 5;
 export const SKIP_COOLDOWN_COST = 10;
 export const PLUS_DAILY_BONUS = 10;           // NOVO — claim diario Plus

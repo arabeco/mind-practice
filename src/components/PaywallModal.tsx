@@ -29,10 +29,12 @@ interface PaywallModalProps {
   onClose: () => void;
 }
 
+const PRO_PRICE_FICHAS = FICHA_SPEND_CATALOG.pro.priceFichas;
+
 const REASON_COPY: Record<PaywallReason, { headline: string; body: string }> = {
   deck_locked: {
     headline: 'Esse deck é Pro',
-    body: 'Decks além da Fundação destravam com Pro — pague com 1000 fichas ou R$ 14,90/mês.',
+    body: `Decks além da Fundação destravam com Pro — pague com ${PRO_PRICE_FICHAS} fichas ou R$ 14,90/mês.`,
   },
   run_cap: {
     headline: 'Limite de runs do dia',
@@ -40,11 +42,9 @@ const REASON_COPY: Record<PaywallReason, { headline: string; body: string }> = {
   },
   share_premium: {
     headline: 'Share card premium',
-    body: 'Cards visuais avançados são exclusivos Pro. Destrave com 1000 fichas ou R$ 14,90.',
+    body: `Cards visuais avançados são exclusivos Pro. Destrave com ${PRO_PRICE_FICHAS} fichas ou R$ 14,90.`,
   },
 };
-
-const PRO_PRICE_FICHAS = FICHA_SPEND_CATALOG.pro.priceFichas;
 
 export default function PaywallModal({ open, reason, onClose }: PaywallModalProps) {
   const router = useRouter();
