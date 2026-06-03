@@ -146,7 +146,7 @@ export function getArchetypeAvatarPaths(archetypeId: string, variant: AvatarVari
 
   if (order) {
     const prefix = variant === 'masculino' ? 'a' : 'b';
-    paths.push(`/avatars/${prefix}${order}.png`);
+    paths.push(`/avatars/${prefix}${order}.webp`);
   }
 
   // Set legado — fica como fallback se o novo PNG nao existir
