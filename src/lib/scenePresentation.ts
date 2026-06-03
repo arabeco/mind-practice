@@ -75,7 +75,7 @@ interface EnvironmentProfile {
 }
 
 const DEFAULT_PREFS: Omit<PresentationPrefs, 'reducedMotion'> = {
-  soundEnabled: false,
+  soundEnabled: true,
   hapticsEnabled: true,
 };
 

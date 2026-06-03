@@ -18,10 +18,10 @@ import { HAPTIC_GRAMMAR, type HapticPattern } from '@/lib/hapticGrammar';
 const PREFS_KEY = 'mindpractice_presentation_prefs';
 
 function readPrefs(): { sound: boolean; haptics: boolean } {
-  if (typeof window === 'undefined') return { sound: false, haptics: true };
+  if (typeof window === 'undefined') return { sound: true, haptics: true };
   try {
     const raw = localStorage.getItem(PREFS_KEY);
-    if (!raw) return { sound: false, haptics: true };
+    if (!raw) return { sound: true, haptics: true };
     const p = JSON.parse(raw) as { soundEnabled?: boolean; hapticsEnabled?: boolean };
     return { sound: p.soundEnabled ?? false, haptics: p.hapticsEnabled ?? true };
   } catch {

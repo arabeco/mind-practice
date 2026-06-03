@@ -15,6 +15,7 @@ import ShareButton from '@/components/ShareButton';
 import ReferralPanel from '@/components/ReferralPanel';
 import LevelBadge from '@/components/LevelBadge';
 import DailyAndAchievements from '@/components/DailyAndAchievements';
+import PreferencesCard from '@/components/PreferencesCard';
 import { getPlayerLevel } from '@/lib/playerLevel';
 import { useToast } from '@/components/Toast';
 import { deleteAccountRequest } from '@/lib/accountDeletion';
@@ -351,6 +352,11 @@ export default function PerfilPage() {
           state={state}
           onClaim={() => dispatch({ type: 'CLAIM_DAILY' })}
         />
+      </motion.section>
+
+      {/* Preferências: Som + Vibração */}
+      <motion.section variants={fadeUp} className="mt-3">
+        <PreferencesCard />
       </motion.section>
 
       {/* ================================================================ */}
