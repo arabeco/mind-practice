@@ -223,21 +223,27 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const pisoFichas = runsPaidSoFar < RUN_PISO_CAP_PER_DAY ? RUN_PISO_FICHAS : 0;
       const nextRunsPaidToday = pisoFichas > 0 ? runsPaidSoFar + 1 : runsPaidSoFar;
 
+      // Escassez controlada: as fontes "repetiveis" (piso + sem-timeout) so
+      // pagam dentro do RUN_PISO_CAP_PER_DAY runs/dia. Depois disso, replay so
+      // rende bonus de 1a vez (que esgota). Isso fecha as torneiras infinitas.
+      const withinDailyCap = runsPaidSoFar < RUN_PISO_CAP_PER_DAY;
+      const isFirstTimeDeck = deckId ? !state.completedDecks[deckId] : false;
+
       let bonusFichas = pisoFichas;
       // First run of the calendar day
       const firstOfDay = state.lastPlayDate !== todayStr;
       if (firstOfDay) bonusFichas += FIRST_RUN_OF_DAY_BONUS;
       // Weekly streak bonus (a cada 7 dias consecutivos)
       if (newStreak > 0 && newStreak % 7 === 0) bonusFichas += STREAK_7_BONUS;
-      // Zero-timeout run
+      // Zero-timeout run — so dentro do cap diario (era torneira infinita)
       const noTimeouts = state.activeRun ? state.activeRun.timeoutCount === 0 : false;
-      if (noTimeouts) bonusFichas += NO_TIMEOUT_RUN_BONUS;
-      // Calibragem — always rewarded (feeds profile + unlocks next)
-      if (deckId && CALIBRAGEM_IDS.has(deckId)) {
+      if (noTimeouts && withinDailyCap) bonusFichas += NO_TIMEOUT_RUN_BONUS;
+      // Calibragem — so na PRIMEIRA conclusao (alimenta perfil + destrava o
+      // proximo). Replay nao paga de novo (era torneira infinita).
+      if (deckId && CALIBRAGEM_IDS.has(deckId) && isFirstTimeDeck) {
         bonusFichas += CALIBRAGEM_COMPLETION_FICHAS;
       }
-      // NEW: primeira vez completando este deck (não paga em completar de novo)
-      const isFirstTimeDeck = deckId ? !state.completedDecks[deckId] : false;
+      // Primeira vez completando este deck (nao paga em completar de novo)
       if (isFirstTimeDeck) bonusFichas += DECK_FIRST_TIME_BONUS;
 
       const finishBeliefs = state.calibration.beliefs ?? createPriorProfile();

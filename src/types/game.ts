@@ -309,7 +309,7 @@ export const INITIAL_WALLET: Wallet = {
 };
 
 /** Fichas que o jogador ganha ao logar pela 1a vez no dia (escasso). */
-export const DAILY_FICHAS = 3;
+export const DAILY_FICHAS = 5;
 
 /** Bonus extra concedido a cada N dias consecutivos de login. */
 export const DAILY_STREAK_BONUS_FICHAS = 15;
@@ -323,7 +323,7 @@ export const RUN_PISO_CAP_PER_DAY = 5;
 export const FIRST_RUN_OF_DAY_BONUS = 5;      // era +3 inline
 export const STREAK_7_BONUS = 20;             // valor explicito (era inline)
 export const DECK_FIRST_TIME_BONUS = 15;      // NOVO — primeira vez completando deck
-export const NO_TIMEOUT_RUN_BONUS = 5;        // mantido (era inline)
+export const NO_TIMEOUT_RUN_BONUS = 2;        // reduzido (5→2) + capado ao cap diario
 export const CAMPAIGN_ENDING_BONUS = 40;      // era 30
 export const FRIEND_ACCEPT_BONUS = 5;
 export const SKIP_COOLDOWN_COST = 10;
