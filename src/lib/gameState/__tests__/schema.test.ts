@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { GameStateSchema, CURRENT_SCHEMA_VERSION } from '../schema';
 import { INITIAL_STATE } from '../defaults';
 
-test('CURRENT_SCHEMA_VERSION é 4', () => {
-  assert.equal(CURRENT_SCHEMA_VERSION, 4);
+test('CURRENT_SCHEMA_VERSION é 5', () => {
+  assert.equal(CURRENT_SCHEMA_VERSION, 5);
 });
 
 test('INITIAL_STATE passa no schema', () => {

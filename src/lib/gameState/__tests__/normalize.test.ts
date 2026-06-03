@@ -11,10 +11,10 @@ const FIXTURES = path.resolve(__dirname, '..', '__fixtures__');
 const loadFixture = (name: string) =>
   JSON.parse(fs.readFileSync(path.join(FIXTURES, name), 'utf-8'));
 
-test('v1 → v4: preserva wallet/decks/streak, calibration wipe (Bayes reset)', () => {
+test('v1 → v5: preserva wallet/decks/streak, calibration wipe (Bayes reset)', () => {
   const v1 = loadFixture('state-v1.json');
   const s = normalizeGameState(v1);
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, 5);
   assert.equal(s.wallet.fichas, 85);
   assert.equal(s.wallet.totalEarned, 120);
   assert.equal(Object.keys(s.completedDecks).length, 2);
@@ -23,27 +23,27 @@ test('v1 → v4: preserva wallet/decks/streak, calibration wipe (Bayes reset)', 
   assert.equal(s.calibration.totalResponses, 0);
 });
 
-test('v2 → v4: preserva wallet.runsPaidToday e streak, calibration wipe', () => {
+test('v2 → v5: preserva wallet.runsPaidToday e streak, calibration wipe', () => {
   const v2 = loadFixture('state-v2.json');
   const s = normalizeGameState(v2);
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, 5);
   assert.equal(s.calibration.totalResponses, 0);
   assert.equal(s.wallet.runsPaidToday, 2);
   assert.equal(s.wallet.runsPaidDate, '2026-02-01');
   assert.equal(s.streak, 3);
 });
 
-test('v3 → v4: calibration wipe, demais campos preservados', () => {
+test('v3 → v5: calibration wipe, demais campos preservados', () => {
   const v3 = loadFixture('state-v3.json');
   const s = normalizeGameState(v3);
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, 5);
   assert.equal(s.calibration.totalResponses, 0);
   assert.equal(s.devicePersistedAt, '2026-04-24T11:59:58.000Z');
 });
 
 test('raw nulo retorna INITIAL_STATE', () => {
   const s = normalizeGameState(null);
-  assert.equal(s.schemaVersion, 4);
+  assert.equal(s.schemaVersion, 5);
   assert.equal(s.wallet.fichas, 20);
 });
 

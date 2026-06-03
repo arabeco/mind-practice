@@ -33,8 +33,10 @@ test('CLAIM_DAILY primeiro claim adiciona fichas', () => {
 test('CLAIM_DAILY mesmo dia é no-op', () => {
   const s = freshState();
   const today = new Date().toISOString().split('T')[0];
+  // O guard do reducer usa dailyLoginClaimedAt (v5), não wallet.lastDailyClaim.
   const already: GameState = {
     ...s,
+    dailyLoginClaimedAt: today,
     wallet: { ...s.wallet, lastDailyClaim: today },
   };
   const next = gameReducer(already, { type: 'CLAIM_DAILY' });

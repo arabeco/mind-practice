@@ -34,12 +34,16 @@ test('v2 → v3: adiciona schemaVersion=3, updatedAt, devicePersistedAt', () => 
   assert.equal(out.wallet.fichas, 100); // preservado
 });
 
-test('runMigrations encadeia v1 → v4 (calibration descartada na bayes step)', () => {
+test('runMigrations encadeia v1 → v5 (calibration descartada na bayes step)', () => {
   const v1 = { userStats: { vigor: 1, harmonia: 0, filtro: 0, presenca: 0, desapego: 0 }, completedDecks: {} };
   const result = runMigrations(v1, 1) as any;
-  assert.equal(result.schemaVersion, 4);
+  assert.equal(result.schemaVersion, 5);
   // v3→v4 wipes calibration — defaults reapply on normalize.
   assert.equal(result.calibration, undefined);
+  // v4→v5 adiciona os campos de daily login + achievements.
+  assert.equal(result.dailyLoginClaimedAt, null);
+  assert.equal(result.loginStreak, 0);
+  assert.deepEqual(result.achievements, {});
 });
 
 test('v3 → v4: wipe calibration, preserva wallet/streak/decks', () => {
@@ -66,7 +70,7 @@ test('runMigrations throw quando versão > atual', () => {
 });
 
 test('runMigrations no-op quando já na versão atual', () => {
-  const v4 = { schemaVersion: 4, wallet: { fichas: 50 } };
-  const result = runMigrations(v4, 4) as any;
-  assert.deepEqual(result, v4);
+  const v5 = { schemaVersion: CURRENT_SCHEMA_VERSION, wallet: { fichas: 50 } };
+  const result = runMigrations(v5, CURRENT_SCHEMA_VERSION) as any;
+  assert.deepEqual(result, v5);
 });
