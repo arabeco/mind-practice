@@ -110,6 +110,7 @@ export const initialState: GameState = {
   dailyLoginClaimedAt: null,
   loginStreak: 0,
   achievements: {},
+  lastRunReward: null,
 };
 
 // ---------------------------------------------------------------------------
@@ -274,6 +275,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         lastTrainingDate: now,
         streak: newStreak,
         lastPlayDate: todayStr,
+        lastRunReward: {
+          total: bonusFichas,
+          firstTime: isFirstTimeDeck,
+          fichasAfter: state.wallet.fichas + bonusFichas,
+          at: now,
+        },
         wallet: {
           ...state.wallet,
           fichas: state.wallet.fichas + bonusFichas,

@@ -6,6 +6,7 @@
  */
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import {
   DAILY_FICHAS,
   DAILY_STREAK_BONUS_FICHAS,
@@ -13,6 +14,7 @@ import {
   type GameState,
 } from '@/types/game';
 import { ACHIEVEMENTS } from '@/data/achievements';
+import { feedback } from '@/lib/uiFeedback';
 
 interface Props {
   state: GameState;
@@ -27,6 +29,18 @@ export default function DailyAndAchievements({ state, onClaim }: Props) {
   const stepsToBonus =
     streak > 0 ? DAILY_STREAK_LENGTH - (streak % DAILY_STREAK_LENGTH) : DAILY_STREAK_LENGTH;
   const nextIsBonusDay = stepsToBonus === DAILY_STREAK_LENGTH && streak > 0;
+  // Progresso (0..1) dentro do ciclo de streak atual, pra barra/anel.
+  const cycleProgress = streak > 0 ? ((streak % DAILY_STREAK_LENGTH) || DAILY_STREAK_LENGTH) / DAILY_STREAK_LENGTH : 0;
+
+  const [popping, setPopping] = useState(false);
+  const handleClaim = () => {
+    if (alreadyClaimed) return;
+    // suco: som de moeda + haptic de milestone, e pop visual
+    feedback(nextIsBonusDay ? 'success' : 'claim', 'milestone');
+    setPopping(true);
+    window.setTimeout(() => setPopping(false), 650);
+    onClaim();
+  };
 
   return (
     <div className="rounded-2xl border border-accent-gold/20 bg-accent-gold/[0.035] p-3.5">
@@ -36,31 +50,55 @@ export default function DailyAndAchievements({ state, onClaim }: Props) {
           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent-gold/70">
             Ritual diario
           </p>
-          <p className="mt-1 text-sm text-white/85">
+          {/* Streak chamativo: chama + número + barra de ciclo */}
+          <div className="mt-1 flex items-center gap-2">
+            <motion.span
+              aria-hidden
+              className="text-base"
+              animate={streak > 0 ? { scale: [1, 1.18, 1] } : {}}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ filter: streak > 0 ? 'drop-shadow(0 0 6px rgba(251,146,60,0.7))' : 'grayscale(1) opacity(0.4)' }}
+            >
+              🔥
+            </motion.span>
+            <span className="text-sm font-bold text-white/90">
+              {streak}<span className="text-white/45 font-normal"> dia{streak === 1 ? '' : 's'}</span>
+            </span>
+            {!alreadyClaimed && (
+              <span className="text-[11px] font-semibold text-accent-gold/85">· +{DAILY_FICHAS}{nextIsBonusDay ? `+${DAILY_STREAK_BONUS_FICHAS}` : ''} hoje</span>
+            )}
+          </div>
+          {/* Barra de progresso até o bônus */}
+          <div className="mt-1.5 h-1 w-full max-w-[160px] overflow-hidden rounded-full bg-white/8">
+            <div
+              className="h-full rounded-full transition-[width] duration-500"
+              style={{ width: `${cycleProgress * 100}%`, background: 'linear-gradient(90deg,#fb923c,#fbbf24)' }}
+            />
+          </div>
+          <p className="mt-1 text-[10px] text-white/45">
             {alreadyClaimed
-              ? `Voce ja resgatou hoje · streak ${streak}d`
-              : `+${DAILY_FICHAS} fichas hoje · streak ${streak}d`}
+              ? 'Resgatado hoje · volte amanhã'
+              : nextIsBonusDay
+              ? `🎁 Hoje fecha o ciclo: +${DAILY_STREAK_BONUS_FICHAS} bônus!`
+              : `Faltam ${stepsToBonus} dia${stepsToBonus > 1 ? 's' : ''} pro bônus de ${DAILY_STREAK_BONUS_FICHAS}`}
           </p>
-          {streak > 0 && !alreadyClaimed && (
-            <p className="mt-0.5 text-[10px] text-white/45">
-              {nextIsBonusDay
-                ? `Hoje fecha o ciclo: +${DAILY_STREAK_BONUS_FICHAS} bonus extra`
-                : `Faltam ${stepsToBonus} dia${stepsToBonus > 1 ? 's' : ''} pro bonus de ${DAILY_STREAK_BONUS_FICHAS}`}
-            </p>
-          )}
         </div>
-        <button
+        <motion.button
           type="button"
-          onClick={onClaim}
+          onClick={handleClaim}
           disabled={alreadyClaimed}
+          whileTap={alreadyClaimed ? undefined : { scale: 0.9 }}
+          animate={popping ? { scale: [1, 1.25, 1] } : {}}
+          transition={{ duration: 0.5 }}
           className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors ${
             alreadyClaimed
               ? 'cursor-default border border-white/8 bg-white/4 text-white/30'
               : 'border border-accent-gold/55 bg-accent-gold/15 text-accent-gold hover:bg-accent-gold/25'
           }`}
+          style={!alreadyClaimed ? { boxShadow: '0 0 18px rgba(212,175,55,0.25)' } : undefined}
         >
           {alreadyClaimed ? 'Pego' : 'Resgatar'}
-        </button>
+        </motion.button>
       </div>
 
       {/* Achievements */}

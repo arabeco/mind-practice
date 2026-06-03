@@ -382,6 +382,20 @@ export interface GameState {
   loginStreak: number;
   /** Achievements destrancados: { achievementId: ISO timestamp do unlock }. */
   achievements: Record<string, string>;
+  /**
+   * Recompensa da última run (transiente — pra a tela /resultado celebrar com
+   * "+N fichas"). Não é persistido no schema (stripado no save); vive só na
+   * sessão entre /play → /resultado.
+   */
+  lastRunReward?: RunReward | null;
+}
+
+/** Detalhe da recompensa de fichas de uma run (pra UI de celebração). */
+export interface RunReward {
+  total: number;
+  firstTime: boolean;      // primeira vez completando este deck
+  fichasAfter: number;     // saldo após a run
+  at: string;              // ISO timestamp (dedupe na UI)
 }
 
 // ============================================================

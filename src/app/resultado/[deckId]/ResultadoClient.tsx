@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import { playCue, haptic } from '@/lib/uiFeedback';
 import DeckTransitionCard from '@/components/DeckTransitionCard';
 import RunReportCard from '@/components/RunReportCard';
 import ShareButton from '@/components/ShareButton';
@@ -34,6 +35,28 @@ export default function ResultadoClient({ deckId }: { deckId: string }) {
     const stored = localStorage.getItem('mindpractice_nickname');
     if (stored) setNickname(stored);
   }, []);
+
+  // --- Celebração da recompensa de fichas (count-up + moeda + haptic) -------
+  const reward = state.lastRunReward ?? null;
+  const rewardTotal = reward && reward.total > 0 ? reward.total : 0;
+  const [shownFichas, setShownFichas] = useState(0);
+
+  useEffect(() => {
+    if (rewardTotal <= 0) return;
+    haptic('milestone');
+    playCue('coinChain');
+    const start = performance.now();
+    const dur = 900;
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      setShownFichas(Math.round(rewardTotal * eased));
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [rewardTotal]);
 
   const archetypeChanged = featuredSnapshot?.archetypeChanged ?? false;
   const profileShift = featuredSnapshot?.profileShift ?? 0;
@@ -136,6 +159,39 @@ export default function ResultadoClient({ deckId }: { deckId: string }) {
             {relatedDeck ? relatedDeck.name : 'Run finalizada'}
           </p>
         </motion.div>
+
+        {/* Recompensa de fichas — count-up + brilho */}
+        {rewardTotal > 0 && (
+          <motion.div
+            initial={{ scale: 0.7, opacity: 0, y: -6 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, type: 'spring', stiffness: 280, damping: 16 }}
+            className="flex flex-col items-center"
+          >
+            <div
+              className="inline-flex items-center gap-2 rounded-full border border-accent-gold/45 bg-accent-gold/12 px-4 py-2"
+              style={{ boxShadow: '0 0 30px rgba(212,175,55,0.28)' }}
+            >
+              <span className="text-lg">🪙</span>
+              <span className="font-mono text-2xl font-black text-accent-gold tabular-nums">
+                +{shownFichas}
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-gold/70">
+                fichas
+              </span>
+            </div>
+            {reward?.firstTime && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-gold/55"
+              >
+                ✦ Primeira vez neste deck — bônus extra
+              </motion.p>
+            )}
+          </motion.div>
+        )}
 
         {/* Archetype avatar + name */}
         <motion.div
