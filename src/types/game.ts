@@ -318,11 +318,14 @@ export const INITIAL_WALLET: Wallet = {
 /** Fichas ao logar pela 1a vez no dia. */
 export const DAILY_FICHAS = 10;
 
-/** Bonus ao completar o streak de login. */
-export const DAILY_STREAK_BONUS_FICHAS = 50;
+/** Bonus ao completar o streak de login.
+ *  Calibrado pra que farmer (5d-on / 1d-off) NAO consiga gamear o ciclo:
+ *  ciclo de 7d obriga consistencia real pra colher o bonus. */
+export const DAILY_STREAK_BONUS_FICHAS = 35;
 
-/** Tamanho da streak (em dias) que dispara o bonus. */
-export const DAILY_STREAK_LENGTH = 5;
+/** Tamanho da streak (em dias) que dispara o bonus.
+ *  7d = semana fechada — quem joga so 5/7 nunca pega. */
+export const DAILY_STREAK_LENGTH = 7;
 
 // Ficha economy — fonts/sinks.
 export const RUN_PISO_FICHAS = 0;             // v2: sem grind por run
